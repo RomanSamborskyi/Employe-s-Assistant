@@ -42,9 +42,10 @@ final class MonthsViewModel: ObservableObject {
         }
     }
     
-    func addNewMonth(title: String) {
+    func addNewMonth(title: String, monthTarget: Int32) {
         let newMonth = MonthEntity(context: coreData.context)
         newMonth.title = title
+        newMonth.monthTarget = monthTarget
         newMonth.date = Date()
         save()
     }
