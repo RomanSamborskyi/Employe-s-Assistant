@@ -17,6 +17,7 @@
 		6B7090032B1A61440099C4AA /* SettingsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7090022B1A61440099C4AA /* SettingsMainView.swift */; };
 		6B7090062B1A61900099C4AA /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7090052B1A61900099C4AA /* Enums.swift */; };
 		6B70900A2B1A65060099C4AA /* Container.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B7090082B1A65060099C4AA /* Container.xcdatamodeld */; };
+		6B70900C2B1A69B60099C4AA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B70900B2B1A69B60099C4AA /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		6B7090022B1A61440099C4AA /* SettingsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainView.swift; sourceTree = "<group>"; };
 		6B7090052B1A61900099C4AA /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		6B7090092B1A65060099C4AA /* Container.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Container.xcdatamodel; sourceTree = "<group>"; };
+		6B70900B2B1A69B60099C4AA /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				6B7090082B1A65060099C4AA /* Container.xcdatamodeld */,
+				6B70900B2B1A69B60099C4AA /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				6B7090032B1A61440099C4AA /* SettingsMainView.swift in Sources */,
 				6B708FFF2B1A612D0099C4AA /* StatisticMainView.swift in Sources */,
 				6B7090062B1A61900099C4AA /* Enums.swift in Sources */,
+				6B70900C2B1A69B60099C4AA /* CoreDataManager.swift in Sources */,
 				6B708FE22B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift in Sources */,
 				6B7090012B1A613A0099C4AA /* ProfileMainView.swift in Sources */,
 			);
