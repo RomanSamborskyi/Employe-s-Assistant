@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct MonthsMainView: View {
+    
+    @StateObject private var viewModel: MonthsViewModel = MonthsViewModel()
+    
     var body: some View {
          NavigationView {
              List {
-                 
+                 ForEach(viewModel.months) { month in
+                     
+                 }
              }.navigationTitle("Months")
         }
     }
