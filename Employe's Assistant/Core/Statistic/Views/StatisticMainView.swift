@@ -10,7 +10,7 @@ import SwiftUI
 struct StatisticMainView: View {
     var body: some View {
         NavigationView {
-            List {
+            VStack {
                 
             }.navigationTitle("Statistic")
        }

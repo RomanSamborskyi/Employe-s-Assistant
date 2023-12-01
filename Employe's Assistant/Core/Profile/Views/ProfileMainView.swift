@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfileMainView: View {
     var body: some View {
         NavigationView {
-            List {
+            VStack {
                 
             }.navigationTitle("Profile")
        }

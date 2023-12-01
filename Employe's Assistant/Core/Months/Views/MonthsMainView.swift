@@ -14,9 +14,7 @@ struct MonthsMainView: View {
     var body: some View {
          NavigationView {
              List {
-                 ForEach(viewModel.months) { month in
-                     
-                 }
+                
              }.navigationTitle("Months")
         }
     }
