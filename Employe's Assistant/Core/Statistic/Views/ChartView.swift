@@ -22,7 +22,7 @@ struct ChartView: View {
                 ForEach(array, id: \.date) { hour in
                     BarMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
                             y: .value("Hours", hour.hours)
-                    ).foregroundStyle(Color.accentColor)
+                    ).foregroundStyle(Color.accentColor.gradient)
                 }
             }
         }.onAppear {

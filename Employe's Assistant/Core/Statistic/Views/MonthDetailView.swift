@@ -19,7 +19,7 @@ struct MonthDetailView: View {
         HStack {
             ZStack {
                 Circle()
-                    .stroke(Color.green,lineWidth: 10)
+                    .stroke(Color.green.gradient,lineWidth: 10)
                     .frame(width: 95)
                 Circle()
                     .trim(from: CGFloat(month.trim) , to: 1.0)
