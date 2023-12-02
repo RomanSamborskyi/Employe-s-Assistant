@@ -15,7 +15,6 @@ final class MonthsViewModel: ObservableObject {
     let coreData: CoreDataManager = CoreDataManager.instanse
     
     @Published var months: [MonthEntity] = []
-    @Published var days: [MonthEntity:[DayEntity]] = [:]
     
     init() { 
         fetchMonths()
@@ -43,6 +42,32 @@ final class MonthsViewModel: ObservableObject {
         }
     }
     
+    func countHours(for month: MonthEntity) -> Double {
+        let daysArray = fetchDays(from: month)
+        var hoursArray: [Double] = []
+        for day in daysArray {
+            let minutes = Double(day.hours * 60 ) + Double(day.minutes)
+            hoursArray.append(minutes)
+        }
+        return hoursArray.reduce(0,+) / 60
+    }
+    
+    func countHoursTitle(for month: MonthEntity) -> String {
+        let daysArray = fetchDays(from: month)
+        var hoursArray: [Double] = []
+        for day in daysArray {
+            let minutes = Double(day.hours * 60 ) + Double(day.minutes)
+            hoursArray.append(minutes)
+        }
+        let totalHours = String(hoursArray.reduce(0, +) / 60)
+        let index = totalHours.firstIndex(of: ".") ?? totalHours.endIndex
+        let hour = totalHours[..<index]
+        var minute = totalHours[index...]
+        minute.removeFirst()
+        let convertInToMonute = (60 * (Int(minute) ?? 0) / 100)
+        return "\(hour):\(convertInToMonute)"
+    }
+    
     func addNewMonth(title: String, monthTarget: Int32) {
         let newMonth = MonthEntity(context: coreData.context)
         newMonth.title = title
@@ -59,11 +84,16 @@ final class MonthsViewModel: ObservableObject {
         let hour = stringOfMinutes[..<index]
         var minute = stringOfMinutes[index...]
         minute.removeFirst()
-        let convertInToMinutes = 60 * (Int(minute) ?? 30 / 10000)
+        let convertInToMinutes = (60 * (Int(minute) ?? 30 / 100))
+        let minuteToString = String(convertInToMinutes)
+        if minuteToString.count == 3 {
+            newDay.minutes = Int32(convertInToMinutes / 10)
+        } else if minuteToString.count > 3 {
+            newDay.minutes = Int32(convertInToMinutes / 100)
+        }
         newDay.month = month
         newDay.date = date
         newDay.hours = Int32(hour) ?? 0
-        newDay.minutes = Int32(convertInToMinutes)
         newDay.startHours = startHours
         newDay.startMinutes = startMinutes
         newDay.endHours = endHours

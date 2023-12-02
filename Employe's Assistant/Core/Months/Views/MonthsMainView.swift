@@ -11,16 +11,26 @@ struct MonthsMainView: View {
     
     @StateObject private var viewModel: MonthsViewModel = MonthsViewModel()
     @State private var addNewMonth: Bool = false
-    
+    var dateFormater: DateFormatter = {
+        var dateFormater: DateFormatter = DateFormatter()
+        dateFormater.dateStyle = .medium
+        return dateFormater
+    }()
     var body: some View {
         NavigationStack {
             List {
                 ForEach(viewModel.months) { month in
-                   NavigationLink(month.title ?? "NO TITLE", destination: { DayDetailView(vm: viewModel, month: month) })
+                    NavigationLink(destination: { DayDetailView(vm: viewModel, month: month) }, label: {
+                        HStack {
+                            Text(month.title ?? "no title")
+                            Spacer()
+                            Text(viewModel.countHoursTitle(for: month))
+                        }
+                    })
                 }.onDelete(perform: { indexSet in
                     viewModel.deleteMonth(indexSet: indexSet)
                 })
-            }.navigationTitle("Months")
+            }.navigationTitle(dateFormater.string(from: Date()))
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing, content: {
                         Button(action: {
