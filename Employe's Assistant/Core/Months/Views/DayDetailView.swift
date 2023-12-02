@@ -17,6 +17,7 @@ struct DayDetailView: View {
     @ObservedObject var vm: MonthsViewModel
     @State private var addNewDay: Bool = false
     let month: MonthEntity
+    
     var body: some View {
         List {
             ForEach(vm.fetchDays(from: month)) { day in
@@ -46,6 +47,20 @@ struct DayDetailView: View {
                         .padding()
                 })
             })
+        }
+        .overlay {
+            if let array = month.day?.allObjects as? [DayEntity] {
+                if array.isEmpty {
+                    VStack {
+                        Image(systemName: "list.bullet.clipboard")
+                            .padding()
+                            .font(.system(size: 55, weight: .bold, design: .rounded))
+                        Text("The list is empty")
+                            .padding()
+                            .font(.system(size: 25, weight: .bold, design: .rounded))
+                    }
+                }
+            }
         }
         .navigationTitle(month.title ?? "no title")
         .sheet(isPresented: $addNewDay, content: {

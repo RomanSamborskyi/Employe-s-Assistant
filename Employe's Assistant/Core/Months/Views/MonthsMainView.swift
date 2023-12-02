@@ -46,6 +46,18 @@ struct MonthsMainView: View {
                 .sheet(isPresented: $addNewMonth) {
                     AddMonthView(vm: viewModel, dissmiss: $addNewMonth)
             }
+                .overlay {
+                    if viewModel.months.isEmpty {
+                        VStack {
+                            Image(systemName: "calendar.badge.exclamationmark")
+                                .padding()
+                                .font(.system(size: 55, weight: .bold, design: .rounded))
+                            Text("There are no months added")
+                                .padding()
+                                .font(.system(size: 25, weight: .bold, design: .rounded))
+                        }
+                    }
+                }
         }
     }
 }
