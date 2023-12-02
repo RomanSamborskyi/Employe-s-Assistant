@@ -24,6 +24,7 @@ struct AddMonthView: View {
             HStack {
                 Text("Select a month:")
                     .padding(10)
+                    .font(.system(size: 25, weight: .bold, design: .rounded))
                 Spacer()
                 Picker("", selection: $selectedMonth, content: {
                     ForEach(Monthes.allCases) { month in
@@ -34,6 +35,7 @@ struct AddMonthView: View {
             HStack {
                 Text("Set a hours target fo the month: ")
                     .padding(10)
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
                 Spacer()
                 TextField("Type...", text: $targetText)
                     .padding(10)

@@ -11,7 +11,6 @@ import CoreData
 class StatisticViewModel: ObservableObject {
     
     let monthViewModel: MonthsViewModel = MonthsViewModel.instance
-    let coreData: CoreDataManager = CoreDataManager()
     @Published var currentMonth: MonthEntity? = nil
     
     init() { getCurrentMonth() }
@@ -36,7 +35,5 @@ class StatisticViewModel: ObservableObject {
         let scorePercent = CGFloat(hours) / CGFloat(currentMonth.monthTarget) * CGFloat(100)
         let currentTrim: CGFloat = CGFloat(scorePercent) / CGFloat(1.0) / CGFloat(100)
         month.trim = currentTrim
-        print(month.trim)
-        print(hours)
     }
 }

@@ -21,7 +21,7 @@ struct MoreDetailsOfDayView: View {
             Image(systemName: "info.bubble.fill")
                 .font(.system(size: 55, weight: .bold, design: .rounded))
                 .foregroundStyle(Color.accentColor)
-            Text("Detail of day:")
+            Text("Detail of a day:")
                 .font(.system(size: 40, weight: .bold, design: .rounded))
             Text(dateFormater.string(from: day.date ?? Date()))
                 .font(.title2)
@@ -40,7 +40,7 @@ struct MoreDetailsOfDayView: View {
                 Spacer()
                 Text("\(day.startHours)")
                     .frame(width: 40)
-                Text("\(day.minutes)")
+                Text("\(day.startMinutes)")
                     .frame(width: 40)
             }            
             HStack {

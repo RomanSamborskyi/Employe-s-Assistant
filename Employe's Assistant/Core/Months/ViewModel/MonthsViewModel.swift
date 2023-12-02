@@ -77,13 +77,18 @@ final class MonthsViewModel: ObservableObject {
         let hour = totalHours[..<index]
         var minute = totalHours[index...]
         minute.removeFirst()
-        let convertInToMonute = (60 * (Int(minute) ?? 0) / 100)
+        var convertInToMonute: Int = 0
+        if minute.count <= 1 {
+            convertInToMonute = (60 * (Int(minute) ?? 0) / 10)
+        } else if minute.count >= 2 {
+            convertInToMonute = (60 * (Int(minute) ?? 0) / 100)
+        }
         return "\(hour):\(convertInToMonute)"
     }
     
     func addNewMonth(title: String, monthTarget: Int32) {
-        var dateFormater: DateFormatter = {
-            var dateFormater: DateFormatter = DateFormatter()
+        let dateFormater: DateFormatter = {
+            let dateFormater: DateFormatter = DateFormatter()
             dateFormater.dateStyle = .full
             dateFormater.dateFormat = " YYYY"
             return dateFormater

@@ -14,7 +14,9 @@ struct StatisticMainView: View {
     var body: some View {
         NavigationView {
             List {
-                MonthDetailView(vm: vm, month: vm.currentMonth!)
+                Section("Current month") {
+                    MonthDetailView(vm: vm, month: vm.currentMonth!)
+                }
             }.navigationTitle("Statistic")
        }
     }
