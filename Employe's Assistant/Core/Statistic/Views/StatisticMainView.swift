@@ -19,7 +19,7 @@ struct StatisticMainView: View {
                         MonthDetailView(vm: vm, month: vm.currentMonth!)
                     }
                     Section {
-                        ChartView(month: vm.currentMonth!, vm: vm)
+                        ChartView(vm: vm)
                     }
                 }.navigationTitle("Statistic")
             } else {

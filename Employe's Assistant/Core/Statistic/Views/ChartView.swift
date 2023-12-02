@@ -10,15 +10,20 @@ import Charts
 
 struct ChartView: View {
     
-    let month: MonthEntity
-    @ObservedObject var vm: StatisticViewModel = StatisticViewModel()
-    @State private var selectedMonth: Monthes = .december
+   
+    @ObservedObject var vm: StatisticViewModel
+    @State private var selectedMonth: MonthEntity? = nil
+    @State private var selectedIndex = 1
+    @State var array: [DayEntity] = []
     
     var body: some View {
         VStack {
-            Text("Some text under the chart")
-                .font(.system(size: 15, weight: .bold, design: .rounded))
-            if let array = month.day?.allObjects as? [DayEntity] {
+            Picker("Selected month", selection: $selectedIndex) {
+                ForEach(vm.monthViewModel.months.indices) { index in
+                    Text(vm.monthViewModel.months[index].title ?? "")
+                }
+            }
+            .font(.system(size: 15, weight: .bold, design: .rounded))
                 Chart {
                     ForEach(array, id: \.date) { hour in
                         BarMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
@@ -26,11 +31,15 @@ struct ChartView: View {
                         ).foregroundStyle(Color.accentColor)
                     }
                 }
-            }
+        }.onAppear {
+            self.selectedMonth = vm.monthViewModel.months[selectedIndex]
+            guard let array = selectedMonth?.day?.allObjects as? [DayEntity] else { return }
+            self.array = array
         }
+
     }
 }
 
 #Preview {
-    ChartView(month: MonthEntity(context: CoreDataManager().context))
+    ChartView(vm: StatisticViewModel())
 }
