@@ -18,6 +18,9 @@ struct StatisticMainView: View {
                     Section("Current month") {
                         MonthDetailView(vm: vm, month: vm.currentMonth!)
                     }
+                    Section {
+                        ChartView(month: vm.currentMonth!, vm: vm)
+                    }
                 }.navigationTitle("Statistic")
             } else {
                 VStack {
