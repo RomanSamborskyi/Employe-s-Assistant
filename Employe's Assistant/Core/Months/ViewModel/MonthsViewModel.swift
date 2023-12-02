@@ -9,10 +9,10 @@ import Foundation
 import CoreData
 
 
-
 final class MonthsViewModel: ObservableObject {
     
     let coreData: CoreDataManager = CoreDataManager.instanse
+    static let instance: MonthsViewModel = MonthsViewModel()
     
     @Published var months: [MonthEntity] = []
     
@@ -58,6 +58,8 @@ final class MonthsViewModel: ObservableObject {
         let percent = curentHours / Double(target) * 100
         if percent >= 100 {
             return CGFloat(100)
+        } else if month.monthTarget == 0 {
+            return 0
         } else {
             return CGFloat(percent)
         }
@@ -80,8 +82,14 @@ final class MonthsViewModel: ObservableObject {
     }
     
     func addNewMonth(title: String, monthTarget: Int32) {
+        var dateFormater: DateFormatter = {
+            var dateFormater: DateFormatter = DateFormatter()
+            dateFormater.dateStyle = .full
+            dateFormater.dateFormat = " YYYY"
+            return dateFormater
+        }()
         let newMonth = MonthEntity(context: coreData.context)
-        newMonth.title = title
+        newMonth.title = title + dateFormater.string(for: Date())!
         newMonth.monthTarget = monthTarget
         newMonth.date = Date()
         save()

@@ -11,6 +11,7 @@ struct MonthProgressBarView: View {
     
     @ObservedObject var vm: MonthsViewModel
     let month: MonthEntity
+    @State private var width: CGFloat = 0
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -18,9 +19,11 @@ struct MonthProgressBarView: View {
                 .frame(width: 100, height: 15)
                 .foregroundStyle(Color.gray.opacity(0.5))
             RoundedRectangle(cornerRadius: 25)
-                .frame(width: vm.progressBar(for: month), height: 15)
+                .frame(width: width, height: 15)
                 .foregroundStyle(Int32(vm.countHours(for: month)) >= month.monthTarget ? Color.green : Color.purple)
                 
+        }.onAppear {
+           width = vm.progressBar(for: month)
         }
     }
 }

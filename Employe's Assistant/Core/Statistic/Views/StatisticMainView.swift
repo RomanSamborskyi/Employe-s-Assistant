@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct StatisticMainView: View {
+    
+    @StateObject var vm: StatisticViewModel = StatisticViewModel()
+    
     var body: some View {
         NavigationView {
-            VStack {
-                
+            List {
+                MonthDetailView(vm: vm, month: vm.currentMonth!)
             }.navigationTitle("Statistic")
        }
     }
