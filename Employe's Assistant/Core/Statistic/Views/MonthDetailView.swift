@@ -67,10 +67,12 @@ struct MonthDetailView: View {
                         .foregroundStyle(Color.purple)
                 }
             }.onAppear {
-                if let array = month.day?.allObjects as? [DayEntity] {
-                    self.count = array.count
+                withAnimation(Animation.spring) {
+                    if let array = month.day?.allObjects as? [DayEntity] {
+                        self.count = array.count
+                    }
+                    vm.trimCalculation(for: month)
                 }
-                vm.trimCalculation(for: month)
            }
         }
     }

@@ -15,8 +15,8 @@ struct StatisticMainView: View {
         NavigationView {
             if !vm.monthViewModel.months.isEmpty {
                 List {
-                    Section("Current month") {
-                        MonthDetailView(vm: vm, month: vm.currentMonth!)
+                    Section {
+                        MonthDetailView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
                     }
                     Section {
                         ChartView(vm: vm)
