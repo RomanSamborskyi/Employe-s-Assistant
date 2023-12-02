@@ -24,7 +24,7 @@ struct MonthsMainView: View {
                         HStack {
                             Text(month.title ?? "no title")
                             Spacer()
-                            Text(viewModel.countHoursTitle(for: month))
+                            MonthProgressBarView(vm: viewModel, month: month)
                         }
                     })
                 }.onDelete(perform: { indexSet in

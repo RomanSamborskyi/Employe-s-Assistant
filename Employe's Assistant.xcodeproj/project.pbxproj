@@ -24,6 +24,7 @@
 		6B70900C2B1A69B60099C4AA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B70900B2B1A69B60099C4AA /* CoreDataManager.swift */; };
 		6BBF3D6F2B1B25AB00C40227 /* MoreDetailsOfDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D6E2B1B25AB00C40227 /* MoreDetailsOfDayView.swift */; };
 		6BBF3D732B1B2D2400C40227 /* DatePickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D722B1B2D2400C40227 /* DatePickerVIew.swift */; };
+		6BBF3D752B1B44C000C40227 /* MonthProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D742B1B44C000C40227 /* MonthProgressBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		6B70900B2B1A69B60099C4AA /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		6BBF3D6E2B1B25AB00C40227 /* MoreDetailsOfDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailsOfDayView.swift; sourceTree = "<group>"; };
 		6BBF3D722B1B2D2400C40227 /* DatePickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVIew.swift; sourceTree = "<group>"; };
+		6BBF3D742B1B44C000C40227 /* MonthProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthProgressBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				6B5A7E202B1A8266007FDA57 /* DayDetailView.swift */,
 				6BBF3D6E2B1B25AB00C40227 /* MoreDetailsOfDayView.swift */,
 				6B5A7E222B1A8B68007FDA57 /* AddDayView.swift */,
+				6BBF3D742B1B44C000C40227 /* MonthProgressBarView.swift */,
 				6BBF3D722B1B2D2400C40227 /* DatePickerVIew.swift */,
 			);
 			path = Views;
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BBF3D752B1B44C000C40227 /* MonthProgressBarView.swift in Sources */,
 				6BBF3D732B1B2D2400C40227 /* DatePickerVIew.swift in Sources */,
 				6B708FFD2B1A611E0099C4AA /* MonthsMainView.swift in Sources */,
 				6B708FE42B1A5DEA0099C4AA /* ContentView.swift in Sources */,

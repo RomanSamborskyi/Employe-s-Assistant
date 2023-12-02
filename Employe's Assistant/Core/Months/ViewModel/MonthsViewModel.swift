@@ -52,6 +52,17 @@ final class MonthsViewModel: ObservableObject {
         return hoursArray.reduce(0,+) / 60
     }
     
+    func progressBar(for month: MonthEntity) -> CGFloat {
+        let target = month.monthTarget
+        let curentHours = countHours(for: month)
+        let percent = curentHours / Double(target) * 100
+        if percent >= 100 {
+            return CGFloat(100)
+        } else {
+            return CGFloat(percent)
+        }
+     }
+    
     func countHoursTitle(for month: MonthEntity) -> String {
         let daysArray = fetchDays(from: month)
         var hoursArray: [Double] = []
