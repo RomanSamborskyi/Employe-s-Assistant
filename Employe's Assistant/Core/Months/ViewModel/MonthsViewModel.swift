@@ -9,11 +9,13 @@ import Foundation
 import CoreData
 
 
+
 final class MonthsViewModel: ObservableObject {
     
-    private let coreData: CoreDataManager = CoreDataManager.instanse
+    let coreData: CoreDataManager = CoreDataManager.instanse
     
     @Published var months: [MonthEntity] = []
+    @Published var days: [MonthEntity:[DayEntity]] = [:]
     
     init() { 
         fetchMonths()
@@ -21,7 +23,7 @@ final class MonthsViewModel: ObservableObject {
     
     func fetchMonths() {
         let request = NSFetchRequest<MonthEntity>(entityName: coreData.monthsEntety)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \MonthEntity.date, ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MonthEntity.date, ascending: false)]
         do {
             try months = coreData.context.fetch(request)
         } catch let error {
@@ -33,9 +35,8 @@ final class MonthsViewModel: ObservableObject {
         let request = NSFetchRequest<DayEntity>(entityName: coreData.dayEntity)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \DayEntity.date, ascending: false)]
         request.predicate = NSPredicate(format: "month == %@", month)
-        
         do {
-            return try coreData.context.fetch(request)
+           return try coreData.context.fetch(request)
         } catch let error {
             print("Error of fetching days: \(error.localizedDescription)")
             return []
@@ -50,11 +51,19 @@ final class MonthsViewModel: ObservableObject {
         save()
     }
     
-    func addHours(hours: Int32, minutes: Int32, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32) {
+    func addHours(month: MonthEntity, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
         let newDay = DayEntity(context: coreData.context)
-        newDay.date = Date()
-        newDay.hours = hours
-        newDay.minutes = minutes
+        let convertToMinutes = ((Double(endHours) * 60 + Double(endMinutes)) - (Double(startHours) * 60 + Double(startMinutes)) - Double(pauseTime)) / 60
+        let stringOfMinutes: String = String(convertToMinutes)
+        let index = stringOfMinutes.firstIndex(of: ".") ?? stringOfMinutes.endIndex
+        let hour = stringOfMinutes[..<index]
+        var minute = stringOfMinutes[index...]
+        minute.removeFirst()
+        let convertInToMinutes = 60 * (Int(minute) ?? 30 / 10000)
+        newDay.month = month
+        newDay.date = date
+        newDay.hours = Int32(hour) ?? 0
+        newDay.minutes = Int32(convertInToMinutes)
         newDay.startHours = startHours
         newDay.startMinutes = startMinutes
         newDay.endHours = endHours

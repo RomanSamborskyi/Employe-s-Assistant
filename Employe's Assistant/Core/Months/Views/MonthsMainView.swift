@@ -13,10 +13,10 @@ struct MonthsMainView: View {
     @State private var addNewMonth: Bool = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(viewModel.months) { month in
-                    Text(month.title ?? "NO TITLE")
+                   NavigationLink(month.title ?? "NO TITLE", destination: { DayDetailView(vm: viewModel, month: month) })
                 }.onDelete(perform: { indexSet in
                     viewModel.deleteMonth(indexSet: indexSet)
                 })

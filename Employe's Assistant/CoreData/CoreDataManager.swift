@@ -22,7 +22,7 @@ class CoreDataManager {
     
     init() {
         container = NSPersistentContainer(name: containerName)
-        container.loadPersistentStores { NSEntityDescription, error in
+        container.loadPersistentStores { description, error in
             if error != nil {
                 print("Error of load core data: \(error.debugDescription)")
             } else {
@@ -30,6 +30,7 @@ class CoreDataManager {
             }
         }
         context = container.viewContext
+        container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
     }
     
     func save() {

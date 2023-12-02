@@ -9,17 +9,12 @@
         <attribute name="pauseTime" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startHours" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startMinutes" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="month" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MonthEntity" inverseName="day" inverseEntity="MonthEntity"/>
+        <relationship name="month" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MonthEntity" inverseName="day" inverseEntity="MonthEntity"/>
     </entity>
     <entity name="MonthEntity" representedClassName="MonthEntity" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="monthTarget" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="totalHours" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="day" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DayEntity" inverseName="month" inverseEntity="DayEntity"/>
-    </entity>
-    <entity name="ProfileEntity" representedClassName="ProfileEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="hourSalary" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
 </model>
