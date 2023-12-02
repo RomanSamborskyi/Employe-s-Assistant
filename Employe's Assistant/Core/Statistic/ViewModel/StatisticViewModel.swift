@@ -12,6 +12,7 @@ class StatisticViewModel: ObservableObject {
     
     let monthViewModel: MonthsViewModel = MonthsViewModel.instance
     @Published var currentMonth: MonthEntity? = nil
+    @Published var selectedIndex: Int = 0
     
     init() { getCurrentMonth() }
     
@@ -25,6 +26,7 @@ class StatisticViewModel: ObservableObject {
     func getCurrentMonth() {
         guard let index = monthViewModel.months.firstIndex(where: { $0.title == dateFormater.string(from: Date()) }) else { return }
         let month = monthViewModel.months[index]
+        selectedIndex = index
         currentMonth = month
     }
     

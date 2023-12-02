@@ -23,7 +23,7 @@ struct MonthProgressBarView: View {
                 .foregroundStyle(Int32(vm.countHours(for: month)) >= month.monthTarget ? Color.green : Color.purple)
                 
         }.onAppear {
-           width = vm.progressBar(for: month)
+                width = vm.progressBar(for: month)
         }
     }
 }

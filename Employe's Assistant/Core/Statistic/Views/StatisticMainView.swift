@@ -22,6 +22,15 @@ struct StatisticMainView: View {
                         ChartView(vm: vm)
                     }
                 }.navigationTitle("Statistic")
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Picker("Selected month", selection: $vm.selectedIndex) {
+                                ForEach(vm.monthViewModel.months.indices, id: \.self) { index in
+                                    Text(vm.monthViewModel.months[index].title ?? "")
+                                }
+                            }
+                        }
+                    }
             } else {
                 VStack {
                     Image(systemName: "chart.xyaxis.line")

@@ -12,17 +12,11 @@ struct ChartView: View {
     
    
     @ObservedObject var vm: StatisticViewModel
-    @State private var selectedMonth: MonthEntity? = nil
-    @State private var selectedIndex = 1
     @State var array: [DayEntity] = []
     
     var body: some View {
         VStack {
-            Picker("Selected month", selection: $selectedIndex) {
-                ForEach(vm.monthViewModel.months.indices) { index in
-                    Text(vm.monthViewModel.months[index].title ?? "")
-                }
-            }
+            Text("\(vm.currentMonth?.title ?? "")")
             .font(.system(size: 15, weight: .bold, design: .rounded))
                 Chart {
                     ForEach(array, id: \.date) { hour in
@@ -32,11 +26,14 @@ struct ChartView: View {
                     }
                 }
         }.onAppear {
-            self.selectedMonth = vm.monthViewModel.months[selectedIndex]
-            guard let array = selectedMonth?.day?.allObjects as? [DayEntity] else { return }
+            guard let array = vm.currentMonth?.day?.allObjects as? [DayEntity] else { return }
             self.array = array
         }
-
+        .onChange(of: vm.selectedIndex) { newValue in
+            vm.currentMonth = vm.monthViewModel.months[newValue]
+            guard let array = vm.currentMonth?.day?.allObjects as? [DayEntity] else { return }
+            self.array = array
+        }
     }
 }
 
