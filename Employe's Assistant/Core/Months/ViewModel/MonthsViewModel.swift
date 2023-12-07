@@ -123,6 +123,7 @@ final class MonthsViewModel: ObservableObject {
         newDay.endHours = endHours
         newDay.endMinutes = endMinutes
         newDay.pauseTime = pauseTime
+        newDay.month?.totalHours = countHours(for: month)
         save()
     }
     

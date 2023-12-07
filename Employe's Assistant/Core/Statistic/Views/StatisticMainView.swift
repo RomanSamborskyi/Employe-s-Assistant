@@ -21,6 +21,9 @@ struct StatisticMainView: View {
                     Section {
                         ChartView(vm: vm)
                     }
+                    Section {
+                        StatisticByMonthsChartView(vm: vm)
+                    }
                 }.navigationTitle("Statistic")
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
