@@ -18,6 +18,14 @@ struct MonthDetailView: View {
     var body: some View {
         HStack {
             ZStack {
+                if Int32(month.totalHours) >= month.monthTarget {
+                    withAnimation(Animation.bouncy) {
+                        Circle()
+                            .stroke(Color.green.gradient.opacity(0.3),lineWidth: 10)
+                            .frame(width: 100)
+                            .blur(radius: 0.5)
+                    }
+                }
                 Circle()
                     .stroke(Color.green.gradient,lineWidth: 10)
                     .frame(width: 95)
@@ -30,6 +38,7 @@ struct MonthDetailView: View {
                 Text("\(vm.currentMonth?.monthTarget ?? 0)")
                     .font(.system(size: 35, weight: .bold, design: .rounded))
             }.padding(5)
+                .frame(width: 105)
             VStack(alignment: .leading) {
                 HStack {
                     Text("Month details")
@@ -74,6 +83,13 @@ struct MonthDetailView: View {
                     vm.trimCalculation(for: month)
                 }
            }
+            .onChange(of: vm.currentMonth, perform: { month in
+                withAnimation(Animation.spring) {
+                    if let array = month?.day?.allObjects as? [DayEntity] {
+                        self.count = array.count
+                    }
+                }
+            })
         }
     }
 }

@@ -8,6 +8,22 @@
 import Foundation
 
 
+enum StatisticType: String, Identifiable, CaseIterable {
+    var id: Self { self }
+    case hours, workingDays, salary
+    
+    var description: String {
+        switch self {
+        case .hours:
+            return "hours"
+        case .workingDays:
+            return "working days"
+        case .salary:
+            return "salary"
+        }
+    }
+}
+
 enum Tabs {
     case months, statistic, profile, settings
 }
