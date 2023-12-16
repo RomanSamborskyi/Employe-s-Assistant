@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import Combine
 
 class StatisticViewModel: ObservableObject {
     
@@ -22,6 +23,7 @@ class StatisticViewModel: ObservableObject {
         dateFormater.dateFormat = "MMMM YYYY"
         return dateFormater
     }()
+    
     
     func getCurrentMonth() {
         guard let index = monthViewModel.months.firstIndex(where: { $0.title == dateFormater.string(from: Date()) }) else { return }

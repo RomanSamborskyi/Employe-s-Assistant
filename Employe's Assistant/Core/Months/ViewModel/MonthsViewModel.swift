@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 
-final class MonthsViewModel: ObservableObject {
+class MonthsViewModel: ObservableObject {
     
     let coreData: CoreDataManager = CoreDataManager.instanse
     static let instance: MonthsViewModel = MonthsViewModel()
@@ -19,7 +19,7 @@ final class MonthsViewModel: ObservableObject {
     init() { 
         fetchMonths()
     }
-    
+
     func fetchMonths() {
         let request = NSFetchRequest<MonthEntity>(entityName: coreData.monthsEntety)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \MonthEntity.date, ascending: false)]
