@@ -15,12 +15,8 @@ struct Profile {
     var position: String
     var hourSalary: Double
     var isEdited: Bool
-
+    
     mutating func edite() {
-        if isEdited {
-            self.isEdited = false
-        } else if !isEdited {
-            self.isEdited = true
-        }
+      isEdited = !isEdited
     }
 }

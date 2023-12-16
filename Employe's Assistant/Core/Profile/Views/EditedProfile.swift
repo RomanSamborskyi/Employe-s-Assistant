@@ -12,7 +12,8 @@ struct EditedProfile: View {
     @State private var name: String = ""
     @State private var company: String = ""
     @State private var position: String = ""
-    @State private var hourSalary: Double = 0
+    @State private var hourSalary: String = ""
+    @ObservedObject var vm: ProfileViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,7 +29,7 @@ struct EditedProfile: View {
             Text("Enter your company name:")
                 .padding(5)
                 .font(.system(size: 20, weight: .regular, design: .rounded))
-            TextField("Company...", text: $name)
+            TextField("Company...", text: $company)
                 .padding()
                 .background(
                     Color.gray.opacity(0.5)
@@ -37,7 +38,7 @@ struct EditedProfile: View {
             Text("Enter your position:")
                 .padding(5)
                 .font(.system(size: 20, weight: .regular, design: .rounded))
-            TextField("Position...", text: $name)
+            TextField("Position...", text: $position)
                 .padding()
                 .background(
                     Color.gray.opacity(0.5)
@@ -46,7 +47,7 @@ struct EditedProfile: View {
             Text("Enter your hour salary to let us calculate for you your total salary per month")
                 .padding(5)
                 .font(.system(size: 20, weight: .regular, design: .rounded))
-            TextField("0..", text: $name)
+            TextField("0..", text: $hourSalary)
                 .padding()
                 .background(
                     Color.gray.opacity(0.5)
@@ -54,7 +55,7 @@ struct EditedProfile: View {
                 )
             
             Button(action: {
-                
+                vm.profile.edite()
             } , label: {
                 Label(
                     title: { Text("SAVE") }, icon: { Image(systemName: "square.and.arrow.down.fill") }
@@ -68,9 +69,17 @@ struct EditedProfile: View {
             })
         } .navigationTitle("Profile")
             .padding()
+            .onAppear {
+                withAnimation(Animation.bouncy) {
+                    self.name = vm.profile.name
+                    self.position = vm.profile.position
+                    self.company = vm.profile.company
+                    self.hourSalary = String(vm.profile.hourSalary)
+                }
+            }
     }
 }
 
 #Preview {
-    EditedProfile()
+    EditedProfile(vm: ProfileViewModel())
 }

@@ -9,22 +9,22 @@ import SwiftUI
 
 struct ProfileMainView: View {
     
-    var profile: Profile = Profile(name: "Roman", company: "Makro", position: "Picker", hourSalary: 160, isEdited: false)
+    @StateObject var vm: ProfileViewModel = ProfileViewModel()
     
     var body: some View {
         NavigationView {
             VStack {
-                switch profile.isEdited {
+                switch vm.profile.isEdited {
                 case true:
-                   EditedProfile()
+                   EditedProfile(vm: vm )
                 case false:
-                   ProfileView()
+                    ProfileView(profile: vm.profile)
                 }
             }.navigationTitle("Profile")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
-                            
+                            vm.profile.edite()
                         }, label: {
                             Text("Edite")
                         })
@@ -34,6 +34,3 @@ struct ProfileMainView: View {
     }
 }
 
-#Preview {
-    ProfileMainView()
-}
