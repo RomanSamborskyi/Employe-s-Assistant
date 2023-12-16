@@ -67,17 +67,17 @@ struct StatisticByMonthsChartView: View {
                 Chart {
                     ForEach(array.reversed(), id: \.self) { month in
                         LineMark(x: .value("month", month.title!),
-                                 y: .value("total", month.totalHours)
+                                 y: .value("total", vm.monthViewModel.countSalary(for: month))
                         )
                     }
                     ForEach(array.reversed(), id: \.self) { month in
                         PointMark(x: .value("month", month.title!),
-                                  y: .value("total", month.totalHours)
+                                  y: .value("total", vm.monthViewModel.countSalary(for: month))
                         )
                     }
                     ForEach(array.reversed(), id: \.self) { month in
                         AreaMark(x: .value("month", month.title!),
-                                  y: .value("total", month.totalHours)
+                                  y: .value("total", vm.monthViewModel.countSalary(for: month))
                         ).foregroundStyle(linearGradient)
                     }
                 }

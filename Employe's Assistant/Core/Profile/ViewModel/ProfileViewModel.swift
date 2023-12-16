@@ -11,6 +11,7 @@ import CoreData
 
 class ProfileViewModel: ObservableObject {
     
+    static let instance: ProfileViewModel = ProfileViewModel()
     @Published var profile: Profile = Profile(name: "Roman", company: "Makro", position: "Picker", hourSalary: 160, isEdited: false)
     @Published var profile2: [ProfileEntity] = []
     let coreData = CoreDataManager.instanse

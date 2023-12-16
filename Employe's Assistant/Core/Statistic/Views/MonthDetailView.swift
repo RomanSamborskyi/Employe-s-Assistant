@@ -59,7 +59,7 @@ struct MonthDetailView: View {
                         .foregroundColor(.green.opacity(0.7))
                         .font(.caption)
                         Spacer(minLength: 35)
-                    Text(String(format: "%.2f", 0.0))
+                    Text(String(format: "%.2f", vm.monthViewModel.countSalary(for: month)))
                         .foregroundStyle(Color.green)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)

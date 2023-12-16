@@ -13,6 +13,7 @@ class MonthsViewModel: ObservableObject {
     
     let coreData: CoreDataManager = CoreDataManager.instanse
     static let instance: MonthsViewModel = MonthsViewModel()
+    let profile: ProfileViewModel = ProfileViewModel.instance
     
     @Published var months: [MonthEntity] = []
     
@@ -50,6 +51,11 @@ class MonthsViewModel: ObservableObject {
             hoursArray.append(minutes)
         }
         return hoursArray.reduce(0,+) / 60
+    }
+    
+    func countSalary(for month: MonthEntity) -> Double {
+        let totalHours = countHours(for: month)
+        return totalHours * profile.profile.hourSalary
     }
     
     func progressBar(for month: MonthEntity) -> CGFloat {
