@@ -12,35 +12,57 @@ struct ProfileView: View {
     let profile: Profile
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
+        VStack{
+            HStack {
+                Image(systemName: "person.fill")
+                    .font(.title)
                 VStack(alignment: .leading) {
                     Text("name")
                         .foregroundStyle(Color.gray)
+                        .font(.caption2)
                     Text(profile.name)
                         .font(.system(size: 25, weight: .regular, design: .rounded))
                 }.padding(5)
+                Spacer()
+            }
+            HStack {
+                Image(systemName: "house.fill")
+                    .font(.title)
                 VStack(alignment: .leading) {
                     Text("company")
                         .foregroundStyle(Color.gray)
+                        .font(.caption2)
                     Text(profile.company)
                         .font(.system(size: 25, weight: .regular, design: .rounded))
                 }.padding(5)
+                Spacer()
+            }
+            HStack {
+                Image(systemName: "figure.wave.circle")
+                    .font(.title)
                 VStack(alignment: .leading) {
                     Text("position")
                         .foregroundStyle(Color.gray)
+                        .font(.caption2)
                     Text(profile.position)
                         .font(.system(size: 25, weight: .regular, design: .rounded))
-                }
+                }.padding(5)
+                Spacer()
+            }
+            HStack {
+                Image(systemName: "dollarsign.circle")
+                    .font(.title)
                 VStack(alignment: .leading) {
                     Text("hour salary")
                         .foregroundStyle(Color.gray)
-                    Text("\(profile.hourSalary)")
+                        .font(.caption2)
+                    Text(String(format: "%.2f", profile.hourSalary))
                         .font(.system(size: 25, weight: .regular, design: .rounded))
                 }.padding(5)
+                Spacer()
             }
             Spacer()
-        }
+        }.padding()
     }
 }
 
