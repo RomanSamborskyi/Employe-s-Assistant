@@ -10,16 +10,21 @@ import SwiftUI
 struct ProfileMainView: View {
     
     @StateObject var vm: ProfileViewModel = ProfileViewModel()
-    
+
     var body: some View {
         NavigationView {
             VStack {
-                switch vm.profile.isEdited {
-                case true:
-                   EditedProfile(vm: vm )
-                case false:
-                    ProfileView(profile: vm.profile)
+                if vm.profile != nil {
+                    switch vm.profile.isEdited {
+                    case true:
+                        EditedProfile(vm: vm )
+                    case false:
+                        ProfileView(profile: vm.profile)
+                    }
+                } else {
+                    EditedProfile(vm: vm )
                 }
+                
             }.navigationTitle("Profile")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {

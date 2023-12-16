@@ -19,7 +19,8 @@ struct EditedProfile: View {
         VStack(alignment: .leading) {
             Text("Enter your name:")
                 .padding(5)
-                .font(.system(size: 20, weight: .regular, design: .rounded))
+                .font(.system(size: 15, weight: .regular, design: .rounded))
+                .foregroundStyle(Color.gray)
             TextField("Your name...", text: $name)
                 .padding()
                 .background(
@@ -28,7 +29,8 @@ struct EditedProfile: View {
                 )
             Text("Enter your company name:")
                 .padding(5)
-                .font(.system(size: 20, weight: .regular, design: .rounded))
+                .font(.system(size: 15, weight: .regular, design: .rounded))
+                .foregroundStyle(Color.gray)
             TextField("Company...", text: $company)
                 .padding()
                 .background(
@@ -37,7 +39,8 @@ struct EditedProfile: View {
                 )
             Text("Enter your position:")
                 .padding(5)
-                .font(.system(size: 20, weight: .regular, design: .rounded))
+                .font(.system(size: 15, weight: .regular, design: .rounded))
+                .foregroundStyle(Color.gray)
             TextField("Position...", text: $position)
                 .padding()
                 .background(
@@ -46,7 +49,8 @@ struct EditedProfile: View {
                 )
             Text("Enter your hour salary to let us calculate for you your total salary per month")
                 .padding(5)
-                .font(.system(size: 20, weight: .regular, design: .rounded))
+                .font(.system(size: 15, weight: .regular, design: .rounded))
+                .foregroundStyle(Color.gray)
             TextField("0..", text: $hourSalary)
                 .padding()
                 .background(
@@ -67,6 +71,7 @@ struct EditedProfile: View {
                 )
                 .frame(maxWidth: .infinity)
             })
+            Spacer()
         } .navigationTitle("Profile")
             .padding()
             .onAppear {
