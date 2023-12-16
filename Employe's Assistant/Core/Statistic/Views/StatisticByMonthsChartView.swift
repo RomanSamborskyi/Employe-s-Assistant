@@ -30,55 +30,25 @@ struct StatisticByMonthsChartView: View {
             case .hours:
                 Chart {
                     ForEach(array.reversed(), id: \.self) { month in
-                        LineMark(x: .value("month", month.title!),
-                                 y: .value("total", month.totalHours)
+                        BarMark(x: .value("month", month.title!),
+                                y: .value("total", month.totalHours)
                         )
-                    }
-                    ForEach(array.reversed(), id: \.self) { month in
-                        PointMark(x: .value("month", month.title!),
-                                  y: .value("total", month.totalHours)
-                        )
-                    }
-                    ForEach(array.reversed(), id: \.self) { month in
-                        AreaMark(x: .value("month", month.title!),
-                                  y: .value("total", month.totalHours)
-                        ).foregroundStyle(linearGradient)
                     }
                 }
             case .workingDays:
                 Chart {
                     ForEach(array.reversed(), id: \.self) { month in
-                        LineMark(x: .value("month", month.title!),
-                                 y: .value("total", month.day?.count ?? 0)
+                        BarMark(x: .value("month", month.title!),
+                                y: .value("total", month.day?.count ?? 0)
                         )
-                    }
-                    ForEach(array.reversed(), id: \.self) { month in
-                        PointMark(x: .value("month", month.title!),
-                                  y: .value("total", month.day?.count ?? 0)
-                        )
-                    }
-                    ForEach(array.reversed(), id: \.self) { month in
-                        AreaMark(x: .value("month", month.title!),
-                                  y: .value("total", month.day?.count ?? 0)
-                        ).foregroundStyle(linearGradient)
                     }
                 }
             case .salary:
                 Chart {
                     ForEach(array.reversed(), id: \.self) { month in
-                        LineMark(x: .value("month", month.title!),
-                                 y: .value("total", vm.monthViewModel.countSalary(for: month))
+                        BarMark(x: .value("month", month.title!),
+                                y: .value("total", vm.monthViewModel.countSalary(for: month))
                         )
-                    }
-                    ForEach(array.reversed(), id: \.self) { month in
-                        PointMark(x: .value("month", month.title!),
-                                  y: .value("total", vm.monthViewModel.countSalary(for: month))
-                        )
-                    }
-                    ForEach(array.reversed(), id: \.self) { month in
-                        AreaMark(x: .value("month", month.title!),
-                                  y: .value("total", vm.monthViewModel.countSalary(for: month))
-                        ).foregroundStyle(linearGradient)
                     }
                 }
             }
