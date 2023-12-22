@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct Employe_s_AssistantApp: App {
+    
+    @AppStorage("isDark") var isDark: Bool = false
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.colorScheme, isDark ? .dark : .light)
         }
     }
 }
+
+
+

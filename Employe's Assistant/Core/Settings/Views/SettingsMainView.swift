@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct SettingsMainView: View {
+    
+    @StateObject var vm: SettingsViewModel = SettingsViewModel()
+    @AppStorage("isDark") var isDark: Bool = false
+    
     var body: some View {
         NavigationView {
-            VStack {
-                
+            List {
+                Section("Appearance") {
+                    Toggle("Appearance", isOn: $isDark)
+                }
             }.navigationTitle("Settings")
-       }
+        }
     }
 }
 

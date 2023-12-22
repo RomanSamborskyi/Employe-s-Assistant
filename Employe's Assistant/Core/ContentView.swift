@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var selectedTab: Tabs = .months
     
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView {
             MonthsMainView()
                 .tag(selectedTab == .months)
                 .tabItem {
@@ -22,11 +22,6 @@ struct ContentView: View {
                 .tag(selectedTab == .statistic)
                 .tabItem {
                     Label("Statistic", systemImage: "chart.xyaxis.line")
-                }
-            ProfileMainView()
-                .tag(selectedTab == .profile)
-                .tabItem {
-                    Label("Profile", systemImage: "person")
                 }
             SettingsMainView()
                 .tag(selectedTab == .settings)

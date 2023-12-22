@@ -13,7 +13,7 @@ class MonthsViewModel: ObservableObject {
     
     let coreData: CoreDataManager = CoreDataManager.instanse
     static let instance: MonthsViewModel = MonthsViewModel()
-    let profile: ProfileViewModel = ProfileViewModel.instance
+    let settings: SettingsViewModel = SettingsViewModel.instance
     
     @Published var months: [MonthEntity] = []
     
@@ -55,7 +55,7 @@ class MonthsViewModel: ObservableObject {
     
     func countSalary(for month: MonthEntity) -> Double {
         let totalHours = countHours(for: month)
-        return totalHours * profile.profile.hourSalary
+        return totalHours * settings.hourSalary
     }
     
     func progressBar(for month: MonthEntity) -> CGFloat {
@@ -129,7 +129,8 @@ class MonthsViewModel: ObservableObject {
         newDay.endHours = endHours
         newDay.endMinutes = endMinutes
         newDay.pauseTime = pauseTime
-        newDay.month?.totalHours = countHours(for: month)
+        month.totalHours = countHours(for: month)
+        month.totalSalary = countSalary(for: month)
         save()
     }
     

@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B28AF262B2DBB1D00217DE5 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AF252B2DBB1D00217DE5 /* ProfileModel.swift */; };
-		6B28AF282B2DBBBC00217DE5 /* EditedProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AF272B2DBBBC00217DE5 /* EditedProfile.swift */; };
-		6B28AF2A2B2DBF8F00217DE5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AF292B2DBF8F00217DE5 /* ProfileView.swift */; };
-		6B28AF2C2B2DC6D200217DE5 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AF2B2B2DC6D200217DE5 /* ProfileViewModel.swift */; };
+		6B2A83F92B3613AC00BB1B6A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2A83F82B3613AC00BB1B6A /* SettingsViewModel.swift */; };
 		6B4B642B2B22406B0063783D /* StatisticByMonthsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B642A2B22406B0063783D /* StatisticByMonthsChartView.swift */; };
 		6B5A7E1D2B1A6C68007FDA57 /* MonthsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A7E1C2B1A6C68007FDA57 /* MonthsViewModel.swift */; };
 		6B5A7E1F2B1A7C64007FDA57 /* AddMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A7E1E2B1A7C64007FDA57 /* AddMonthView.swift */; };
@@ -23,7 +20,6 @@
 		6B708FE92B1A5DEB0099C4AA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B708FE82B1A5DEB0099C4AA /* Preview Assets.xcassets */; };
 		6B708FFD2B1A611E0099C4AA /* MonthsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B708FFC2B1A611E0099C4AA /* MonthsMainView.swift */; };
 		6B708FFF2B1A612D0099C4AA /* StatisticMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B708FFE2B1A612D0099C4AA /* StatisticMainView.swift */; };
-		6B7090012B1A613A0099C4AA /* ProfileMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7090002B1A613A0099C4AA /* ProfileMainView.swift */; };
 		6B7090032B1A61440099C4AA /* SettingsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7090022B1A61440099C4AA /* SettingsMainView.swift */; };
 		6B7090062B1A61900099C4AA /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7090052B1A61900099C4AA /* Enums.swift */; };
 		6B70900C2B1A69B60099C4AA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B70900B2B1A69B60099C4AA /* CoreDataManager.swift */; };
@@ -36,10 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6B28AF252B2DBB1D00217DE5 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
-		6B28AF272B2DBBBC00217DE5 /* EditedProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedProfile.swift; sourceTree = "<group>"; };
-		6B28AF292B2DBF8F00217DE5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		6B28AF2B2B2DC6D200217DE5 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		6B2A83F82B3613AC00BB1B6A /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		6B4B642A2B22406B0063783D /* StatisticByMonthsChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticByMonthsChartView.swift; sourceTree = "<group>"; };
 		6B5A7E1C2B1A6C68007FDA57 /* MonthsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthsViewModel.swift; sourceTree = "<group>"; };
 		6B5A7E1E2B1A7C64007FDA57 /* AddMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMonthView.swift; sourceTree = "<group>"; };
@@ -53,7 +46,6 @@
 		6B708FE82B1A5DEB0099C4AA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6B708FFC2B1A611E0099C4AA /* MonthsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthsMainView.swift; sourceTree = "<group>"; };
 		6B708FFE2B1A612D0099C4AA /* StatisticMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticMainView.swift; sourceTree = "<group>"; };
-		6B7090002B1A613A0099C4AA /* ProfileMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainView.swift; sourceTree = "<group>"; };
 		6B7090022B1A61440099C4AA /* SettingsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainView.swift; sourceTree = "<group>"; };
 		6B7090052B1A61900099C4AA /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		6B70900B2B1A69B60099C4AA /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -76,14 +68,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6B28AF242B2DBAE800217DE5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				6B28AF252B2DBB1D00217DE5 /* ProfileModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		6B708FD52B1A5DEA0099C4AA = {
 			isa = PBXGroup;
 			children = (
@@ -127,7 +111,6 @@
 				6B708FE32B1A5DEA0099C4AA /* ContentView.swift */,
 				6B708FF02B1A60090099C4AA /* Months */,
 				6B708FF32B1A60550099C4AA /* Statistic */,
-				6B708FF62B1A60AA0099C4AA /* Profile */,
 				6B708FF92B1A60CF0099C4AA /* Settings */,
 			);
 			path = Core;
@@ -192,34 +175,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		6B708FF62B1A60AA0099C4AA /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				6B708FF72B1A60B70099C4AA /* Views */,
-				6B28AF242B2DBAE800217DE5 /* Model */,
-				6B708FF82B1A60BC0099C4AA /* ViewModel */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		6B708FF72B1A60B70099C4AA /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				6B7090002B1A613A0099C4AA /* ProfileMainView.swift */,
-				6B28AF272B2DBBBC00217DE5 /* EditedProfile.swift */,
-				6B28AF292B2DBF8F00217DE5 /* ProfileView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		6B708FF82B1A60BC0099C4AA /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				6B28AF2B2B2DC6D200217DE5 /* ProfileViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		6B708FF92B1A60CF0099C4AA /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +195,7 @@
 		6B708FFB2B1A60E20099C4AA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				6B2A83F82B3613AC00BB1B6A /* SettingsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -337,23 +293,19 @@
 				6B708FE42B1A5DEA0099C4AA /* ContentView.swift in Sources */,
 				6B7090032B1A61440099C4AA /* SettingsMainView.swift in Sources */,
 				6B5A7E232B1A8B68007FDA57 /* AddDayView.swift in Sources */,
-				6B28AF2C2B2DC6D200217DE5 /* ProfileViewModel.swift in Sources */,
 				6B5A7E262B1A95BD007FDA57 /* Container.xcdatamodeld in Sources */,
 				6B708FFF2B1A612D0099C4AA /* StatisticMainView.swift in Sources */,
 				6B4B642B2B22406B0063783D /* StatisticByMonthsChartView.swift in Sources */,
+				6B2A83F92B3613AC00BB1B6A /* SettingsViewModel.swift in Sources */,
 				6B7090062B1A61900099C4AA /* Enums.swift in Sources */,
 				6B5A7E212B1A8266007FDA57 /* DayDetailView.swift in Sources */,
 				6BBF3D7B2B1BA47800C40227 /* ChartView.swift in Sources */,
 				6BBF3D6F2B1B25AB00C40227 /* MoreDetailsOfDayView.swift in Sources */,
 				6B70900C2B1A69B60099C4AA /* CoreDataManager.swift in Sources */,
 				6BBF3D792B1B582500C40227 /* MonthDetailView.swift in Sources */,
-				6B28AF262B2DBB1D00217DE5 /* ProfileModel.swift in Sources */,
 				6B708FE22B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift in Sources */,
-				6B28AF2A2B2DBF8F00217DE5 /* ProfileView.swift in Sources */,
 				6B5A7E1F2B1A7C64007FDA57 /* AddMonthView.swift in Sources */,
-				6B28AF282B2DBBBC00217DE5 /* EditedProfile.swift in Sources */,
 				6BBF3D772B1B52F100C40227 /* StatisticViewModel.swift in Sources */,
-				6B7090012B1A613A0099C4AA /* ProfileMainView.swift in Sources */,
 				6B5A7E1D2B1A6C68007FDA57 /* MonthsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

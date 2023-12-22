@@ -17,7 +17,7 @@ struct StatisticByMonthsChartView: View {
     
     var body: some View {
         VStack {
-            Text("Statistic of \(selectedTab.description) by monts")
+            Text("Statistic of \(selectedTab.description) by months")
                 .font(.system(size: 15, weight: .bold, design: .rounded))
                 .padding(5)
             Picker("", selection: $selectedTab) {
@@ -47,7 +47,7 @@ struct StatisticByMonthsChartView: View {
                 Chart {
                     ForEach(array.reversed(), id: \.self) { month in
                         BarMark(x: .value("month", month.title!),
-                                y: .value("total", vm.monthViewModel.countSalary(for: month))
+                                y: .value("total", month.totalSalary)
                         )
                     }
                 }
