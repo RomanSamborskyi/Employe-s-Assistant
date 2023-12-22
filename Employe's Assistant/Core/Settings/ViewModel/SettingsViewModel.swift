@@ -11,8 +11,13 @@ import Foundation
 class SettingsViewModel: ObservableObject {
     
     static let instance: SettingsViewModel = SettingsViewModel()
-    
-    @Published var hourSalary: Double = 160
 
+    
+    func saveHourSalary(_ newValue: Double) {
+        UserDefaults.standard.setValue(newValue, forKey: "hourSalary")
+    }
+    func returnHourSalary() -> Double {
+        return UserDefaults.standard.double(forKey: "hourSalary")
+    }
 }
 

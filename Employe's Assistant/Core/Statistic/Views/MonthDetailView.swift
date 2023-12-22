@@ -33,8 +33,11 @@ struct MonthDetailView: View {
                             .frame(width: 105)
                             .blur(radius: 0.5)
                 }
-                Text("\(vm.currentMonth?.monthTarget ?? 0)")
-                    .font(.system(size: 35, weight: .bold, design: .rounded))
+                Text(vm.monthViewModel.countHoursTitle(for: month))
+                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .frame(width: 80)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }.frame(width: 110, height: 110)
             VStack(alignment: .leading) {
                 HStack {
@@ -65,11 +68,11 @@ struct MonthDetailView: View {
                         .minimumScaleFactor(0.8)
                 }
                 HStack {
-                    Text("Total hours:")
+                    Text("Month target:")
                         .font(.caption)
                         .foregroundColor(.purple.opacity(0.7))
                     Spacer(minLength: 25)
-                    Text(vm.monthViewModel.countHoursTitle(for: month))
+                    Text("\(month.monthTarget)")
                         .foregroundStyle(Color.purple)
                 }
             }.onAppear {

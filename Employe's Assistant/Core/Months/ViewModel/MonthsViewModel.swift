@@ -55,7 +55,7 @@ class MonthsViewModel: ObservableObject {
     
     func countSalary(for month: MonthEntity) -> Double {
         let totalHours = countHours(for: month)
-        return totalHours * settings.hourSalary
+        return totalHours * settings.returnHourSalary()
     }
     
     func progressBar(for month: MonthEntity) -> CGFloat {
