@@ -13,12 +13,13 @@ struct SettingsMainView: View {
     @AppStorage("isDark") var isDark: Bool = false
     @State private var setHours: Bool = false
     @State private var hourSalary: Double = 0
+    
     var body: some View {
         NavigationView {
             List {
                 Section("Appearance") {
                     HStack {
-                        Image(systemName: "moon.fill")
+                        Image(systemName: isDark ? "moon.fill" : "sun.min.fill")
                         Toggle("Appearance", isOn: $isDark)
                     }
                 }
@@ -44,8 +45,10 @@ struct SettingsMainView: View {
                         Text("App icon")
                     }
                     HStack {
-                        Image(systemName: "paintpalette.fill")
-                        Text("Accent color")
+                        NavigationLink(destination: { ColorPickerView(vm: vm) }, label: {
+                            Image(systemName: "paintpalette.fill")
+                            Text("Accent color")
+                        })
                     }
                 }
             }.navigationTitle("Settings")

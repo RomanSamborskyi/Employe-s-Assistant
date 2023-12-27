@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6B2A83F92B3613AC00BB1B6A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2A83F82B3613AC00BB1B6A /* SettingsViewModel.swift */; };
 		6B2A83FB2B362FA800BB1B6A /* SetHourSalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2A83FA2B362FA800BB1B6A /* SetHourSalaryView.swift */; };
+		6B2FE3202B3C9B8B009B3299 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2FE31F2B3C9B8B009B3299 /* ColorPickerView.swift */; };
 		6B4B642B2B22406B0063783D /* StatisticByMonthsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B642A2B22406B0063783D /* StatisticByMonthsChartView.swift */; };
 		6B5A7E1D2B1A6C68007FDA57 /* MonthsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A7E1C2B1A6C68007FDA57 /* MonthsViewModel.swift */; };
 		6B5A7E1F2B1A7C64007FDA57 /* AddMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A7E1E2B1A7C64007FDA57 /* AddMonthView.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		6B2A83F82B3613AC00BB1B6A /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		6B2A83FA2B362FA800BB1B6A /* SetHourSalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHourSalaryView.swift; sourceTree = "<group>"; };
+		6B2FE31F2B3C9B8B009B3299 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		6B4B642A2B22406B0063783D /* StatisticByMonthsChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticByMonthsChartView.swift; sourceTree = "<group>"; };
 		6B5A7E1C2B1A6C68007FDA57 /* MonthsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthsViewModel.swift; sourceTree = "<group>"; };
 		6B5A7E1E2B1A7C64007FDA57 /* AddMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMonthView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				6B7090022B1A61440099C4AA /* SettingsMainView.swift */,
 				6B2A83FA2B362FA800BB1B6A /* SetHourSalaryView.swift */,
+				6B2FE31F2B3C9B8B009B3299 /* ColorPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				6B2A83FB2B362FA800BB1B6A /* SetHourSalaryView.swift in Sources */,
 				6BBF3D792B1B582500C40227 /* MonthDetailView.swift in Sources */,
 				6B708FE22B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift in Sources */,
+				6B2FE3202B3C9B8B009B3299 /* ColorPickerView.swift in Sources */,
 				6B5A7E1F2B1A7C64007FDA57 /* AddMonthView.swift in Sources */,
 				6BBF3D772B1B52F100C40227 /* StatisticViewModel.swift in Sources */,
 				6B5A7E1D2B1A6C68007FDA57 /* MonthsViewModel.swift in Sources */,

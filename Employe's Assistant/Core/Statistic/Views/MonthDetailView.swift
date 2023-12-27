@@ -70,10 +70,10 @@ struct MonthDetailView: View {
                 HStack {
                     Text("Month target:")
                         .font(.caption)
-                        .foregroundColor(.purple.opacity(0.7))
+                        .foregroundColor(vm.monthViewModel.settings.newAccentColor)
                     Spacer(minLength: 25)
                     Text("\(month.monthTarget)")
-                        .foregroundStyle(Color.purple)
+                        .foregroundStyle(vm.monthViewModel.settings.newAccentColor)
                 }
             }.onAppear {
                 withAnimation(Animation.spring) {

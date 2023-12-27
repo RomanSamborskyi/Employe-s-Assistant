@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SetHourSalaryView: View {
     @ObservedObject var vm: SettingsViewModel
+    @AppStorage("isDark") var isDark: Bool = false
     @Binding var setHours: Bool
     @Binding var hourSalary: Double
     @State private var text: String = ""
@@ -40,7 +41,9 @@ struct SetHourSalaryView: View {
                     .padding()
                     
             })
-        }.onAppear {
+        }.accentColor(vm.newAccentColor)
+            .preferredColorScheme(isDark ? .dark : .light)
+        .onAppear {
             self.text = String(vm.returnHourSalary())
         }
     }

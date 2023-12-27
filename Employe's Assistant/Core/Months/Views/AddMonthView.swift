@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddMonthView: View {
     
+    @AppStorage("isDark") var isDark: Bool = false
     @State private var targetText: String = ""
     @State private var selectedMonth: Monthes = .empty
     @StateObject var vm: MonthsViewModel
@@ -55,7 +56,8 @@ struct AddMonthView: View {
                     .background(Color.accentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
-        }
+        }.accentColor(vm.settings.newAccentColor)
+            .preferredColorScheme(isDark ? .dark : .light)
     }
 }
 

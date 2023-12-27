@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
  
     @State private var selectedTab: Tabs = .months
+    @StateObject private var svm :SettingsViewModel = SettingsViewModel()
     
     var body: some View {
         TabView {
@@ -28,7 +29,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
-        }
+        }.accentColor(svm.newAccentColor)
     }
 }
 

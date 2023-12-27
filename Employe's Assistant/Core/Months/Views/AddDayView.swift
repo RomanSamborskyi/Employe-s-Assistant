@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddDayView: View {
     
+    @AppStorage("isDark") var isDark: Bool = false
     @ObservedObject var vm: MonthsViewModel
     @State private var startHours: Hours = .zero
     @State private var startMinutes: Minutes = .zero
@@ -95,7 +96,8 @@ struct AddDayView: View {
                     .background(Color.accentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
-        }
+        }.accentColor(vm.settings.newAccentColor)
+            .preferredColorScheme(isDark ? .dark : .light)
     }
 }
 
