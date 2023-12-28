@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
  
     @State private var selectedTab: Tabs = .months
-    @StateObject private var svm :SettingsViewModel = SettingsViewModel()
+    @StateObject private var svm: SettingsViewModel = SettingsViewModel()
     
     var body: some View {
         TabView {

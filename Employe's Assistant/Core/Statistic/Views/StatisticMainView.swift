@@ -10,6 +10,7 @@ import SwiftUI
 struct StatisticMainView: View {
     
     @StateObject var vm: StatisticViewModel = StatisticViewModel()
+    @State private var showMonth: Bool = false
     
     var body: some View {
         NavigationView {
@@ -17,6 +18,11 @@ struct StatisticMainView: View {
                 List {
                     Section {
                         MonthDetailView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                            .onTapGesture {
+                                withAnimation(Animation.bouncy) {
+                                    showMonth.toggle()
+                                }
+                            }
                     }
                     Section {
                         ChartView(vm: vm)
@@ -24,7 +30,10 @@ struct StatisticMainView: View {
                     Section {
                         StatisticByMonthsChartView(vm: vm)
                     }
-                }.navigationTitle("Statistic")
+                }.sheet(isPresented: $showMonth, content: {
+                    DayDetailView(vm: vm.monthViewModel, month: vm.currentMonth!)
+                })
+                .navigationTitle("Statistic")
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             Picker("Selected month", selection: $vm.selectedIndex) {

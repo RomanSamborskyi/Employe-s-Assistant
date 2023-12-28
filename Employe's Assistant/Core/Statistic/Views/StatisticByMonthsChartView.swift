@@ -12,7 +12,6 @@ struct StatisticByMonthsChartView: View {
     
     @ObservedObject var vm: StatisticViewModel
     @State private var array: [MonthEntity] = []
-    var linearGradient: LinearGradient = LinearGradient(colors: [Color.accentColor.opacity(0.4), Color.accentColor.opacity(0.0)], startPoint: .top, endPoint: .bottom)
     @State var selectedTab: StatisticType = .hours
     
     var body: some View {

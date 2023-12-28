@@ -13,6 +13,7 @@ struct SetHourSalaryView: View {
     @Binding var setHours: Bool
     @Binding var hourSalary: Double
     @State private var text: String = ""
+    
     var body: some View {
         VStack {
             Image(systemName: "dollarsign")

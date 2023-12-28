@@ -15,7 +15,9 @@ class StatisticViewModel: ObservableObject {
     @Published var currentMonth: MonthEntity? = nil
     @Published var selectedIndex: Int = 0
     
-    init() { getCurrentMonth() }
+    init() {
+        getCurrentMonth()
+    }
     
     var dateFormater: DateFormatter = {
         var dateFormater: DateFormatter = DateFormatter()
@@ -23,7 +25,6 @@ class StatisticViewModel: ObservableObject {
         dateFormater.dateFormat = "MMMM YYYY"
         return dateFormater
     }()
-    
     
     func getCurrentMonth() {
         guard let index = monthViewModel.months.firstIndex(where: { $0.title == dateFormater.string(from: Date()) }) else { return }
