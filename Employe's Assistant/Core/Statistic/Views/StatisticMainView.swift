@@ -18,11 +18,6 @@ struct StatisticMainView: View {
                 List {
                     Section {
                         MonthDetailView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
-                            .onTapGesture {
-                                withAnimation(Animation.bouncy) {
-                                    showMonth.toggle()
-                                }
-                            }
                     }
                     Section {
                         ChartView(vm: vm)
@@ -30,10 +25,7 @@ struct StatisticMainView: View {
                     Section {
                         StatisticByMonthsChartView(vm: vm)
                     }
-                }.sheet(isPresented: $showMonth, content: {
-                    DayDetailView(vm: vm.monthViewModel, month: vm.currentMonth!)
-                })
-                .navigationTitle("Statistic")
+                }.navigationTitle("Statistic")
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             Picker("Selected month", selection: $vm.selectedIndex) {
