@@ -58,12 +58,12 @@ class MonthsViewModel: ObservableObject {
         return totalHours * settings.returnHourSalary()
     }
     
-    func progressBar(for month: MonthEntity) -> CGFloat {
+    func progressBar(for month: MonthEntity, width: CGFloat) -> CGFloat {
         let target = month.monthTarget
         let curentHours = countHours(for: month)
-        let percent = curentHours / Double(target) * 100
-        if percent >= 100 {
-            return CGFloat(100)
+        let percent = curentHours / Double(target) * width
+        if percent >= width {
+            return CGFloat(width)
         } else if month.monthTarget == 0 {
             return 0
         } else {

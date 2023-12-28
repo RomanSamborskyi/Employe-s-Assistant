@@ -20,6 +20,9 @@ struct DayDetailView: View {
     
     var body: some View {
         List {
+            Section {
+                ProgresBarView(vm: vm, month: month)
+            }
             ForEach(vm.fetchDays(from: month)) { day in
               NavigationLink(destination: { MoreDetailsOfDayView(day: day) }, label: {
                   HStack {
