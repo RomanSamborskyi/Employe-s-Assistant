@@ -24,7 +24,7 @@ struct MonthsMainView: View {
                         HStack {
                             Text(month.title ?? "no title")
                             Spacer()
-                            MonthProgressBarView(vm: viewModel, month: month)
+                           // MonthProgressBarView(vm: viewModel, month: month)
                         }
                     })
                 }.onDelete(perform: { indexSet in
