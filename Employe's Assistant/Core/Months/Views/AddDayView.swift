@@ -96,6 +96,7 @@ struct AddDayView: View {
                     .background(Color.accentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
+                .disabled(startHours == .zero || endHours == .zero || date > Date())
         }.accentColor(vm.settings.newAccentColor)
             .preferredColorScheme(isDark ? .dark : .light)
     }
