@@ -21,6 +21,7 @@ struct SetHourSalaryView: View {
                 .foregroundStyle(Color.accentColor)
             Text("Set your hour salary:")
                 .font(.system(size: 35, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
             TextField("", text: $text)
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 15).foregroundStyle(Color.gray.opacity(0.4)))

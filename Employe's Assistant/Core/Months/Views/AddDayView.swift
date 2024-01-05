@@ -38,7 +38,7 @@ struct AddDayView: View {
                     .frame(width: 40)
             }.padding(10)
             HStack {
-                Text("Start work at: ")
+                Text("Start work at:")
                     .padding(10)
                 Spacer()
                 Picker("", selection: $startHours, content: {
@@ -53,7 +53,7 @@ struct AddDayView: View {
                 })
             }
             HStack{
-                Text("End work at: ")
+                Text("End work at:")
                     .padding(10)
                 Spacer()
                 Picker("", selection: $endHours, content: {
@@ -68,7 +68,7 @@ struct AddDayView: View {
                 })
             }
             HStack{
-                Text("Pause time: ")
+                Text("Pause time:")
                     .padding(10)
                 Spacer()
                 Picker("", selection: $pauseTime, content: {

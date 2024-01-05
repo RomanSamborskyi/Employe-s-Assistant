@@ -15,11 +15,11 @@ enum StatisticType: String, Identifiable, CaseIterable {
     var description: String {
         switch self {
         case .hours:
-            return "hours"
+            return NSLocalizedString("hours", comment: "")
         case .workingDays:
-            return "working days"
+            return NSLocalizedString("working days", comment: "")
         case .salary:
-            return "salary"
+            return NSLocalizedString("salary", comment: "")
         }
     }
 }

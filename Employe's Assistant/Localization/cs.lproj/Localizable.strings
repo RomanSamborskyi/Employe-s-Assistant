@@ -1,0 +1,79 @@
+//Add month view
+"Add new month:" = "Přidat nový měsíc:";
+"Select a month:" = "Vybrat měsíc:";
+"Set a hours target fo the month: " = "Nastavit hodinový cíl pro daný měsíc:";
+"Type..." = "Zadat…";
+"SAVE" = "ULOŽIT";
+"Months" = "Měsíce";
+"There are no months added" = "Nejsou žádné přidané měsíce";
+//Day detail view
+"Delete" = "Smazat";
+"The list is empty" = "Seznam je prázdný";
+
+//More deatail
+"Detail of a day:" = "Detail dne:";
+"hour" = "hodina";
+"minute" = "minuta";
+"Start work at:" = "Začátek práce:";
+"End work at:" = "Konec práce:";
+"Pause time:" = "Pauza:";
+
+//Add day view
+"Set up working hours:" = "Nastavení směny";
+"hour" = "hodina";
+"minute" = "minuta";
+"Start work at:" = "Začátek práce:";
+"End work at:" = "Konec práce:";
+"Pause time:" = "Pauza:";
+"Date: " = "Datum:";
+"SAVE" = "ULOŽIT";
+
+//Month detail view
+"Month details" = "Detail měsíce";
+"Count of working days:" = "Počet odpracovaných dní:";
+"Total salary:" = "Mzda celkem:";
+"Month target:" = "Měsíční cíl:";
+"Statistic" = "Statistika";
+"Selected month" = "Vybraný měsíc";
+"There is no any statistic" = "Není k dispozici žádná statistika";
+"Days" = "Dny";
+"Hours" = "Hodiny";
+"Statistic of %.1f by months" = "Statistika po měsících";
+"month" = "měsíc";
+"total" = "celkem";
+//Settings view
+"Appearance" = "Vzhled";
+"Dark" = "Tmavý";
+"Light" = "Světlý";
+"Hour salary" = "Hodinová mzda";
+"Edit" = "Upravit";
+"General" = "Obecné";
+"App icon" = "Ikona aplikace";
+"Accent color" = "Barva";
+"Settings" = "Nastavení";
+"Set your hour salary:" = "Nastavit hodinovou mzdu:";
+"SAVE" = "ULOŽIT";
+"Pick accent color" = "Vybrat barvu";
+"RESET" = "OBNOVIT";
+"Color changed" = "Barva změněna";
+"Restart application to aply changes" = "Pro provedení změn restartujte aplikaci";
+"OK" = "Ano";
+//
+"January" = "Leden";
+"February" = "Únor";
+"March" = "Březen";
+"April" = "Duben";
+"May" = "Květen";
+"June" = "Červen";
+"July" = "Červenec";
+"August" = "Srpen";
+"September" = "Září";
+"October" = "Říjen";
+"November" = "Listopad";
+"December" = "Prosinec";
+"Not selected" = "Nevybráno";
+//
+"hours" = "hodin";
+"working days" = "dní";
+"salary" = "mzda";
+

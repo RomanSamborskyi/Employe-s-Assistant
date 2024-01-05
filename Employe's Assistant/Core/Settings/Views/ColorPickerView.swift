@@ -20,6 +20,7 @@ struct ColorPickerView: View {
                 .foregroundStyle(Color.accentColor)
             Text("Pick accent color")
                 .font(.system(size: 35, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
             ColorPicker(selection: $vm.newAccentColor, label: {
                 Text("Accent color")
                     .padding()

@@ -16,7 +16,7 @@ struct StatisticByMonthsChartView: View {
     
     var body: some View {
         VStack {
-            Text("Statistic of \(selectedTab.description) by months")
+            Text(String(format: NSLocalizedString("Statistic of %.1f by months", comment: ""), self.selectedTab.description))
                 .font(.system(size: 15, weight: .bold, design: .rounded))
                 .padding(5)
             Picker("", selection: $selectedTab) {

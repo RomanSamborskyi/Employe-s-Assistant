@@ -1,0 +1,78 @@
+//Add month view
+"Add new month:" = "Додайте новий місяць";
+"Select a month:" = "Виберіть місяць";
+"Set a hours target fo the month: " = "Вкажіть ціль на місяць (в годинах)";
+"Type..." = "Введіть...";
+"SAVE" = "ЗБЕРЕГТИ";
+"Months" = "Місяці";
+"There are no months added" = "Немає доданих місяців";
+//Day detail view
+"Delete" = "Видадити";
+"The list is empty" = "Список порожній";
+
+//More deatail
+"Detail of a day:" = "Деталі дня:";
+"hour" = "год.";
+"minute" = "хв.";
+"Start work at:" = "Початок зміни:";
+"End work at:" = "Кінець зміни:";
+"Pause time:" = "Час на обід:";
+
+//Add day view
+"Set up working hours:" = "Вкажіть робочі години";
+"hour" = "год.";
+"minute" = "хв.";
+"Start work at:" = "Початок зміни:";
+"End work at:" = "Кінець зміни:";
+"Pause time:" = "Час на обід:";
+"Date: " = "Дата:";
+"SAVE" = "ЗБЕРЕГТИ";
+
+//Month detail view
+"Month details" = "Деталі місяця";
+"Count of working days:" = "Відпрацьовано днів:";
+"Total salary:" = "Загальна сумма:";
+"Month target:" = "Ціль на місяць:";
+"Statistic" = "Статистика";
+"Selected month" = "Вибраний місяць";
+"There is no any statistic" = "Немає доступної статистики";
+"Days" = "Дні";
+"Hours" = "Години";
+"Statistic of %.1f by months" = "Статистика за місяць";
+"month" = "місяць";
+"total" = "загально";
+//Settings view
+"Appearance" = "Режим перегляду";
+"Dark" = "Темний";
+"Light" = "Світлий";
+"Hour salary" = "По годинна ставка";
+"Edit" = "Ред.";
+"General" = "Загальні";
+"App icon" = "Іконка додатку";
+"Accent color" = "Головний колір";
+"Settings" = "Налаштування";
+"Set your hour salary:" = "Вкажіть Вашу погодинну ставку";
+"SAVE" = "ЗБЕРЕГТИ";
+"Pick accent color" = "Виберіть головний колір";
+"RESET" = "СКИНУТИ";
+"Color changed" = "Колір змінено";
+"Restart application to aply changes" = "Перезавантажте додаток, щоб застосувати зміни";
+"OK" = "Добре";
+//
+"January" = "Січень";
+"February" = "Лютий";
+"March" = "Березень";
+"April" = "Квітень";
+"May" = "Травень";
+"June" = "Черевень";
+"July" = "Липень";
+"August" = "Серпень";
+"September" = "Вересень";
+"October" = "Жовтень";
+"November" = "Листопад";
+"December" = "Грудень";
+"Not selected" = "Не вибрано";
+//
+"hours" = "години";
+"working days" = "дні";
+"salary" = "зар.плата";

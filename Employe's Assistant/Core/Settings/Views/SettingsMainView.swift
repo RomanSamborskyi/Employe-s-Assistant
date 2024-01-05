@@ -20,12 +20,12 @@ struct SettingsMainView: View {
                 Section("Appearance") {
                     HStack {
                         Image(systemName: isDark ? "moon.fill" : "sun.min.fill")
-                        Toggle("Appearance", isOn: $isDark)
+                        Toggle(isDark ? "Dark" : "Light", isOn: $isDark)
                     }
                 }
                 Section("Hour salary") {
                     HStack {
-                        Image(systemName: "dollarsign")
+                        Image(systemName: "banknote")
                         Text(String(format: "%.2f", hourSalary))
                         Spacer()
                         Button("Edit", action: {
