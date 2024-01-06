@@ -134,7 +134,7 @@
 		6B708FF02B1A60090099C4AA /* Months */ = {
 			isa = PBXGroup;
 			children = (
-				6B9427C32B496E3000535A16 /* Model */,
+				6B9427C32B496E3000535A16 /* Models */,
 				6B708FF12B1A603B0099C4AA /* Views */,
 				6B708FF22B1A60400099C4AA /* ViewModel */,
 			);
@@ -244,13 +244,13 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
-		6B9427C32B496E3000535A16 /* Model */ = {
+		6B9427C32B496E3000535A16 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				6B9427C42B496E4400535A16 /* MonthsModel.swift */,
 				6B9427C62B496E7200535A16 /* DaysModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
