@@ -38,7 +38,7 @@
 "There is no any statistic" = "Není k dispozici žádná statistika";
 "Days" = "Dny";
 "Hours" = "Hodiny";
-"Statistic of %.1f by months" = "Statistika po měsících";
+"Statistic by months" = "Statistika po měsících";
 "month" = "měsíc";
 "total" = "celkem";
 //Settings view

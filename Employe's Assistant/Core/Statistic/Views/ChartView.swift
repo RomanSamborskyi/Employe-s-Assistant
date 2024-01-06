@@ -13,10 +13,11 @@ struct ChartView: View {
    
     @ObservedObject var vm: StatisticViewModel
     @State var array: [DayEntity] = []
+    let month: MonthEntity
     
     var body: some View {
         VStack {
-            Text("\(vm.currentMonth?.title ?? "")")
+            Text("\(month.title ?? "")")
             .font(.system(size: 15, weight: .bold, design: .rounded))
             Chart {
                 ForEach(array, id: \.date) { hour in
@@ -27,7 +28,7 @@ struct ChartView: View {
             }
         }.onAppear {
             withAnimation(Animation.bouncy) {
-                guard let array = vm.currentMonth?.day?.allObjects as? [DayEntity] else { return }
+                guard let array = month.day?.allObjects as? [DayEntity] else { return }
                 self.array = array
             }
         }
@@ -42,5 +43,5 @@ struct ChartView: View {
 }
 
 #Preview {
-    ChartView(vm: StatisticViewModel())
+    ChartView(vm: StatisticViewModel(), month: MonthEntity(context: CoreDataManager.instanse.context))
 }

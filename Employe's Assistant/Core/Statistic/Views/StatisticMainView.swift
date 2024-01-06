@@ -20,7 +20,7 @@ struct StatisticMainView: View {
                         MonthDetailView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
                     }
                     Section {
-                        ChartView(vm: vm)
+                        ChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
                     }
                     Section {
                         StatisticByMonthsChartView(vm: vm)

@@ -38,7 +38,7 @@
 "There is no any statistic" = "Немає доступної статистики";
 "Days" = "Дні";
 "Hours" = "Години";
-"Statistic of %.1f by months" = "Статистика за місяць";
+"Statistic by months" = "Статистика за місяць";
 "month" = "місяць";
 "total" = "загально";
 //Settings view
