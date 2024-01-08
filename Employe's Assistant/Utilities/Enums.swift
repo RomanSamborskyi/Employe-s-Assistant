@@ -93,33 +93,17 @@ enum Minutes: String, CaseIterable, Identifiable {
     
     var id: Self { self }
     
-    case zero, five, ten, fifteen, twentee, twentee_five, thirtee, thirtee_five, fourtee, fourtee_five, fiftee, fiftee_five
+    case zero, fifteen, thirtee,  fourtee_five
     var description: String {
         switch self {
         case .zero:
             "0"
-        case .five:
-            "5"
-        case .ten:
-            "10"
         case .fifteen:
             "15"
-        case .twentee:
-            "20"
-        case .twentee_five:
-            "25"
         case .thirtee:
             "30"
-        case .thirtee_five:
-            "35"
-        case .fourtee:
-            "40"
         case .fourtee_five:
             "45"
-        case .fiftee:
-            "50"
-        case .fiftee_five:
-            "55"
         }
     }
 }

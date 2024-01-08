@@ -48,7 +48,7 @@
 		6B5A7E202B1A8266007FDA57 /* DayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailView.swift; sourceTree = "<group>"; };
 		6B5A7E222B1A8B68007FDA57 /* AddDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDayView.swift; sourceTree = "<group>"; };
 		6B5A7E252B1A95BD007FDA57 /* Container.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Container.xcdatamodel; sourceTree = "<group>"; };
-		6B708FDE2B1A5DEA0099C4AA /* Employe's Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Employe's Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B708FDE2B1A5DEA0099C4AA /* Employee's Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Employee's Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B708FE12B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employe_s_AssistantApp.swift; sourceTree = "<group>"; };
 		6B708FE32B1A5DEA0099C4AA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6B708FE52B1A5DEB0099C4AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 		6B708FDF2B1A5DEA0099C4AA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6B708FDE2B1A5DEA0099C4AA /* Employe's Assistant.app */,
+				6B708FDE2B1A5DEA0099C4AA /* Employee's Assistant.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -256,9 +256,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6B708FDD2B1A5DEA0099C4AA /* Employe's Assistant */ = {
+		6B708FDD2B1A5DEA0099C4AA /* Employee's Assistant */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6B708FEC2B1A5DEB0099C4AA /* Build configuration list for PBXNativeTarget "Employe's Assistant" */;
+			buildConfigurationList = 6B708FEC2B1A5DEB0099C4AA /* Build configuration list for PBXNativeTarget "Employee's Assistant" */;
 			buildPhases = (
 				6B708FDA2B1A5DEA0099C4AA /* Sources */,
 				6B708FDB2B1A5DEA0099C4AA /* Frameworks */,
@@ -268,9 +268,9 @@
 			);
 			dependencies = (
 			);
-			name = "Employe's Assistant";
+			name = "Employee's Assistant";
 			productName = "Employe's Assistant";
-			productReference = 6B708FDE2B1A5DEA0099C4AA /* Employe's Assistant.app */;
+			productReference = 6B708FDE2B1A5DEA0099C4AA /* Employee's Assistant.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -288,7 +288,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6B708FD92B1A5DEA0099C4AA /* Build configuration list for PBXProject "Employe's Assistant" */;
+			buildConfigurationList = 6B708FD92B1A5DEA0099C4AA /* Build configuration list for PBXProject "Employee's Assistant" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -303,7 +303,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6B708FDD2B1A5DEA0099C4AA /* Employe's Assistant */,
+				6B708FDD2B1A5DEA0099C4AA /* Employee's Assistant */,
 			);
 		};
 /* End PBXProject section */
@@ -502,6 +502,7 @@
 				DEVELOPMENT_TEAM = XYXST7NTMH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Employee's Assistant";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -536,6 +537,7 @@
 				DEVELOPMENT_TEAM = XYXST7NTMH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Employee's Assistant";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -562,7 +564,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6B708FD92B1A5DEA0099C4AA /* Build configuration list for PBXProject "Employe's Assistant" */ = {
+		6B708FD92B1A5DEA0099C4AA /* Build configuration list for PBXProject "Employee's Assistant" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6B708FEA2B1A5DEB0099C4AA /* Debug */,
@@ -571,7 +573,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6B708FEC2B1A5DEB0099C4AA /* Build configuration list for PBXNativeTarget "Employe's Assistant" */ = {
+		6B708FEC2B1A5DEB0099C4AA /* Build configuration list for PBXNativeTarget "Employee's Assistant" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6B708FED2B1A5DEB0099C4AA /* Debug */,
