@@ -19,17 +19,17 @@ struct MonthDetailView: View {
         HStack {
             ZStack {
                 Circle()
-                    .stroke(Color.green.gradient,lineWidth: 10)
+                    .stroke(Color.gray.opacity(0.5),style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .frame(width: 95)
                 Circle()
-                    .trim(from: CGFloat(month.trim) , to: 1.0)
-                    .stroke(Color.gray,lineWidth: 10)
+                    .trim(from: 0.0 , to: CGFloat(month.trim))
+                    .stroke(Color.green,style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .frame(width: 95)
                     .rotationEffect(Angle(degrees: 270.0))
                     .animation(.linear, value: 0.2)
                 if Int32(month.totalHours) >= month.monthTarget {
                         Circle()
-                            .stroke(Color.green.gradient.opacity(0.3),lineWidth: 10)
+                        .stroke(Color.green.gradient.opacity(0.3), style: StrokeStyle(lineWidth: 10, lineCap: .round))
                             .frame(width: 105)
                             .blur(radius: 0.5)
                 }
