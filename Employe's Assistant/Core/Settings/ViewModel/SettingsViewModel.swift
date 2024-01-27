@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+
+
 class SettingsViewModel: ObservableObject {
     
     static let instance: SettingsViewModel = SettingsViewModel()
@@ -39,7 +41,9 @@ class SettingsViewModel: ObservableObject {
     func getColor() {
         guard let components = UserDefaults.standard.value(forKey: key) as? [CGFloat] else { return }
         let color = Color(.sRGB, red: components[0], green: components[1], blue: components[2], opacity: components[3] )
-        self.newAccentColor = color
+        DispatchQueue.main.async {
+            self.newAccentColor = color
+        }
     }
     func saveHourSalary(_ newValue: Double) {
         UserDefaults.standard.setValue(newValue, forKey: "hourSalary")

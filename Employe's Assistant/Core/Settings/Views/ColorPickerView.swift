@@ -52,6 +52,11 @@ struct ColorPickerView: View {
         }.alert(isPresented: $showAlert) {
             Alert(title: Text("Color changed"), message: Text("Restart application to aply changes"), dismissButton: .default(Text("OK"), action: { disMiss.callAsFunction() }))
         }
+        .onDisappear {
+                DispatchQueue.main.async {
+                    vm.getColor()
+                }
+        }
     }
 }
 

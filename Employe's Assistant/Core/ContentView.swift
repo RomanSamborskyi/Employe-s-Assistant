@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
  
     @State private var selectedTab: Tabs = .months
-    @StateObject private var svm: SettingsViewModel = SettingsViewModel()
+    @StateObject var svm: SettingsViewModel = SettingsViewModel()
     
     var body: some View {
         TabView {
@@ -24,7 +24,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Statistic", systemImage: "chart.xyaxis.line")
                 }
-            SettingsMainView(vm: SettingsViewModel())
+            SettingsMainView(vm: svm)
                 .tag(selectedTab == .settings)
                 .tabItem {
                     Label("Settings", systemImage: "gear")

@@ -10,11 +10,11 @@ import SwiftUI
 struct AlternativeIconView: View {
     
     @ObservedObject var vm: SettingsViewModel
-    private let columns: [GridItem] = [GridItem(), GridItem()]
+    private let columns: [GridItem] = [GridItem(), GridItem(), GridItem()]
     private var checkmark: some View {
               Image(systemName: "checkmark.seal.fill")
                     .font(.title)
-                    .foregroundStyle(Color.blue)
+                    .foregroundStyle(Color.accentColor)
                     .offset(x: -10, y: -10)
     }
     
@@ -28,16 +28,13 @@ struct AlternativeIconView: View {
                 .padding()
                 .font(.system(size: 45, weight: .bold, design: .rounded))
                 .foregroundStyle(Color.accentColor)
-            HStack {
+            LazyVGrid(columns: columns) {
                 ForEach(vm.icons, id: \.self) { icon in
                     ZStack(alignment: .topLeading) {
                         Image(uiImage: UIImage(named: icon ?? "AppIcon") ?? UIImage() )
                             .resizable()
                             .frame(width: 100, height: 100)
                             .clipShape(RoundedRectangle(cornerRadius: 25))
-                            .overlay {
-                                
-                            }
                             .onTapGesture {
                                 vm.currentIndex = vm.icons.firstIndex(of: icon) ?? 0
                             }
@@ -61,7 +58,9 @@ struct AlternativeIconView: View {
                         }
                     })
                 }
-        }
+           }
+            Spacer()
+                .frame(height: 200)
         }
     }
 }

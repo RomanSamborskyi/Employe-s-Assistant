@@ -56,10 +56,7 @@ struct SettingsMainView: View {
             }.navigationTitle("Settings")
                 .sheet(isPresented: $setHours, content: {
                     SetHourSalaryView(vm: vm, setHours: $setHours, hourSalary: $hourSalary)
-                })
-                .onAppear {
-                    self.hourSalary = vm.returnHourSalary()
-                }
+            })
         }
     }
 }
