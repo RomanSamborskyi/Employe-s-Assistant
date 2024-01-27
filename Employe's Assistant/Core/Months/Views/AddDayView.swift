@@ -20,7 +20,17 @@ struct AddDayView: View {
     @State private var showPopOver: Bool = false
     @Binding var dissmiss: Bool
     let month: MonthEntity
-    
+    var popOverTitle: String {
+        var title: String = ""
+        if startHours == .zero && endHours == .zero && date > Date() {
+            title = "Set all required fields"
+        } else if startHours == .zero || endHours == .zero {
+            title = "Set up start and end hours"
+        } else if date > Date() {
+            title = "This day is in the future"
+        }
+        return title
+    }
     var body: some View {
         VStack {
             Image(systemName: "box.truck.badge.clock")
@@ -107,7 +117,7 @@ struct AddDayView: View {
             .preferredColorScheme(isDark ? .dark : .light)
             .overlay {
                 if showPopOver {
-                    CustomPopOver(vm: vm.settings, trigerPopOver: $showPopOver, text: "This day is in the future", iconName: "exclamationmark.square.fill")
+                    CustomPopOver(vm: vm.settings, trigerPopOver: $showPopOver, text: NSLocalizedString(popOverTitle, comment: ""), iconName: "exclamationmark.square.fill")
                         .transition(.move(edge: .top))
                 }
         }

@@ -61,7 +61,7 @@ struct ColorPickerView: View {
         }
         .overlay {
             if showAlert {
-               CustomPopOver(vm: vm, trigerPopOver: $showAlert, text: "Color was successfully changed", iconName: "checkmark.square.fill")
+               CustomPopOver(vm: vm, trigerPopOver: $showAlert, text: NSLocalizedString("Color was successfully changed", comment: ""), iconName: "checkmark.square.fill")
                     .transition(.move(edge: .top))
                     .onDisappear {
                         disMiss.callAsFunction()

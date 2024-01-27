@@ -27,11 +27,11 @@ struct CustomPopOver: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 15)
                             .foregroundStyle(isDark ? .black : .white)
-                            .frame(width: 330, height: 75)
+                            //.frame(width: 330, height: 75)
                         RoundedRectangle(cornerRadius: 15)
                             .stroke(lineWidth: 3)
                             .foregroundStyle(vm.newAccentColor)
-                            .frame(width: 330, height: 75)
+                            //.frame(width: 330, height: 75)
                     }
                 )
             Spacer()

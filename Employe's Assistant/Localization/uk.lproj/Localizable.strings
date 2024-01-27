@@ -76,3 +76,8 @@
 "hours" = "години";
 "working days" = "дні";
 "salary" = "зар.плата";
+"Color was successfully changed" = "Колір успішно змінено";
+"This day is in the future" = "Цей день поки що не настав";
+"Pick an icon" = "Оберіть іконку";
+"Set up start and end hours" = "Вкажіть початок та кінець робочго дня";
+"Set all required fields" = "Заповніть усі необхідні поля";
