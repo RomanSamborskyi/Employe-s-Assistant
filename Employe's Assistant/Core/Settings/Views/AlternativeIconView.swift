@@ -9,51 +9,59 @@ import SwiftUI
 
 struct AlternativeIconView: View {
     
-    @State private var checkAnIcon: Bool = false
     @ObservedObject var vm: SettingsViewModel
     private let columns: [GridItem] = [GridItem(), GridItem()]
+    private var checkmark: some View {
+              Image(systemName: "checkmark.seal.fill")
+                    .font(.title)
+                    .foregroundStyle(Color.blue)
+                    .offset(x: -10, y: -10)
+    }
     
     var body: some View {
-        HStack {
-            ForEach(vm.icons, id: \.self) { icon in
-                ZStack(alignment: .topLeading) {
-                    Image(uiImage: UIImage(named: icon ?? "AppIcon") ?? UIImage() )
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .onTapGesture {
-                            vm.currentIndex = vm.icons.firstIndex(of: icon) ?? 0
-                        }
-                    if let currentIcon = UIApplication.shared.alternateIconName {
-                        if currentIcon == icon {
-                            Image(systemName: "checkmark.seal.fill")
-                                .font(.title)
-                                .foregroundStyle(Color.blue)
+        VStack {
+            Image(systemName: "photo.on.rectangle.angled")
+                .padding()
+                .font(.system(size: 65, weight: .bold, design: .rounded))
+                .foregroundStyle(Color.accentColor)
+            Text("Pick an icon")
+                .padding()
+                .font(.system(size: 45, weight: .bold, design: .rounded))
+                .foregroundStyle(Color.accentColor)
+            HStack {
+                ForEach(vm.icons, id: \.self) { icon in
+                    ZStack(alignment: .topLeading) {
+                        Image(uiImage: UIImage(named: icon ?? "AppIcon") ?? UIImage() )
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .clipShape(RoundedRectangle(cornerRadius: 25))
+                            .overlay {
+                                
+                            }
+                            .onTapGesture {
+                                vm.currentIndex = vm.icons.firstIndex(of: icon) ?? 0
+                            }
+                           if icon == UIApplication.shared.alternateIconName {
+                               checkmark
+                            } else if UIApplication.shared.alternateIconName == nil && vm.currentIndex == vm.icons.firstIndex(of: icon) {
+                               checkmark
                         }
                     }
                 }
-            }
-        }.onReceive([self.vm.currentIndex].publisher.first()){ value in
-            let i = self.vm.icons.firstIndex(of: UIApplication.shared.alternateIconName) ?? 0
-            if value != i{
-                UIApplication.shared.setAlternateIconName(self.vm.icons[value], completionHandler: {
-                    error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        print("Success!")
-                    }
-                })
-            }
+            }.padding()
+            .onReceive([self.vm.currentIndex].publisher.first()){ value in
+                let i = self.vm.icons.firstIndex(of: UIApplication.shared.alternateIconName) ?? 0
+                if value != i{
+                    UIApplication.shared.setAlternateIconName(self.vm.icons[value], completionHandler: {
+                        error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        } else {
+                
+                        }
+                    })
+                }
         }
-        .onAppear {
-            if let currentIcon = UIApplication.shared.alternateIconName {
-                if currentIcon == vm.icons[vm.currentIndex] {
-                    self.checkAnIcon = true
-                } else {
-                    self.checkAnIcon = false
-                }
-            }
         }
     }
 }

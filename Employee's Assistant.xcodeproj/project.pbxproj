@@ -30,8 +30,8 @@
 		6B9427C52B496E4400535A16 /* MonthsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9427C42B496E4400535A16 /* MonthsModel.swift */; };
 		6B9427C72B496E7200535A16 /* DaysModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9427C62B496E7200535A16 /* DaysModel.swift */; };
 		6B98ABD72B654A100097DF54 /* AlternativeIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B98ABD62B654A100097DF54 /* AlternativeIconView.swift */; };
-		6B98ABDC2B654DA00097DF54 /* Icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98ABDA2B654DA00097DF54 /* Icon2.png */; };
-		6B98ABDD2B654DA00097DF54 /* Icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98ABDB2B654DA00097DF54 /* Icon1.png */; };
+		6B98ABE42B6558F70097DF54 /* Icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98ABE22B6558F70097DF54 /* Icon1.png */; };
+		6B98ABE52B6558F70097DF54 /* Icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98ABE32B6558F70097DF54 /* Icon2.png */; };
 		6BBF3D6F2B1B25AB00C40227 /* MoreDetailsOfDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D6E2B1B25AB00C40227 /* MoreDetailsOfDayView.swift */; };
 		6BBF3D732B1B2D2400C40227 /* DatePickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D722B1B2D2400C40227 /* DatePickerVIew.swift */; };
 		6BBF3D752B1B44C000C40227 /* MonthProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D742B1B44C000C40227 /* MonthProgressBarView.swift */; };
@@ -68,8 +68,8 @@
 		6B9427C62B496E7200535A16 /* DaysModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysModel.swift; sourceTree = "<group>"; };
 		6B98ABD62B654A100097DF54 /* AlternativeIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeIconView.swift; sourceTree = "<group>"; };
 		6B98ABD82B654AF10097DF54 /* Employee-s-Assistant-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Employee-s-Assistant-Info.plist"; sourceTree = "<group>"; };
-		6B98ABDA2B654DA00097DF54 /* Icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon2.png; sourceTree = "<group>"; };
-		6B98ABDB2B654DA00097DF54 /* Icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon1.png; sourceTree = "<group>"; };
+		6B98ABE22B6558F70097DF54 /* Icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon1.png; sourceTree = "<group>"; };
+		6B98ABE32B6558F70097DF54 /* Icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon2.png; sourceTree = "<group>"; };
 		6BBF3D6E2B1B25AB00C40227 /* MoreDetailsOfDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailsOfDayView.swift; sourceTree = "<group>"; };
 		6BBF3D722B1B2D2400C40227 /* DatePickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVIew.swift; sourceTree = "<group>"; };
 		6BBF3D742B1B44C000C40227 /* MonthProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthProgressBarView.swift; sourceTree = "<group>"; };
@@ -266,8 +266,8 @@
 		6B98ABD92B654BEE0097DF54 /* AlternativeIcons */ = {
 			isa = PBXGroup;
 			children = (
-				6B98ABDB2B654DA00097DF54 /* Icon1.png */,
-				6B98ABDA2B654DA00097DF54 /* Icon2.png */,
+				6B98ABE22B6558F70097DF54 /* Icon1.png */,
+				6B98ABE32B6558F70097DF54 /* Icon2.png */,
 			);
 			path = AlternativeIcons;
 			sourceTree = "<group>";
@@ -332,11 +332,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B98ABDD2B654DA00097DF54 /* Icon1.png in Resources */,
 				6B708FE92B1A5DEB0099C4AA /* Preview Assets.xcassets in Resources */,
 				6B9427BD2B48837F00535A16 /* Localizable.strings in Resources */,
+				6B98ABE42B6558F70097DF54 /* Icon1.png in Resources */,
+				6B98ABE52B6558F70097DF54 /* Icon2.png in Resources */,
 				6B708FE62B1A5DEB0099C4AA /* Assets.xcassets in Resources */,
-				6B98ABDC2B654DA00097DF54 /* Icon2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
