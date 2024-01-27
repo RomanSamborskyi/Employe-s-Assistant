@@ -11,11 +11,29 @@ import SwiftUI
 class SettingsViewModel: ObservableObject {
     
     static let instance: SettingsViewModel = SettingsViewModel()
+    @Published var currentIndex: Int = 0
     @Published var newAccentColor: Color = .accentColor
+    var icons: [String?] = [nil]
     private let key: String = "color"
     
     init() {
         getColor()
+        getAlternativeAppIcon()
+        
+        if let currentIcon = UIApplication.shared.alternateIconName {
+            self.currentIndex = icons.firstIndex(of: currentIcon) ?? 0
+        }
+    }
+    
+    func getAlternativeAppIcon() {
+        if let icons = Bundle.main.object(forInfoDictionaryKey: "CFBundleIcons") as? [String: Any], let alternativeIcons = icons["CFBundleAlternateIcons"] as? [String: Any] {
+            for (_,value) in alternativeIcons {
+                guard let iconList = value as? Dictionary<String,Any> else { return }
+                guard let iconsArray = iconList["CFBundleIconFiles"] as? [String] else { return }
+                guard let icon = iconsArray.first else { return }
+                self.icons.append(icon)
+            }
+        }
     }
     
     func getColor() {

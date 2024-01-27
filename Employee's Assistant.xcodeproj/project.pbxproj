@@ -29,6 +29,9 @@
 		6B9427BD2B48837F00535A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9427BF2B48837F00535A16 /* Localizable.strings */; };
 		6B9427C52B496E4400535A16 /* MonthsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9427C42B496E4400535A16 /* MonthsModel.swift */; };
 		6B9427C72B496E7200535A16 /* DaysModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9427C62B496E7200535A16 /* DaysModel.swift */; };
+		6B98ABD72B654A100097DF54 /* AlternativeIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B98ABD62B654A100097DF54 /* AlternativeIconView.swift */; };
+		6B98ABDC2B654DA00097DF54 /* Icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98ABDA2B654DA00097DF54 /* Icon2.png */; };
+		6B98ABDD2B654DA00097DF54 /* Icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98ABDB2B654DA00097DF54 /* Icon1.png */; };
 		6BBF3D6F2B1B25AB00C40227 /* MoreDetailsOfDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D6E2B1B25AB00C40227 /* MoreDetailsOfDayView.swift */; };
 		6BBF3D732B1B2D2400C40227 /* DatePickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D722B1B2D2400C40227 /* DatePickerVIew.swift */; };
 		6BBF3D752B1B44C000C40227 /* MonthProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D742B1B44C000C40227 /* MonthProgressBarView.swift */; };
@@ -63,6 +66,10 @@
 		6B9427C22B4883B200535A16 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6B9427C42B496E4400535A16 /* MonthsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthsModel.swift; sourceTree = "<group>"; };
 		6B9427C62B496E7200535A16 /* DaysModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysModel.swift; sourceTree = "<group>"; };
+		6B98ABD62B654A100097DF54 /* AlternativeIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeIconView.swift; sourceTree = "<group>"; };
+		6B98ABD82B654AF10097DF54 /* Employee-s-Assistant-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Employee-s-Assistant-Info.plist"; sourceTree = "<group>"; };
+		6B98ABDA2B654DA00097DF54 /* Icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon2.png; sourceTree = "<group>"; };
+		6B98ABDB2B654DA00097DF54 /* Icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon1.png; sourceTree = "<group>"; };
 		6BBF3D6E2B1B25AB00C40227 /* MoreDetailsOfDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailsOfDayView.swift; sourceTree = "<group>"; };
 		6BBF3D722B1B2D2400C40227 /* DatePickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVIew.swift; sourceTree = "<group>"; };
 		6BBF3D742B1B44C000C40227 /* MonthProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthProgressBarView.swift; sourceTree = "<group>"; };
@@ -85,6 +92,7 @@
 		6B708FD52B1A5DEA0099C4AA = {
 			isa = PBXGroup;
 			children = (
+				6B98ABD82B654AF10097DF54 /* Employee-s-Assistant-Info.plist */,
 				6B708FE02B1A5DEA0099C4AA /* Employe's Assistant */,
 				6B708FDF2B1A5DEA0099C4AA /* Products */,
 			);
@@ -106,6 +114,7 @@
 				6B708FEF2B1A5FFD0099C4AA /* Core */,
 				6B7090072B1A64E20099C4AA /* CoreData */,
 				6B7090042B1A617D0099C4AA /* Utilities */,
+				6B98ABD92B654BEE0097DF54 /* AlternativeIcons */,
 				6B708FE52B1A5DEB0099C4AA /* Assets.xcassets */,
 				6B708FE72B1A5DEB0099C4AA /* Preview Content */,
 			);
@@ -206,6 +215,7 @@
 			children = (
 				6B7090022B1A61440099C4AA /* SettingsMainView.swift */,
 				6B2A83FA2B362FA800BB1B6A /* SetHourSalaryView.swift */,
+				6B98ABD62B654A100097DF54 /* AlternativeIconView.swift */,
 				6B2FE31F2B3C9B8B009B3299 /* ColorPickerView.swift */,
 			);
 			path = Views;
@@ -251,6 +261,15 @@
 				6B9427C62B496E7200535A16 /* DaysModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		6B98ABD92B654BEE0097DF54 /* AlternativeIcons */ = {
+			isa = PBXGroup;
+			children = (
+				6B98ABDB2B654DA00097DF54 /* Icon1.png */,
+				6B98ABDA2B654DA00097DF54 /* Icon2.png */,
+			);
+			path = AlternativeIcons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,9 +332,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B98ABDD2B654DA00097DF54 /* Icon1.png in Resources */,
 				6B708FE92B1A5DEB0099C4AA /* Preview Assets.xcassets in Resources */,
 				6B9427BD2B48837F00535A16 /* Localizable.strings in Resources */,
 				6B708FE62B1A5DEB0099C4AA /* Assets.xcassets in Resources */,
+				6B98ABDC2B654DA00097DF54 /* Icon2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +360,7 @@
 				6B4B642B2B22406B0063783D /* StatisticByMonthsChartView.swift in Sources */,
 				6B2A83F92B3613AC00BB1B6A /* SettingsViewModel.swift in Sources */,
 				6B7090062B1A61900099C4AA /* Enums.swift in Sources */,
+				6B98ABD72B654A100097DF54 /* AlternativeIconView.swift in Sources */,
 				6B5A7E212B1A8266007FDA57 /* DayDetailView.swift in Sources */,
 				6BBF3D7B2B1BA47800C40227 /* ChartView.swift in Sources */,
 				6BBF3D6F2B1B25AB00C40227 /* MoreDetailsOfDayView.swift in Sources */,
@@ -502,6 +524,7 @@
 				DEVELOPMENT_TEAM = XYXST7NTMH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Employee-s-Assistant-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Employee's Assistant";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -537,6 +560,7 @@
 				DEVELOPMENT_TEAM = XYXST7NTMH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Employee-s-Assistant-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Employee's Assistant";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsMainView: View {
     
-    @StateObject var vm: SettingsViewModel = SettingsViewModel()
+    @ObservedObject var vm: SettingsViewModel
     @AppStorage("isDark") var isDark: Bool = false
     @State private var setHours: Bool = false
     @State private var hourSalary: Double = 0
@@ -41,8 +41,10 @@ struct SettingsMainView: View {
                         Text("iCloud sync")
                     }
                     HStack {
-                        Image(systemName: "photo.on.rectangle.angled")
-                        Text("App icon")
+                        NavigationLink(destination: { AlternativeIconView(vm: vm) }) {
+                            Image(systemName: "photo.on.rectangle.angled")
+                            Text("App icon")
+                        }
                     }
                     HStack {
                         NavigationLink(destination: { ColorPickerView(vm: vm) }, label: {
@@ -63,7 +65,7 @@ struct SettingsMainView: View {
 }
 
 #Preview {
-    SettingsMainView()
+    SettingsMainView(vm: SettingsViewModel())
 }
 
 
