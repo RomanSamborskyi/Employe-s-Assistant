@@ -29,7 +29,9 @@ struct ColorPickerView: View {
             
             Button(action: {
                 vm.addToUserDefaults()
-                self.showAlert.toggle()
+                withAnimation(Animation.bouncy) {
+                    self.showAlert.toggle()
+                }
             }, label: {
                 Text("SAVE")
                     .padding()
@@ -40,7 +42,9 @@ struct ColorPickerView: View {
             
             Button(action: {
                 vm.resetAccenrColor()
-                self.showAlert.toggle()
+                withAnimation(Animation.bouncy) {
+                    self.showAlert.toggle()
+                }
             }, label: {
                 Text("RESET")
                     .padding()
@@ -49,13 +53,20 @@ struct ColorPickerView: View {
                     .background(RoundedRectangle(cornerRadius: 15))
             }).padding()
             Spacer()
-        }.alert(isPresented: $showAlert) {
-            Alert(title: Text("Color changed"), message: Text("Restart application to aply changes"), dismissButton: .default(Text("OK"), action: { disMiss.callAsFunction() }))
         }
         .onDisappear {
                 DispatchQueue.main.async {
                     vm.getColor()
                 }
+        }
+        .overlay {
+            if showAlert {
+               CustomPopOver(vm: vm, trigerPopOver: $showAlert, text: "Color was successfully changed", iconName: "checkmark.square.fill")
+                    .transition(.move(edge: .top))
+                    .onDisappear {
+                        disMiss.callAsFunction()
+                    }
+            }
         }
     }
 }
@@ -63,3 +74,6 @@ struct ColorPickerView: View {
 #Preview {
     ColorPickerView(vm: SettingsViewModel())
 }
+
+
+

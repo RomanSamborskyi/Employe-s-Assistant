@@ -17,6 +17,7 @@ struct AddDayView: View {
     @State private var endMinutes: Minutes = .zero
     @State private var pauseTime: Pause = .zero
     @State private var date: Date = Date()
+    @State private var showPopOver: Bool = false
     @Binding var dissmiss: Bool
     let month: MonthEntity
     
@@ -84,10 +85,16 @@ struct AddDayView: View {
                 DatePickerVIew(date: $date)
             }
             Button(action: {
-                withAnimation(Animation.spring) {
-                    self.dissmiss = false
+                if startHours == .zero || endHours == .zero || date > Date() {
+                    withAnimation(Animation.bouncy) {
+                        self.showPopOver.toggle()
+                    }
+                } else {
+                    withAnimation(Animation.spring) {
+                        self.dissmiss = false
+                    }
+                    vm.addHours(month: month, startHours: Int32(startHours.description) ?? 0, startMinutes: Int32(startMinutes.description) ?? 0, endHours: Int32(endHours.description) ?? 0, endMinutes: Int32(endMinutes.description) ?? 0, pauseTime: Int32(pauseTime.description) ?? 0, date: date)
                 }
-                vm.addHours(month: month, startHours: Int32(startHours.description) ?? 0, startMinutes: Int32(startMinutes.description) ?? 0, endHours: Int32(endHours.description) ?? 0, endMinutes: Int32(endMinutes.description) ?? 0, pauseTime: Int32(pauseTime.description) ?? 0, date: date)
             }, label: {
                 Text("SAVE")
                     .padding()
@@ -96,9 +103,14 @@ struct AddDayView: View {
                     .background(Color.accentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
-                .disabled(startHours == .zero || endHours == .zero || date > Date())
         }.accentColor(vm.settings.newAccentColor)
             .preferredColorScheme(isDark ? .dark : .light)
+            .overlay {
+                if showPopOver {
+                    CustomPopOver(vm: vm.settings, trigerPopOver: $showPopOver, text: "This day is in the future", iconName: "exclamationmark.square.fill")
+                        .transition(.move(edge: .top))
+                }
+        }
     }
 }
 

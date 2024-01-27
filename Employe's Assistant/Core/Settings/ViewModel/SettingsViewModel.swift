@@ -27,6 +27,15 @@ class SettingsViewModel: ObservableObject {
         }
     }
     
+    
+    func checkIcon(icon: String?) -> Bool  {
+        var boolValue: Bool = false
+        if UIApplication.shared.alternateIconName == nil && currentIndex == icons.firstIndex(of: icon) || icon == UIApplication.shared.alternateIconName {
+            boolValue = true
+        }
+        return boolValue
+    }
+    
     func getAlternativeAppIcon() {
         if let icons = Bundle.main.object(forInfoDictionaryKey: "CFBundleIcons") as? [String: Any], let alternativeIcons = icons["CFBundleAlternateIcons"] as? [String: Any] {
             for (_,value) in alternativeIcons {

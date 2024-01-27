@@ -28,19 +28,18 @@ struct AlternativeIconView: View {
                 .padding()
                 .font(.system(size: 45, weight: .bold, design: .rounded))
                 .foregroundStyle(Color.accentColor)
-            LazyVGrid(columns: columns) {
+            LazyVGrid(columns: columns, spacing: 30) {
                 ForEach(vm.icons, id: \.self) { icon in
                     ZStack(alignment: .topLeading) {
                         Image(uiImage: UIImage(named: icon ?? "AppIcon") ?? UIImage() )
                             .resizable()
                             .frame(width: 100, height: 100)
                             .clipShape(RoundedRectangle(cornerRadius: 25))
+                            .shadow(color: vm.newAccentColor ,radius: 5, x: 5, y: 5)
                             .onTapGesture {
                                 vm.currentIndex = vm.icons.firstIndex(of: icon) ?? 0
                             }
-                           if icon == UIApplication.shared.alternateIconName {
-                               checkmark
-                            } else if UIApplication.shared.alternateIconName == nil && vm.currentIndex == vm.icons.firstIndex(of: icon) {
+                        if vm.checkIcon(icon: icon) {
                                checkmark
                         }
                     }
