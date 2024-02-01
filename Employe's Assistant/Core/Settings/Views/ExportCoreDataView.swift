@@ -16,25 +16,46 @@ struct ExportCoreDataView: View {
     
     var body: some View {
         VStack {
-            Button(action: {
-                sheetIsPresented.toggle()
-            }, label: {
-                Label(
-                    title: { Text("Export data")},
-                    icon: { Image(systemName: "arrow.up") }
-                ).foregroundStyle(Color.primary)
-            }).padding()
-                .background( RoundedRectangle(cornerRadius: 15).foregroundStyle(Color.accentColor))
-            Button(action: {
-                presentingImportSheet.toggle()
-            }, label: {
-                Label(
-                    title: { Text("Import data") },
-                    icon: { Image(systemName: "arrow.down") }
-                ).foregroundStyle(Color.primary)
-            }).padding()
-                .background( RoundedRectangle(cornerRadius: 15).foregroundStyle(Color.accentColor))
-
+            Text("Backup your data localy on your device")
+                .padding(25)
+                .font(.system(size: 35, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
+            VStack {
+                Text("Export backup file")
+                    .font(.system(size: 35, weight: .bold, design: .rounded))
+                Text("To save your backup file on your device")
+                    .padding(.bottom, 15)
+                    .font(.system(size: 15))
+                Button(action: {
+                    sheetIsPresented.toggle()
+                }, label: {
+                    Label(
+                        title: { Text("Export data")},
+                        icon: { Image(systemName: "arrow.up") }
+                    ).foregroundStyle(Color.primary)
+                }).padding()
+                    .background( RoundedRectangle(cornerRadius: 15).foregroundStyle(Color.accentColor))
+            }.padding()
+                .background(RoundedRectangle(cornerRadius: 25).foregroundStyle(Color.accentColor.opacity(0.3)))
+            VStack {
+                Text("Import backup file")
+                    .font(.system(size: 35, weight: .bold, design: .rounded))
+                Text("From your device to restore all your data")
+                    .padding(.bottom, 15)
+                    .font(.system(size: 15))
+                Button(action: {
+                    presentingImportSheet.toggle()
+                }, label: {
+                    Label(
+                        title: { Text("Import data") },
+                        icon: { Image(systemName: "arrow.down") }
+                    ).foregroundStyle(Color.primary)
+                }).padding()
+                    .background( RoundedRectangle(cornerRadius: 15).foregroundStyle(Color.accentColor))
+            }.padding()
+                .background(RoundedRectangle(cornerRadius: 25).foregroundStyle(Color.accentColor.opacity(0.3)))
+            Spacer()
+                .frame(height: 130)
         }.onAppear {
             self.sharedURL = vm.exportCoreData()
         }

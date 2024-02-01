@@ -53,7 +53,7 @@ class SettingsViewModel: ObservableObject {
            let jsonData = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             decoder.userInfo[.context] = coreData.context
-            let result = try decoder.decode([MonthEntity].self, from: jsonData)
+            _ = try decoder.decode([MonthEntity].self, from: jsonData)
             
             try coreData.context.save()
         } catch {

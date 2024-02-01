@@ -26,14 +26,14 @@ struct ProgresBarView: View {
             Text(vm.countHoursTitle(for: month))
                 .foregroundStyle(Color.primary)
                 .font(.system(size: 20, weight: .bold, design: .rounded))
-               
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
             Text("/")
                 .foregroundStyle(Color.primary)
                 .font(.system(size: 25, weight: .bold, design: .rounded))
             Text("\(month.monthTarget)")
                 .foregroundStyle(Color.gray)
                 .font(.system(size: 15, weight: .medium, design: .rounded))
-                
         }
             .onAppear {
                 withAnimation(Animation.bouncy) {
