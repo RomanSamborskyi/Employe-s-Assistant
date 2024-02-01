@@ -29,7 +29,50 @@ class SettingsViewModel: ObservableObject {
         }
     }
     
-    func exportCoreData() {
+//    func forseRestore() {
+//        let file = "jsonFileExp"
+//        
+//        do {
+//            if let path = Bundle.main.path(forResource: file, ofType: "json") {
+//                if let jsonData = try String(contentsOfFile: path).data(using: .utf8) {
+//                    let decoder = JSONDecoder()
+//                    decoder.userInfo[.context] = coreData.context
+//                    let result = try decoder.decode([MonthEntity].self, from: jsonData)
+//                    print(result)
+//                    
+//                    try coreData.context.save()
+//                }
+//            }
+//        } catch {
+//            print("error of restoring: \(error.localizedDescription)")
+//        }
+//    }
+    
+    func importJSONFile(_ url: URL) {
+        do {
+           let jsonData = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            decoder.userInfo[.context] = coreData.context
+            let result = try decoder.decode([MonthEntity].self, from: jsonData)
+            
+            try coreData.context.save()
+        } catch {
+            print("Error of importing json: \(error.localizedDescription)")
+        }
+    }
+    
+    func delteTempFile(_ url: URL) {
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func exportCoreData() -> URL {
+        
+        var url: URL = URL(string: "google.com")!
+        
         do {
             if let entity = MonthEntity.entity().name {
                 let request = NSFetchRequest<MonthEntity>(entityName: entity)
@@ -38,12 +81,17 @@ class SettingsViewModel: ObservableObject {
                
                 let jasonFile = try JSONEncoder().encode(results)
                 if let jsonString = String(data: jasonFile, encoding: .utf8) {
-                    print(jsonString)
+                    if let tempURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                        let pathURL = tempURL.appending(component: "Exposrt \(Date().formatted(date: .complete, time: .omitted)).json")
+                        try jsonString.write(to: pathURL, atomically: true, encoding: .utf8)
+                        url = pathURL
+                    }
                 }
             }
         } catch {
             print(error.localizedDescription)
         }
+        return url
     }
     
     func checkIcon(icon: String?) -> Bool  {

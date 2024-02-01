@@ -40,11 +40,12 @@ struct StatisticMainView: View {
                     Image(systemName: "chart.xyaxis.line")
                         .padding()
                         .font(.system(size: 55, weight: .bold, design: .rounded))
+                        .foregroundStyle(Color.accentColor)
                     Text("There is no any statistic")
                         .padding()
                         .font(.system(size: 25, weight: .bold, design: .rounded))
                 }.navigationTitle("Statistic")
-                    .foregroundStyle(Color.accentColor)
+                    
             }
         }
     }

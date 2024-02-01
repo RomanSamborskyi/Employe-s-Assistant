@@ -52,10 +52,11 @@ struct MonthsMainView: View {
                             Image(systemName: "calendar.badge.exclamationmark")
                                 .padding()
                                 .font(.system(size: 55, weight: .bold, design: .rounded))
+                                .foregroundStyle(Color.accentColor)
                             Text("There are no months added")
                                 .padding()
                                 .font(.system(size: 25, weight: .bold, design: .rounded))
-                        }.foregroundStyle(Color.accentColor)
+                        }
                     }
                 }
         }

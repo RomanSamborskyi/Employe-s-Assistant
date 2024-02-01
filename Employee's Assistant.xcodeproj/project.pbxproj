@@ -41,6 +41,7 @@
 		6BB5744E2B6BB7A0007DA12D /* DayEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB5744A2B6BB7A0007DA12D /* DayEntity+CoreDataProperties.swift */; };
 		6BB5744F2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB5744B2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift */; };
 		6BB574502B6BB7A0007DA12D /* MonthEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB5744C2B6BB7A0007DA12D /* MonthEntity+CoreDataProperties.swift */; };
+		6BB574532B6BC552007DA12D /* CustomShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB574522B6BC552007DA12D /* CustomShareSheetView.swift */; };
 		6BBF3D6F2B1B25AB00C40227 /* MoreDetailsOfDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D6E2B1B25AB00C40227 /* MoreDetailsOfDayView.swift */; };
 		6BBF3D732B1B2D2400C40227 /* DatePickerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D722B1B2D2400C40227 /* DatePickerVIew.swift */; };
 		6BBF3D752B1B44C000C40227 /* MonthProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D742B1B44C000C40227 /* MonthProgressBarView.swift */; };
@@ -88,6 +89,7 @@
 		6BB5744A2B6BB7A0007DA12D /* DayEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6BB5744B2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonthEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6BB5744C2B6BB7A0007DA12D /* MonthEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonthEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6BB574522B6BC552007DA12D /* CustomShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShareSheetView.swift; sourceTree = "<group>"; };
 		6BBF3D6E2B1B25AB00C40227 /* MoreDetailsOfDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailsOfDayView.swift; sourceTree = "<group>"; };
 		6BBF3D722B1B2D2400C40227 /* DatePickerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVIew.swift; sourceTree = "<group>"; };
 		6BBF3D742B1B44C000C40227 /* MonthProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthProgressBarView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				6B2A83FA2B362FA800BB1B6A /* SetHourSalaryView.swift */,
 				6B98ABEE2B6587C80097DF54 /* CustomPopOver.swift */,
 				6B98ABD62B654A100097DF54 /* AlternativeIconView.swift */,
+				6BB574522B6BC552007DA12D /* CustomShareSheetView.swift */,
 				6B2FE31F2B3C9B8B009B3299 /* ColorPickerView.swift */,
 			);
 			path = Views;
@@ -395,6 +398,7 @@
 				6BB5744F2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift in Sources */,
 				6B9427C72B496E7200535A16 /* DaysModel.swift in Sources */,
 				6B9427C52B496E4400535A16 /* MonthsModel.swift in Sources */,
+				6BB574532B6BC552007DA12D /* CustomShareSheetView.swift in Sources */,
 				6B5A7E262B1A95BD007FDA57 /* Container.xcdatamodeld in Sources */,
 				6B708FFF2B1A612D0099C4AA /* StatisticMainView.swift in Sources */,
 				6B4B642B2B22406B0063783D /* StatisticByMonthsChartView.swift in Sources */,

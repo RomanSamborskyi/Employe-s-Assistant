@@ -15,7 +15,7 @@ extension MonthEntity {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MonthEntity> {
         return NSFetchRequest<MonthEntity>(entityName: "MonthEntity")
     }
-
+    
     @NSManaged public var date: Date?
     @NSManaged public var monthTarget: Int32
     @NSManaged public var title: String?
