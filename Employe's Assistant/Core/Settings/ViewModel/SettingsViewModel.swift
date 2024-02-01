@@ -7,12 +7,14 @@
 
 import Foundation
 import SwiftUI
-
+import CoreData
 
 
 class SettingsViewModel: ObservableObject {
     
     static let instance: SettingsViewModel = SettingsViewModel()
+    let coreData: CoreDataManager = CoreDataManager.instanse
+    
     @Published var currentIndex: Int = 0
     @Published var newAccentColor: Color = .accentColor
     var icons: [String?] = [nil]
@@ -27,6 +29,22 @@ class SettingsViewModel: ObservableObject {
         }
     }
     
+    func exportCoreData() {
+        do {
+            if let entity = MonthEntity.entity().name {
+                let request = NSFetchRequest<MonthEntity>(entityName: entity)
+                request.relationshipKeyPathsForPrefetching = ["day"]
+                let results = try coreData.context.fetch(request)
+               
+                let jasonFile = try JSONEncoder().encode(results)
+                if let jsonString = String(data: jasonFile, encoding: .utf8) {
+                    print(jsonString)
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
     
     func checkIcon(icon: String?) -> Bool  {
         var boolValue: Bool = false

@@ -44,6 +44,7 @@ struct StatisticMainView: View {
                         .padding()
                         .font(.system(size: 25, weight: .bold, design: .rounded))
                 }.navigationTitle("Statistic")
+                    .foregroundStyle(Color.accentColor)
             }
         }
     }

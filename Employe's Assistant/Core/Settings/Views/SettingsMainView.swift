@@ -37,8 +37,10 @@ struct SettingsMainView: View {
                 }
                 Section("General") {
                     HStack {
-                        Image(systemName: "icloud.fill")
-                        Text("iCloud sync")
+                        NavigationLink(destination: { ExportCoreDataView(vm: vm) }) {
+                            Image(systemName: "icloud.fill")
+                            Text("iCloud sync")
+                        }
                     }
                     HStack {
                         NavigationLink(destination: { AlternativeIconView(vm: vm) }) {

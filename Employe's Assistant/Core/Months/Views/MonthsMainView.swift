@@ -55,7 +55,7 @@ struct MonthsMainView: View {
                             Text("There are no months added")
                                 .padding()
                                 .font(.system(size: 25, weight: .bold, design: .rounded))
-                        }
+                        }.foregroundStyle(Color.accentColor)
                     }
                 }
         }

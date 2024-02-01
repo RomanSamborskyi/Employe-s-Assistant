@@ -31,6 +31,7 @@ class CoreDataManager {
         }
         context = container.viewContext
         container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        
     }
     
     func save() {
