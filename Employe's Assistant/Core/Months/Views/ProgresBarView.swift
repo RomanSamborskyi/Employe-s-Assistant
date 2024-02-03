@@ -12,7 +12,7 @@ struct ProgresBarView: View {
     @ObservedObject var vm: MonthsViewModel
     let month: MonthEntity
     @State private var width: CGFloat = 0
-    
+   
     var body: some View {
         HStack {
             ZStack(alignment: .leading) {

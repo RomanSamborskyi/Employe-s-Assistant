@@ -16,7 +16,7 @@ struct ExportCoreDataView: View {
     
     var body: some View {
         VStack {
-            Text("Backup your data localy on your device")
+            Text("Backup data localy on your device")
                 .padding(25)
                 .font(.system(size: 35, weight: .bold, design: .rounded))
                 .multilineTextAlignment(.center)
