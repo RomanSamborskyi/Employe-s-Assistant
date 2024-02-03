@@ -37,7 +37,7 @@ struct ProgresBarView: View {
         }
             .onAppear {
                 withAnimation(Animation.bouncy) {
-                    width = vm.progressBar(for: month, width: 180)
+                    self.width = vm.progressBar(for: month, width: 180)
                 }
             }
     }

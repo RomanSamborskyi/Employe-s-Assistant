@@ -12,6 +12,8 @@ struct CalendarView: View {
     @State private var days: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     @State private var columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 7)
     @State private var sheetIsPresented: Bool = false
+    @State private var showConfirmationDialog: Bool = false
+    @AppStorage("isDark") var isDark: Bool = false
     @ObservedObject var vm: MonthsViewModel
     let month: MonthEntity
     
@@ -21,7 +23,7 @@ struct CalendarView: View {
                 ForEach(days, id: \.self) { day in
                     Text(day)
                         .padding(8)
-                        .font(.system(size: 18, weight: .regular, design: .rounded))
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
                 }
             }
             LazyVGrid(columns: columns, spacing: 30) {
@@ -38,17 +40,41 @@ struct CalendarView: View {
                                     vm.getCurrentDay(day, month)
                                     sheetIsPresented.toggle()
                                 }
-                        }
+                            }
+                            .onLongPressGesture {
+                                if vm.checkDays(day, month) {
+                                    vm.getCurrentDay(day, month)
+                                    showConfirmationDialog.toggle()
+                                }
+                            }
                     }
                 }
             }.padding()
+            
+            HStack {
+                Text("Monthly progress")
+                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                Image(systemName: "figure.step.training")
+                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .foregroundStyle(Color.accentColor)
+            } .padding()
             ProgresBarView(vm: vm, month: month)
-                .padding()
             Spacer()
         }.sheet(isPresented: $sheetIsPresented) {
             MoreDetailsOfDayView(day: vm.currentDay!)
                 .accentColor(vm.settings.newAccentColor)
+                .preferredColorScheme(isDark ? .dark : .light)
         }
+        .confirmationDialog("", isPresented: $showConfirmationDialog, actions: {
+            Button(role: .destructive, action: { vm.deleteDay(month: month, day: vm.currentDay!)
+            },label: {
+                HStack {
+                    Text("Delete")
+                    Spacer()
+                    Image(systemName: "trash")
+                }
+            })
+        })
     }
 }
 
