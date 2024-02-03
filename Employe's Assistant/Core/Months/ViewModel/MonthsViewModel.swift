@@ -5,22 +5,99 @@
 //  Created by Roman Samborskyi on 01.12.2023.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 
 class MonthsViewModel: ObservableObject {
     
-    let coreData: CoreDataManager = CoreDataManager.instanse
     static let instance: MonthsViewModel = MonthsViewModel()
+    let coreData: CoreDataManager = CoreDataManager.instanse
     let settings: SettingsViewModel = SettingsViewModel.instance
     
     @Published var months: [MonthEntity] = []
+    @Published var currentDay: DayEntity? = nil
     
     init() { 
         fetchMonths()
     }
+    
+    func getCurrentDay(_ day: CalendarDates?, _ month: MonthEntity) {
+        guard let array = month.day?.allObjects as? [DayEntity] else { return }
+       
+        let dateFormatter: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            return dateFormatter
+        }()
+      
+        let dayDate = dateFormatter.string(from: day!.date)
+        
+        guard let firsDay = array.firstIndex(where: { dateFormatter.string(from: $0.date!) == dayDate }) else { return }
+        self.currentDay = array[firsDay]
+    }
+    
+    func checkDays(_ day: CalendarDates?, _ month: MonthEntity) -> Bool {
+        guard let array = month.day?.allObjects as? [DayEntity] else { return false }
+        var tempBool: Bool = false
+        let dateFormatter: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            return dateFormatter
+        }()
+      
+        let dayDate = dateFormatter.string(from: day!.date)
+        
+        guard let firsDay = array.firstIndex(where: { dateFormatter.string(from: $0.date!) == dayDate }) else { return false }
+        let element = array[firsDay]
+        let elementDate = dateFormatter.string(from: element.date!)
+        if dayDate == elementDate {
+            tempBool = true
+        }
+        return tempBool
+    }
+    
+    func fetchDates(_ month: MonthEntity) -> [CalendarDates] {
+        let current = Calendar.current
+       
+        let currentMonth = getCurrentMont(month)
+        
+        var monthDays = currentMonth.datesOfMonth().map {
+            CalendarDates(day: current.component(.day, from: $0), date: $0)
+        }
+        
+        let firstDayOfTheWeek = current.component(.weekday, from: monthDays.first?.date ?? Date())
+        if firstDayOfTheWeek > 1 {
+            for _ in 0..<firstDayOfTheWeek - 2 {
+                monthDays.insert(CalendarDates(day: -1, date: Date()), at: 0)
+            }
+        } else if firstDayOfTheWeek <= 1 {
+            for _ in -7..<firstDayOfTheWeek - 2 {
+                monthDays.insert(CalendarDates(day: -1, date: Date()), at: 0)
+            }
+        }
+        
+        return monthDays
+    }
+    
+    func getCurrentMont(_ selectedMonth: MonthEntity) -> Date {
+        let calendar = Calendar.current
 
+        let dateFormatter: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM yyyy"
+            return dateFormatter
+        }()
+
+        if let monthTitle = selectedMonth.title, let currentMonth = dateFormatter.date(from: monthTitle) {
+            let returnedMonth = calendar.date(bySetting: .day, value: 1, of: currentMonth)
+
+            if let formattedMonth = returnedMonth {
+                return formattedMonth
+            }
+        }
+        return Date()
+    }
     
     func fetchMonths() {
         let request = NSFetchRequest<MonthEntity>(entityName: coreData.monthsEntety)

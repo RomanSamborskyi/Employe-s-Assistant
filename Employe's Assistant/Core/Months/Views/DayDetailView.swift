@@ -8,44 +8,30 @@
 import SwiftUI
 
 struct DayDetailView: View {
-    
-    var dateFormater: DateFormatter = {
-       let dateFormater = DateFormatter()
-        dateFormater.dateStyle = .medium
-        return dateFormater
-    }()
+ 
     @ObservedObject var vm: MonthsViewModel
     @State private var addNewDay: Bool = false
+    @AppStorage("selectedView") var selectedView: SelectView = .list
     let month: MonthEntity
     
     var body: some View {
-        List {
-            if let array = month.day?.allObjects as? [DayEntity] {
-                if !array.isEmpty {
-                    Section {
-                        ProgresBarView(vm: vm, month: month)
+        VStack {
+            switch selectedView {
+            case .list:
+                ListView(vm: vm, month: month)
+            case .calendar:
+                CalendarView(vm: vm, month: month)
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing, content: {
+                Picker("", selection: $selectedView) {
+                    ForEach(SelectView.allCases) { view in
+                        Text(view.description)
+                            .tag(view)
                     }
                 }
-            }
-            ForEach(vm.fetchDays(from: month)) { day in
-              NavigationLink(destination: { MoreDetailsOfDayView(day: day) }, label: {
-                  HStack {
-                  Text(dateFormater.string(from: day.date ?? Date()))
-                  Spacer()
-                  Text("\(day.hours):\(day.minutes)")
-              }
-              }).contextMenu {
-                  Button(role: .destructive, action: { vm.deleteDay(month: month, day: day)
-                  },label: {
-                      HStack {
-                          Text("Delete")
-                          Spacer()
-                          Image(systemName: "trash")
-                      }
-                  })
-              }
-            }
-        }.toolbar {
+            })
             ToolbarItem(placement: .topBarTrailing, content: {
                 Button(action: {
                     self.addNewDay.toggle()
@@ -79,3 +65,6 @@ struct DayDetailView: View {
 #Preview {
     DayDetailView(vm: MonthsViewModel(), month: MonthEntity(context: MonthsViewModel().coreData.context))
 }
+
+
+

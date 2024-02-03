@@ -8,6 +8,20 @@
 import Foundation
 
 
+enum SelectView: String, Identifiable, CaseIterable {
+    var id: Self { self }
+    case list, calendar
+    
+    var description: String {
+        switch self {
+        case .list:
+            "List"
+        case .calendar:
+            "Calendar"
+        }
+    }
+}
+
 enum StatisticType: String, Identifiable, CaseIterable {
     var id: Self { self }
     case hours, workingDays, salary
