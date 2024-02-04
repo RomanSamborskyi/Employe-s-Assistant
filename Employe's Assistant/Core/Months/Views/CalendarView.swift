@@ -16,6 +16,11 @@ struct CalendarView: View {
     @AppStorage("isDark") var isDark: Bool = false
     @ObservedObject var vm: MonthsViewModel
     let month: MonthEntity
+    let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        return dateFormatter
+    }()
     
     var body: some View {
         VStack {
@@ -34,12 +39,22 @@ struct CalendarView: View {
                         Text("\(day.day)")
                             .background(vm.checkDays(day, month) ? RoundedRectangle(cornerRadius: 10)
                                 .frame(width: 35,height: 35)
-                                .foregroundStyle(Color.accentColor.opacity(0.3)) : nil )
+                                .foregroundStyle(Color.accentColor.opacity(0.5)) : nil )
+                            .overlay {
+                                if dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(lineWidth: 5)
+                                        .foregroundStyle(Color.accentColor)
+                                        .frame(width: 35, height: 35)
+                                }
+                            }
                             .onTapGesture {
                                 if vm.checkDays(day, month) {
                                     vm.getCurrentDay(day, month)
                                     sheetIsPresented.toggle()
                                 }
+                                print(day.date)
+                                print(Date())
                             }
                             .onLongPressGesture {
                                 if vm.checkDays(day, month) {
