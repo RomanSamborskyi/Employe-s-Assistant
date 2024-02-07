@@ -37,7 +37,7 @@ struct CalendarView: View {
                         Text("")
                     } else {
                         Text("\(day.day)")
-                            .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? (isDark ? Color.black : Color.white) : Color.primary)
+                            .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? Color.accentColor : Color.primary)
                             .fontWeight(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? .bold : nil)
                             .background(vm.checkDays(day, month) ? RoundedRectangle(cornerRadius: 10)
                                 .frame(width: 35,height: 35)
