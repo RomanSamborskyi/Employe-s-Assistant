@@ -37,13 +37,15 @@ struct CalendarView: View {
                         Text("")
                     } else {
                         Text("\(day.day)")
+                            .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? (isDark ? Color.black : Color.white) : Color.primary)
+                            .fontWeight(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? .bold : nil)
                             .background(vm.checkDays(day, month) ? RoundedRectangle(cornerRadius: 10)
                                 .frame(width: 35,height: 35)
                                 .foregroundStyle(Color.accentColor.opacity(0.5)) : nil )
                             .overlay {
                                 if dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) {
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(lineWidth: 5)
+                                        .stroke(lineWidth: 3)
                                         .foregroundStyle(Color.accentColor)
                                         .frame(width: 35, height: 35)
                                 }
