@@ -53,8 +53,6 @@ struct CalendarView: View {
                                     vm.getCurrentDay(day, month)
                                     sheetIsPresented.toggle()
                                 }
-                                print(day.date)
-                                print(Date())
                             }
                             .onLongPressGesture {
                                 if vm.checkDays(day, month) {

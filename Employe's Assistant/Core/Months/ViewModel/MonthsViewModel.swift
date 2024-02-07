@@ -85,7 +85,7 @@ class MonthsViewModel: ObservableObject {
 
         let dateFormatter: DateFormatter = {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMMM yyyy"
+            dateFormatter.dateFormat = "LLLL yyyy"
             return dateFormatter
         }()
 
