@@ -59,6 +59,9 @@ struct MonthsMainView: View {
                         }
                     }
                 }
+                .refreshable {
+                    viewModel.fetchMonths()
+                }
         }
     }
 }

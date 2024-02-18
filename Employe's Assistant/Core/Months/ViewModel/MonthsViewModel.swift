@@ -15,6 +15,7 @@ class MonthsViewModel: ObservableObject {
     let coreData: CoreDataManager = CoreDataManager.instanse
     let settings: SettingsViewModel = SettingsViewModel.instance
     
+    
     @Published var months: [MonthEntity] = []
     @Published var currentDay: DayEntity? = nil
     

@@ -12,6 +12,10 @@
 		6B2FE3202B3C9B8B009B3299 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2FE31F2B3C9B8B009B3299 /* ColorPickerView.swift */; };
 		6B3C65002B3DFECB0060158B /* ProgresBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C64FF2B3DFECB0060158B /* ProgresBarView.swift */; };
 		6B4B642B2B22406B0063783D /* StatisticByMonthsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B642A2B22406B0063783D /* StatisticByMonthsChartView.swift */; };
+		6B4D269D2B820C2100215DF7 /* MonthEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB5744B2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift */; };
+		6B4D269E2B820C2900215DF7 /* MonthEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB5744C2B6BB7A0007DA12D /* MonthEntity+CoreDataProperties.swift */; };
+		6B4D269F2B820C3400215DF7 /* DayEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB5744A2B6BB7A0007DA12D /* DayEntity+CoreDataProperties.swift */; };
+		6B4D26A02B820C3700215DF7 /* DayEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB574492B6BB7A0007DA12D /* DayEntity+CoreDataClass.swift */; };
 		6B5842B22B6AF09C00C2688C /* ExportCoreDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5842B12B6AF09C00C2688C /* ExportCoreDataView.swift */; };
 		6B5A7E1D2B1A6C68007FDA57 /* MonthsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A7E1C2B1A6C68007FDA57 /* MonthsViewModel.swift */; };
 		6B5A7E1F2B1A7C64007FDA57 /* AddMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A7E1E2B1A7C64007FDA57 /* AddMonthView.swift */; };
@@ -41,6 +45,15 @@
 		6B98ABEC2B6576D00097DF54 /* Icon4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98ABE92B6576D00097DF54 /* Icon4.png */; };
 		6B98ABED2B6576D00097DF54 /* Icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98ABEA2B6576D00097DF54 /* Icon5.png */; };
 		6B98ABEF2B6587C80097DF54 /* CustomPopOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B98ABEE2B6587C80097DF54 /* CustomPopOver.swift */; };
+		6BA82F242B81F29D00CD3ED1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B388F522B768D410085973F /* WidgetKit.framework */; };
+		6BA82F252B81F29D00CD3ED1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B388F542B768D410085973F /* SwiftUI.framework */; };
+		6BA82F282B81F29D00CD3ED1 /* statistic_employes_assistantBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA82F272B81F29D00CD3ED1 /* statistic_employes_assistantBundle.swift */; };
+		6BA82F2A2B81F29D00CD3ED1 /* statistic_employes_assistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA82F292B81F29D00CD3ED1 /* statistic_employes_assistant.swift */; };
+		6BA82F2C2B81F29D00CD3ED1 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA82F2B2B81F29D00CD3ED1 /* AppIntent.swift */; };
+		6BA82F2E2B81F29E00CD3ED1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BA82F2D2B81F29E00CD3ED1 /* Assets.xcassets */; };
+		6BA82F322B81F29E00CD3ED1 /* statistic.employes-assistantExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6BA82F232B81F29D00CD3ED1 /* statistic.employes-assistantExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6BA82F372B81F73A00CD3ED1 /* Container.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A7E242B1A95BD007FDA57 /* Container.xcdatamodeld */; };
+		6BA82F392B81FF9800CD3ED1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B70900B2B1A69B60099C4AA /* CoreDataManager.swift */; };
 		6BB5744D2B6BB7A0007DA12D /* DayEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB574492B6BB7A0007DA12D /* DayEntity+CoreDataClass.swift */; };
 		6BB5744E2B6BB7A0007DA12D /* DayEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB5744A2B6BB7A0007DA12D /* DayEntity+CoreDataProperties.swift */; };
 		6BB5744F2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB5744B2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift */; };
@@ -54,6 +67,16 @@
 		6BBF3D7B2B1BA47800C40227 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D7A2B1BA47800C40227 /* ChartView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6BA82F302B81F29E00CD3ED1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B708FD62B1A5DEA0099C4AA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BA82F222B81F29D00CD3ED1;
+			remoteInfo = "statistic.employes-assistantExtension";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		6B65693D2B7017C100E7433F /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -61,6 +84,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				6BA82F322B81F29E00CD3ED1 /* statistic.employes-assistantExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +95,8 @@
 		6B2A83F82B3613AC00BB1B6A /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		6B2A83FA2B362FA800BB1B6A /* SetHourSalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHourSalaryView.swift; sourceTree = "<group>"; };
 		6B2FE31F2B3C9B8B009B3299 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		6B388F522B768D410085973F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		6B388F542B768D410085973F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		6B3C64FF2B3DFECB0060158B /* ProgresBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgresBarView.swift; sourceTree = "<group>"; };
 		6B4B642A2B22406B0063783D /* StatisticByMonthsChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticByMonthsChartView.swift; sourceTree = "<group>"; };
 		6B5842B12B6AF09C00C2688C /* ExportCoreDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportCoreDataView.swift; sourceTree = "<group>"; };
@@ -83,8 +109,6 @@
 		6B65691E2B6E583500E7433F /* CalendarDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDates.swift; sourceTree = "<group>"; };
 		6B6569202B6E592E00E7433F /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		6B6569222B6E712800E7433F /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		6B65692A2B7017C000E7433F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
-		6B65692C2B7017C000E7433F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		6B708FDE2B1A5DEA0099C4AA /* Employee's Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Employee's Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B708FE12B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employe_s_AssistantApp.swift; sourceTree = "<group>"; };
 		6B708FE32B1A5DEA0099C4AA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +132,13 @@
 		6B98ABE92B6576D00097DF54 /* Icon4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon4.png; sourceTree = "<group>"; };
 		6B98ABEA2B6576D00097DF54 /* Icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon5.png; sourceTree = "<group>"; };
 		6B98ABEE2B6587C80097DF54 /* CustomPopOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopOver.swift; sourceTree = "<group>"; };
+		6BA82F232B81F29D00CD3ED1 /* statistic.employes-assistantExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "statistic.employes-assistantExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BA82F272B81F29D00CD3ED1 /* statistic_employes_assistantBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statistic_employes_assistantBundle.swift; sourceTree = "<group>"; };
+		6BA82F292B81F29D00CD3ED1 /* statistic_employes_assistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statistic_employes_assistant.swift; sourceTree = "<group>"; };
+		6BA82F2B2B81F29D00CD3ED1 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		6BA82F2D2B81F29E00CD3ED1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6BA82F2F2B81F29E00CD3ED1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BA82F362B81F2B400CD3ED1 /* statistic.employes-assistantExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "statistic.employes-assistantExtension.entitlements"; sourceTree = "<group>"; };
 		6BB574492B6BB7A0007DA12D /* DayEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6BB5744A2B6BB7A0007DA12D /* DayEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6BB5744B2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonthEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -129,14 +160,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6BA82F202B81F29D00CD3ED1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BA82F252B81F29D00CD3ED1 /* SwiftUI.framework in Frameworks */,
+				6BA82F242B81F29D00CD3ED1 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6B6569292B7017C000E7433F /* Frameworks */ = {
+		6B388F512B768D410085973F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6B65692A2B7017C000E7433F /* WidgetKit.framework */,
-				6B65692C2B7017C000E7433F /* SwiftUI.framework */,
+				6B388F522B768D410085973F /* WidgetKit.framework */,
+				6B388F542B768D410085973F /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -144,9 +184,11 @@
 		6B708FD52B1A5DEA0099C4AA = {
 			isa = PBXGroup;
 			children = (
+				6BA82F362B81F2B400CD3ED1 /* statistic.employes-assistantExtension.entitlements */,
 				6B98ABD82B654AF10097DF54 /* Employee-s-Assistant-Info.plist */,
 				6B708FE02B1A5DEA0099C4AA /* Employe's Assistant */,
-				6B6569292B7017C000E7433F /* Frameworks */,
+				6BA82F262B81F29D00CD3ED1 /* statistic.employes-assistant */,
+				6B388F512B768D410085973F /* Frameworks */,
 				6B708FDF2B1A5DEA0099C4AA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -155,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				6B708FDE2B1A5DEA0099C4AA /* Employee's Assistant.app */,
+				6BA82F232B81F29D00CD3ED1 /* statistic.employes-assistantExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -336,6 +379,18 @@
 			path = AlternativeIcons;
 			sourceTree = "<group>";
 		};
+		6BA82F262B81F29D00CD3ED1 /* statistic.employes-assistant */ = {
+			isa = PBXGroup;
+			children = (
+				6BA82F272B81F29D00CD3ED1 /* statistic_employes_assistantBundle.swift */,
+				6BA82F292B81F29D00CD3ED1 /* statistic_employes_assistant.swift */,
+				6BA82F2B2B81F29D00CD3ED1 /* AppIntent.swift */,
+				6BA82F2D2B81F29E00CD3ED1 /* Assets.xcassets */,
+				6BA82F2F2B81F29E00CD3ED1 /* Info.plist */,
+			);
+			path = "statistic.employes-assistant";
+			sourceTree = "<group>";
+		};
 		6BB574512B6BBEDA007DA12D /* CoreDataClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,11 +417,29 @@
 			buildRules = (
 			);
 			dependencies = (
+				6BA82F312B81F29E00CD3ED1 /* PBXTargetDependency */,
 			);
 			name = "Employee's Assistant";
 			productName = "Employe's Assistant";
 			productReference = 6B708FDE2B1A5DEA0099C4AA /* Employee's Assistant.app */;
 			productType = "com.apple.product-type.application";
+		};
+		6BA82F222B81F29D00CD3ED1 /* statistic.employes-assistantExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6BA82F352B81F29E00CD3ED1 /* Build configuration list for PBXNativeTarget "statistic.employes-assistantExtension" */;
+			buildPhases = (
+				6BA82F1F2B81F29D00CD3ED1 /* Sources */,
+				6BA82F202B81F29D00CD3ED1 /* Frameworks */,
+				6BA82F212B81F29D00CD3ED1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "statistic.employes-assistantExtension";
+			productName = "statistic.employes-assistantExtension";
+			productReference = 6BA82F232B81F29D00CD3ED1 /* statistic.employes-assistantExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -380,6 +453,9 @@
 				TargetAttributes = {
 					6B708FDD2B1A5DEA0099C4AA = {
 						CreatedOnToolsVersion = 15.0.1;
+					};
+					6BA82F222B81F29D00CD3ED1 = {
+						CreatedOnToolsVersion = 15.2;
 					};
 				};
 			};
@@ -399,6 +475,7 @@
 			projectRoot = "";
 			targets = (
 				6B708FDD2B1A5DEA0099C4AA /* Employee's Assistant */,
+				6BA82F222B81F29D00CD3ED1 /* statistic.employes-assistantExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -416,6 +493,14 @@
 				6B98ABE42B6558F70097DF54 /* Icon1.png in Resources */,
 				6B98ABE52B6558F70097DF54 /* Icon2.png in Resources */,
 				6B708FE62B1A5DEB0099C4AA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BA82F212B81F29D00CD3ED1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BA82F2E2B81F29E00CD3ED1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,7 +551,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6BA82F1F2B81F29D00CD3ED1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BA82F282B81F29D00CD3ED1 /* statistic_employes_assistantBundle.swift in Sources */,
+				6BA82F372B81F73A00CD3ED1 /* Container.xcdatamodeld in Sources */,
+				6BA82F2A2B81F29D00CD3ED1 /* statistic_employes_assistant.swift in Sources */,
+				6BA82F392B81FF9800CD3ED1 /* CoreDataManager.swift in Sources */,
+				6BA82F2C2B81F29D00CD3ED1 /* AppIntent.swift in Sources */,
+				6B4D269E2B820C2900215DF7 /* MonthEntity+CoreDataProperties.swift in Sources */,
+				6B4D269D2B820C2100215DF7 /* MonthEntity+CoreDataClass.swift in Sources */,
+				6B4D269F2B820C3400215DF7 /* DayEntity+CoreDataProperties.swift in Sources */,
+				6B4D26A02B820C3700215DF7 /* DayEntity+CoreDataClass.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6BA82F312B81F29E00CD3ED1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BA82F222B81F29D00CD3ED1 /* statistic.employes-assistantExtension */;
+			targetProxy = 6BA82F302B81F29E00CD3ED1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6B9427BF2B48837F00535A16 /* Localizable.strings */ = {
@@ -621,6 +730,7 @@
 				INFOPLIST_FILE = "Employee-s-Assistant-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Employee's Assistant";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -659,6 +769,7 @@
 				INFOPLIST_FILE = "Employee-s-Assistant-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Employee's Assistant";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -681,6 +792,64 @@
 			};
 			name = Release;
 		};
+		6BA82F332B81F29E00CD3ED1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "statistic.employes-assistantExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XYXST7NTMH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "statistic.employes-assistant/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "statistic.employes-assistant";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "employes-assistant.Employe-s-Assistant.statistic-employes-assistant";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6BA82F342B81F29E00CD3ED1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "statistic.employes-assistantExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XYXST7NTMH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "statistic.employes-assistant/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "statistic.employes-assistant";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "employes-assistant.Employe-s-Assistant.statistic-employes-assistant";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -698,6 +867,15 @@
 			buildConfigurations = (
 				6B708FED2B1A5DEB0099C4AA /* Debug */,
 				6B708FEE2B1A5DEB0099C4AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6BA82F352B81F29E00CD3ED1 /* Build configuration list for PBXNativeTarget "statistic.employes-assistantExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BA82F332B81F29E00CD3ED1 /* Debug */,
+				6BA82F342B81F29E00CD3ED1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import WidgetKit
+
 
 struct ListView: View {
     
@@ -35,7 +37,9 @@ struct ListView: View {
                   Text("\(day.hours):\(day.minutes)")
               }
               }).contextMenu {
-                  Button(role: .destructive, action: { vm.deleteDay(month: month, day: day)
+                  Button(role: .destructive, action: {
+                      vm.deleteDay(month: month, day: day)
+                      WidgetCenter.shared.reloadAllTimelines()
                   },label: {
                       HStack {
                           Text("Delete")

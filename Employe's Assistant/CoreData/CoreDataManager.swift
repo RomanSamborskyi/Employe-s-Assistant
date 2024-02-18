@@ -19,9 +19,14 @@ class CoreDataManager {
     let monthsEntety: String = "MonthEntity"
     let dayEntity: String = "DayEntity"
     let profileEntety: String = "ProfileEntity"
+    let appgroupID: String = "group.hoursApp.Hours.StatisticWidget"
     
     init() {
         container = NSPersistentContainer(name: containerName)
+        container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        let url = URL.storeURL(for: appgroupID, dataBase: containerName)
+        let storeDescription = NSPersistentStoreDescription(url: url)
+        container.persistentStoreDescriptions = [storeDescription]
         container.loadPersistentStores { description, error in
             if error != nil {
                 print("Error of load core data: \(error.debugDescription)")
@@ -30,8 +35,6 @@ class CoreDataManager {
             }
         }
         context = container.viewContext
-        container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        
     }
     
     func save() {
@@ -40,5 +43,15 @@ class CoreDataManager {
         } catch let error {
             print("Error of saving entity: \(error.localizedDescription)")
         }
+    }
+}
+
+public extension URL {
+    static func storeURL(for appgroup: String, dataBase: String) -> URL {
+        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appgroup) else {
+            print("Error of creating of url for appgroup")
+            fatalError()
+        }
+        return container.appendingPathComponent("\(dataBase).sqlite")
     }
 }
