@@ -50,6 +50,7 @@ class SettingsViewModel: ObservableObject {
     
     func importJSONFile(_ url: URL) {
         do {
+            print(url)
            let jsonData = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             decoder.userInfo[.context] = coreData.context

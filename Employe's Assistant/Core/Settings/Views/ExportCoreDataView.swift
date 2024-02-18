@@ -13,7 +13,8 @@ struct ExportCoreDataView: View {
     @State private var sheetIsPresented: Bool = false
     @State private var sharedURL: URL = URL(string: "google.com")!
     @State private var presentingImportSheet: Bool = false
-    
+    @State private var showPopOver: Bool = false
+    @State private var popoverText: String = ""
     var body: some View {
         VStack {
             Text("Backup data localy on your device")
@@ -66,10 +67,19 @@ struct ExportCoreDataView: View {
             switch result {
             case .success(let url):
                 vm.importJSONFile(url)
+                self.showPopOver.toggle()
+                self.popoverText = "Data impoted succesfully"
             case .failure(let error):
                 print(error.localizedDescription)
+                self.showPopOver.toggle()
+                self.popoverText = "Error of importing data"
             }
         }
+        .overlay(content: {
+            if showPopOver {
+                CustomPopOver(vm: vm, trigerPopOver: $showPopOver, text: popoverText, iconName: "checkmark.square.fill")
+            }
+        })
     }
 }
 

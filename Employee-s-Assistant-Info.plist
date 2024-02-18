@@ -67,5 +67,13 @@
 			<string>UINewsstandBindingTypeMagazine</string>
 		</dict>
 	</dict>
+	<key>NSAllowsLocalFileReading</key>
+	<true/>
+	<key>NSFileProviderDomain</key>
+	<array>
+		<string>com.apple.CloudDocs</string>
+	</array>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 </dict>
 </plist>

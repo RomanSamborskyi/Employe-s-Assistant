@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct CalendarView: View {
     
@@ -81,7 +82,9 @@ struct CalendarView: View {
                 .preferredColorScheme(isDark ? .dark : .light)
         }
         .confirmationDialog("", isPresented: $showConfirmationDialog, actions: {
-            Button(role: .destructive, action: { vm.deleteDay(month: month, day: vm.currentDay!)
+            Button(role: .destructive, action: { 
+                vm.deleteDay(month: month, day: vm.currentDay!)
+                WidgetCenter.shared.reloadAllTimelines()
             },label: {
                 HStack {
                     Text("Delete")
