@@ -29,6 +29,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
+            Text("sldflks")
         }.accentColor(svm.newAccentColor)
     }
 }
