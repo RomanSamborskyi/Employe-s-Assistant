@@ -14,13 +14,20 @@ class MonthsViewModel: ObservableObject {
     static let instance: MonthsViewModel = MonthsViewModel()
     let coreData: CoreDataManager = CoreDataManager.instanse
     let settings: SettingsViewModel = SettingsViewModel.instance
-    
+    let dataManager: DataManager = DataManager.instanse
     
     @Published var months: [MonthEntity] = []
+    @Published var months1: [Months] = []
     @Published var currentDay: DayEntity? = nil
     
     init() { 
         fetchMonths()
+        getMonths()
+    }
+    
+    func getMonths() {
+        guard let months = dataManager.getMonths() else { return }
+        months1 = months
     }
     
     func getCurrentDay(_ day: CalendarDates?, _ month: MonthEntity) {
@@ -134,7 +141,7 @@ class MonthsViewModel: ObservableObject {
     
     func countSalary(for month: MonthEntity) -> Double {
         let totalHours = countHours(for: month)
-        return totalHours * settings.returnHourSalary()
+        return totalHours * UserDefaults.standard.double(forKey: "hourSalary")
     }
     
     func progressBar(for month: MonthEntity, width: CGFloat) -> CGFloat {
