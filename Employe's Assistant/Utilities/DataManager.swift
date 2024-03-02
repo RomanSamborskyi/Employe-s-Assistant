@@ -27,9 +27,8 @@ class DataManager {
     
     func getMonths() -> [Months]? {
         var months: [Months] = []
-        let coreDataMonths: [MonthEntity] = fetchMonths()
-        
-        for month in coreDataMonths {
+       
+        for month in fetchMonths() {
             guard let days = month.day?.allObjects as? [DayEntity] else { return nil }
             for day in days {
                 let convertedMonth = Months(date: month.date ?? Date(), monthTarget: month.monthTarget , title: month.title ?? "", totalHours: month.totalHours, totalSalary: month.totalSalary, trim: month.trim, days: [Days(date: day.date ?? Date(), endHours: day.endHours, endMinutes: day.endMinutes, hours: day.hours, minutes: day.minutes, pauseTime: day.pauseTime, startHours: day.startHours, startMinutes: day.startMinutes)])
