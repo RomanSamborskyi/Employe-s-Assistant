@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-import Combine
+
 
 class StatisticViewModel: ObservableObject {
     
