@@ -12,7 +12,7 @@ struct ConfigurationAppIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "Configuration"
     static var description = IntentDescription("This is an example widget.")
 
-    @Parameter(title: "Widget type", default: .calendar) var type: WidgetType
+    @Parameter(title: "Widget type", default: .progressBar) var type: WidgetType
 
 }
 
