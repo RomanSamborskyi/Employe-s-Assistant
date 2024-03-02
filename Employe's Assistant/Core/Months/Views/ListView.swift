@@ -22,33 +22,34 @@ struct ListView: View {
     
     var body: some View {
         List {
-            if let array = month.day?.allObjects as? [DayEntity] {
+            if var array = month.day?.allObjects as? [DayEntity] {
                 if !array.isEmpty {
                     Section {
                         ProgresBarView(vm: vm, month: month)
                     }
+                    ForEach(array.sorted(by: { $0.date! > $1.date! })) { day in
+                      NavigationLink(destination: { MoreDetailsOfDayView(day: day) }, label: {
+                          HStack {
+                          Text(dateFormater.string(from: day.date ?? Date()))
+                          Spacer()
+                          Text("\(day.hours):\(day.minutes)")
+                          }
+                      }).contextMenu {
+                          Button(role: .destructive, action: {
+                              vm.deleteDay(month: month, day: day)
+                              WidgetCenter.shared.reloadAllTimelines()
+                          },label: {
+                              HStack {
+                                  Text("Delete")
+                                  Spacer()
+                                  Image(systemName: "trash")
+                              }
+                          })
+                      }
+                    }
                 }
             }
-            ForEach(vm.fetchDays(from: month)) { day in
-              NavigationLink(destination: { MoreDetailsOfDayView(day: day) }, label: {
-                  HStack {
-                  Text(dateFormater.string(from: day.date ?? Date()))
-                  Spacer()
-                  Text("\(day.hours):\(day.minutes)")
-              }
-              }).contextMenu {
-                  Button(role: .destructive, action: {
-                      vm.deleteDay(month: month, day: day)
-                      WidgetCenter.shared.reloadAllTimelines()
-                  },label: {
-                      HStack {
-                          Text("Delete")
-                          Spacer()
-                          Image(systemName: "trash")
-                      }
-                  })
-              }
-            }
+         
         }
     }
 }

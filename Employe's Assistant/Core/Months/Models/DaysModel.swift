@@ -8,7 +8,8 @@
 import UIKit
 
 
-struct Days {
+struct Days: Identifiable {
+    var id = UUID().uuidString
     var date: Date
     var endHours: Int32
     var endMinutes: Int32
