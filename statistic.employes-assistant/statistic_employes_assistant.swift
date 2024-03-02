@@ -22,7 +22,7 @@ struct Provider: AppIntentTimelineProvider {
             dateFormatter.dateStyle = .short
             return dateFormatter
         }()
-      
+        
         let dayDate = dateFormatter.string(from: day!.date)
         
         guard let firsDay = array.firstIndex(where: { dateFormatter.string(from: $0.date!) == dayDate }) else { return false }
@@ -36,7 +36,7 @@ struct Provider: AppIntentTimelineProvider {
     
     func fetchDates(_ month: MonthEntity) -> [CalendarDates] {
         let current = Calendar.current
-       
+        
         let currentMonth = getCurrentMont(month)
         
         var monthDays = currentMonth.datesOfMonth().map {
@@ -59,16 +59,16 @@ struct Provider: AppIntentTimelineProvider {
     
     func getCurrentMont(_ selectedMonth: MonthEntity) -> Date {
         let calendar = Calendar.current
-
+        
         let dateFormatter: DateFormatter = {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "LLLL yyyy"
             return dateFormatter
         }()
-
+        
         if let monthTitle = selectedMonth.title, let currentMonth = dateFormatter.date(from: monthTitle) {
             let returnedMonth = calendar.date(bySetting: .day, value: 1, of: currentMonth)
-
+            
             if let formattedMonth = returnedMonth {
                 return formattedMonth
             }
@@ -139,7 +139,7 @@ struct Provider: AppIntentTimelineProvider {
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
         var entries: [SimpleEntry] = []
-
+        
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
@@ -148,7 +148,7 @@ struct Provider: AppIntentTimelineProvider {
                 entries.append(entry)
             }
         }
-
+        
         return Timeline(entries: entries, policy: .atEnd)
     }
 }
@@ -163,6 +163,7 @@ struct SimpleEntry: TimelineEntry {
 struct statistic_employes_assistantEntryView : View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var family
+    @State private var days: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     @State private var columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 7)
     @State private var count: Int = 0
     let dateFormatter: DateFormatter = {
@@ -290,32 +291,39 @@ struct statistic_employes_assistantEntryView : View {
                             .lineLimit(1)
                             .minimumScaleFactor(0.7)
                     }.frame(width: 90, height: 90)
-                    
-                    LazyVGrid(columns: columns, spacing: 5) {
-                        ForEach(Provider().fetchDates(entry.month)) { day in
-                            if day.day == -1 {
-                               Text("")
-                            } else {
-                                Text("\(day.day)")
-                                    .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? Color.accentColor : Color.primary)
-                                    .font(.caption)
-                                    .fontWeight(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? .bold : nil)
-                                    .background(Provider().checkDays(day, entry.month) ? RoundedRectangle(cornerRadius: 5)
-                                        .frame(width: 20,height: 20)
-                                        .foregroundStyle(Color.accentColor.opacity(0.5)) : nil )
-                                    .overlay {
-                                        if dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) {
-                                            RoundedRectangle(cornerRadius: 5)
-                                                .stroke(lineWidth: 2)
-                                                .foregroundStyle(Color.accentColor)
-                                                .frame(width: 20, height: 20)
-                                        }
-                                    }
+                    VStack {
+                        HStack {
+                            ForEach(days, id: \.self) { day in
+                                Text(day)
+                                    .padding(2)
+                                    .font(.system(size: 7, weight: .bold, design: .rounded))
                             }
                         }
-                    }
-                    .frame(width: 170)
-                    .padding()
+                        LazyVGrid(columns: columns, spacing: 5) {
+                            ForEach(Provider().fetchDates(entry.month)) { day in
+                                if day.day == -1 {
+                                    Text("")
+                                } else {
+                                    Text("\(day.day)")
+                                        .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? Color.accentColor : Color.primary)
+                                        .font(.caption)
+                                        .fontWeight(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? .bold : nil)
+                                        .background(Provider().checkDays(day, entry.month) ? RoundedRectangle(cornerRadius: 5)
+                                            .frame(width: 20,height: 20)
+                                            .foregroundStyle(Color.accentColor.opacity(0.5)) : nil )
+                                        .overlay {
+                                            if dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) {
+                                                RoundedRectangle(cornerRadius: 5)
+                                                    .stroke(lineWidth: 2)
+                                                    .foregroundStyle(Color.accentColor)
+                                                    .frame(width: 20, height: 20)
+                                            }
+                                        }
+                                }
+                            }
+                        }
+                    }.frame(width: 180)
+                        .padding(.horizontal, 15)
                 }
             }
         default:
@@ -326,7 +334,7 @@ struct statistic_employes_assistantEntryView : View {
 
 struct statistic_employes_assistant: Widget {
     let kind: String = "statistic_employes_assistant"
-
+    
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
             statistic_employes_assistantEntryView(entry: entry)
@@ -366,11 +374,11 @@ extension Date {
         endDateComponents.day = -1
         let endDate = calendar.date(byAdding: endDateComponents, to: startDate)!
         var dates: [Date] = []
-                    var currentDate = startDate
-                    while currentDate <= endDate {
+        var currentDate = startDate
+        while currentDate <= endDate {
             dates.append (currentDate)
-                        currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
         }
-         return dates
+        return dates
     }
 }
