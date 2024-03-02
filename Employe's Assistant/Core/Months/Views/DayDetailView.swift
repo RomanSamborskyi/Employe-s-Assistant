@@ -42,15 +42,17 @@ struct DayDetailView: View {
             })
         }
         .overlay {
-            if let array = month.day?.allObjects as? [DayEntity] {
-                if array.isEmpty {
-                    VStack {
-                        Image(systemName: "list.bullet.clipboard")
-                            .padding()
-                            .font(.system(size: 55, weight: .bold, design: .rounded))
-                        Text("The list is empty")
-                            .padding()
-                            .font(.system(size: 25, weight: .bold, design: .rounded))
+            if selectedView == .list {
+                if let array = month.day?.allObjects as? [DayEntity] {
+                    if array.isEmpty {
+                        VStack {
+                            Image(systemName: "list.bullet.clipboard")
+                                .padding()
+                                .font(.system(size: 55, weight: .bold, design: .rounded))
+                            Text("The list is empty")
+                                .padding()
+                                .font(.system(size: 25, weight: .bold, design: .rounded))
+                        }
                     }
                 }
             }

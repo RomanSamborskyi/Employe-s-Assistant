@@ -215,15 +215,10 @@ struct statistic_employes_assistant: Widget {
 }
 
 extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
     
-    fileprivate static var starEyes: ConfigurationAppIntent {
+    fileprivate static var widgetType: ConfigurationAppIntent {
         let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
+        intent.type = WidgetType.calendar
         return intent
     }
 }
@@ -231,5 +226,5 @@ extension ConfigurationAppIntent {
 #Preview(as: .systemMedium) {
     statistic_employes_assistant()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .starEyes, month: MonthEntity.init(context: CoreDataManager.instanse.context), hoursTitle: "0:0")
+    SimpleEntry(date: .now, configuration: .widgetType, month: MonthEntity.init(context: CoreDataManager.instanse.context), hoursTitle: "0:0")
 }
