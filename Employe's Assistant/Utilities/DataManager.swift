@@ -13,27 +13,19 @@ class DataManager {
     let coreData: CoreDataManager = CoreDataManager.instanse
     
     
-    func fetchDays(from month: MonthEntity) -> [DayEntity] {
-        let request = NSFetchRequest<DayEntity>(entityName: coreData.dayEntity)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \DayEntity.date, ascending: false)]
-        request.predicate = NSPredicate(format: "month == %@", month)
-        do {
-           return try coreData.context.fetch(request)
-        } catch let error {
-            print("Error of fetching days: \(error.localizedDescription)")
-            return []
-        }
-    }
     
     func getMonths() -> [Months]? {
         var months: [Months] = []
-       
+        
         for month in fetchMonths() {
+            var dayArray: [Days] = []
             guard let days = month.day?.allObjects as? [DayEntity] else { return nil }
             for day in days {
-                let convertedMonth = Months(date: month.date ?? Date(), monthTarget: month.monthTarget , title: month.title ?? "", totalHours: month.totalHours, totalSalary: month.totalSalary, trim: month.trim, days: [Days(date: day.date ?? Date(), endHours: day.endHours, endMinutes: day.endMinutes, hours: day.hours, minutes: day.minutes, pauseTime: day.pauseTime, startHours: day.startHours, startMinutes: day.startMinutes)])
-                months.append(convertedMonth)
+              let convday = Days(date: day.date ?? Date(), endHours: day.endHours, endMinutes: day.endMinutes, hours: day.hours, minutes: day.minutes, pauseTime: day.pauseTime, startHours: day.startHours, startMinutes: day.startMinutes)
+                dayArray.append(convday)
             }
+            let convertedMonth = Months(date: month.date ?? Date(), monthTarget: month.monthTarget , title: month.title ?? "", totalHours: month.totalHours, totalSalary: month.totalSalary, trim: month.trim, days: dayArray)
+            months.append(convertedMonth)
         }
         return months
     }
