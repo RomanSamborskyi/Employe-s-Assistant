@@ -272,17 +272,17 @@ struct statistic_employes_assistantEntryView : View {
                     ZStack {
                         Circle()
                             .stroke(Color.gray.opacity(0.5),style: StrokeStyle(lineWidth: 10, lineCap: .round))
-                            .frame(width: 80)
+                            .frame(width: 90)
                         Circle()
                             .trim(from: 0.0 , to: CGFloat(entry.month.trim))
                             .stroke(Color.green,style: StrokeStyle(lineWidth: 10, lineCap: .round))
-                            .frame(width: 80)
+                            .frame(width: 90)
                             .rotationEffect(Angle(degrees: 270.0))
                             .animation(.linear, value: 0.2)
                         if Int32(entry.month.totalHours) >= entry.month.monthTarget {
                             Circle()
                                 .stroke(Color.green.gradient.opacity(0.3), style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
-                                .frame(width: 80)
+                                .frame(width: 90)
                                 .blur(radius: 0.5)
                         }
                         Text("\(entry.hoursTitle)")
@@ -290,23 +290,22 @@ struct statistic_employes_assistantEntryView : View {
                             .frame(width: 50)
                             .lineLimit(1)
                             .minimumScaleFactor(0.7)
-                    }.frame(width: 90, height: 90)
+                    }.frame(width: 100, height: 100)
                     VStack {
                         HStack {
                             ForEach(days, id: \.self) { day in
                                 Text(day)
-                                    .padding(2)
-                                    .font(.system(size: 7, weight: .bold, design: .rounded))
+                                    .font(.system(size: 10.5, weight: .bold, design: .rounded))
                             }
                         }
-                        LazyVGrid(columns: columns, spacing: 5) {
+                        LazyVGrid(columns: columns, spacing: 8) {
                             ForEach(Provider().fetchDates(entry.month)) { day in
                                 if day.day == -1 {
                                     Text("")
                                 } else {
                                     Text("\(day.day)")
                                         .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? Color.accentColor : Color.primary)
-                                        .font(.caption)
+                                        .font(.system(size: 12, weight: .regular, design: .rounded))
                                         .fontWeight(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? .bold : nil)
                                         .background(Provider().checkDays(day, entry.month) ? RoundedRectangle(cornerRadius: 5)
                                             .frame(width: 20,height: 20)
@@ -322,8 +321,8 @@ struct statistic_employes_assistantEntryView : View {
                                 }
                             }
                         }
-                    }.frame(width: 180)
-                        .padding(.horizontal, 15)
+                    }.frame(width: 190)
+                        .padding(.horizontal, 5)
                 }
             }
         default:
