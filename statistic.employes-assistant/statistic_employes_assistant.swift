@@ -13,6 +13,69 @@ import CoreData
 
 struct Provider: AppIntentTimelineProvider {
     
+    
+    func checkDays(_ day: CalendarDates?, _ month: MonthEntity) -> Bool {
+        guard let array = month.day?.allObjects as? [DayEntity] else { return false }
+        var tempBool: Bool = false
+        let dateFormatter: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            return dateFormatter
+        }()
+        
+        let dayDate = dateFormatter.string(from: day!.date)
+        
+        guard let firsDay = array.firstIndex(where: { dateFormatter.string(from: $0.date!) == dayDate }) else { return false }
+        let element = array[firsDay]
+        let elementDate = dateFormatter.string(from: element.date!)
+        if dayDate == elementDate {
+            tempBool = true
+        }
+        return tempBool
+    }
+    
+    func fetchDates(_ month: MonthEntity) -> [CalendarDates] {
+        let current = Calendar.current
+        
+        let currentMonth = getCurrentMont(month)
+        
+        var monthDays = currentMonth.datesOfMonth().map {
+            CalendarDates(day: current.component(.day, from: $0), date: $0)
+        }
+        
+        let firstDayOfTheWeek = current.component(.weekday, from: monthDays.first?.date ?? Date())
+        if firstDayOfTheWeek > 1 {
+            for _ in 0..<firstDayOfTheWeek - 2 {
+                monthDays.insert(CalendarDates(day: -1, date: Date()), at: 0)
+            }
+        } else if firstDayOfTheWeek <= 1 {
+            for _ in -7..<firstDayOfTheWeek - 2 {
+                monthDays.insert(CalendarDates(day: -1, date: Date()), at: 0)
+            }
+        }
+        
+        return monthDays
+    }
+    
+    func getCurrentMont(_ selectedMonth: MonthEntity) -> Date {
+        let calendar = Calendar.current
+        
+        let dateFormatter: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "LLLL yyyy"
+            return dateFormatter
+        }()
+        
+        if let monthTitle = selectedMonth.title, let currentMonth = dateFormatter.date(from: monthTitle) {
+            let returnedMonth = calendar.date(bySetting: .day, value: 1, of: currentMonth)
+            
+            if let formattedMonth = returnedMonth {
+                return formattedMonth
+            }
+        }
+        return Date()
+    }
+    
     func fetchDays(from month: MonthEntity) -> [DayEntity] {
         let request = NSFetchRequest<DayEntity>(entityName: CoreDataManager.instanse.dayEntity)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \DayEntity.date, ascending: false)]
@@ -76,8 +139,7 @@ struct Provider: AppIntentTimelineProvider {
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
         var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+        
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
@@ -86,7 +148,7 @@ struct Provider: AppIntentTimelineProvider {
                 entries.append(entry)
             }
         }
-
+        
         return Timeline(entries: entries, policy: .atEnd)
     }
 }
@@ -101,7 +163,14 @@ struct SimpleEntry: TimelineEntry {
 struct statistic_employes_assistantEntryView : View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var family
+    @State private var days: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    @State private var columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 7)
     @State private var count: Int = 0
+    let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        return dateFormatter
+    }()
     
     @ViewBuilder
     var body: some View {
@@ -130,71 +199,131 @@ struct statistic_employes_assistantEntryView : View {
                     .minimumScaleFactor(0.7)
             }
         case .systemMedium:
-            HStack {
-                ZStack {
-                    Circle()
-                        .stroke(Color.gray.opacity(0.5),style: StrokeStyle(lineWidth: 10, lineCap: .round))
-                        .frame(width: 95)
-                    Circle()
-                        .trim(from: 0.0 , to: CGFloat(entry.month.trim))
-                        .stroke(Color.green,style: StrokeStyle(lineWidth: 10, lineCap: .round))
-                        .frame(width: 95)
-                        .rotationEffect(Angle(degrees: 270.0))
-                        .animation(.linear, value: 0.2)
-                    if Int32(entry.month.totalHours) >= entry.month.monthTarget {
+            if entry.configuration.type == .progressBar {
+                HStack {
+                    ZStack {
                         Circle()
-                            .stroke(Color.green.gradient.opacity(0.3), style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
-                            .frame(width: 105)
-                            .blur(radius: 0.5)
-                    }
-                    Text("\(entry.hoursTitle)")
-                        .font(.system(size: 25, weight: .bold, design: .rounded))
-                        .frame(width: 80)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.7)
-                }.frame(width: 110, height: 110)
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Month details")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                        Image(systemName: "info.bubble.fill")
-                            .symbolRenderingMode(.hierarchical)
-                            .foregroundStyle(Color.primary)
-                            .font(.title2)
-                    }
-                    HStack {
-                        Text("Count of working days:")
-                            .foregroundColor(.red.opacity(0.7))
-                            .font(.caption)
-                        Spacer(minLength: 25)
-                        Text("\(count)")
-                            .foregroundStyle(Color.red)
-                    }
-                    HStack {
-                        Text("Total salary:")
-                            .foregroundColor(.green.opacity(0.7))
-                            .font(.caption)
-                        Spacer(minLength: 35)
-                        Text(String(format: "%.2f", entry.month.totalSalary))
-                            .foregroundStyle(Color.green)
+                            .stroke(Color.gray.opacity(0.5),style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                            .frame(width: 95)
+                        Circle()
+                            .trim(from: 0.0 , to: CGFloat(entry.month.trim))
+                            .stroke(Color.green,style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                            .frame(width: 95)
+                            .rotationEffect(Angle(degrees: 270.0))
+                            .animation(.linear, value: 0.2)
+                        if Int32(entry.month.totalHours) >= entry.month.monthTarget {
+                            Circle()
+                                .stroke(Color.green.gradient.opacity(0.3), style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                                .frame(width: 105)
+                                .blur(radius: 0.5)
+                        }
+                        Text("\(entry.hoursTitle)")
+                            .font(.system(size: 25, weight: .bold, design: .rounded))
+                            .frame(width: 80)
                             .lineLimit(1)
-                            .minimumScaleFactor(0.8)
-                    }
-                    HStack {
-                        Text("Month target:")
-                            .font(.caption)
-                            .foregroundColor(Color.primary)
-                        Spacer(minLength: 25)
+                            .minimumScaleFactor(0.7)
+                    }.frame(width: 110, height: 110)
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Month details")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                            Image(systemName: "info.bubble.fill")
+                                .symbolRenderingMode(.hierarchical)
+                                .foregroundStyle(Color.primary)
+                                .font(.title2)
+                        }
+                        HStack {
+                            Text("Count of working days:")
+                                .foregroundColor(.red.opacity(0.7))
+                                .font(.caption)
+                            Spacer(minLength: 25)
+                            Text("\(count)")
+                                .foregroundStyle(Color.red)
+                        }
+                        HStack {
+                            Text("Total salary:")
+                                .foregroundColor(.green.opacity(0.7))
+                                .font(.caption)
+                            Spacer(minLength: 35)
+                            Text(String(format: "%.2f", entry.month.totalSalary))
+                                .foregroundStyle(Color.green)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.8)
+                        }
+                        HStack {
+                            Text("Month target:")
+                                .font(.caption)
+                                .foregroundColor(Color.primary)
+                            Spacer(minLength: 25)
                             Text("\(entry.month.monthTarget)")
-                            .foregroundStyle(Color.primary)
+                                .foregroundStyle(Color.primary)
+                        }
+                    }
+                }.onAppear {
+                    withAnimation(Animation.spring) {
+                        if let array = entry.month.day?.allObjects as? [DayEntity] {
+                            self.count = array.count
+                        }
                     }
                 }
-            }.onAppear {
-                withAnimation(Animation.spring) {
-                    if let array = entry.month.day?.allObjects as? [DayEntity] {
-                        self.count = array.count
-                    }
+            } else if entry.configuration.type == .calendar {
+                HStack {
+                    ZStack {
+                        Circle()
+                            .stroke(Color.gray.opacity(0.5),style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                            .frame(width: 80)
+                        Circle()
+                            .trim(from: 0.0 , to: CGFloat(entry.month.trim))
+                            .stroke(Color.green,style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                            .frame(width: 80)
+                            .rotationEffect(Angle(degrees: 270.0))
+                            .animation(.linear, value: 0.2)
+                        if Int32(entry.month.totalHours) >= entry.month.monthTarget {
+                            Circle()
+                                .stroke(Color.green.gradient.opacity(0.3), style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                                .frame(width: 80)
+                                .blur(radius: 0.5)
+                        }
+                        Text("\(entry.hoursTitle)")
+                            .font(.system(size: 15, weight: .bold, design: .rounded))
+                            .frame(width: 50)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
+                    }.frame(width: 90, height: 90)
+                    VStack {
+                        HStack {
+                            ForEach(days, id: \.self) { day in
+                                Text(day)
+                                    .padding(2)
+                                    .font(.system(size: 7, weight: .bold, design: .rounded))
+                            }
+                        }
+                        LazyVGrid(columns: columns, spacing: 5) {
+                            ForEach(Provider().fetchDates(entry.month)) { day in
+                                if day.day == -1 {
+                                    Text("")
+                                } else {
+                                    Text("\(day.day)")
+                                        .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? Color.accentColor : Color.primary)
+                                        .font(.caption)
+                                        .fontWeight(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? .bold : nil)
+                                        .background(Provider().checkDays(day, entry.month) ? RoundedRectangle(cornerRadius: 5)
+                                            .frame(width: 20,height: 20)
+                                            .foregroundStyle(Color.accentColor.opacity(0.5)) : nil )
+                                        .overlay {
+                                            if dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) {
+                                                RoundedRectangle(cornerRadius: 5)
+                                                    .stroke(lineWidth: 2)
+                                                    .foregroundStyle(Color.accentColor)
+                                                    .frame(width: 20, height: 20)
+                                            }
+                                        }
+                                }
+                            }
+                        }
+                    }.frame(width: 180)
+                        .padding(.horizontal, 15)
                 }
             }
         default:
@@ -205,7 +334,7 @@ struct statistic_employes_assistantEntryView : View {
 
 struct statistic_employes_assistant: Widget {
     let kind: String = "statistic_employes_assistant"
-
+    
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
             statistic_employes_assistantEntryView(entry: entry)
@@ -215,15 +344,10 @@ struct statistic_employes_assistant: Widget {
 }
 
 extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
     
-    fileprivate static var starEyes: ConfigurationAppIntent {
+    fileprivate static var widgetType: ConfigurationAppIntent {
         let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
+        intent.type = WidgetType.calendar
         return intent
     }
 }
@@ -231,5 +355,30 @@ extension ConfigurationAppIntent {
 #Preview(as: .systemMedium) {
     statistic_employes_assistant()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .starEyes, month: MonthEntity.init(context: CoreDataManager.instanse.context), hoursTitle: "0:0")
+    SimpleEntry(date: .now, configuration: .widgetType, month: MonthEntity.init(context: CoreDataManager.instanse.context), hoursTitle: "0:0")
+}
+
+extension Date {
+    func datesOfMonth() -> [Date] {
+        let calendar = Calendar.current
+        let currentMonth = calendar.component(.month, from: self)
+        let currentYear = calendar.component(.year, from: self)
+        var startDateComponents = DateComponents()
+        startDateComponents.year = currentYear
+        startDateComponents.month = currentMonth
+        startDateComponents.day = 1
+        let startDate = calendar.date(from: startDateComponents)!
+        
+        var endDateComponents = DateComponents()
+        endDateComponents.month = 1
+        endDateComponents.day = -1
+        let endDate = calendar.date(byAdding: endDateComponents, to: startDate)!
+        var dates: [Date] = []
+        var currentDate = startDate
+        while currentDate <= endDate {
+            dates.append (currentDate)
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+        return dates
+    }
 }

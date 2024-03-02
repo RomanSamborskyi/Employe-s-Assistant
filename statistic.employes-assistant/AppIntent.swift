@@ -12,8 +12,17 @@ struct ConfigurationAppIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "Configuration"
     static var description = IntentDescription("This is an example widget.")
 
-    // An example configurable parameter.
-    @Parameter(title: "Favorite Emoji", default: "😃")
-    var favoriteEmoji: String
+    @Parameter(title: "Widget type", default: .progressBar) var type: WidgetType
+
 }
 
+enum WidgetType: String, AppEnum {
+    case progressBar, calendar
+    
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Widget type"
+    
+    static var caseDisplayRepresentations: [WidgetType : DisplayRepresentation] = [
+        .calendar : "Calendar",
+        .progressBar : "Progress Bar"
+    ]
+}
