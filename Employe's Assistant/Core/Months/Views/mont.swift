@@ -23,7 +23,7 @@ struct mont: View {
                 }.onDelete(perform: { indexSet in
                     viewModel.deleteMonth(indexSet: indexSet)
                 })
-            }
+            }.navigationTitle("Title")
         }
     }
 }
@@ -49,6 +49,16 @@ struct Detail: View {
                         Text(dateFormater.string(from: day.date))
                         Spacer()
                         Text("\(day.hours):\(day.minutes)")
+                    }.contextMenu {
+                        Button(role: .destructive, action: {
+                            //vm.deleteDay(month: month, day: day)
+                        },label: {
+                            HStack {
+                                Text("Delete")
+                                Spacer()
+                                Image(systemName: "trash")
+                            }
+                        })
                     }
             }
         }
