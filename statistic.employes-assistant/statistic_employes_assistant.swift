@@ -296,6 +296,7 @@ struct statistic_employes_assistantEntryView : View {
                             ForEach(days, id: \.self) { day in
                                 Text(day)
                                     .font(.system(size: 10.5, weight: .bold, design: .rounded))
+                                    .foregroundStyle(Color.red)
                             }
                         }
                         LazyVGrid(columns: columns, spacing: 5) {
