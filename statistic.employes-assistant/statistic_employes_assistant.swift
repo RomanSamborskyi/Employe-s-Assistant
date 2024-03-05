@@ -275,7 +275,7 @@ struct statistic_employes_assistantEntryView : View {
                             .frame(width: 90)
                         Circle()
                             .trim(from: 0.0 , to: CGFloat(entry.month.trim))
-                            .stroke(Color.green,style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                            .stroke(Int32(entry.month.totalHours) >= entry.month.monthTarget ? Color.green : Color.accentColor,style: StrokeStyle(lineWidth: 10, lineCap: .round))
                             .frame(width: 90)
                             .rotationEffect(Angle(degrees: 270.0))
                             .animation(.linear, value: 0.2)
