@@ -51,7 +51,7 @@ struct Detail: View {
                         Text("\(day.hours):\(day.minutes)")
                     }.contextMenu {
                         Button(role: .destructive, action: {
-                            //vm.deleteDay(month: month, day: day)
+                            vm.deleteDay2(month: month, day: day)
                         },label: {
                             HStack {
                                 Text("Delete")
@@ -62,6 +62,5 @@ struct Detail: View {
                     }
             }
         }
-        
     }
 }

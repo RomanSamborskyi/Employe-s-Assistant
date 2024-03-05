@@ -33,7 +33,7 @@ struct MonthDetailView: View {
                             .frame(width: 105)
                             .blur(radius: 0.5)
                 }
-                Text(vm.monthViewModel.countHoursTitle(for: month))
+                Text(vm.monthViewModel.countHoursTitle(for: month) ?? "")
                     .font(.system(size: 25, weight: .bold, design: .rounded))
                     .frame(width: 80)
                     .lineLimit(1)
@@ -62,7 +62,7 @@ struct MonthDetailView: View {
                         .foregroundColor(.green.opacity(0.7))
                         .font(.caption)
                         Spacer(minLength: 35)
-                    Text(String(format: "%.2f", vm.monthViewModel.countSalary(for: month)))
+                    Text(String(format: "%.2f", vm.monthViewModel.countSalary(for: month) ?? 0))
                         .foregroundStyle(Color.green)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)

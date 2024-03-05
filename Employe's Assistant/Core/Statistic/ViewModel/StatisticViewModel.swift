@@ -36,7 +36,7 @@ class StatisticViewModel: ObservableObject {
     func trimCalculation(for month: MonthEntity){
         guard let index = monthViewModel.months.firstIndex(where: { $0.id == month.id }) else { return }
         let currentMonth = monthViewModel.months[index]
-        let hours = monthViewModel.countHours(for: month)
+        let hours = monthViewModel.countHours(for: month) ?? 0
         let scorePercent = CGFloat(hours) / CGFloat(currentMonth.monthTarget) * CGFloat(100)
         let currentTrim: CGFloat = CGFloat(scorePercent) / CGFloat(1.0) / CGFloat(100)
         month.trim = currentTrim
