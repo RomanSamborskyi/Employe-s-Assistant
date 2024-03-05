@@ -30,6 +30,7 @@ struct CalendarView: View {
                     Text(day)
                         .padding(8)
                         .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .foregroundStyle(Color.red)
                 }
             }
             LazyVGrid(columns: columns, spacing: 30) {
