@@ -22,7 +22,7 @@ struct ListView: View {
     
     var body: some View {
         List {
-            if var array = month.day?.allObjects as? [DayEntity] {
+            if let array = month.day?.allObjects as? [DayEntity] {
                 if !array.isEmpty {
                     Section {
                         ProgresBarView(vm: vm, month: month)

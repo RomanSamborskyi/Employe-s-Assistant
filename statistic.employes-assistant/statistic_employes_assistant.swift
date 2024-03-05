@@ -299,15 +299,15 @@ struct statistic_employes_assistantEntryView : View {
                                     .foregroundStyle(Color.red)
                             }
                         }
-                        LazyVGrid(columns: columns, spacing: 8) {
+                        LazyVGrid(columns: columns, spacing: 5) {
                             ForEach(Provider().fetchDates(entry.month)) { day in
                                 if day.day == -1 {
                                     Text("")
                                 } else {
                                     Text("\(day.day)")
                                         .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? Color.accentColor : Color.primary)
-                                        .font(.system(size: 12, weight: .regular, design: .rounded))
-                                        .fontWeight(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? .bold : nil)
+                                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                        .fontWeight(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? .heavy : nil)
                                         .background(Provider().checkDays(day, entry.month) ? RoundedRectangle(cornerRadius: 5)
                                             .frame(width: 20,height: 20)
                                             .foregroundStyle(Color.accentColor.opacity(0.5)) : nil )
