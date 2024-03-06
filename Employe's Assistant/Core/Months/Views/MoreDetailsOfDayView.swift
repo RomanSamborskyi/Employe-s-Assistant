@@ -57,6 +57,14 @@ struct MoreDetailsOfDayView: View {
                 Text("\(day.pauseTime)")
                     .frame(width: 40)
             }
+            HStack {
+                Text("Total hours:")
+                Spacer()
+                Text("\(day.hours)")
+                    .frame(width: 40)
+                Text("\(day.minutes)")
+                    .frame(width: 40)
+            }
             Spacer()
         }.padding()
     }
