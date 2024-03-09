@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B1670A12B9C906000AD68AB /* NewColorEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1670A02B9C906000AD68AB /* NewColorEntity+CoreDataClass.swift */; };
+		6B1670A22B9C906000AD68AB /* NewColorEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1670A02B9C906000AD68AB /* NewColorEntity+CoreDataClass.swift */; };
+		6B1670A42B9C90D000AD68AB /* NewColorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1670A32B9C90D000AD68AB /* NewColorEntity+CoreDataProperties.swift */; };
+		6B1670A52B9C90D000AD68AB /* NewColorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1670A32B9C90D000AD68AB /* NewColorEntity+CoreDataProperties.swift */; };
 		6B2A83F92B3613AC00BB1B6A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2A83F82B3613AC00BB1B6A /* SettingsViewModel.swift */; };
 		6B2A83FB2B362FA800BB1B6A /* SetHourSalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2A83FA2B362FA800BB1B6A /* SetHourSalaryView.swift */; };
 		6B2FE3202B3C9B8B009B3299 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2FE31F2B3C9B8B009B3299 /* ColorPickerView.swift */; };
@@ -97,6 +101,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6B1670A02B9C906000AD68AB /* NewColorEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewColorEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6B1670A32B9C90D000AD68AB /* NewColorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewColorEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6B2A83F82B3613AC00BB1B6A /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		6B2A83FA2B362FA800BB1B6A /* SetHourSalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetHourSalaryView.swift; sourceTree = "<group>"; };
 		6B2FE31F2B3C9B8B009B3299 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
@@ -411,6 +417,8 @@
 				6BB5744A2B6BB7A0007DA12D /* DayEntity+CoreDataProperties.swift */,
 				6BB5744B2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift */,
 				6BB5744C2B6BB7A0007DA12D /* MonthEntity+CoreDataProperties.swift */,
+				6B1670A02B9C906000AD68AB /* NewColorEntity+CoreDataClass.swift */,
+				6B1670A32B9C90D000AD68AB /* NewColorEntity+CoreDataProperties.swift */,
 			);
 			path = CoreDataClasses;
 			sourceTree = "<group>";
@@ -527,10 +535,12 @@
 				6BBF3D752B1B44C000C40227 /* MonthProgressBarView.swift in Sources */,
 				6BB5744D2B6BB7A0007DA12D /* DayEntity+CoreDataClass.swift in Sources */,
 				6BBF3D732B1B2D2400C40227 /* DatePickerVIew.swift in Sources */,
+				6B1670A42B9C90D000AD68AB /* NewColorEntity+CoreDataProperties.swift in Sources */,
 				6B708FFD2B1A611E0099C4AA /* MonthsMainView.swift in Sources */,
 				6B708FE42B1A5DEA0099C4AA /* ContentView.swift in Sources */,
 				6B7090032B1A61440099C4AA /* SettingsMainView.swift in Sources */,
 				6B5A7E232B1A8B68007FDA57 /* AddDayView.swift in Sources */,
+				6B1670A12B9C906000AD68AB /* NewColorEntity+CoreDataClass.swift in Sources */,
 				6B65691F2B6E583500E7433F /* CalendarDates.swift in Sources */,
 				6B6569212B6E592E00E7433F /* Extentions.swift in Sources */,
 				6BB5744F2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift in Sources */,
@@ -579,9 +589,11 @@
 				6BA82F2C2B81F29D00CD3ED1 /* AppIntent.swift in Sources */,
 				6B4D269E2B820C2900215DF7 /* MonthEntity+CoreDataProperties.swift in Sources */,
 				6B4D269D2B820C2100215DF7 /* MonthEntity+CoreDataClass.swift in Sources */,
+				6B1670A22B9C906000AD68AB /* NewColorEntity+CoreDataClass.swift in Sources */,
 				6BE3289F2B939D7600D4CB4A /* CalendarDates.swift in Sources */,
 				6B4D269F2B820C3400215DF7 /* DayEntity+CoreDataProperties.swift in Sources */,
 				6B4D26A02B820C3700215DF7 /* DayEntity+CoreDataClass.swift in Sources */,
+				6B1670A52B9C90D000AD68AB /* NewColorEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

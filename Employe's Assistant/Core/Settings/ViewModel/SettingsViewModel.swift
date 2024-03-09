@@ -134,6 +134,11 @@ class SettingsViewModel: ObservableObject {
         let savedColor = UIColor(newAccentColor).cgColor
         if let component = savedColor.components {
             UserDefaults.standard.set(component, forKey: key)
+            let color = NewColorEntity(context: coreData.context)
+            for comp in component {
+                color.newAccentColor = Float(comp)
+            }
+            coreData.save()
         }
     }
     
