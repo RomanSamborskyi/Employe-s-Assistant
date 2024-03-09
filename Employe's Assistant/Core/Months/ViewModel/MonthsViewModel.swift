@@ -14,20 +14,12 @@ class MonthsViewModel: ObservableObject {
     static let instance: MonthsViewModel = MonthsViewModel()
     let coreData: CoreDataManager = CoreDataManager.instanse
     let settings: SettingsViewModel = SettingsViewModel.instance
-    let dataManager: DataManager = DataManager.instanse
-    
+
     @Published var months: [MonthEntity] = []
-    @Published var months1: [Months] = []
     @Published var currentDay: DayEntity? = nil
     
     init() {
         fetchMonths()
-        getMonths()
-    }
-    
-    func getMonths() {
-        guard let months = dataManager.getMonths() else { return }
-        months1 = months
     }
     
     func getCurrentDay(_ day: CalendarDates?, _ month: MonthEntity) {
@@ -223,15 +215,8 @@ class MonthsViewModel: ObservableObject {
     func deleteDay(month: MonthEntity, day: DayEntity) {
         guard let daysArray = month.day?.allObjects as? [DayEntity] else { return }
         guard let index = daysArray.firstIndex(of: day) else { return }
-        let item = daysArray[index]
+        let item = daysArray[index] 
         coreData.context.delete(item)
-        save()
-    }
-    func deleteDay2(month: Months, day: Days) {
-        guard let currentMonth = months.first(where: { $0.date == month.date }),
-              let daysArray = currentMonth.day?.allObjects as? [DayEntity],
-              let currentDay = daysArray.first(where: { $0.date == day.date }) else { return }
-        coreData.context.delete(currentDay)
         save()
     }
     
@@ -245,6 +230,5 @@ class MonthsViewModel: ObservableObject {
     func save() {
         coreData.save()
         fetchMonths()
-        getMonths()
     }
 }

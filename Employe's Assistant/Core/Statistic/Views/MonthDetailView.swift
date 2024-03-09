@@ -80,7 +80,6 @@ struct MonthDetailView: View {
                     if let array = month.day?.allObjects as? [DayEntity] {
                         self.count = array.count
                     }
-                    vm.trimCalculation(for: month)
                 }
            }
             .onChange(of: vm.currentMonth, perform: { month in
