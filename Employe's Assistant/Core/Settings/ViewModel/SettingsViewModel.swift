@@ -121,15 +121,17 @@ class SettingsViewModel: ObservableObject {
             self.newAccentColor = color
         }
     }
+    
     func saveHourSalary(_ newValue: Double) {
         UserDefaults.standard.setValue(newValue, forKey: "hourSalary")
     }
+    
     func returnHourSalary() -> Double {
         return UserDefaults.standard.double(forKey: "hourSalary")
     }
+    
     func addToUserDefaults() {
         let savedColor = UIColor(newAccentColor).cgColor
-        
         if let component = savedColor.components {
             UserDefaults.standard.set(component, forKey: key)
             let color = NewColorEntity(context: coreData.context)
@@ -139,6 +141,7 @@ class SettingsViewModel: ObservableObject {
             coreData.save()
         }
     }
+    
     func resetAccenrColor() {
         let color = UIColor(Color.accentColor).cgColor
         

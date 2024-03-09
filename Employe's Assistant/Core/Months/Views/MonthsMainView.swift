@@ -24,7 +24,6 @@ struct MonthsMainView: View {
                         HStack {
                             Text(month.title ?? "no title")
                             Spacer()
-                           // MonthProgressBarView(vm: viewModel, month: month)
                         }
                     })
                 }.onDelete(perform: { indexSet in
@@ -46,7 +45,7 @@ struct MonthsMainView: View {
                 .sheet(isPresented: $addNewMonth) {
                     AddMonthView(vm: viewModel, dissmiss: $addNewMonth)
             }
-                .overlay {
+            .overlay {
                     if viewModel.months.isEmpty {
                         VStack {
                             Image(systemName: "calendar.badge.exclamationmark")

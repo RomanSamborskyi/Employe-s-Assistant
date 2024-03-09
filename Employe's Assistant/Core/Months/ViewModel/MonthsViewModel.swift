@@ -14,12 +14,11 @@ class MonthsViewModel: ObservableObject {
     static let instance: MonthsViewModel = MonthsViewModel()
     let coreData: CoreDataManager = CoreDataManager.instanse
     let settings: SettingsViewModel = SettingsViewModel.instance
-    
-    
+
     @Published var months: [MonthEntity] = []
     @Published var currentDay: DayEntity? = nil
     
-    init() { 
+    init() {
         fetchMonths()
     }
     
@@ -110,20 +109,20 @@ class MonthsViewModel: ObservableObject {
         }
     }
     
-    func fetchDays(from month: MonthEntity) -> [DayEntity] {
-        let request = NSFetchRequest<DayEntity>(entityName: coreData.dayEntity)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \DayEntity.date, ascending: false)]
-        request.predicate = NSPredicate(format: "month == %@", month)
-        do {
-           return try coreData.context.fetch(request)
-        } catch let error {
-            print("Error of fetching days: \(error.localizedDescription)")
-            return []
-        }
-    }
+//    func fetchDays(from month: MonthEntity) -> [DayEntity] {
+//        let request = NSFetchRequest<DayEntity>(entityName: coreData.dayEntity)
+//        request.sortDescriptors = [NSSortDescriptor(keyPath: \DayEntity.date, ascending: false)]
+//        request.predicate = NSPredicate(format: "month == %@", month)
+//        do {
+//           return try coreData.context.fetch(request)
+//        } catch let error {
+//            print("Error of fetching days: \(error.localizedDescription)")
+//            return []
+//        }
+//    }
     
-    func countHours(for month: MonthEntity) -> Double {
-        let daysArray = fetchDays(from: month)
+    func countHours(for month: MonthEntity) -> Double? {
+        guard let daysArray = month.day?.allObjects as? [DayEntity] else { return nil }
         var hoursArray: [Double] = []
         for day in daysArray {
             let minutes = Double(day.hours * 60 ) + Double(day.minutes)
@@ -132,14 +131,14 @@ class MonthsViewModel: ObservableObject {
         return hoursArray.reduce(0,+) / 60
     }
     
-    func countSalary(for month: MonthEntity) -> Double {
-        let totalHours = countHours(for: month)
-        return totalHours * settings.returnHourSalary()
+    func countSalary(for month: MonthEntity) -> Double? {
+        guard let totalHours = countHours(for: month) else { return nil }
+        return totalHours * UserDefaults.standard.double(forKey: "hourSalary")
     }
     
     func progressBar(for month: MonthEntity, width: CGFloat) -> CGFloat {
         let target = month.monthTarget
-        let curentHours = countHours(for: month)
+        let curentHours = countHours(for: month) ?? 0
         let percent = curentHours / Double(target) * width
         if percent >= width {
             return CGFloat(width)
@@ -150,8 +149,8 @@ class MonthsViewModel: ObservableObject {
         }
      }
     
-    func countHoursTitle(for month: MonthEntity) -> String {
-        let daysArray = fetchDays(from: month)
+    func countHoursTitle(for month: MonthEntity) -> String? {
+        guard let daysArray = month.day?.allObjects as? [DayEntity] else { return nil }
         var hoursArray: [Double] = []
         for day in daysArray {
             let minutes = Double(day.hours * 60 ) + Double(day.minutes)
@@ -208,15 +207,15 @@ class MonthsViewModel: ObservableObject {
         newDay.endHours = endHours
         newDay.endMinutes = endMinutes
         newDay.pauseTime = pauseTime
-        month.totalHours = countHours(for: month)
-        month.totalSalary = countSalary(for: month)
+        month.totalHours = countHours(for: month) ?? 0
+        month.totalSalary = countSalary(for: month) ?? 0
         save()
     }
     
     func deleteDay(month: MonthEntity, day: DayEntity) {
         guard let daysArray = month.day?.allObjects as? [DayEntity] else { return }
         guard let index = daysArray.firstIndex(of: day) else { return }
-        let item = daysArray[index]
+        let item = daysArray[index] 
         coreData.context.delete(item)
         save()
     }

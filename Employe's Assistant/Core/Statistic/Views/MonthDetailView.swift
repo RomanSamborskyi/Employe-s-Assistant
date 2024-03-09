@@ -23,7 +23,7 @@ struct MonthDetailView: View {
                     .frame(width: 95)
                 Circle()
                     .trim(from: 0.0 , to: CGFloat(month.trim))
-                    .stroke(Color.green,style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                    .stroke(Int32(month.totalHours) >= month.monthTarget ? Color.green : Color.accentColor,style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .frame(width: 95)
                     .rotationEffect(Angle(degrees: 270.0))
                     .animation(.linear, value: 0.2)
@@ -33,7 +33,7 @@ struct MonthDetailView: View {
                             .frame(width: 105)
                             .blur(radius: 0.5)
                 }
-                Text(vm.monthViewModel.countHoursTitle(for: month))
+                Text(vm.monthViewModel.countHoursTitle(for: month) ?? "")
                     .font(.system(size: 25, weight: .bold, design: .rounded))
                     .frame(width: 80)
                     .lineLimit(1)
@@ -51,19 +51,19 @@ struct MonthDetailView: View {
                 }
                 HStack {
                     Text("Count of working days:")
-                        .foregroundColor(.red.opacity(0.7))
+                        .foregroundColor(.gray)
                         .font(.caption)
                     Spacer(minLength: 25)
                     Text("\(count)")
-                        .foregroundStyle(Color.red)
+                        .foregroundStyle(Color.gray)
                 }
                 HStack {
                     Text("Total salary:")
-                        .foregroundColor(.green.opacity(0.7))
+                        .foregroundColor(.gray)
                         .font(.caption)
                         Spacer(minLength: 35)
-                    Text(String(format: "%.2f", vm.monthViewModel.countSalary(for: month)))
-                        .foregroundStyle(Color.green)
+                    Text(String(format: "%.2f", vm.monthViewModel.countSalary(for: month) ?? 0))
+                        .foregroundStyle(Color.gray)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                 }
@@ -80,7 +80,6 @@ struct MonthDetailView: View {
                     if let array = month.day?.allObjects as? [DayEntity] {
                         self.count = array.count
                     }
-                    vm.trimCalculation(for: month)
                 }
            }
             .onChange(of: vm.currentMonth, perform: { month in
