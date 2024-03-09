@@ -51,19 +51,19 @@ struct MonthDetailView: View {
                 }
                 HStack {
                     Text("Count of working days:")
-                        .foregroundColor(.red.opacity(0.7))
+                        .foregroundColor(.gray)
                         .font(.caption)
                     Spacer(minLength: 25)
                     Text("\(count)")
-                        .foregroundStyle(Color.red)
+                        .foregroundStyle(Color.gray)
                 }
                 HStack {
                     Text("Total salary:")
-                        .foregroundColor(.green.opacity(0.7))
+                        .foregroundColor(.gray)
                         .font(.caption)
                         Spacer(minLength: 35)
                     Text(String(format: "%.2f", vm.monthViewModel.countSalary(for: month) ?? 0))
-                        .foregroundStyle(Color.green)
+                        .foregroundStyle(Color.gray)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                 }
