@@ -7,10 +7,12 @@
 
 import Foundation
 import WidgetKit
+import SwiftUI
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationAppIntent
     let month: MonthEntity
     let hoursTitle: String
+    let color: Color
 }

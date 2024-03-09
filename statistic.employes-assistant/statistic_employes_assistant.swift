@@ -16,11 +16,11 @@ struct Provider: AppIntentTimelineProvider {
     let viewModel = WidgetViewModel.instanse
     
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), month: viewModel.getCurrentMonth()!, hoursTitle: viewModel.countHoursTitle(for: viewModel.getCurrentMonth()!))
+        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), month: viewModel.getCurrentMonth()!, hoursTitle: viewModel.countHoursTitle(for: viewModel.getCurrentMonth()!), color: viewModel.getSavedColor() ?? Color.accentColor)
     }
     
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration, month: viewModel.getCurrentMonth()!, hoursTitle: viewModel.countHoursTitle(for: viewModel.getCurrentMonth()!))
+        SimpleEntry(date: Date(), configuration: configuration, month: viewModel.getCurrentMonth()!, hoursTitle: viewModel.countHoursTitle(for: viewModel.getCurrentMonth()!), color: viewModel.getSavedColor() ?? Color.accentColor)
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
@@ -30,7 +30,7 @@ struct Provider: AppIntentTimelineProvider {
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
             if let month = viewModel.getCurrentMonth() {
-                let entry = SimpleEntry(date: entryDate, configuration: configuration, month: month, hoursTitle: viewModel.countHoursTitle(for: viewModel.getCurrentMonth()!))
+                let entry = SimpleEntry(date: entryDate, configuration: configuration, month: month, hoursTitle: viewModel.countHoursTitle(for: viewModel.getCurrentMonth()!), color: viewModel.getSavedColor() ?? Color.accentColor)
                 entries.append(entry)
             }
         }
@@ -90,7 +90,7 @@ struct statistic_employes_assistantEntryView: View {
 #Preview(as: .systemMedium) {
     statistic_employes_assistant()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .widgetType, month: MonthEntity.init(context: CoreDataManager.instanse.context), hoursTitle: "0:0")
+    SimpleEntry(date: .now, configuration: .widgetType, month: MonthEntity.init(context: CoreDataManager.instanse.context), hoursTitle: "0:0", color: Color.accentColor)
 }
 
 @ViewBuilder
@@ -101,7 +101,7 @@ func smallWidget(_ entry: Provider.Entry) -> some View {
             .frame(width: 95)
         Circle()
             .trim(from: 0.0 , to: CGFloat(entry.month.trim))
-            .stroke(Color.green,style: StrokeStyle(lineWidth: 10, lineCap: .round))
+            .stroke(Int32(entry.month.totalHours) >= entry.month.monthTarget ? Color.green : entry.color,style: StrokeStyle(lineWidth: 10, lineCap: .round))
             .frame(width: 95)
             .rotationEffect(Angle(degrees: 270.0))
             .animation(.linear, value: 0.2)
@@ -128,7 +128,7 @@ func mediumProgressBarWidget(_ entry: Provider.Entry, count: Int) -> some View {
                 .frame(width: 95)
             Circle()
                 .trim(from: 0.0 , to: CGFloat(entry.month.trim))
-                .stroke(Int32(entry.month.totalHours) >= entry.month.monthTarget ? Color.green : Color.accentColor ,style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                .stroke(Int32(entry.month.totalHours) >= entry.month.monthTarget ? Color.green : entry.color ,style: StrokeStyle(lineWidth: 10, lineCap: .round))
                 .frame(width: 95)
                 .rotationEffect(Angle(degrees: 270.0))
                 .animation(.linear, value: 0.2)
@@ -151,7 +151,7 @@ func mediumProgressBarWidget(_ entry: Provider.Entry, count: Int) -> some View {
                     .fontWeight(.bold)
                 Image(systemName: "info.bubble.fill")
                     .symbolRenderingMode(.hierarchical)
-                    .foregroundStyle(Color.primary)
+                    .foregroundStyle(entry.color)
                     .font(.title2)
             }
             HStack {
@@ -175,10 +175,10 @@ func mediumProgressBarWidget(_ entry: Provider.Entry, count: Int) -> some View {
             HStack {
                 Text("Month target:")
                     .font(.caption)
-                    .foregroundColor(Color.primary)
+                    .foregroundColor(entry.color)
                 Spacer(minLength: 25)
                 Text("\(entry.month.monthTarget)")
-                    .foregroundStyle(Color.primary)
+                    .foregroundStyle(entry.color)
             }
         }
     }
@@ -193,7 +193,7 @@ func mediumCalendarWidget(_ entry: Provider.Entry, days: [String], columns: [Gri
                 .frame(width: 90)
             Circle()
                 .trim(from: 0.0 , to: CGFloat(entry.month.trim))
-                .stroke(Int32(entry.month.totalHours) >= entry.month.monthTarget ? Color.green : Color.accentColor ,style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                .stroke(Int32(entry.month.totalHours) >= entry.month.monthTarget ? Color.green : entry.color ,style: StrokeStyle(lineWidth: 10, lineCap: .round))
                 .frame(width: 90)
                 .rotationEffect(Angle(degrees: 270.0))
                 .animation(.linear, value: 0.2)
@@ -223,17 +223,17 @@ func mediumCalendarWidget(_ entry: Provider.Entry, days: [String], columns: [Gri
                         Text("")
                     } else {
                         Text("\(day.day)")
-                            .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? Color.accentColor : Color.primary)
+                            .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? entry.color : Color.primary)
                             .font(.system(size: 14, weight: .semibold, design: .rounded))
                             .fontWeight(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? .heavy : nil)
                             .background(Provider().viewModel.checkDays(day, entry.month) ? RoundedRectangle(cornerRadius: 5)
                                 .frame(width: 20,height: 20)
-                                .foregroundStyle(Color.accentColor.opacity(0.5)) : nil )
+                                .foregroundStyle(entry.color.opacity(0.5)) : nil )
                             .overlay {
                                 if dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) {
                                     RoundedRectangle(cornerRadius: 5)
                                         .stroke(lineWidth: 2)
-                                        .foregroundStyle(Color.accentColor)
+                                        .foregroundStyle(entry.color)
                                         .frame(width: 20, height: 20)
                                 }
                             }

@@ -9,10 +9,25 @@ import Foundation
 import SwiftUI
 import CoreData
 
-class WidgetViewModel {
+class WidgetViewModel: ObservableObject {
     static let instanse: WidgetViewModel = WidgetViewModel()
     
-    @Published var newAccentColor: Color? = nil
+
+    func getSavedColor() -> Color? {
+        var newColor: Color? = nil
+        do {
+            let contianer = CoreDataManager.instanse.container.viewContext
+            let request = NewColorEntity.fetchRequest()
+            let result = try contianer.fetch(request)
+            
+            for item in result {
+                newColor = Color(.sRGB, red: CGFloat(item.red), green: CGFloat(item.green), blue: CGFloat(item.blue), opacity: CGFloat(item.opacity) )
+            }
+        } catch {
+            print("Error of fetching color: \(error)")
+        }
+        return newColor
+    }
     
     func checkDays(_ day: CalendarDates?, _ month: MonthEntity) -> Bool {
         guard let array = month.day?.allObjects as? [DayEntity] else { return false }

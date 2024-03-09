@@ -14,7 +14,10 @@ extension NewColorEntity {
         return NSFetchRequest<NewColorEntity>(entityName: "NewColorEntity")
     }
 
-    @NSManaged public var newAccentColor: Float
+    @NSManaged public var red: Float
+    @NSManaged public var green: Float
+    @NSManaged public var blue: Float
+    @NSManaged public var opacity: Float
 
 }
 
