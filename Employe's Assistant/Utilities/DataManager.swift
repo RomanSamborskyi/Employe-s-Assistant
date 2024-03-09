@@ -14,17 +14,17 @@ class DataManager {
     
     
     
-    func getMonths() -> [Months]? {
-        var months: [Months] = []
+    func getMonths() -> [Month]? {
+        var months: [Month] = []
         
         for month in fetchMonths() {
-            var dayArray: [Days] = []
+            var dayArray: [Day] = []
             guard let days = month.day?.allObjects as? [DayEntity] else { return nil }
             for day in days {
-              let convday = Days(date: day.date ?? Date(), endHours: day.endHours, endMinutes: day.endMinutes, hours: day.hours, minutes: day.minutes, pauseTime: day.pauseTime, startHours: day.startHours, startMinutes: day.startMinutes)
+              let convday = Day(date: day.date ?? Date(), endHours: day.endHours, endMinutes: day.endMinutes, hours: day.hours, minutes: day.minutes, pauseTime: day.pauseTime, startHours: day.startHours, startMinutes: day.startMinutes)
                 dayArray.append(convday)
             }
-            let convertedMonth = Months(date: month.date ?? Date(), monthTarget: month.monthTarget , title: month.title ?? "", totalHours: month.totalHours, totalSalary: month.totalSalary, trim: month.trim, days: dayArray)
+            let convertedMonth = Month(date: month.date ?? Date(), monthTarget: month.monthTarget , title: month.title ?? "", totalHours: month.totalHours, totalSalary: month.totalSalary, trim: month.trim, days: dayArray)
             months.append(convertedMonth)
         }
         return months

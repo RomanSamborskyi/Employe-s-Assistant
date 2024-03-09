@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import WidgetKit
+
 
 struct ColorPickerView: View {
     
@@ -29,6 +31,7 @@ struct ColorPickerView: View {
             
             Button(action: {
                 vm.addToUserDefaults()
+                WidgetCenter.shared.reloadAllTimelines()
                 withAnimation(Animation.bouncy) {
                     self.showAlert.toggle()
                 }
@@ -42,6 +45,7 @@ struct ColorPickerView: View {
             
             Button(action: {
                 vm.resetAccenrColor()
+                WidgetCenter.shared.reloadAllTimelines()
                 withAnimation(Animation.bouncy) {
                     self.showAlert.toggle()
                 }

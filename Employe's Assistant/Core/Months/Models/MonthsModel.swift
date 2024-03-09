@@ -8,7 +8,7 @@
 import UIKit
 
 
-struct Months: Identifiable {
+struct Month: Identifiable {
     
     var id = UUID().uuidString
     var date: Date
@@ -17,7 +17,7 @@ struct Months: Identifiable {
     var totalHours: Double
     var totalSalary :Double
     var trim: Double
-    var days: [Days]
+    var days: [Day]
 }
 
 

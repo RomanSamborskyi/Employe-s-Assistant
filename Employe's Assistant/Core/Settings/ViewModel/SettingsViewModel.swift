@@ -148,6 +148,12 @@ class SettingsViewModel: ObservableObject {
         
         if let component = color.components {
             UserDefaults.standard.set(component, forKey: key)
+            let color = NewColorEntity(context: coreData.context)
+            color.red = Float(component[0])
+            color.green = Float(component[1])
+            color.blue = Float(component[2])
+            color.opacity = Float(component[3])
+            coreData.save()
         }
     }
 }
