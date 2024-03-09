@@ -132,6 +132,11 @@ class SettingsViewModel: ObservableObject {
         
         if let component = savedColor.components {
             UserDefaults.standard.set(component, forKey: key)
+            let color = NewColorEntity(context: coreData.context)
+            for comp in component {
+                color.newAccentColor = Float(comp)
+            }
+            coreData.save()
         }
     }
     func resetAccenrColor() {
