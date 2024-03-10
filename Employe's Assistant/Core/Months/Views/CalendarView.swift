@@ -24,7 +24,7 @@ struct CalendarView: View {
     }()
     
     var body: some View {
-        VStack {
+        ScrollView(.vertical, showsIndicators: false) {
             HStack {
                 ForEach(days, id: \.self) { day in
                     Text(day)

@@ -217,7 +217,7 @@ func mediumCalendarWidget(_ entry: Provider.Entry, days: [String], columns: [Gri
                         .foregroundStyle(Color.red)
                 }
             }
-            LazyVGrid(columns: columns, spacing: 5) {
+            LazyVGrid(columns: columns, spacing: 8) {
                 ForEach(Provider().viewModel.fetchDates(entry.month)) { day in
                     if day.day == -1 {
                         Text("")

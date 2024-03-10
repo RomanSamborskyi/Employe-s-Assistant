@@ -29,14 +29,14 @@ struct ChartView: View {
         }.onAppear {
             withAnimation(Animation.bouncy) {
                 guard let array = month.day?.allObjects as? [DayEntity] else { return }
-                self.array = array
+                self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
             }
         }
         .onChange(of: vm.selectedIndex) { newValue in
             withAnimation(Animation.bouncy) {
                 vm.currentMonth = vm.monthViewModel.months[newValue]
                 guard let array = vm.currentMonth?.day?.allObjects as? [DayEntity] else { return }
-                self.array = array
+                self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
             }
         }
     }
