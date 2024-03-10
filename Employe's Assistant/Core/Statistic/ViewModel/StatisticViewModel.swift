@@ -42,4 +42,12 @@ class StatisticViewModel: ObservableObject {
         month.trim = currentTrim
         monthViewModel.save()
     }
+    
+    func calculateSegmentHeight(day: DayEntity) -> CGFloat? {
+        guard let array = currentMonth?.day?.allObjects as? [DayEntity] else { return 0 }
+        guard let max = array.max(by: { $0.hours < $1.hours }) else { return 0 }
+        let dayHours = (day.hours * 60 + day.minutes) / 60
+        let maxHeight: CGFloat = CGFloat(max.hours + 3)
+        return CGFloat(dayHours) / maxHeight * 100
+    }
 }
