@@ -23,9 +23,8 @@ struct CustomChartView: View {
                             SegmentView(vm: vm, day: day)
                         }
                     }
-                }
+                }.frame(height: 130)
         }
-        .frame(height: 150)
         .onAppear {
             if let array = month.day?.allObjects as? [DayEntity] {
                 withAnimation(Animation.bouncy) {
