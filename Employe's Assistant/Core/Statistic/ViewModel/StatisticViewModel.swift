@@ -50,4 +50,33 @@ class StatisticViewModel: ObservableObject {
         let maxHeight: CGFloat = CGFloat(max.hours + 3)
         return CGFloat(dayHours) / maxHeight * 100
     }
+    
+    func calculateHeight(_ month: MonthEntity, selectedTab: StatisticType) -> CGFloat? {
+        switch selectedTab {
+        case .hours:
+            var hours: [Double] = []
+            for month in monthViewModel.months {
+                hours.append(month.totalHours)
+            }
+            let maxValue = hours.max(by: { $0 < $1 }) ?? 0
+            let maxHeigh: CGFloat = CGFloat(maxValue + 30)
+            return CGFloat(month.totalHours) / maxHeigh * 100
+        case .workingDays:
+            var days: [Int] = []
+            for month in monthViewModel.months {
+                days.append(month.day?.count ?? 0)
+            }
+            let maxValue = days.max(by: { $0 < $1 }) ?? 0
+            let maxHeigh: CGFloat = CGFloat(maxValue + 5)
+            return CGFloat(month.day?.count ?? 0) / maxHeigh * 100
+        case .salary:
+            var salary: [Double] = []
+            for month in monthViewModel.months {
+                salary.append(month.totalSalary)
+            }
+            let maxValue = salary.max(by: { $0 < $1 }) ?? 0
+            let maxHeigh: CGFloat = CGFloat(maxValue + 3000)
+            return CGFloat(month.totalSalary) / maxHeigh * 100
+        }
+    }
 }
