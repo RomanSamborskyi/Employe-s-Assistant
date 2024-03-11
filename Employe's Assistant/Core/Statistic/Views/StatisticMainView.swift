@@ -10,7 +10,6 @@ import SwiftUI
 struct StatisticMainView: View {
     
     @StateObject var vm: StatisticViewModel = StatisticViewModel()
-    @State private var showMonth: Bool = false
     
     var body: some View {
         NavigationView {
