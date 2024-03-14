@@ -54,7 +54,8 @@ struct SegmentView: View {
     let day: DayEntity
     var dateFormater: DateFormatter = {
         var formater: DateFormatter = DateFormatter()
-        formater.dateFormat = "d.M"
+        formater.dateStyle = .medium
+        formater.dateFormat = "d.MMM"
         return formater
     }()
     var body: some View {
@@ -74,7 +75,10 @@ struct SegmentView: View {
                 .frame(height: height)
                 .foregroundStyle(Color.accentColor)
             Text(dateFormater.string(from: day.date ?? Date()))
-                .font(.caption2)
+                .font(.system(size: 7))
+                .frame(width: 25)
+//                .lineLimit(1)
+//                .minimumScaleFactor(0.5)
                 .foregroundStyle(Color.gray)
         }
         .onAppear {
