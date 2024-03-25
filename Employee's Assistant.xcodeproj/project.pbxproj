@@ -206,7 +206,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6B6804B72BB1F95E006A5F16 /* OnboardingViews */ = {
+		6B6804B72BB1F95E006A5F16 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				6B6804C02BB1FCCF006A5F16 /* Views */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		6B6804C02BB1FCCF006A5F16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				6B6804B82BB1F97C006A5F16 /* OnboardingMainView.swift */,
@@ -214,7 +222,7 @@
 				6B6804BC2BB1FA79006A5F16 /* SecondOnboardingView.swift */,
 				6B6804BE2BB1FAAF006A5F16 /* TheardOnboardingView.swift */,
 			);
-			path = OnboardingViews;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		6B708FD52B1A5DEA0099C4AA = {
@@ -264,8 +272,8 @@
 		6B708FEF2B1A5FFD0099C4AA /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6B6804B72BB1F95E006A5F16 /* OnboardingViews */,
 				6B708FE32B1A5DEA0099C4AA /* ContentView.swift */,
+				6B6804B72BB1F95E006A5F16 /* Onboarding */,
 				6B708FF02B1A60090099C4AA /* Months */,
 				6B708FF32B1A60550099C4AA /* Statistic */,
 				6B708FF92B1A60CF0099C4AA /* Settings */,

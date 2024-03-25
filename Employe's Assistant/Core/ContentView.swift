@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
  
     @State private var selectedTab: Tabs = .months
+    @State private var showOnboarding: Bool = true
     @StateObject var svm: SettingsViewModel = SettingsViewModel()
     
     var body: some View {
@@ -30,6 +31,9 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }.accentColor(svm.newAccentColor)
+            .fullScreenCover(isPresented: self.$showOnboarding) {
+                OnboardingMainView(hideOnboarding: $showOnboarding)
+            }
     }
 }
 
