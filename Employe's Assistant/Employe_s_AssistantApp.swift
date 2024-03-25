@@ -15,7 +15,7 @@ struct Employe_s_AssistantApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnboardingMainView()
                 .environment(\.colorScheme, isDark ? .dark : .light)
         }
     }

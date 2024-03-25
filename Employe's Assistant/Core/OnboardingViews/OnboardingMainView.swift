@@ -9,7 +9,15 @@ import SwiftUI
 
 struct OnboardingMainView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            FirstOnboardingView()
+                .tag(1)
+            SecondOnboardingView()
+                .tag(2)
+            TheardOnboardingView()
+                .tag(3)
+        }.tabViewStyle(.page)
+            .ignoresSafeArea(.all, edges: .all)
     }
 }
 
