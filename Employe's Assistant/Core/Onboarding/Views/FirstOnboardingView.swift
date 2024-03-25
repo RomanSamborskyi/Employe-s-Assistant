@@ -9,24 +9,13 @@ import SwiftUI
 
 struct FirstOnboardingView: View {
     
-    @Binding var pageNumber: OnboardingPages
-    
     var body: some View {
-        ZStack {
-            Color.red
-            
-            Button(action: {
-                self.pageNumber = .second
-            }, label: {
-                HStack {
-                    Image(systemName: "arrow.right")
-                        .fontWeight(.bold)
-                }
-                .padding()
-                .foregroundStyle(Color.red)
-                .background(Color.white)
-                .clipShape(Circle())
-            })
+            ZStack {
+                Color.clear
+                VStack {
+                    Text("First view")
+            }
         }.ignoresSafeArea(.all, edges: .all)
     }
 }
+

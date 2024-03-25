@@ -9,25 +9,14 @@ import SwiftUI
 
 struct TheardOnboardingView: View {
     
-    @Binding var pageNumber: OnboardingPages
-    @Binding var hideOnboarding: Bool
-    
     var body: some View {
         ZStack {
-            Color.purple
-            
-            Button(action: {
-                self.hideOnboarding = false
-            }, label: {
-                HStack {
-                    Image(systemName: "arrow.right")
-                        .fontWeight(.bold)
-                }
-                .padding()
-                .foregroundStyle(Color.purple)
-                .background(Color.white)
-                .clipShape(Circle())
-            })
+            Color.clear
+            VStack{
+                Text("Threed view")
+            }
         }.ignoresSafeArea(.all, edges: .all)
     }
 }
+
+

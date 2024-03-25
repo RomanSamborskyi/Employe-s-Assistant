@@ -8,25 +8,13 @@
 import SwiftUI
 
 struct SecondOnboardingView: View {
-    
-    @Binding var pageNumber: OnboardingPages
-    
+  
     var body: some View {
         ZStack {
-            Color.green
-            
-            Button(action: {
-                self.pageNumber = .thread
-            }, label: {
-                HStack {
-                    Image(systemName: "arrow.right")
-                        .fontWeight(.bold)
-                }
-                .padding()
-                .foregroundStyle(Color.green)
-                .background(Color.white)
-                .clipShape(Circle())
-            })
+            Color.clear
+            VStack {
+                Text("Second view")
+            }
         }.ignoresSafeArea(.all, edges: .all)
     }
 }
