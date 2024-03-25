@@ -77,8 +77,6 @@ struct SegmentView: View {
             Text(dateFormater.string(from: day.date ?? Date()))
                 .font(.system(size: 7))
                 .frame(width: 25)
-//                .lineLimit(1)
-//                .minimumScaleFactor(0.5)
                 .foregroundStyle(Color.gray)
         }
         .onAppear {
