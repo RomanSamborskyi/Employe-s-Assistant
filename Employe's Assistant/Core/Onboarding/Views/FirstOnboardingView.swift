@@ -10,11 +10,21 @@ import SwiftUI
 struct FirstOnboardingView: View {
     
     var body: some View {
-            ZStack {
-                Color.clear
-                VStack {
-                    Text("First view")
-            }
+        ZStack {
+            Color.white
+            VStack {
+                Image("1")
+                    .resizable()
+                    .frame(width: 230, height: 380)
+                Text("Add month and start tracking your working time".uppercased())
+                    .padding(10)
+                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.center)
+                Text("You can also specify the number of hours you plan to work per month")
+                    .padding(10)
+                    .font(.system(size: 15, weight: .regular, design: .rounded))
+                    .multilineTextAlignment(.center)
+            }.padding()
         }.ignoresSafeArea(.all, edges: .all)
     }
 }

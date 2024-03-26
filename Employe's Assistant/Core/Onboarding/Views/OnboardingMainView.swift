@@ -12,6 +12,11 @@ import SwiftUI
 struct OnboardingMainView: View {
     
     @State var viewNumber: OnboardingPages = .first
+    @State private var selectedMonth: Monthes = .empty
+    @StateObject private var vm: OnboardingViewModel = OnboardingViewModel()
+    
+    @State private var targetText: String = ""
+    @State private var hourSalary: String = ""
     @Binding var hideOnboarding: Bool
    
     var body: some View {
@@ -19,12 +24,51 @@ struct OnboardingMainView: View {
             switch viewNumber {
             case .first:
                 FirstOnboardingView()
+                    .transition(.move(edge: .trailing))
             case .second:
                 SecondOnboardingView()
+                    .transition(.move(edge: .trailing))
             case .thread:
                 TheardOnboardingView()
+                    .transition(.move(edge: .trailing))
+            case .fourth:
+                FourthOnboardingView(targetText: $targetText, hourSalary: $hourSalary, selectedMonth: $selectedMonth)
+                    .transition(.move(edge: .trailing))
             }
             HStack {
+                Button(action: {
+                    switch viewNumber {
+                    case .first:
+                        withAnimation(Animation.bouncy) {
+                            self.hideOnboarding = false
+                            HapticEngineManager.instance.makeFeadback(with: .rigid)
+                        }
+                    case .second:
+                        withAnimation(Animation.bouncy) {
+                            self.hideOnboarding = false
+                            HapticEngineManager.instance.makeFeadback(with: .rigid)
+                        }
+                    case .thread:
+                        withAnimation(Animation.bouncy) {
+                            self.hideOnboarding = false
+                            HapticEngineManager.instance.makeFeadback(with: .rigid)
+                        }
+                    case .fourth:
+                        withAnimation(Animation.bouncy) {
+                            self.hideOnboarding = false
+                            HapticEngineManager.instance.makeFeadback(with: .rigid)
+                        }
+                    }
+                }, label: {
+                    Text("Skip")
+                        .fontWeight(.bold)
+                        .foregroundStyle(Color.gray.opacity(0.5))
+                })
+                .padding()
+                .foregroundStyle(Color.black)
+                
+                Spacer()
+                
                 ForEach(OnboardingPages.allCases, id: \.self) { page in
                     RoundedRectangle(cornerRadius: 15)
                         .frame(width: viewNumber == page ? 24 : 8, height: 8)
@@ -34,32 +78,42 @@ struct OnboardingMainView: View {
                             }
                         }
                 }
+                
                 Spacer()
+                
                 Button(action: {
                     switch viewNumber {
                     case .first:
                         withAnimation(Animation.bouncy) {
                             self.viewNumber = .second
+                            HapticEngineManager.instance.makeFeadback(with: .soft)
                         }
                     case .second:
                         withAnimation(Animation.bouncy) {
                             self.viewNumber = .thread
+                            HapticEngineManager.instance.makeFeadback(with: .soft)
                         }
                     case .thread:
                         withAnimation(Animation.bouncy) {
+                            self.viewNumber = .fourth
+                            HapticEngineManager.instance.makeFeadback(with: .soft)
+                        }
+                    case .fourth:
+                        withAnimation(Animation.bouncy) {
+                            vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
+                            vm.setHourSalary(salary: Double(hourSalary) ?? 0)
+                            HapticEngineManager.instance.hapticNotification(with: .success)
                             self.hideOnboarding = false
                         }
                     }
                 }, label: {
-                    Image(systemName: viewNumber == .thread ? "checkmark" : "arrow.right")
+                    Text(viewNumber == .fourth ? "Done" : "Next")
                         .fontWeight(.bold)
                 })
                 .padding()
-                .foregroundStyle(Color.white)
-                .background(Color.blue)
-                .clipShape(Circle())
             }.padding()
-        }
+        }.foregroundStyle(Color.black)
+            .background(Color.white)
     }
 }
 

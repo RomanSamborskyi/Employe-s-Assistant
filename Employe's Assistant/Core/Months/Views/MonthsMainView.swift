@@ -61,6 +61,9 @@ struct MonthsMainView: View {
                 .refreshable {
                     viewModel.fetchMonths()
                 }
+                .onAppear {
+                    viewModel.fetchMonths()
+                }
         }
     }
 }

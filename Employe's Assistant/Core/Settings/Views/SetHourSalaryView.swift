@@ -32,6 +32,7 @@ struct SetHourSalaryView: View {
                     self.setHours.toggle()
                     self.hourSalary = (Double(text) ?? 0)
                     vm.saveHourSalary(Double(text) ?? 0)
+                    HapticEngineManager.instance.hapticNotification(with: .success)
                 }
             }, label: {
                 Text("SAVE")

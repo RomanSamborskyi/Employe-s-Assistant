@@ -31,7 +31,7 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }.accentColor(svm.newAccentColor)
-            .fullScreenCover(isPresented: self.$showOnboarding) {
+            .fullScreenCover(isPresented: $showOnboarding) {
                 OnboardingMainView(hideOnboarding: $showOnboarding)
             }
     }

@@ -36,6 +36,9 @@
 		6B6804BB2BB1FA66006A5F16 /* FirstOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6804BA2BB1FA66006A5F16 /* FirstOnboardingView.swift */; };
 		6B6804BD2BB1FA79006A5F16 /* SecondOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6804BC2BB1FA79006A5F16 /* SecondOnboardingView.swift */; };
 		6B6804BF2BB1FAAF006A5F16 /* TheardOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6804BE2BB1FAAF006A5F16 /* TheardOnboardingView.swift */; };
+		6B6804C72BB3196E006A5F16 /* FourthOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6804C62BB3196E006A5F16 /* FourthOnboardingView.swift */; };
+		6B6804CA2BB32162006A5F16 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6804C92BB32162006A5F16 /* OnboardingViewModel.swift */; };
+		6B6804CC2BB3511E006A5F16 /* HapticEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6804CB2BB3511E006A5F16 /* HapticEngineManager.swift */; };
 		6B708FE22B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B708FE12B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift */; };
 		6B708FE42B1A5DEA0099C4AA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B708FE32B1A5DEA0099C4AA /* ContentView.swift */; };
 		6B708FE62B1A5DEB0099C4AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B708FE52B1A5DEB0099C4AA /* Assets.xcassets */; };
@@ -131,6 +134,9 @@
 		6B6804BA2BB1FA66006A5F16 /* FirstOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingView.swift; sourceTree = "<group>"; };
 		6B6804BC2BB1FA79006A5F16 /* SecondOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingView.swift; sourceTree = "<group>"; };
 		6B6804BE2BB1FAAF006A5F16 /* TheardOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheardOnboardingView.swift; sourceTree = "<group>"; };
+		6B6804C62BB3196E006A5F16 /* FourthOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthOnboardingView.swift; sourceTree = "<group>"; };
+		6B6804C92BB32162006A5F16 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		6B6804CB2BB3511E006A5F16 /* HapticEngineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticEngineManager.swift; sourceTree = "<group>"; };
 		6B708FDE2B1A5DEA0099C4AA /* Employee's Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Employee's Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B708FE12B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employe_s_AssistantApp.swift; sourceTree = "<group>"; };
 		6B708FE32B1A5DEA0099C4AA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -209,6 +215,7 @@
 		6B6804B72BB1F95E006A5F16 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				6B6804C82BB32142006A5F16 /* ViewModel */,
 				6B6804C02BB1FCCF006A5F16 /* Views */,
 			);
 			path = Onboarding;
@@ -221,8 +228,17 @@
 				6B6804BA2BB1FA66006A5F16 /* FirstOnboardingView.swift */,
 				6B6804BC2BB1FA79006A5F16 /* SecondOnboardingView.swift */,
 				6B6804BE2BB1FAAF006A5F16 /* TheardOnboardingView.swift */,
+				6B6804C62BB3196E006A5F16 /* FourthOnboardingView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		6B6804C82BB32142006A5F16 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6B6804C92BB32162006A5F16 /* OnboardingViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		6B708FD52B1A5DEA0099C4AA = {
@@ -382,6 +398,7 @@
 				6B7090052B1A61900099C4AA /* Enums.swift */,
 				6B55422D2B8D3A2D00D374A0 /* DataManager.swift */,
 				6B6569202B6E592E00E7433F /* Extentions.swift */,
+				6B6804CB2BB3511E006A5F16 /* HapticEngineManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -579,8 +596,10 @@
 				6B9427C72B496E7200535A16 /* DaysModel.swift in Sources */,
 				6B6569232B6E712800E7433F /* ListView.swift in Sources */,
 				6B9427C52B496E4400535A16 /* MonthsModel.swift in Sources */,
+				6B6804C72BB3196E006A5F16 /* FourthOnboardingView.swift in Sources */,
 				6BB574532B6BC552007DA12D /* CustomShareSheetView.swift in Sources */,
 				6B5A7E262B1A95BD007FDA57 /* Container.xcdatamodeld in Sources */,
+				6B6804CA2BB32162006A5F16 /* OnboardingViewModel.swift in Sources */,
 				6B708FFF2B1A612D0099C4AA /* StatisticMainView.swift in Sources */,
 				6B4B642B2B22406B0063783D /* StatisticByMonthsChartView.swift in Sources */,
 				6BB574502B6BB7A0007DA12D /* MonthEntity+CoreDataProperties.swift in Sources */,
@@ -591,6 +610,7 @@
 				6B98ABD72B654A100097DF54 /* AlternativeIconView.swift in Sources */,
 				6B5A7E212B1A8266007FDA57 /* DayDetailView.swift in Sources */,
 				6B6804BB2BB1FA66006A5F16 /* FirstOnboardingView.swift in Sources */,
+				6B6804CC2BB3511E006A5F16 /* HapticEngineManager.swift in Sources */,
 				6BBF3D7B2B1BA47800C40227 /* ChartView.swift in Sources */,
 				6BBF3D6F2B1B25AB00C40227 /* MoreDetailsOfDayView.swift in Sources */,
 				6B70900C2B1A69B60099C4AA /* CoreDataManager.swift in Sources */,

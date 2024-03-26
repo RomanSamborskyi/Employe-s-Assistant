@@ -69,10 +69,12 @@ struct ExportCoreDataView: View {
                 vm.importJSONFile(url)
                 self.showPopOver.toggle()
                 self.popoverText = "Data impoted succesfully"
+                HapticEngineManager.instance.hapticNotification(with: .success)
             case .failure(let error):
                 print(error.localizedDescription)
                 self.showPopOver.toggle()
                 self.popoverText = "Error of importing data"
+                HapticEngineManager.instance.hapticNotification(with: .error)
             }
         }
         .overlay(content: {
