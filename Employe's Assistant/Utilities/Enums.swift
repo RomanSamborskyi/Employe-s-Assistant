@@ -198,5 +198,5 @@ enum Monthes: String, CaseIterable, Identifiable {
 }
 
 enum OnboardingPages: CaseIterable {
-    case first, second, thread
+    case first, second, thread, fourth, fifth
 }

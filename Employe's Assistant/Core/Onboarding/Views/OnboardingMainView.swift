@@ -23,6 +23,10 @@ struct OnboardingMainView: View {
                 SecondOnboardingView()
             case .thread:
                 TheardOnboardingView()
+            case .fourth:
+                FourthOnboardingView()
+            case .fifth:
+                FifthOnboardingView()
             }
             HStack {
                 ForEach(OnboardingPages.allCases, id: \.self) { page in
@@ -47,11 +51,19 @@ struct OnboardingMainView: View {
                         }
                     case .thread:
                         withAnimation(Animation.bouncy) {
+                            self.viewNumber = .fourth
+                        }
+                    case .fourth:
+                        withAnimation(Animation.bouncy) {
+                            self.viewNumber = .fifth
+                        }
+                    case .fifth:
+                        withAnimation(Animation.bouncy) {
                             self.hideOnboarding = false
                         }
                     }
                 }, label: {
-                    Image(systemName: viewNumber == .thread ? "checkmark" : "arrow.right")
+                    Image(systemName: viewNumber == .fifth ? "checkmark" : "arrow.right")
                         .fontWeight(.bold)
                 })
                 .padding()
