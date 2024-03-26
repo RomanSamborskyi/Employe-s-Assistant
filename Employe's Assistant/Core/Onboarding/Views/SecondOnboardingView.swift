@@ -11,10 +11,20 @@ struct SecondOnboardingView: View {
   
     var body: some View {
         ZStack {
-            Color.clear
-            VStack {
-                Text("Second view")
-            }
+            Color.white
+            VStack{
+                Image("2")
+                    .resizable()
+                    .frame(width: 230, height: 380)
+                Text("Add working days...".uppercased())
+                    .padding(10)
+                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.center)
+                Text("And select the time of the start of work, the time of lunch, the time of the end of the working day and the date.")
+                    .padding(10)
+                    .font(.system(size: 15, weight: .regular, design: .rounded))
+                    .multilineTextAlignment(.center)
+            }.padding()
         }.ignoresSafeArea(.all, edges: .all)
     }
 }

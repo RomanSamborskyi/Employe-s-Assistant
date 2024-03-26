@@ -24,16 +24,47 @@ struct OnboardingMainView: View {
             switch viewNumber {
             case .first:
                 FirstOnboardingView()
+                    .transition(.move(edge: .trailing))
             case .second:
                 SecondOnboardingView()
+                    .transition(.move(edge: .trailing))
             case .thread:
                 TheardOnboardingView()
+                    .transition(.move(edge: .trailing))
             case .fourth:
-                FourthOnboardingView()
-            case .fifth:
-                FifthOnboardingView(targetText: $targetText, hourSalary: $hourSalary, selectedMonth: $selectedMonth)
+                FourthOnboardingView(targetText: $targetText, hourSalary: $hourSalary, selectedMonth: $selectedMonth)
+                    .transition(.move(edge: .trailing))
             }
             HStack {
+                Button(action: {
+                    switch viewNumber {
+                    case .first:
+                        withAnimation(Animation.bouncy) {
+                            self.hideOnboarding = false
+                        }
+                    case .second:
+                        withAnimation(Animation.bouncy) {
+                            self.hideOnboarding = false
+                        }
+                    case .thread:
+                        withAnimation(Animation.bouncy) {
+                            self.hideOnboarding = false
+                        }
+                    case .fourth:
+                        withAnimation(Animation.bouncy) {
+                            self.hideOnboarding = false
+                        }
+                    }
+                }, label: {
+                    Text("Skip")
+                        .fontWeight(.bold)
+                        .foregroundStyle(Color.gray.opacity(0.5))
+                })
+                .padding()
+                .foregroundStyle(Color.black)
+                
+                Spacer()
+                
                 ForEach(OnboardingPages.allCases, id: \.self) { page in
                     RoundedRectangle(cornerRadius: 15)
                         .frame(width: viewNumber == page ? 24 : 8, height: 8)
@@ -43,7 +74,9 @@ struct OnboardingMainView: View {
                             }
                         }
                 }
+                
                 Spacer()
+                
                 Button(action: {
                     switch viewNumber {
                     case .first:
@@ -60,25 +93,19 @@ struct OnboardingMainView: View {
                         }
                     case .fourth:
                         withAnimation(Animation.bouncy) {
-                            self.viewNumber = .fifth
-                        }
-                    case .fifth:
-                        withAnimation(Animation.bouncy) {
                             vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
                             vm.setHourSalary(salary: Double(hourSalary) ?? 0)
                             self.hideOnboarding = false
                         }
                     }
                 }, label: {
-                    Image(systemName: viewNumber == .fifth ? "checkmark" : "arrow.right")
+                    Text(viewNumber == .fourth ? "Done" : "Next")
                         .fontWeight(.bold)
                 })
                 .padding()
-                .foregroundStyle(Color.white)
-                .background(Color.blue)
-                .clipShape(Circle())
             }.padding()
-        }
+        }.foregroundStyle(Color.black)
+            .background(Color.white)
     }
 }
 
