@@ -34,6 +34,7 @@ struct ColorPickerView: View {
                 WidgetCenter.shared.reloadAllTimelines()
                 withAnimation(Animation.bouncy) {
                     self.showAlert.toggle()
+                    HapticEngineManager.instance.hapticNotification(with: .success)
                 }
             }, label: {
                 Text("SAVE")
@@ -41,6 +42,7 @@ struct ColorPickerView: View {
                     .foregroundStyle(Color.white)
                     .frame(maxWidth: .infinity)
                     .background(RoundedRectangle(cornerRadius: 15))
+                
             }).padding()
             
             Button(action: {
@@ -48,6 +50,7 @@ struct ColorPickerView: View {
                 WidgetCenter.shared.reloadAllTimelines()
                 withAnimation(Animation.bouncy) {
                     self.showAlert.toggle()
+                    HapticEngineManager.instance.hapticNotification(with: .warning)
                 }
             }, label: {
                 Text("RESET")

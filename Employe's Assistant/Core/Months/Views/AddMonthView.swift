@@ -47,6 +47,7 @@ struct AddMonthView: View {
             
             Button(action: {
                 vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
+                HapticEngineManager.instance.hapticNotification(with: .success)
                 self.dissmiss = false
             }, label: {
                 Text("SAVE")

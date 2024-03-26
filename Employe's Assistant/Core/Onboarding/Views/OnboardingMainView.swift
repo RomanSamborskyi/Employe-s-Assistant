@@ -41,18 +41,22 @@ struct OnboardingMainView: View {
                     case .first:
                         withAnimation(Animation.bouncy) {
                             self.hideOnboarding = false
+                            HapticEngineManager.instance.makeFeadback(with: .rigid)
                         }
                     case .second:
                         withAnimation(Animation.bouncy) {
                             self.hideOnboarding = false
+                            HapticEngineManager.instance.makeFeadback(with: .rigid)
                         }
                     case .thread:
                         withAnimation(Animation.bouncy) {
                             self.hideOnboarding = false
+                            HapticEngineManager.instance.makeFeadback(with: .rigid)
                         }
                     case .fourth:
                         withAnimation(Animation.bouncy) {
                             self.hideOnboarding = false
+                            HapticEngineManager.instance.makeFeadback(with: .rigid)
                         }
                     }
                 }, label: {
@@ -82,19 +86,23 @@ struct OnboardingMainView: View {
                     case .first:
                         withAnimation(Animation.bouncy) {
                             self.viewNumber = .second
+                            HapticEngineManager.instance.makeFeadback(with: .soft)
                         }
                     case .second:
                         withAnimation(Animation.bouncy) {
                             self.viewNumber = .thread
+                            HapticEngineManager.instance.makeFeadback(with: .soft)
                         }
                     case .thread:
                         withAnimation(Animation.bouncy) {
                             self.viewNumber = .fourth
+                            HapticEngineManager.instance.makeFeadback(with: .soft)
                         }
                     case .fourth:
                         withAnimation(Animation.bouncy) {
                             vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
                             vm.setHourSalary(salary: Double(hourSalary) ?? 0)
+                            HapticEngineManager.instance.hapticNotification(with: .success)
                             self.hideOnboarding = false
                         }
                     }

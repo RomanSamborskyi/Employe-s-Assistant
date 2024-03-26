@@ -38,6 +38,7 @@ struct AlternativeIconView: View {
                             .shadow(color: vm.newAccentColor ,radius: 5, x: 5, y: 5)
                             .onTapGesture {
                                 vm.currentIndex = vm.icons.firstIndex(of: icon) ?? 0
+                                HapticEngineManager.instance.hapticNotification(with: .success)
                             }
                         if vm.checkIcon(icon: icon) {
                                checkmark

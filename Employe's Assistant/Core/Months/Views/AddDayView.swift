@@ -99,12 +99,14 @@ struct AddDayView: View {
                 if startHours == .zero || endHours == .zero || date > Date() {
                     withAnimation(Animation.bouncy) {
                         self.showPopOver.toggle()
+                        HapticEngineManager.instance.hapticNotification(with: .error)
                     }
                 } else {
                     withAnimation(Animation.spring) {
                         self.dissmiss = false
                     }
                     vm.addHours(month: month, startHours: Int32(startHours.description) ?? 0, startMinutes: Int32(startMinutes.description) ?? 0, endHours: Int32(endHours.description) ?? 0, endMinutes: Int32(endMinutes.description) ?? 0, pauseTime: Int32(pauseTime.description) ?? 0, date: date)
+                    HapticEngineManager.instance.hapticNotification(with: .success)
                     WidgetCenter.shared.reloadAllTimelines()
                 }
             }, label: {
