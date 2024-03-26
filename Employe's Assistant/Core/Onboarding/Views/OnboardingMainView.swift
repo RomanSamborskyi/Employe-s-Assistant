@@ -12,6 +12,11 @@ import SwiftUI
 struct OnboardingMainView: View {
     
     @State var viewNumber: OnboardingPages = .first
+    @State private var selectedMonth: Monthes = .empty
+    @StateObject private var vm: OnboardingViewModel = OnboardingViewModel()
+    
+    @State private var targetText: String = ""
+    @State private var hourSalary: String = ""
     @Binding var hideOnboarding: Bool
    
     var body: some View {
@@ -26,7 +31,7 @@ struct OnboardingMainView: View {
             case .fourth:
                 FourthOnboardingView()
             case .fifth:
-                FifthOnboardingView()
+                FifthOnboardingView(targetText: $targetText, hourSalary: $hourSalary, selectedMonth: $selectedMonth)
             }
             HStack {
                 ForEach(OnboardingPages.allCases, id: \.self) { page in
@@ -59,6 +64,8 @@ struct OnboardingMainView: View {
                         }
                     case .fifth:
                         withAnimation(Animation.bouncy) {
+                            vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
+                            vm.setHourSalary(salary: Double(hourSalary) ?? 0)
                             self.hideOnboarding = false
                         }
                     }

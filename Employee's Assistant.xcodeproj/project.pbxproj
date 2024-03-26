@@ -38,6 +38,7 @@
 		6B6804BF2BB1FAAF006A5F16 /* TheardOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6804BE2BB1FAAF006A5F16 /* TheardOnboardingView.swift */; };
 		6B6804C52BB3195D006A5F16 /* FourthOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6804C42BB3195D006A5F16 /* FourthOnboardingView.swift */; };
 		6B6804C72BB3196E006A5F16 /* FifthOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6804C62BB3196E006A5F16 /* FifthOnboardingView.swift */; };
+		6B6804CA2BB32162006A5F16 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6804C92BB32162006A5F16 /* OnboardingViewModel.swift */; };
 		6B708FE22B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B708FE12B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift */; };
 		6B708FE42B1A5DEA0099C4AA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B708FE32B1A5DEA0099C4AA /* ContentView.swift */; };
 		6B708FE62B1A5DEB0099C4AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B708FE52B1A5DEB0099C4AA /* Assets.xcassets */; };
@@ -135,6 +136,7 @@
 		6B6804BE2BB1FAAF006A5F16 /* TheardOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheardOnboardingView.swift; sourceTree = "<group>"; };
 		6B6804C42BB3195D006A5F16 /* FourthOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthOnboardingView.swift; sourceTree = "<group>"; };
 		6B6804C62BB3196E006A5F16 /* FifthOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifthOnboardingView.swift; sourceTree = "<group>"; };
+		6B6804C92BB32162006A5F16 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		6B708FDE2B1A5DEA0099C4AA /* Employee's Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Employee's Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B708FE12B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employe_s_AssistantApp.swift; sourceTree = "<group>"; };
 		6B708FE32B1A5DEA0099C4AA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 		6B6804B72BB1F95E006A5F16 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				6B6804C82BB32142006A5F16 /* ViewModel */,
 				6B6804C02BB1FCCF006A5F16 /* Views */,
 			);
 			path = Onboarding;
@@ -229,6 +232,14 @@
 				6B6804BE2BB1FAAF006A5F16 /* TheardOnboardingView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		6B6804C82BB32142006A5F16 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6B6804C92BB32162006A5F16 /* OnboardingViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		6B708FD52B1A5DEA0099C4AA = {
@@ -588,6 +599,7 @@
 				6B6804C72BB3196E006A5F16 /* FifthOnboardingView.swift in Sources */,
 				6BB574532B6BC552007DA12D /* CustomShareSheetView.swift in Sources */,
 				6B5A7E262B1A95BD007FDA57 /* Container.xcdatamodeld in Sources */,
+				6B6804CA2BB32162006A5F16 /* OnboardingViewModel.swift in Sources */,
 				6B708FFF2B1A612D0099C4AA /* StatisticMainView.swift in Sources */,
 				6B4B642B2B22406B0063783D /* StatisticByMonthsChartView.swift in Sources */,
 				6BB574502B6BB7A0007DA12D /* MonthEntity+CoreDataProperties.swift in Sources */,
