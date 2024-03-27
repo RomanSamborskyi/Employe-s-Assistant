@@ -20,7 +20,7 @@ struct TheardOnboardingView: View {
                     .padding(10)
                     .font(.system(size: 25, weight: .bold, design: .rounded))
                     .multilineTextAlignment(.center)
-                Text("Visit the statistics screen to view statistics for the current month or history for previous monthsю")
+                Text("Visit the statistics screen to view statistics for the current month or history for previous months")
                     .padding(10)
                     .font(.system(size: 15, weight: .regular, design: .rounded))
                     .multilineTextAlignment(.center)

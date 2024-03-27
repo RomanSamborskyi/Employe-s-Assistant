@@ -7,9 +7,6 @@
 
 import UIKit
 
-
-
-
 extension Date {
     func datesOfMonth() -> [Date] {
         let calendar = Calendar.current
