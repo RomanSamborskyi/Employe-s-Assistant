@@ -10,6 +10,7 @@ import SwiftUI
 struct StatisticMainView: View {
     
     @StateObject var vm: StatisticViewModel = StatisticViewModel()
+    @AppStorage("savedType") var chartType: ChartType = .barMark
     
     var body: some View {
         NavigationView {
@@ -19,10 +20,17 @@ struct StatisticMainView: View {
                         MonthDetailView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
                     }
                     Section {
-                        CustomChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                        switch chartType {
+                        case .barMark:
+                            ChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                        case .lineMark:
+                            LinearMarkChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                        case .custom:
+                            CustomChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                        }
                     }
                     Section {
-                        StatisticByMonthsChartView(vm: vm)
+                        StatisticByMonthsChartView(vm: vm, chartType: $chartType)
                     }
                 }.navigationTitle("Statistic")
                     .toolbar {
@@ -30,6 +38,16 @@ struct StatisticMainView: View {
                             Picker("Selected month", selection: $vm.selectedIndex) {
                                 ForEach(vm.monthViewModel.months.indices, id: \.self) { index in
                                     Text(vm.monthViewModel.months[index].title ?? "")
+                                }
+                            }
+                        }
+                        if #available(iOS 16, *) {
+                            ToolbarItem(placement: .topBarLeading) {
+                                Picker("", selection: $chartType) {
+                                    ForEach(ChartType.allCases) { chart in
+                                        Text(chart.description)
+                                            .tag(chart)
+                                    }
                                 }
                             }
                         }

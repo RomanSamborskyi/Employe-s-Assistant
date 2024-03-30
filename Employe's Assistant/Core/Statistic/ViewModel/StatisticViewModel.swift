@@ -20,6 +20,7 @@ class StatisticViewModel: ObservableObject {
         trimCalculation()
     }
     
+    
     var dateFormater: DateFormatter = {
         var dateFormater: DateFormatter = DateFormatter()
         dateFormater.dateStyle = .full

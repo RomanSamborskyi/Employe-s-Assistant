@@ -200,3 +200,19 @@ enum Monthes: String, CaseIterable, Identifiable {
 enum OnboardingPages: CaseIterable {
     case first, second, thread, fourth
 }
+
+enum ChartType: String, Identifiable, CaseIterable {
+    var id: Self { self }
+    case barMark, lineMark, custom
+    
+    var description: String {
+        switch self {
+        case .barMark:
+            "Bar Charts"
+        case .lineMark:
+            "Liner Charts"
+        case .custom:
+            "Minimalistic"
+        }
+    }
+}

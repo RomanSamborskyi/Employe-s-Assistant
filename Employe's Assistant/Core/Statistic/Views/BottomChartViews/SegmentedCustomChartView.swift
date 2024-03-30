@@ -1,66 +1,32 @@
 //
-//  StatisticByMonthsChartView.swift
-//  Employe's Assistant
+//  SegmentedCustomChartView.swift
+//  Employee's Assistant
 //
-//  Created by Roman Samborskyi on 07.12.2023.
+//  Created by Roman Samborskyi on 30.03.2024.
 //
 
 import SwiftUI
-import Charts
 
-struct StatisticByMonthsChartView: View {
+struct SegmentedCustomChart: View {
     
     @ObservedObject var vm: StatisticViewModel
+    @Binding var selectedTab: StatisticType
     @State private var array: [MonthEntity] = []
-    @State var selectedTab: StatisticType = .hours
     
     var body: some View {
-        VStack {
-            Text("Statistic by months")
-                .font(.system(size: 15, weight: .bold, design: .rounded))
-                .padding(5)
-            Picker("", selection: $selectedTab) {
-                ForEach(StatisticType.allCases, id: \.self) { tab in
-                    Text(tab.description)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .bottom) {
+                ForEach(array.reversed(), id: \.self) { month in
+                    SegmentUniversalView(vm: vm, selectedTab: $selectedTab, month: month)
                 }
-            }.pickerStyle(.segmented)
-                .padding(5)
-            switch selectedTab {
-            case .hours:
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .bottom) {
-                        ForEach(array.reversed(), id: \.self) { month in
-                            SegmentUniversalView(vm: vm, selectedTab: $selectedTab, month: month)
-                        }
-                    }
-                }.frame(height: 130)
-            case .workingDays:
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .bottom) {
-                        ForEach(array.reversed(), id: \.self) { month in
-                            SegmentUniversalView(vm: vm, selectedTab: $selectedTab, month: month)
-                        }
-                    }
-                }.frame(height: 130)
-            case .salary:
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .bottom) {
-                        ForEach(array.reversed(), id: \.self) { month in
-                            SegmentUniversalView(vm: vm, selectedTab: $selectedTab, month: month)
-                        }
-                    }
-                }.frame(height: 130)
             }
-        }.onAppear {
-            withAnimation(Animation.bouncy) {
-                self.array = vm.monthViewModel.months
+        }.frame(height: 130)
+            .onAppear {
+                withAnimation(Animation.bouncy) {
+                    self.array = vm.monthViewModel.months
+                }
             }
-        }
     }
-}
-
-#Preview {
-    StatisticByMonthsChartView(vm: StatisticViewModel())
 }
 
 struct SegmentUniversalView: View {
