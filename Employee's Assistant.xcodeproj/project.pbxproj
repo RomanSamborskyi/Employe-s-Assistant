@@ -82,6 +82,7 @@
 		6BBF3D792B1B582500C40227 /* MonthDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D782B1B582500C40227 /* MonthDetailView.swift */; };
 		6BBF3D7B2B1BA47800C40227 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D7A2B1BA47800C40227 /* ChartView.swift */; };
 		6BE3289F2B939D7600D4CB4A /* CalendarDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65691E2B6E583500E7433F /* CalendarDates.swift */; };
+		6BFAABC42BB834B600EA4187 /* LinearMarkChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFAABC32BB834B600EA4187 /* LinearMarkChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +182,7 @@
 		6BBF3D762B1B52F100C40227 /* StatisticViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewModel.swift; sourceTree = "<group>"; };
 		6BBF3D782B1B582500C40227 /* MonthDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthDetailView.swift; sourceTree = "<group>"; };
 		6BBF3D7A2B1BA47800C40227 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		6BFAABC32BB834B600EA4187 /* LinearMarkChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearMarkChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +350,7 @@
 				6B708FFE2B1A612D0099C4AA /* StatisticMainView.swift */,
 				6B29CE0E2B9E57810011DDA4 /* CustomChartView.swift */,
 				6BBF3D7A2B1BA47800C40227 /* ChartView.swift */,
+				6BFAABC32BB834B600EA4187 /* LinearMarkChartView.swift */,
 				6B4B642A2B22406B0063783D /* StatisticByMonthsChartView.swift */,
 			);
 			path = Views;
@@ -592,6 +595,7 @@
 				6B1670A12B9C906000AD68AB /* NewColorEntity+CoreDataClass.swift in Sources */,
 				6B65691F2B6E583500E7433F /* CalendarDates.swift in Sources */,
 				6B6569212B6E592E00E7433F /* Extentions.swift in Sources */,
+				6BFAABC42BB834B600EA4187 /* LinearMarkChartView.swift in Sources */,
 				6BB5744F2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift in Sources */,
 				6B9427C72B496E7200535A16 /* DaysModel.swift in Sources */,
 				6B6569232B6E712800E7433F /* ListView.swift in Sources */,

@@ -19,7 +19,14 @@ struct StatisticMainView: View {
                         MonthDetailView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
                     }
                     Section {
-                        CustomChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                        switch chartType {
+                        case .barMark:
+                            ChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                        case .lineMark:
+                            LinearMarkChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                        case .custom:
+                            CustomChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                        }
                     }
                     Section {
                         StatisticByMonthsChartView(vm: vm)
@@ -33,10 +40,12 @@ struct StatisticMainView: View {
                                 }
                             }
                         }
-                        ToolbarItem(placement: .topBarLeading) {
-                            Picker("", selection: $chartType) {
-                                ForEach(ChartType.allCases, id: \.self) { chart in
-                                    Text(chart.rawValue)
+                        if #available(iOS 16, *) {
+                            ToolbarItem(placement: .topBarLeading) {
+                                Picker("", selection: $chartType) {
+                                    ForEach(ChartType.allCases, id: \.self) { chart in
+                                        Text(chart.rawValue)
+                                    }
                                 }
                             }
                         }
