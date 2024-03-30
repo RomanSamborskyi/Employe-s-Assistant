@@ -201,17 +201,18 @@ enum OnboardingPages: CaseIterable {
     case first, second, thread, fourth
 }
 
-enum ChartType: String, CaseIterable {
+enum ChartType: String, Identifiable, CaseIterable {
+    var id: Self { self }
     case barMark, lineMark, custom
     
-    var rawValue: String {
+    var description: String {
         switch self {
         case .barMark:
-            "BarMark"
+            "Bar Charts"
         case .lineMark:
-            "LineMark"
+            "Liner Charts"
         case .custom:
-            "Custom"
+            "Minimalistic"
         }
     }
 }

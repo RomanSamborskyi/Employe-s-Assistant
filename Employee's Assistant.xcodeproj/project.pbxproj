@@ -83,6 +83,9 @@
 		6BBF3D7B2B1BA47800C40227 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF3D7A2B1BA47800C40227 /* ChartView.swift */; };
 		6BE3289F2B939D7600D4CB4A /* CalendarDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65691E2B6E583500E7433F /* CalendarDates.swift */; };
 		6BFAABC42BB834B600EA4187 /* LinearMarkChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFAABC32BB834B600EA4187 /* LinearMarkChartView.swift */; };
+		6BFAABC62BB876DF00EA4187 /* SegmentedCustomChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFAABC52BB876DF00EA4187 /* SegmentedCustomChartView.swift */; };
+		6BFAABC82BB8770D00EA4187 /* LinearMarkChartMontView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFAABC72BB8770D00EA4187 /* LinearMarkChartMontView.swift */; };
+		6BFAABCA2BB8774C00EA4187 /* BartMarkChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFAABC92BB8774C00EA4187 /* BartMarkChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +186,9 @@
 		6BBF3D782B1B582500C40227 /* MonthDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthDetailView.swift; sourceTree = "<group>"; };
 		6BBF3D7A2B1BA47800C40227 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		6BFAABC32BB834B600EA4187 /* LinearMarkChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearMarkChartView.swift; sourceTree = "<group>"; };
+		6BFAABC52BB876DF00EA4187 /* SegmentedCustomChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedCustomChartView.swift; sourceTree = "<group>"; };
+		6BFAABC72BB8770D00EA4187 /* LinearMarkChartMontView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearMarkChartMontView.swift; sourceTree = "<group>"; };
+		6BFAABC92BB8774C00EA4187 /* BartMarkChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartMarkChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,12 +352,12 @@
 		6B708FF42B1A608A0099C4AA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6BFAABCB2BB8780600EA4187 /* BottomChartViews */,
 				6BBF3D782B1B582500C40227 /* MonthDetailView.swift */,
 				6B708FFE2B1A612D0099C4AA /* StatisticMainView.swift */,
 				6B29CE0E2B9E57810011DDA4 /* CustomChartView.swift */,
 				6BBF3D7A2B1BA47800C40227 /* ChartView.swift */,
 				6BFAABC32BB834B600EA4187 /* LinearMarkChartView.swift */,
-				6B4B642A2B22406B0063783D /* StatisticByMonthsChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -474,6 +480,17 @@
 			path = CoreDataClasses;
 			sourceTree = "<group>";
 		};
+		6BFAABCB2BB8780600EA4187 /* BottomChartViews */ = {
+			isa = PBXGroup;
+			children = (
+				6B4B642A2B22406B0063783D /* StatisticByMonthsChartView.swift */,
+				6BFAABC72BB8770D00EA4187 /* LinearMarkChartMontView.swift */,
+				6BFAABC52BB876DF00EA4187 /* SegmentedCustomChartView.swift */,
+				6BFAABC92BB8774C00EA4187 /* BartMarkChartView.swift */,
+			);
+			path = BottomChartViews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -594,6 +611,7 @@
 				6B5A7E232B1A8B68007FDA57 /* AddDayView.swift in Sources */,
 				6B1670A12B9C906000AD68AB /* NewColorEntity+CoreDataClass.swift in Sources */,
 				6B65691F2B6E583500E7433F /* CalendarDates.swift in Sources */,
+				6BFAABCA2BB8774C00EA4187 /* BartMarkChartView.swift in Sources */,
 				6B6569212B6E592E00E7433F /* Extentions.swift in Sources */,
 				6BFAABC42BB834B600EA4187 /* LinearMarkChartView.swift in Sources */,
 				6BB5744F2B6BB7A0007DA12D /* MonthEntity+CoreDataClass.swift in Sources */,
@@ -606,6 +624,7 @@
 				6B6804CA2BB32162006A5F16 /* OnboardingViewModel.swift in Sources */,
 				6B708FFF2B1A612D0099C4AA /* StatisticMainView.swift in Sources */,
 				6B4B642B2B22406B0063783D /* StatisticByMonthsChartView.swift in Sources */,
+				6BFAABC62BB876DF00EA4187 /* SegmentedCustomChartView.swift in Sources */,
 				6BB574502B6BB7A0007DA12D /* MonthEntity+CoreDataProperties.swift in Sources */,
 				6B2A83F92B3613AC00BB1B6A /* SettingsViewModel.swift in Sources */,
 				6B29CE0F2B9E57810011DDA4 /* CustomChartView.swift in Sources */,
@@ -624,6 +643,7 @@
 				6B2A83FB2B362FA800BB1B6A /* SetHourSalaryView.swift in Sources */,
 				6BBF3D792B1B582500C40227 /* MonthDetailView.swift in Sources */,
 				6B708FE22B1A5DEA0099C4AA /* Employe_s_AssistantApp.swift in Sources */,
+				6BFAABC82BB8770D00EA4187 /* LinearMarkChartMontView.swift in Sources */,
 				6B2FE3202B3C9B8B009B3299 /* ColorPickerView.swift in Sources */,
 				6B5A7E1F2B1A7C64007FDA57 /* AddMonthView.swift in Sources */,
 				6B55422E2B8D3A2D00D374A0 /* DataManager.swift in Sources */,

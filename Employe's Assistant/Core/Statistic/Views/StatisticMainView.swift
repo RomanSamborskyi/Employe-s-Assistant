@@ -10,7 +10,8 @@ import SwiftUI
 struct StatisticMainView: View {
     
     @StateObject var vm: StatisticViewModel = StatisticViewModel()
-    @State private var chartType: ChartType = .custom
+    @AppStorage("savedType") var chartType: ChartType = .barMark
+    
     var body: some View {
         NavigationView {
             if !vm.monthViewModel.months.isEmpty {
@@ -43,8 +44,9 @@ struct StatisticMainView: View {
                         if #available(iOS 16, *) {
                             ToolbarItem(placement: .topBarLeading) {
                                 Picker("", selection: $chartType) {
-                                    ForEach(ChartType.allCases, id: \.self) { chart in
-                                        Text(chart.rawValue)
+                                    ForEach(ChartType.allCases) { chart in
+                                        Text(chart.description)
+                                            .tag(chart)
                                     }
                                 }
                             }
