@@ -10,7 +10,7 @@ import SwiftUI
 struct StatisticMainView: View {
     
     @StateObject var vm: StatisticViewModel = StatisticViewModel()
-    
+    @State private var chartType: ChartType = .custom
     var body: some View {
         NavigationView {
             if !vm.monthViewModel.months.isEmpty {
@@ -30,6 +30,13 @@ struct StatisticMainView: View {
                             Picker("Selected month", selection: $vm.selectedIndex) {
                                 ForEach(vm.monthViewModel.months.indices, id: \.self) { index in
                                     Text(vm.monthViewModel.months[index].title ?? "")
+                                }
+                            }
+                        }
+                        ToolbarItem(placement: .topBarLeading) {
+                            Picker("", selection: $chartType) {
+                                ForEach(ChartType.allCases, id: \.self) { chart in
+                                    Text(chart.rawValue)
                                 }
                             }
                         }
