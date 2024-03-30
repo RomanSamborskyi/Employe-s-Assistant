@@ -29,7 +29,7 @@ struct StatisticMainView: View {
                         }
                     }
                     Section {
-                        StatisticByMonthsChartView(vm: vm)
+                        StatisticByMonthsChartView(vm: vm, chartType: $chartType)
                     }
                 }.navigationTitle("Statistic")
                     .toolbar {

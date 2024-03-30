@@ -13,6 +13,7 @@ struct StatisticByMonthsChartView: View {
     @ObservedObject var vm: StatisticViewModel
     @State private var array: [MonthEntity] = []
     @State var selectedTab: StatisticType = .hours
+    @Binding var chartType: ChartType
     
     var body: some View {
         VStack {
@@ -27,29 +28,33 @@ struct StatisticByMonthsChartView: View {
                 .padding(5)
             switch selectedTab {
             case .hours:
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .bottom) {
-                        ForEach(array.reversed(), id: \.self) { month in
-                            SegmentUniversalView(vm: vm, selectedTab: $selectedTab, month: month)
-                        }
-                    }
-                }.frame(height: 130)
+                switch chartType {
+                case .barMark:
+                    BartMarkChartView(vm: vm, selectedTab: $selectedTab)
+                case .lineMark:
+                    LinearMarkChartMontView(vm: vm, selectedTab: $selectedTab)
+                case .custom:
+                    SegmentedCustomChart(vm: vm, selectedTab: $selectedTab, array: array)
+                }
             case .workingDays:
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .bottom) {
-                        ForEach(array.reversed(), id: \.self) { month in
-                            SegmentUniversalView(vm: vm, selectedTab: $selectedTab, month: month)
-                        }
-                    }
-                }.frame(height: 130)
+                switch chartType {
+                case .barMark:
+                    BartMarkChartView(vm: vm, selectedTab: $selectedTab)
+                case .lineMark:
+                    LinearMarkChartMontView(vm: vm, selectedTab: $selectedTab)
+                case .custom:
+                    SegmentedCustomChart(vm: vm, selectedTab: $selectedTab, array: array)
+                }
             case .salary:
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .bottom) {
-                        ForEach(array.reversed(), id: \.self) { month in
-                            SegmentUniversalView(vm: vm, selectedTab: $selectedTab, month: month)
-                        }
-                    }
-                }.frame(height: 130)
+                switch chartType {
+                case .barMark:
+                    BartMarkChartView(vm: vm, selectedTab: $selectedTab)
+                case .lineMark:
+                    LinearMarkChartMontView(vm: vm, selectedTab: $selectedTab)
+                case .custom:
+                    SegmentedCustomChart(vm: vm, selectedTab: $selectedTab, array: array)
+                }
+              
             }
         }.onAppear {
             withAnimation(Animation.bouncy) {
@@ -59,8 +64,21 @@ struct StatisticByMonthsChartView: View {
     }
 }
 
-#Preview {
-    StatisticByMonthsChartView(vm: StatisticViewModel())
+struct SegmentedCustomChart: View {
+    
+    @ObservedObject var vm: StatisticViewModel
+    @Binding var selectedTab: StatisticType
+    let array: [MonthEntity]
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .bottom) {
+                ForEach(array.reversed(), id: \.self) { month in
+                    SegmentUniversalView(vm: vm, selectedTab: $selectedTab, month: month)
+                }
+            }
+        }.frame(height: 130)
+    }
 }
 
 struct SegmentUniversalView: View {
@@ -123,6 +141,113 @@ struct SegmentUniversalView: View {
         .onTapGesture {
             withAnimation(Animation.bouncy) {
                 self.showDetail.toggle()
+            }
+        }
+    }
+}
+
+struct LinearMarkChartMontView: View {
+    
+    @ObservedObject var vm: StatisticViewModel
+    @State private var array: [MonthEntity] = []
+    @Binding var selectedTab: StatisticType
+    let gradient: LinearGradient = LinearGradient(colors: [Color.accentColor, Color.clear], startPoint: .top, endPoint: .bottom)
+    
+    var body: some View {
+        ZStack {
+            Chart {
+                ForEach(array, id: \.totalHours) { month in
+                    switch selectedTab {
+                    case .hours:
+                        LineMark(x: .value("Months", month.title ?? ""),
+                                 y: .value("Hours", month.totalHours)
+                        ).foregroundStyle(Color.accentColor.gradient)
+                    case .workingDays:
+                        LineMark(x: .value("Months", month.title ?? ""),
+                                 y: .value("Days", month.day?.count ?? 0)
+                        ).foregroundStyle(Color.accentColor.gradient)
+                    case .salary:
+                        LineMark(x: .value("Months", month.title ?? ""),
+                                 y: .value("Salary", month.totalSalary)
+                        ).foregroundStyle(Color.accentColor.gradient)
+                    }
+                }
+            }
+            Chart {
+                ForEach(array, id: \.totalHours) { month in
+                    switch selectedTab {
+                    case .hours:
+                        PointMark(x: .value("Months", month.title ?? ""),
+                                 y: .value("Hours", month.totalHours)
+                        ).foregroundStyle(Color.accentColor.gradient)
+                    case .workingDays:
+                        PointMark(x: .value("Months", month.title ?? ""),
+                                 y: .value("Days", month.day?.count ?? 0)
+                        ).foregroundStyle(Color.accentColor.gradient)
+                    case .salary:
+                        PointMark(x: .value("Months", month.title ?? ""),
+                                 y: .value("Salary", month.totalSalary)
+                        ).foregroundStyle(Color.accentColor.gradient)
+                    }
+                }
+            }
+            Chart {
+                ForEach(array, id: \.totalHours) { month in
+                    switch selectedTab {
+                    case .hours:
+                        AreaMark(x: .value("Months", month.title ?? ""),
+                                 y: .value("Hours", month.totalHours)
+                        ).foregroundStyle(gradient)
+                    case .workingDays:
+                        AreaMark(x: .value("Months", month.title ?? ""),
+                                 y: .value("Days", month.day?.count ?? 0)
+                        ).foregroundStyle(gradient)
+                    case .salary:
+                        AreaMark(x: .value("Months", month.title ?? ""),
+                                 y: .value("Salary", month.totalSalary)
+                        ).foregroundStyle(gradient)
+                    }
+                }
+            }
+        }
+        .onAppear {
+            withAnimation(Animation.bouncy) {
+                self.array = vm.monthViewModel.months.sorted { $0.date ?? Date() < $1.date ?? Date()
+                }
+            }
+        }
+    }
+}
+
+struct BartMarkChartView: View {
+    
+    @ObservedObject var vm: StatisticViewModel
+    @State private var array: [MonthEntity] = []
+    @Binding var selectedTab: StatisticType
+    
+    var body: some View {
+        Chart {
+            ForEach(array, id: \.totalHours) { month in
+                switch selectedTab {
+                case .hours:
+                    BarMark(x: .value("Months", month.title ?? ""),
+                             y: .value("Hours", month.totalHours)
+                    ).foregroundStyle(Color.accentColor.gradient)
+                case .workingDays:
+                    BarMark(x: .value("Months", month.title ?? ""),
+                             y: .value("Days", month.day?.count ?? 0)
+                    ).foregroundStyle(Color.accentColor.gradient)
+                case .salary:
+                    BarMark(x: .value("Months", month.title ?? ""),
+                             y: .value("Salary", month.totalSalary)
+                    ).foregroundStyle(Color.accentColor.gradient)
+                }
+            }
+        }
+        .onAppear {
+            withAnimation(Animation.bouncy) {
+                self.array = vm.monthViewModel.months.sorted { $0.date ?? Date() < $1.date ?? Date()
+                }
             }
         }
     }

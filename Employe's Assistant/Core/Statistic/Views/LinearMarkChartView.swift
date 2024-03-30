@@ -17,7 +17,7 @@ struct LinearMarkChartView: View {
     var body: some View {
         VStack {
             Text("\(month.title ?? "")")
-            .font(.system(size: 15, weight: .bold, design: .rounded))
+                .font(.system(size: 15, weight: .bold, design: .rounded))
             ZStack {
                 Chart {
                     ForEach(array, id: \.date) { hour in
@@ -29,7 +29,7 @@ struct LinearMarkChartView: View {
                 Chart {
                     ForEach(array, id: \.date) { hour in
                         PointMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
-                                 y: .value("Hours", hour.hours)
+                                  y: .value("Hours", hour.hours)
                         ).foregroundStyle(Color.accentColor.gradient)
                     }
                 }
@@ -53,5 +53,6 @@ struct LinearMarkChartView: View {
                 guard let array = vm.currentMonth?.day?.allObjects as? [DayEntity] else { return }
                 self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
             }
-        }    }
+        }
+    }
 }
