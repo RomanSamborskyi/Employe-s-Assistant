@@ -15,7 +15,7 @@ struct FirstOnboardingView: View {
             VStack {
                 Image("1")
                     .resizable()
-                    .frame(width: 230, height: 380)
+                    .frame(width: 210, height: 380)
                 Text("Add month and start tracking your working time".uppercased())
                     .padding(10)
                     .font(.system(size: 25, weight: .bold, design: .rounded))
