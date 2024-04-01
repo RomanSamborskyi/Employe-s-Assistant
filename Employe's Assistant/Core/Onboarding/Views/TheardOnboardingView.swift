@@ -15,7 +15,7 @@ struct TheardOnboardingView: View {
             VStack {
                 Image("3")
                     .resizable()
-                    .frame(width: 230, height: 380)
+                    .frame(width: 210, height: 380)
                 Text("Statistic view".uppercased())
                     .padding(10)
                     .font(.system(size: 25, weight: .bold, design: .rounded))
