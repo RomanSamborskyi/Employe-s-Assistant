@@ -15,9 +15,9 @@ enum SelectView: String, Identifiable, CaseIterable {
     var description: String {
         switch self {
         case .list:
-            "List"
+            NSLocalizedString("List", comment: "")
         case .calendar:
-            "Calendar"
+            NSLocalizedString("Calendar", comment: "")
         }
     }
 }
@@ -208,11 +208,11 @@ enum ChartType: String, Identifiable, CaseIterable {
     var description: String {
         switch self {
         case .barMark:
-            "Bar Charts"
+            NSLocalizedString("Bar Chart", comment: "")
         case .lineMark:
-            "Liner Charts"
+            NSLocalizedString("Line Chart", comment: "")
         case .custom:
-            "Minimalistic"
+            NSLocalizedString("Minimalistic", comment: "")
         }
     }
 }

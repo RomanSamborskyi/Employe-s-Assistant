@@ -81,3 +81,16 @@
 "Pick an icon" = "Оберіть іконку";
 "Set up start and end hours" = "Вкажіть початок та кінець робочго дня";
 "Set all required fields" = "Заповніть усі необхідні поля";
+"Total hours:" = "Загально годин:";
+"List" = "Список";
+"Calendar" = "Календар";
+"Monthly progress" = "Ваш прогрес";
+"Bar Chart" = "Стовбець";
+"Line Chart" = "Лінійний";
+"Minimalistic" = "Мінімаліст";
+"Done" = "Готово";
+"Next" = "Далі";
+"Skip" = "Проп.";
+"Let's make some basic setup" = "Зробімо базові налаштування";
+"Add month and start tracking your working time" = "Додайте місяць і почніть відстежувати свій робочий час";
+"You can also specify the number of hours you plan to work per month" = "Ви також можете вказати кількість годин, які плануєте відпрацювати в місяць";
