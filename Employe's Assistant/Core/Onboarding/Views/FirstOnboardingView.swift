@@ -16,7 +16,7 @@ struct FirstOnboardingView: View {
                 Image("1")
                     .resizable()
                     .frame(width: 210, height: 380)
-                Text("Add month and start tracking your working time".uppercased())
+                Text("Add month and start tracking your working time")
                     .padding(10)
                     .font(.system(size: 25, weight: .bold, design: .rounded))
                     .multilineTextAlignment(.center)

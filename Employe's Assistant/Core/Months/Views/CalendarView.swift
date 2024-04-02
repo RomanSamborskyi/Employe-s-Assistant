@@ -27,8 +27,8 @@ struct CalendarView: View {
         ScrollView(.vertical, showsIndicators: false) {
             HStack {
                 ForEach(days, id: \.self) { day in
-                    Text(day)
-                        .padding(8)
+                    Text(LocalizedStringKey(day))
+                        .padding(Locale.preferredLanguages.first! == "uk-UA" ? 10 : 8)
                         .font(.system(size: 18, weight: .bold, design: .rounded))
                         .foregroundStyle(Color.red)
                         .lineLimit(1)

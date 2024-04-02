@@ -93,4 +93,15 @@
 "Skip" = "Проп.";
 "Let's make some basic setup" = "Зробімо базові налаштування";
 "Add month and start tracking your working time" = "Додайте місяць і почніть відстежувати свій робочий час";
-"You can also specify the number of hours you plan to work per month" = "Ви також можете вказати кількість годин, які плануєте відпрацювати в місяць";
+"You can also specify the number of hours you plan to work per month" = "Ви також можете вказати кількість годин, які плануєте відпрацювати в місяць.";
+"Add working days..." = "Додавайте робочі дні...";
+"And select the time of the start of work, lunch, end of the working day and the date." = "Та вкажіть час початку роботи, обіду, закінчення робочого дня та дату.";
+"Statistic view" = "Вкладка статистики";
+"Visit the statistics screen to view statistics for the current month or history for previous months" = "Перейдіть на вкладку статистики, щоб переглянути статистику за поточний місяць або історію за попередні місяці.";
+"Mon" = "Пн";
+"Tue" = "Вт";
+"Wed" = "Ср";
+"Thu" = "Чт";
+"Fri" = "Пт";
+"Sat" = "Сб";
+"Sun" = "Нд";

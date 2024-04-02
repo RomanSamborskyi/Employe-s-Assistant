@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
  
     @State private var selectedTab: Tabs = .months
-    @State private var showOnboarding: Bool = true
+    @AppStorage("showOnboarding") private var showOnboarding: Bool = true
     @StateObject var svm: SettingsViewModel = SettingsViewModel()
     
     var body: some View {
