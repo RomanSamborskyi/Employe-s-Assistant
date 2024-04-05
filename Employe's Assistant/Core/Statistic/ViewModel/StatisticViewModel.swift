@@ -23,13 +23,22 @@ class StatisticViewModel: ObservableObject {
     
     var dateFormater: DateFormatter = {
         var dateFormater: DateFormatter = DateFormatter()
-        dateFormater.dateStyle = .full
-        dateFormater.dateFormat = "MMMM YYYY"
+        dateFormater.dateFormat = "LLLL yyyy"
         return dateFormater
     }()
     
+    func localizedMonthTitle(title: String?) -> String {
+        guard let title = title else { return "" }
+        let indexOfSpace = title.firstIndex(of: " ") ?? title.endIndex
+        let clearTitle = title[..<indexOfSpace]
+        let yaer = title[indexOfSpace...]
+        return NSLocalizedString(String(clearTitle), comment: "") + String(yaer)
+    }
+    
     func getCurrentMonth() {
-        guard let index = monthViewModel.months.firstIndex(where: { $0.title == dateFormater.string(from: Date()) }) else { return }
+        guard let index = monthViewModel.months.firstIndex(where: { localizedMonthTitle(title: $0.title) == dateFormater.string(from: Date()).capitalized }) else {
+            return
+        }
         let month = monthViewModel.months[index]
         selectedIndex = index
         currentMonth = month

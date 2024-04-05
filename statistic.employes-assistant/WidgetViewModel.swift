@@ -74,20 +74,25 @@ class WidgetViewModel: ObservableObject {
     
     func getCurrentMont(_ selectedMonth: MonthEntity) -> Date {
         let calendar = Calendar.current
-        
+
         let dateFormatter: DateFormatter = {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "LLLL yyyy"
             return dateFormatter
         }()
         
-        if let monthTitle = selectedMonth.title, let currentMonth = dateFormatter.date(from: monthTitle) {
+        guard let title = selectedMonth.title else { return Date() }
+        let indexOfSpace = title.firstIndex(of: " ") ?? title.endIndex
+        let clearTitle = title[..<indexOfSpace]
+        let yaer = title[indexOfSpace...]
+        let localizedString = NSLocalizedString(String(clearTitle), comment: "") + String(yaer)
+
+        guard let currentMonth = dateFormatter.date(from: localizedString) else { return Date() }
             let returnedMonth = calendar.date(bySetting: .day, value: 1, of: currentMonth)
-            
             if let formattedMonth = returnedMonth {
                 return formattedMonth
             }
-        }
+        
         return Date()
     }
     
@@ -134,13 +139,20 @@ class WidgetViewModel: ObservableObject {
     
     var dateFormater: DateFormatter = {
         var dateFormater: DateFormatter = DateFormatter()
-        dateFormater.dateStyle = .full
-        dateFormater.dateFormat = "MMMM YYYY"
+        dateFormater.dateFormat = "LLLL yyyy"
         return dateFormater
     }()
     
+    func localizedMonthTitle(title: String?) -> String {
+        guard let title = title else { return "" }
+        let indexOfSpace = title.firstIndex(of: " ") ?? title.endIndex
+        let clearTitle = title[..<indexOfSpace]
+        let yaer = title[indexOfSpace...]
+        return NSLocalizedString(String(clearTitle), comment: "") + String(yaer)
+    }
+    
     func getCurrentMonth() -> MonthEntity? {
-        guard let index = try? getMonts().firstIndex(where: { $0.title == dateFormater.string(from: Date()) }) else { return nil }
+        guard let index = try? getMonts().firstIndex(where: { localizedMonthTitle(title: $0.title) == dateFormater.string(from: Date()).capitalized }) else { return nil }
         return try? getMonts()[index]
     }
 }

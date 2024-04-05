@@ -5,3 +5,26 @@
   Created by Roman Samborskyi on 05.01.2024.
   
 */
+"Січень" = "January";
+"Лютий" = "February";
+"Березень" = "March";
+"Квітень" = "April";
+"Травень" = "May";
+"Черевень" = "June";
+"Липень" = "July";
+"Серпень" = "August";
+"Вересень" = "September";
+"Жовтень" = "October";
+"Листопад" = "November";
+"Грудень" = "December";
+"Не вибрано" = "Not selected";
+
+
+"Пн" = "Mon";
+"Вт" = "Tue";
+"Ср" = "Wed";
+"Чт" = "Thu";
+"Пт" = "Fri";
+"Сб" = "Sat";
+"Нд" = "Sun";
+

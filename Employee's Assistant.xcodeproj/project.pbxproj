@@ -61,6 +61,7 @@
 		6B98ABEC2B6576D00097DF54 /* Icon4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98ABE92B6576D00097DF54 /* Icon4.png */; };
 		6B98ABED2B6576D00097DF54 /* Icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98ABEA2B6576D00097DF54 /* Icon5.png */; };
 		6B98ABEF2B6587C80097DF54 /* CustomPopOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B98ABEE2B6587C80097DF54 /* CustomPopOver.swift */; };
+		6B9C04A22BC064B6003B6888 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9427BF2B48837F00535A16 /* Localizable.strings */; };
 		6BA82F242B81F29D00CD3ED1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B388F522B768D410085973F /* WidgetKit.framework */; };
 		6BA82F252B81F29D00CD3ED1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B388F542B768D410085973F /* SwiftUI.framework */; };
 		6BA82F282B81F29D00CD3ED1 /* statistic_employes_assistantBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA82F272B81F29D00CD3ED1 /* statistic_employes_assistantBundle.swift */; };
@@ -590,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BA82F2E2B81F29E00CD3ED1 /* Assets.xcassets in Resources */,
+				6B9C04A22BC064B6003B6888 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
