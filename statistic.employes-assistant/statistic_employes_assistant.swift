@@ -212,7 +212,8 @@ func mediumCalendarWidget(_ entry: Provider.Entry, days: [String], columns: [Gri
         VStack {
             HStack {
                 ForEach(days, id: \.self) { day in
-                    Text(day)
+                    Text(LocalizedStringKey(day))
+                        .padding(.horizontal,Locale.preferredLanguages.first! == "uk-UA" ? 2.65 : 0)
                         .font(.system(size: 10.5, weight: .bold, design: .rounded))
                         .foregroundStyle(Color.red)
                 }

@@ -89,14 +89,21 @@ class MonthsViewModel: ObservableObject {
             return dateFormatter
         }()
 
-        if let monthTitle = selectedMonth.title, let currentMonth = dateFormatter.date(from: monthTitle) {
+        guard let currentMonth = dateFormatter.date(from: localizedMonthTitle(title: selectedMonth.title)) else { return Date() }
             let returnedMonth = calendar.date(bySetting: .day, value: 1, of: currentMonth)
-
             if let formattedMonth = returnedMonth {
                 return formattedMonth
             }
-        }
+        
         return Date()
+    }
+    
+    func localizedMonthTitle(title: String?) -> String {
+        guard let title = title else { return "no title" }
+        let indexOfSpace = title.firstIndex(of: " ") ?? title.endIndex
+        let clearTitle = title[..<indexOfSpace]
+        let yaer = title[indexOfSpace...]
+        return NSLocalizedString(String(clearTitle), comment: "") + String(yaer)
     }
     
     func fetchMonths() {
