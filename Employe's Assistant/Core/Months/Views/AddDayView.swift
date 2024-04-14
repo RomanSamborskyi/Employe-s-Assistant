@@ -117,11 +117,11 @@ struct AddDayView: View {
                     .background(Color.accentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
-        }.accentColor(vm.settings.newAccentColor)
+        }.accentColor(vm.newAccentColor)
             .preferredColorScheme(isDark ? .dark : .light)
             .overlay {
                 if showPopOver {
-                    CustomPopOver(vm: vm.settings, trigerPopOver: $showPopOver, text: NSLocalizedString(popOverTitle, comment: ""), iconName: "exclamationmark.square.fill")
+                    CustomPopOver(vm: SettingsViewModel(), trigerPopOver: $showPopOver, text: NSLocalizedString(popOverTitle, comment: ""), iconName: "exclamationmark.square.fill")
                         .transition(.move(edge: .top))
                 }
         }

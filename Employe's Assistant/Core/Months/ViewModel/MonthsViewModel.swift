@@ -7,19 +7,30 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 
 class MonthsViewModel: ObservableObject {
     
     static let instance: MonthsViewModel = MonthsViewModel()
     let coreData: CoreDataManager = CoreDataManager.instanse
-    let settings: SettingsViewModel = SettingsViewModel.instance
 
     @Published var months: [MonthEntity] = []
     @Published var currentDay: DayEntity? = nil
+    @Published var newAccentColor: Color = .accentColor
+    private let key: String = "color"
     
     init() {
         fetchMonths()
+        getColor()
+    }
+    
+    func getColor() {
+        guard let components = UserDefaults.standard.value(forKey: key) as? [CGFloat] else { return }
+        let color = Color(.sRGB, red: components[0], green: components[1], blue: components[2], opacity: components[3] )
+        DispatchQueue.main.async {
+            self.newAccentColor = color
+        }
     }
     
     func getCurrentDay(_ day: CalendarDates?, _ month: MonthEntity) {

@@ -81,7 +81,7 @@ struct CalendarView: View {
             Spacer()
         }.sheet(isPresented: $sheetIsPresented) {
             MoreDetailsOfDayView(day: vm.currentDay!)
-                .accentColor(vm.settings.newAccentColor)
+                .accentColor(vm.newAccentColor)
                 .preferredColorScheme(isDark ? .dark : .light)
         }
         .confirmationDialog("", isPresented: $showConfirmationDialog, actions: {

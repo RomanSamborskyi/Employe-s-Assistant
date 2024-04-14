@@ -57,7 +57,7 @@ struct AddMonthView: View {
                     .background(Color.accentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
-        }.accentColor(vm.settings.newAccentColor)
+        }.accentColor(vm.newAccentColor)
             .preferredColorScheme(isDark ? .dark : .light)
     }
 }
