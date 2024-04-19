@@ -127,6 +127,18 @@ class MonthsViewModel: ObservableObject {
         }
     }
     
+//    func fetchDays(from month: MonthEntity) -> [DayEntity] {
+//        let request = NSFetchRequest<DayEntity>(entityName: coreData.dayEntity)
+//        request.sortDescriptors = [NSSortDescriptor(keyPath: \DayEntity.date, ascending: false)]
+//        request.predicate = NSPredicate(format: "month == %@", month)
+//        do {
+//           return try coreData.context.fetch(request)
+//        } catch let error {
+//            print("Error of fetching days: \(error.localizedDescription)")
+//            return []
+//        }
+//    }
+    
     func countHours(for month: MonthEntity) -> Double? {
         guard let daysArray = month.day?.allObjects as? [DayEntity] else { return nil }
         var hoursArray: [Double] = []
