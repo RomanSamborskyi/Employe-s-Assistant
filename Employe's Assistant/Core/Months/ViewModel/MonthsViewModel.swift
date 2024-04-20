@@ -13,8 +13,7 @@ class MonthsViewModel: ObservableObject {
     
     static let instance: MonthsViewModel = MonthsViewModel()
     let dataManager: DataManager = DataManager.instanse
-
-    @Published var months: [Month] = [] 
+    @Published var months: [Month] = []
     @Published var currentDay: Day? = nil
     @Published var newAccentColor: Color = .accentColor
     private let key: String = "color"
@@ -25,7 +24,7 @@ class MonthsViewModel: ObservableObject {
     }
     
     func getMonts() {
-        if let moths =  dataManager.getMonths() {
+        if let moths = dataManager.getMonths() {
             DispatchQueue.main.async {
                 self.months = moths
             }
@@ -225,7 +224,6 @@ class MonthsViewModel: ObservableObject {
     
     func deleteDay(month: inout Month, day: Day) {
         guard let index = month.days?.firstIndex(of: day) else { return }
-        
         dataManager.delete(day: day, month: month)
         month.days?.remove(at: index)
         getMonts()
