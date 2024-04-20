@@ -12,7 +12,7 @@ struct DayDetailView: View {
     @ObservedObject var vm: MonthsViewModel
     @State private var addNewDay: Bool = false
     @AppStorage("selectedView") var selectedView: SelectView = .list
-    let month: Month
+    @State var month: Month
     
     var body: some View {
         VStack {

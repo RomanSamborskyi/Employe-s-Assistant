@@ -31,13 +31,11 @@ class StatisticViewModel: ObservableObject {
     }()
     
     func getMonths() {
-    
-            if let months = self.dataManager.getMonths() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) {
-                    self.months = months
-                }
+        if let months = self.dataManager.getMonths() {
+            DispatchQueue.main.async {
+                self.months = months
             }
-        
+        }
     }
     
     func localizedMonthTitle(title: String?) -> String {

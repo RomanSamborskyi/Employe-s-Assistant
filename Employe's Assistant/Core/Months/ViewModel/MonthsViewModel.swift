@@ -16,7 +16,7 @@ class MonthsViewModel: ObservableObject {
     let coreData: CoreDataManager = CoreDataManager.instanse
     let dataManager: DataManager = DataManager.instanse
 
-    @Published var months: [Month] = []
+    @Published var months: [Month] = [] 
     @Published var currentDay: Day? = nil
     @Published var newAccentColor: Color = .accentColor
     private let key: String = "color"
@@ -58,7 +58,7 @@ class MonthsViewModel: ObservableObject {
     }
     
     func checkDays(_ day: CalendarDates?, _ month: Month) -> Bool {
-        let array = month.days
+        let array = months.first(where: { $0.title == month.title })?.days
         var tempBool: Bool = false
         let dateFormatter: DateFormatter = {
             let dateFormatter = DateFormatter()
