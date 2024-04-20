@@ -12,20 +12,33 @@ import CoreData
 class StatisticViewModel: ObservableObject {
     
     let monthViewModel: MonthsViewModel = MonthsViewModel.instance
-    @Published var currentMonth: Month? = nil
+    let dataManager: DataManager = DataManager.instanse
+    @Published var months: [Month] = []
+    @Published var currentMonth: Month?
     @Published var selectedIndex: Int = 0
     
+ 
     init() {
+        getMonths()
         getCurrentMonth()
         trimCalculation()
     }
-    
     
     var dateFormater: DateFormatter = {
         var dateFormater: DateFormatter = DateFormatter()
         dateFormater.dateFormat = "LLLL yyyy"
         return dateFormater
     }()
+    
+    func getMonths() {
+    
+            if let months = self.dataManager.getMonths() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) {
+                    self.months = months
+                }
+            }
+        
+    }
     
     func localizedMonthTitle(title: String?) -> String {
         guard let title = title else { return "" }
@@ -36,21 +49,20 @@ class StatisticViewModel: ObservableObject {
     }
     
     func getCurrentMonth() {
-        guard let index = monthViewModel.months.firstIndex(where: { localizedMonthTitle(title: $0.title) == dateFormater.string(from: Date()).capitalized }) else {
-            return
-        }
-        let month = monthViewModel.months[index]
-        selectedIndex = index
-        currentMonth = month
+        guard let index = self.months.firstIndex(where: { self.localizedMonthTitle(title: $0.title) == self.dateFormater.string(from: Date()).capitalized }) else {
+                return
+            }
+            let month = self.months[index]
+            self.selectedIndex = index
+            self.currentMonth = month
     }
     
     func trimCalculation() {
         if var month = currentMonth {
-            let hours = monthViewModel.countHours(for: month) ?? 0
+            let hours = month.totalHours ?? 0
             let scorePercent = CGFloat(hours) / CGFloat(month.monthTarget ?? 0) * CGFloat(100)
             let currentTrim: CGFloat = CGFloat(scorePercent) / CGFloat(1.0) / CGFloat(100)
             month.trim = currentTrim
-            monthViewModel.save()
         }
     }
     
@@ -66,7 +78,7 @@ class StatisticViewModel: ObservableObject {
         switch selectedTab {
         case .hours:
             var hours: [Double] = []
-            for month in monthViewModel.months {
+            for month in months {
                 hours.append(month.totalHours ?? 0)
             }
             let maxValue = hours.max(by: { $0 < $1 }) ?? 0
@@ -74,7 +86,7 @@ class StatisticViewModel: ObservableObject {
             return CGFloat(month.totalHours ?? 0) / maxHeigh * 100
         case .workingDays:
             var days: [Int] = []
-            for month in monthViewModel.months {
+            for month in months {
                 days.append(month.days?.count ?? 0)
             }
             let maxValue = days.max(by: { $0 < $1 }) ?? 0
@@ -82,7 +94,7 @@ class StatisticViewModel: ObservableObject {
             return CGFloat(month.days?.count ?? 0) / maxHeigh * 100
         case .salary:
             var salary: [Double] = []
-            for month in monthViewModel.months {
+            for month in months {
                 salary.append(month.totalSalary ?? 0)
             }
             let maxValue = salary.max(by: { $0 < $1 }) ?? 0

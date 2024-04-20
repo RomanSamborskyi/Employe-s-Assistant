@@ -14,7 +14,7 @@ class DataManager {
     
     
     
-    func getMonths() async -> [Month]? {
+    func getMonths() -> [Month]? {
         var months: [Month] = []
         
         for month in fetchMonths() {

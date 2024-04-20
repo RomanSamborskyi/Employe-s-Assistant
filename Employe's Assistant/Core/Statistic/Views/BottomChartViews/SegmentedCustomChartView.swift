@@ -23,7 +23,7 @@ struct SegmentedCustomChart: View {
         }.frame(height: 130)
             .onAppear {
                 withAnimation(Animation.bouncy) {
-                    self.array = vm.monthViewModel.months
+                    self.array = vm.months
                 }
             }
     }

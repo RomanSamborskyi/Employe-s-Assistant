@@ -27,11 +27,9 @@ class MonthsViewModel: ObservableObject {
     }
     
     func getMonts() {
-        Task {
-            if let moths = await dataManager.getMonths() {
-                await MainActor.run {
-                    self.months = moths
-                }
+        if let moths =  dataManager.getMonths() {
+            DispatchQueue.main.async {
+                self.months = moths
             }
         }
     }
@@ -266,12 +264,13 @@ class MonthsViewModel: ObservableObject {
     }
     
     func deleteDay(month: Month, day: Day) {
-        guard let daysArray = month.days,
+        guard var daysArray = month.days,
               let index = daysArray.firstIndex(of: day),
               let coreDataMonth = dataManager.fetchMonths().first(where: { $0.title ?? "" == month.title}),
-              var coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity] else { return }
+              let coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity] else { return }
         let item = daysArray[index]
         guard let coreDataItem = coreDataDaysarray.first(where: { $0.date == item.date }) else { return }
+        daysArray.remove(at: index)
         coreData.context.delete(coreDataItem)
         save()
     }
@@ -279,12 +278,13 @@ class MonthsViewModel: ObservableObject {
     func deleteMonth(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
         guard let month = dataManager.fetchMonths().first(where: { $0.title ?? "" == months[index].title}) else { return }
-        self.months.remove(at: index)
+        months.remove(at: index)
         coreData.context.delete(month)
         save()
     }
     
     func save() {
         coreData.save()
+        getMonts()
     }
 }
