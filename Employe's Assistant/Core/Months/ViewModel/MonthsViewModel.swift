@@ -6,14 +6,12 @@
 //
 
 import UIKit
-import CoreData
 import SwiftUI
 
 
 class MonthsViewModel: ObservableObject {
     
     static let instance: MonthsViewModel = MonthsViewModel()
-    let coreData: CoreDataManager = CoreDataManager.instanse
     let dataManager: DataManager = DataManager.instanse
 
     @Published var months: [Month] = [] 
@@ -126,28 +124,6 @@ class MonthsViewModel: ObservableObject {
         return NSLocalizedString(String(clearTitle), comment: "") + String(yaer)
     }
     
-//    func fetchMonths() {
-//        let request = NSFetchRequest<MonthEntity>(entityName: coreData.monthsEntety)
-//        request.sortDescriptors = [NSSortDescriptor(keyPath: \MonthEntity.date, ascending: false)]
-//        do {
-//            try months = coreData.context.fetch(request)
-//        } catch let error {
-//            print("Error of fetching months: \(error.localizedDescription)")
-//        }
-//    }
-    
-//    func fetchDays(from month: MonthEntity) -> [DayEntity] {
-//        let request = NSFetchRequest<DayEntity>(entityName: coreData.dayEntity)
-//        request.sortDescriptors = [NSSortDescriptor(keyPath: \DayEntity.date, ascending: false)]
-//        request.predicate = NSPredicate(format: "month == %@", month)
-//        do {
-//           return try coreData.context.fetch(request)
-//        } catch let error {
-//            print("Error of fetching days: \(error.localizedDescription)")
-//            return []
-//        }
-//    }
-    
     func countHours(for month: Month) -> Double? {
         guard let daysArray = month.days else { return nil }
         var hoursArray: [Double] = []
@@ -196,7 +172,7 @@ class MonthsViewModel: ObservableObject {
         }
         return "\(hour):\(convertInToMonute)"
     }
-    
+  
     func addNewMonth(title: String, monthTarget: Int32) {
         let dateFormater: DateFormatter = {
             let dateFormater: DateFormatter = DateFormatter()
@@ -204,21 +180,18 @@ class MonthsViewModel: ObservableObject {
             dateFormater.dateFormat = " YYYY"
             return dateFormater
         }()
-        let coreDataMonth = MonthEntity(context: coreData.context)
+       
         var newMonth = Month()
         newMonth.title = title + dateFormater.string(for: Date())!
-        coreDataMonth.title = title + dateFormater.string(for: Date())!
         newMonth.monthTarget = monthTarget
-        coreDataMonth.monthTarget = monthTarget
         newMonth.date = Date()
-        coreDataMonth.date = Date()
         self.months.append(newMonth)
-        save()
+        dataManager.addToCoreDataMonth(month: newMonth)
+        getMonts()
     }
     
+    
     func addHours(month: inout Month, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
-        let coreDataDay = DayEntity(context: coreData.context)
-        guard let coreDataMonth = dataManager.fetchMonths().first(where: { $0.title ?? "" == month.title}) else { return }
         var newDay = Day()
         
         let convertToMinutes = ((Double(endHours) * 60 + Double(endMinutes)) - (Double(startHours) * 60 + Double(startMinutes)) - Double(pauseTime)) / 60
@@ -231,10 +204,8 @@ class MonthsViewModel: ObservableObject {
         let minuteToString = String(convertInToMinutes)
         if minuteToString.count == 3 {
             newDay.minutes = Int32(convertInToMinutes / 10)
-            coreDataDay.minutes = Int32(convertInToMinutes / 10)
         } else if minuteToString.count > 3 {
             newDay.minutes = Int32(convertInToMinutes / 100)
-            coreDataDay.minutes = Int32(convertInToMinutes / 100)
         }
         
         newDay.month = month
@@ -248,43 +219,23 @@ class MonthsViewModel: ObservableObject {
         month.days?.append(newDay)
         month.totalHours = countHours(for: month) ?? 0
         month.totalSalary = countSalary(for: month) ?? 0
-        
-        coreDataDay.month = coreDataMonth
-        coreDataDay.date = date
-        coreDataDay.hours = Int32(hour) ?? 0
-        coreDataDay.startHours = startHours
-        coreDataDay.startMinutes = startMinutes
-        coreDataDay.endHours = endHours
-        coreDataDay.endMinutes = endMinutes
-        coreDataDay.pauseTime = pauseTime
-        coreDataMonth.totalHours = countHours(for: month) ?? 0
-        coreDataMonth.totalSalary = countSalary(for: month) ?? 0
-        var coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity]
-        coreDataDaysarray?.append(coreDataDay)
-        save()
+        dataManager.addHoursToCoreData(month: month, day: newDay, hour: String(hour), minutes: minuteToString, convertInToMinutes: convertInToMinutes)
+        getMonts()
     }
     
     func deleteDay(month: inout Month, day: Day) {
-        guard let index = month.days?.firstIndex(of: day),
-              let coreDataMonth = dataManager.fetchMonths().first(where: { $0.title ?? "" == month.title}),
-              let coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity] else { return }
-        let item = month.days?[index]
-        guard let coreDataItem = coreDataDaysarray.first(where: { $0.date == item?.date }) else { return }
+        guard let index = month.days?.firstIndex(of: day) else { return }
+        
+        dataManager.delete(day: day, month: month)
         month.days?.remove(at: index)
-        coreData.context.delete(coreDataItem)
-        save()
+        getMonts()
     }
     
     func deleteMonth(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
-        guard let month = dataManager.fetchMonths().first(where: { $0.title ?? "" == months[index].title}) else { return }
+        let month = months[index]
         months.remove(at: index)
-        coreData.context.delete(month)
-        save()
-    }
-    
-    func save() {
-        coreData.save()
+        dataManager.delete(month: month)
         getMonts()
     }
 }

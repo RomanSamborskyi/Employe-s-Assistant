@@ -41,6 +41,38 @@ class DataManager {
         }
     }
     
+    func addToCoreDataMonth(month: Month) {
+        let coreDataMonth = MonthEntity(context: coreData.context)
+        coreDataMonth.title = month.title ?? ""
+        coreDataMonth.monthTarget = month.monthTarget ?? 0
+        coreDataMonth.date = month.date ?? Date()
+        save()
+    }
+    
+    func addHoursToCoreData(month: Month, day: Day, hour: String, minutes: String, convertInToMinutes: Int) {
+        let coreDataDay = DayEntity(context: coreData.context)
+        guard let coreDataMonth = fetchMonths().first(where: { $0.title ?? "" == month.title}) else { return }
+        
+        if minutes.count == 3 {
+            coreDataDay.minutes = Int32(convertInToMinutes / 10)
+        } else if minutes.count > 3 {
+            coreDataDay.minutes = Int32(convertInToMinutes / 100)
+        }
+        coreDataDay.month = coreDataMonth
+        coreDataDay.date = day.date
+        coreDataDay.hours = Int32(hour) ?? 0
+        coreDataDay.startHours = day.startHours ?? 0
+        coreDataDay.startMinutes = day.startMinutes ?? 0
+        coreDataDay.endHours = day.endHours ?? 0
+        coreDataDay.endMinutes = day.endMinutes ?? 0
+        coreDataDay.pauseTime = day.pauseTime ?? 0
+        coreDataMonth.totalHours = month.totalHours ?? 0
+        coreDataMonth.totalSalary = month.totalSalary ?? 0
+        var coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity]
+        coreDataDaysarray?.append(coreDataDay)
+        save()
+    }
+    
     func countHoursTitle(for month: MonthEntity, _ daysArray: [DayEntity]) -> String {
         var hoursArray: [Double] = []
         for day in daysArray {
@@ -59,5 +91,24 @@ class DataManager {
             convertInToMonute = (60 * (Int(minute) ?? 0) / 100)
         }
         return "\(hour):\(convertInToMonute)"
+    }
+    
+    func delete(day: Day, month: Month) {
+        guard let coreDataMonth = fetchMonths().first(where: { $0.title ?? "" == month.title}),
+              let coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity],
+              let coreDataItem = coreDataDaysarray.first(where: { $0.date == day.date })
+        else { return }
+        coreData.context.delete(coreDataItem)
+        save()
+    }
+    
+    func delete(month: Month) {
+        guard let month = fetchMonths().first(where: { $0.title ?? "" == month.title}) else { return }
+        coreData.context.delete(month)
+        save()
+    }
+    
+    func save() {
+        coreData.save()
     }
 }
