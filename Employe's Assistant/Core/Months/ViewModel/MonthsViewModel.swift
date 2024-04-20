@@ -216,9 +216,8 @@ class MonthsViewModel: ObservableObject {
         save()
     }
     
-    func addHours(month: Month, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
+    func addHours(month: inout Month, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
         let coreDataDay = DayEntity(context: coreData.context)
-        guard var monthArray = months.first(where: { $0.id == month.id }) else { return }
         guard let coreDataMonth = dataManager.fetchMonths().first(where: { $0.title ?? "" == month.title}) else { return }
         var newDay = Day()
         
@@ -238,7 +237,7 @@ class MonthsViewModel: ObservableObject {
             coreDataDay.minutes = Int32(convertInToMinutes / 100)
         }
         
-        newDay.month = monthArray
+        newDay.month = month
         newDay.date = date
         newDay.hours = Int32(hour) ?? 0
         newDay.startHours = startHours
@@ -246,9 +245,9 @@ class MonthsViewModel: ObservableObject {
         newDay.endHours = endHours
         newDay.endMinutes = endMinutes
         newDay.pauseTime = pauseTime
-        monthArray.days?.append(newDay)
-        monthArray.totalHours = countHours(for: monthArray) ?? 0
-        monthArray.totalSalary = countSalary(for: monthArray) ?? 0
+        month.days?.append(newDay)
+        month.totalHours = countHours(for: month) ?? 0
+        month.totalSalary = countSalary(for: month) ?? 0
         
         coreDataDay.month = coreDataMonth
         coreDataDay.date = date
@@ -258,19 +257,20 @@ class MonthsViewModel: ObservableObject {
         coreDataDay.endHours = endHours
         coreDataDay.endMinutes = endMinutes
         coreDataDay.pauseTime = pauseTime
+        coreDataMonth.totalHours = countHours(for: month) ?? 0
+        coreDataMonth.totalSalary = countSalary(for: month) ?? 0
         var coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity]
         coreDataDaysarray?.append(coreDataDay)
         save()
     }
     
-    func deleteDay(month: Month, day: Day) {
-        guard var daysArray = month.days,
-              let index = daysArray.firstIndex(of: day),
+    func deleteDay(month: inout Month, day: Day) {
+        guard let index = month.days?.firstIndex(of: day),
               let coreDataMonth = dataManager.fetchMonths().first(where: { $0.title ?? "" == month.title}),
               let coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity] else { return }
-        let item = daysArray[index]
-        guard let coreDataItem = coreDataDaysarray.first(where: { $0.date == item.date }) else { return }
-        daysArray.remove(at: index)
+        let item = month.days?[index]
+        guard let coreDataItem = coreDataDaysarray.first(where: { $0.date == item?.date }) else { return }
+        month.days?.remove(at: index)
         coreData.context.delete(coreDataItem)
         save()
     }

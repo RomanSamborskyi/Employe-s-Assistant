@@ -35,7 +35,7 @@ struct ListView: View {
                           }
                       }).contextMenu {
                           Button(role: .destructive, action: {
-                              vm.deleteDay(month: month, day: day)
+                              vm.deleteDay(month: &month, day: day)
                               WidgetCenter.shared.reloadAllTimelines()
                           },label: {
                               HStack {

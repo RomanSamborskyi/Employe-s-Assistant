@@ -7,16 +7,15 @@
 
 import Foundation
 import CoreData
-
+import Combine
 
 class StatisticViewModel: ObservableObject {
     
     let monthViewModel: MonthsViewModel = MonthsViewModel.instance
-    let dataManager: DataManager = DataManager.instanse
     @Published var months: [Month] = []
     @Published var currentMonth: Month?
     @Published var selectedIndex: Int = 0
-    
+    var cancellable = Set<AnyCancellable>()
  
     init() {
         getMonths()
@@ -31,11 +30,12 @@ class StatisticViewModel: ObservableObject {
     }()
     
     func getMonths() {
-        if let months = self.dataManager.getMonths() {
-            DispatchQueue.main.async {
-                self.months = months
+        monthViewModel.$months
+            .subscribe(on: DispatchQueue.main)
+            .sink { [weak self] array in
+                self?.months = array
             }
-        }
+            .store(in: &cancellable)
     }
     
     func localizedMonthTitle(title: String?) -> String {

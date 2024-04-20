@@ -32,7 +32,8 @@ struct StatisticMainView: View {
                     Section {
                         StatisticByMonthsChartView(vm: vm, chartType: $chartType)
                     }
-                }.navigationTitle("Statistic")
+                }
+                .navigationTitle("Statistic")
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             Picker("Selected month", selection: $vm.selectedIndex) {
