@@ -11,12 +11,12 @@ struct SegmentedCustomChart: View {
     
     @ObservedObject var vm: StatisticViewModel
     @Binding var selectedTab: StatisticType
-    @State private var array: [MonthEntity] = []
+    @State private var array: [Month] = []
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(alignment: .bottom) {
-                ForEach(array.reversed(), id: \.self) { month in
+                ForEach(array.reversed(), id: \.id) { month in
                     SegmentUniversalView(vm: vm, selectedTab: $selectedTab, month: month)
                 }
             }
@@ -36,7 +36,7 @@ struct SegmentUniversalView: View {
     @State private var date: Date = Date()
     @State private var showDetail: Bool = false
     @Binding var selectedTab: StatisticType
-    let month: MonthEntity
+    let month: Month
     
     var dateFormater: DateFormatter = {
         var formater: DateFormatter = DateFormatter()
@@ -47,11 +47,11 @@ struct SegmentUniversalView: View {
     var detailTitle: String {
         switch selectedTab {
         case .hours:
-            return "\(month.totalHours)"
+            return "\(month.totalHours ?? 0)"
         case .workingDays:
-            return "\(month.day?.count ?? 0)"
+            return "\(month.days?.count ?? 0)"
         case .salary:
-            return "\(month.totalSalary)"
+            return "\(month.totalSalary ?? 0)"
         }
     }
     

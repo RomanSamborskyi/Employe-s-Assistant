@@ -12,7 +12,7 @@ import WidgetKit
 struct ListView: View {
     
     @ObservedObject var vm: MonthsViewModel
-    let month: MonthEntity
+    let month: Month
     
     var dateFormater: DateFormatter = {
        let dateFormater = DateFormatter()
@@ -22,7 +22,7 @@ struct ListView: View {
     
     var body: some View {
         List {
-            if let array = month.day?.allObjects as? [DayEntity] {
+            if let array = month.days {
                 if !array.isEmpty {
                     Section {
                         ProgresBarView(vm: vm, month: month)
@@ -32,7 +32,7 @@ struct ListView: View {
                           HStack {
                           Text(dateFormater.string(from: day.date ?? Date()))
                           Spacer()
-                          Text("\(day.hours):\(day.minutes)")
+                          Text("\(day.hours ?? 0):\(day.minutes ?? 0)")
                           }
                       }).contextMenu {
                           Button(role: .destructive, action: {

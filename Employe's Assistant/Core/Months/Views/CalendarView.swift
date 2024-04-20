@@ -16,7 +16,7 @@ struct CalendarView: View {
     @State private var showConfirmationDialog: Bool = false
     @AppStorage("isDark") var isDark: Bool = false
     @ObservedObject var vm: MonthsViewModel
-    let month: MonthEntity
+    let month: Month
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -97,8 +97,4 @@ struct CalendarView: View {
             })
         })
     }
-}
-
-#Preview {
-    CalendarView(vm: MonthsViewModel(), month: MonthEntity(context: MonthsViewModel().coreData.context))
 }

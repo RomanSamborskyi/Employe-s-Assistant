@@ -13,7 +13,7 @@ struct MonthDetailView: View {
     
     @State private var count: Int = 0
     @ObservedObject var vm: StatisticViewModel
-    let month: MonthEntity
+    let month: Month
     
     var body: some View {
         HStack {
@@ -22,12 +22,12 @@ struct MonthDetailView: View {
                     .stroke(Color.gray.opacity(0.5),style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .frame(width: 95)
                 Circle()
-                    .trim(from: 0.0 , to: CGFloat(month.trim))
-                    .stroke(Int32(month.totalHours) >= month.monthTarget ? Color.green : Color.accentColor,style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                    .trim(from: 0.0 , to: CGFloat(month.trim ?? 0))
+                    .stroke(Int32(month.totalHours ?? 0) >= month.monthTarget ?? 0 ? Color.green : Color.accentColor,style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .frame(width: 95)
                     .rotationEffect(Angle(degrees: 270.0))
                     .animation(.linear, value: 0.2)
-                if Int32(month.totalHours) >= month.monthTarget {
+                if Int32(month.totalHours ?? 0) >= month.monthTarget ?? 0 {
                         Circle()
                         .stroke(Color.green.gradient.opacity(0.3), style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                             .frame(width: 105)
@@ -72,27 +72,23 @@ struct MonthDetailView: View {
                         .font(.caption)
                         .foregroundColor(vm.monthViewModel.newAccentColor)
                     Spacer(minLength: 25)
-                    Text("\(month.monthTarget)")
+                    Text("\(month.monthTarget ?? 0)")
                         .foregroundStyle(vm.monthViewModel.newAccentColor)
                 }
             }.onAppear {
                 withAnimation(Animation.spring) {
-                    if let array = month.day?.allObjects as? [DayEntity] {
+                    if let array = month.days {
                         self.count = array.count
                     }
                 }
            }
             .onChange(of: vm.currentMonth, perform: { month in
                 withAnimation(Animation.spring) {
-                    if let array = month?.day?.allObjects as? [DayEntity] {
+                    if let array = month?.days {
                         self.count = array.count
                     }
                 }
             })
         }
     }
-}
-
-#Preview {
-    MonthDetailView(vm: StatisticViewModel(), month: MonthEntity(context: CoreDataManager().context))
 }

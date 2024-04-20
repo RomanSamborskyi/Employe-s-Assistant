@@ -10,7 +10,7 @@ import SwiftUI
 struct ProgresBarView: View {
     
     @ObservedObject var vm: MonthsViewModel
-    let month: MonthEntity
+    let month: Month
     @State private var width: CGFloat = 0
    
     var body: some View {
@@ -21,7 +21,7 @@ struct ProgresBarView: View {
                     .foregroundStyle(Color.gray)
                 RoundedRectangle(cornerRadius: 25)
                     .frame(width: width, height: 20)
-                    .foregroundStyle(Int32(vm.countHours(for: month) ?? 0) >= month.monthTarget ? Color.green.gradient : Color.accentColor.gradient)
+                    .foregroundStyle(Int32(vm.countHours(for: month) ?? 0) >= month.monthTarget ?? 0 ? Color.green.gradient : Color.accentColor.gradient)
             }
             Text(vm.countHoursTitle(for: month) ?? "")
                 .foregroundStyle(Color.primary)
@@ -31,7 +31,7 @@ struct ProgresBarView: View {
             Text("/")
                 .foregroundStyle(Color.primary)
                 .font(.system(size: 25, weight: .bold, design: .rounded))
-            Text("\(month.monthTarget)")
+            Text("\(month.monthTarget ?? 0)")
                 .foregroundStyle(Color.gray)
                 .font(.system(size: 15, weight: .medium, design: .rounded))
         }
@@ -41,8 +41,4 @@ struct ProgresBarView: View {
                 }
             }
     }
-}
-
-#Preview {
-    ProgresBarView(vm: MonthsViewModel(), month: MonthEntity(context: CoreDataManager.instanse.context))
 }

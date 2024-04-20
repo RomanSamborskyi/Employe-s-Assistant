@@ -20,7 +20,7 @@ struct AddDayView: View {
     @State private var date: Date = Date()
     @State private var showPopOver: Bool = false
     @Binding var dissmiss: Bool
-    let month: MonthEntity
+    let month: Month
     var popOverTitle: String {
         var title: String = ""
         if startHours == .zero && endHours == .zero && date > Date() {
@@ -126,8 +126,4 @@ struct AddDayView: View {
                 }
         }
     }
-}
-
-#Preview {
-    AddDayView(vm: MonthsViewModel(), dissmiss: .constant(false), month: MonthEntity(context: CoreDataManager().context))
 }

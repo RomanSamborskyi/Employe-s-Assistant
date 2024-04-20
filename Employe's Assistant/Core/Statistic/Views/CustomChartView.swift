@@ -10,8 +10,8 @@ import SwiftUI
 struct CustomChartView: View {
     
     @ObservedObject var vm: StatisticViewModel
-    @State var array: [DayEntity] = []
-    let month: MonthEntity
+    @State var array: [Day] = []
+    let month: Month
     
     var body: some View {
         VStack {
@@ -26,7 +26,7 @@ struct CustomChartView: View {
                 }.frame(height: 130)
         }
         .onAppear {
-            if let array = month.day?.allObjects as? [DayEntity] {
+            if let array = month.days {
                 withAnimation(Animation.bouncy) {
                     self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
                 }
@@ -35,23 +35,20 @@ struct CustomChartView: View {
         .onChange(of: vm.selectedIndex) { index in
             withAnimation(Animation.bouncy) {
                 vm.currentMonth = vm.monthViewModel.months[index]
-                guard let array = vm.currentMonth?.day?.allObjects as? [DayEntity] else { return }
+                guard let array = vm.currentMonth?.days else { return }
                 self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
             }
         }
     }
 }
 
-#Preview {
-    CustomChartView(vm: StatisticViewModel(), month: MonthEntity(context: CoreDataManager.instanse.context))
-}
 
 struct SegmentView: View {
     
     @ObservedObject var vm: StatisticViewModel
     @State private var height: CGFloat = 0
     @State private var showHours: Bool = false
-    let day: DayEntity
+    let day: Day
     var dateFormater: DateFormatter = {
         var formater: DateFormatter = DateFormatter()
         formater.dateStyle = .medium
@@ -61,7 +58,7 @@ struct SegmentView: View {
     var body: some View {
         VStack {
             if showHours {
-                Text("\(day.hours):\(day.minutes)")
+                Text("\(day.hours ?? 0):\(day.minutes ?? 0)")
                     .padding(5)
                     .font(.caption)
                     .animation(.bouncy, value: showHours)
