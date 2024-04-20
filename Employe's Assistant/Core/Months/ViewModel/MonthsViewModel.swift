@@ -234,8 +234,10 @@ class MonthsViewModel: ObservableObject {
         let minuteToString = String(convertInToMinutes)
         if minuteToString.count == 3 {
             newDay.minutes = Int32(convertInToMinutes / 10)
+            coreDataDay.minutes = Int32(convertInToMinutes / 10)
         } else if minuteToString.count > 3 {
             newDay.minutes = Int32(convertInToMinutes / 100)
+            coreDataDay.minutes = Int32(convertInToMinutes / 100)
         }
         
         newDay.month = monthArray
@@ -250,7 +252,7 @@ class MonthsViewModel: ObservableObject {
         monthArray.totalHours = countHours(for: monthArray) ?? 0
         monthArray.totalSalary = countSalary(for: monthArray) ?? 0
         
-
+        coreDataDay.month = coreDataMonth
         coreDataDay.date = date
         coreDataDay.hours = Int32(hour) ?? 0
         coreDataDay.startHours = startHours
@@ -264,11 +266,14 @@ class MonthsViewModel: ObservableObject {
     }
     
     func deleteDay(month: Month, day: Day) {
-        guard let daysArray = month.days else { return }
-        guard let index = daysArray.firstIndex(of: day) else { return }
-        let item = daysArray[index] 
-//        coreData.context.delete(item)
-//        save()
+        guard let daysArray = month.days,
+              let index = daysArray.firstIndex(of: day),
+              let coreDataMonth = dataManager.fetchMonths().first(where: { $0.title ?? "" == month.title}),
+              var coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity] else { return }
+        let item = daysArray[index]
+        guard let coreDataItem = coreDataDaysarray.first(where: { $0.date == item.date }) else { return }
+        coreData.context.delete(coreDataItem)
+        save()
     }
     
     func deleteMonth(indexSet: IndexSet) {

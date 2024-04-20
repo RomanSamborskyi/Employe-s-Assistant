@@ -52,6 +52,7 @@ struct StatisticMainView: View {
                             }
                         }
                     }
+                    .onAppear { vm.getCurrentMonth() }
             } else {
                 VStack {
                     Image(systemName: "chart.xyaxis.line")
@@ -62,7 +63,7 @@ struct StatisticMainView: View {
                         .padding()
                         .font(.system(size: 25, weight: .bold, design: .rounded))
                 }.navigationTitle("Statistic")
-                    
+                    .onAppear { vm.getCurrentMonth() }
             }
         }
     }

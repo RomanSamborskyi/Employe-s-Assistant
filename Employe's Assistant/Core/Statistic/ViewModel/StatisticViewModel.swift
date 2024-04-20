@@ -50,7 +50,7 @@ class StatisticViewModel: ObservableObject {
             let scorePercent = CGFloat(hours) / CGFloat(month.monthTarget ?? 0) * CGFloat(100)
             let currentTrim: CGFloat = CGFloat(scorePercent) / CGFloat(1.0) / CGFloat(100)
             month.trim = currentTrim
-//            monthViewModel.save()
+            monthViewModel.save()
         }
     }
     

@@ -20,7 +20,6 @@ class DataManager {
         for month in fetchMonths() {
             var dayArray: [Day]? = []
             guard let days = month.day?.allObjects as? [DayEntity] else { return nil }
-            print(days)
             for day in days {
               let convday = Day(date: day.date ?? Date(), endHours: day.endHours, endMinutes: day.endMinutes, hours: day.hours, minutes: day.minutes, pauseTime: day.pauseTime, startHours: day.startHours, startMinutes: day.startMinutes)
                 dayArray?.append(convday)
