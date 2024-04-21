@@ -13,7 +13,7 @@ class StatisticViewModel: ObservableObject {
     
     let monthViewModel: MonthsViewModel = MonthsViewModel.instance
     @Published var months: [Month] = []
-    @Published var currentMonth: Month?
+    @Published var currentMonth: Month? = nil
     @Published var selectedIndex: Int = 0
     var cancellable = Set<AnyCancellable>()
  
@@ -31,7 +31,6 @@ class StatisticViewModel: ObservableObject {
     
     func getMonths() {
         monthViewModel.$months
-            .subscribe(on: DispatchQueue.main)
             .sink { [weak self] array in
                 self?.months = array
             }

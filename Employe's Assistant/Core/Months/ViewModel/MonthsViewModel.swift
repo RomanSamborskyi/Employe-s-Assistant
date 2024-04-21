@@ -126,7 +126,7 @@ class MonthsViewModel: ObservableObject {
     }
     
     func countHours(for month: Month) -> Double? {
-        guard let daysArray = month.days else { return nil }
+        guard let daysArray = months.first(where: { $0.title == month.title })?.days else { return nil }
         var hoursArray: [Double] = []
         for day in daysArray {
             let minutes = Double((day.hours ?? 0) * 60 ) + Double(day.minutes ?? 0)
@@ -154,7 +154,7 @@ class MonthsViewModel: ObservableObject {
      }
     
     func countHoursTitle(for month: Month) -> String? {
-        guard let daysArray = month.days else { return nil }
+        guard let daysArray = months.first(where: { $0.title == month.title })?.days else { return nil }
         var hoursArray: [Double] = []
         for day in daysArray {
             let minutes = Double((day.hours ?? 0) * 60 ) + Double(day.minutes ?? 0)

@@ -12,7 +12,7 @@ import SwiftUI
 struct MonthDetailView: View {
     
     @State private var count: Int = 0
-    @ObservedObject var vm: StatisticViewModel
+    @StateObject var vm: StatisticViewModel
     let month: Month
     
     var body: some View {

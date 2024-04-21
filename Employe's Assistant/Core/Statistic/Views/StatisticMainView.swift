@@ -14,19 +14,19 @@ struct StatisticMainView: View {
     
     var body: some View {
         NavigationView {
-            if !vm.monthViewModel.months.isEmpty {
+            if !vm.months.isEmpty {
                 List {
                     Section {
-                        MonthDetailView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                        MonthDetailView(vm: vm, month: vm.currentMonth ?? vm.months.first!)
                     }
                     Section {
                         switch chartType {
                         case .barMark:
-                            ChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                            ChartView(vm: vm, month: vm.currentMonth ?? vm.months.first!)
                         case .lineMark:
-                            LinearMarkChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                            LinearMarkChartView(vm: vm, month: vm.currentMonth ?? vm.months.first!)
                         case .custom:
-                            CustomChartView(vm: vm, month: vm.currentMonth ?? vm.monthViewModel.months.first!)
+                            CustomChartView(vm: vm, month: vm.currentMonth ?? vm.months.first!)
                         }
                     }
                     Section {
@@ -37,8 +37,8 @@ struct StatisticMainView: View {
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             Picker("Selected month", selection: $vm.selectedIndex) {
-                                ForEach(vm.monthViewModel.months.indices, id: \.self) { index in
-                                    Text(vm.monthViewModel.months[index].title ?? "")
+                                ForEach(vm.months.indices, id: \.self) { index in
+                                    Text(vm.months[index].title ?? "")
                                 }
                             }
                         }

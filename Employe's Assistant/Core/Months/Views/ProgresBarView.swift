@@ -12,7 +12,7 @@ struct ProgresBarView: View {
     @ObservedObject var vm: MonthsViewModel
     let month: Month
     @State private var width: CGFloat = 0
-   
+    
     var body: some View {
         HStack {
             ZStack(alignment: .leading) {
@@ -35,10 +35,10 @@ struct ProgresBarView: View {
                 .foregroundStyle(Color.gray)
                 .font(.system(size: 15, weight: .medium, design: .rounded))
         }
-            .onAppear {
-                withAnimation(Animation.bouncy) {
-                    self.width = vm.progressBar(for: month, width: 180)
-                }
+        .onAppear {
+            withAnimation(Animation.bouncy) {
+                self.width = vm.progressBar(for: month, width: 180)
             }
+        }
     }
 }
