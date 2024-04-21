@@ -24,9 +24,11 @@ class MonthsViewModel: ObservableObject {
     }
     
     func getMonts() {
-        if let moths = dataManager.getMonths() {
-            DispatchQueue.main.async {
-                self.months = moths
+        Task {
+            if let moths = await dataManager.getMonths() {
+                await MainActor.run {
+                    self.months = moths
+                }
             }
         }
     }
@@ -40,7 +42,7 @@ class MonthsViewModel: ObservableObject {
     }
     
     func getCurrentDay(_ day: CalendarDates?, _ month: Month) {
-        let array = month.days
+        let array = months.first(where: { $0.title == month.title })?.days
        
         let dateFormatter: DateFormatter = {
             let dateFormatter = DateFormatter()
