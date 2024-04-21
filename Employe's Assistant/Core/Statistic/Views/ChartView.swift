@@ -34,7 +34,7 @@ struct ChartView: View {
         }
         .onChange(of: vm.selectedIndex) { newValue in
             withAnimation(Animation.bouncy) {
-                vm.currentMonth = vm.monthViewModel.months[newValue]
+                vm.currentMonth = vm.months[newValue]
                 guard let array = vm.currentMonth?.days else { return }
                 self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
             }

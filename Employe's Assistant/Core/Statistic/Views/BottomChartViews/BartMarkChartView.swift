@@ -36,7 +36,7 @@ struct BartMarkChartView: View {
         }
         .onAppear {
             withAnimation(Animation.bouncy) {
-                self.array = vm.monthViewModel.months.sorted { $0.date ?? Date() < $1.date ?? Date()
+                self.array = vm.months.sorted { $0.date ?? Date() < $1.date ?? Date()
                 }
             }
         }
