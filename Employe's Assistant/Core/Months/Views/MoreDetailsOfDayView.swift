@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MoreDetailsOfDayView: View {
     
-    let day: DayEntity
+    let day: Day
     var dateFormater: DateFormatter = {
         var dateFormater: DateFormatter = DateFormatter()
         dateFormater.dateStyle = .full
@@ -38,38 +38,34 @@ struct MoreDetailsOfDayView: View {
             HStack {
                 Text("Start work at:")
                 Spacer()
-                Text("\(day.startHours)")
+                Text("\(day.startHours ?? 0)")
                     .frame(width: 40)
-                Text("\(day.startMinutes)")
+                Text("\(day.startMinutes ?? 0)")
                     .frame(width: 40)
             }            
             HStack {
                 Text("End work at:")
                 Spacer()
-                Text("\(day.endHours)")
+                Text("\(day.endHours ?? 0)")
                     .frame(width: 40)
-                Text("\(day.endMinutes)")
+                Text("\(day.endMinutes ?? 0)")
                     .frame(width: 40)
             }
             HStack {
                 Text("Pause time:")
                 Spacer()
-                Text("\(day.pauseTime)")
+                Text("\(day.pauseTime ?? 0)")
                     .frame(width: 40)
             }
             HStack {
                 Text("Total hours:")
                 Spacer()
-                Text("\(day.hours)")
+                Text("\(day.hours ?? 0)")
                     .frame(width: 40)
-                Text("\(day.minutes)")
+                Text("\(day.minutes ?? 0)")
                     .frame(width: 40)
             }
             Spacer()
         }.padding()
     }
-}
-
-#Preview {
-    MoreDetailsOfDayView(day: DayEntity(context: CoreDataManager().context))
 }

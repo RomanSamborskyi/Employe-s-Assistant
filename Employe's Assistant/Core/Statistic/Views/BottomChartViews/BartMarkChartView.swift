@@ -12,7 +12,7 @@ import Charts
 struct BartMarkChartView: View {
     
     @ObservedObject var vm: StatisticViewModel
-    @State private var array: [MonthEntity] = []
+    @State private var array: [Month] = []
     @Binding var selectedTab: StatisticType
     
     var body: some View {
@@ -21,15 +21,15 @@ struct BartMarkChartView: View {
                 switch selectedTab {
                 case .hours:
                     BarMark(x: .value("Months", month.title ?? ""),
-                             y: .value("Hours", month.totalHours)
+                             y: .value("Hours", month.totalHours ?? 0)
                     ).foregroundStyle(Color.accentColor.gradient)
                 case .workingDays:
                     BarMark(x: .value("Months", month.title ?? ""),
-                             y: .value("Days", month.day?.count ?? 0)
+                             y: .value("Days", month.days?.count ?? 0)
                     ).foregroundStyle(Color.accentColor.gradient)
                 case .salary:
                     BarMark(x: .value("Months", month.title ?? ""),
-                             y: .value("Salary", month.totalSalary)
+                             y: .value("Salary", month.totalSalary ?? 0)
                     ).foregroundStyle(Color.accentColor.gradient)
                 }
             }

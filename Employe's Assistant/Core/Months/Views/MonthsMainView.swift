@@ -59,10 +59,10 @@ struct MonthsMainView: View {
                     }
                 }
                 .refreshable {
-                    viewModel.fetchMonths()
+                    viewModel.getMonts()
                 }
                 .onAppear {
-                    viewModel.fetchMonths()
+                    viewModel.getMonts()
                 }
         }
     }

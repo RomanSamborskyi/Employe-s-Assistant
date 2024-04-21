@@ -12,7 +12,7 @@ struct DayDetailView: View {
     @ObservedObject var vm: MonthsViewModel
     @State private var addNewDay: Bool = false
     @AppStorage("selectedView") var selectedView: SelectView = .list
-    let month: MonthEntity
+    @State var month: Month
     
     var body: some View {
         VStack {
@@ -43,7 +43,7 @@ struct DayDetailView: View {
         }
         .overlay {
             if selectedView == .list {
-                if let array = month.day?.allObjects as? [DayEntity] {
+                if let array = month.days {
                     if array.isEmpty {
                         VStack {
                             Image(systemName: "list.bullet.clipboard")
@@ -64,9 +64,6 @@ struct DayDetailView: View {
     }
 }
 
-#Preview {
-    DayDetailView(vm: MonthsViewModel(), month: MonthEntity(context: MonthsViewModel().coreData.context))
-}
 
 
 

@@ -6,23 +6,31 @@
 //
 
 import UIKit
-import CoreData
 import SwiftUI
 
 
 class MonthsViewModel: ObservableObject {
     
     static let instance: MonthsViewModel = MonthsViewModel()
-    let coreData: CoreDataManager = CoreDataManager.instanse
-
-    @Published var months: [MonthEntity] = []
-    @Published var currentDay: DayEntity? = nil
+    let dataManager: DataManager = DataManager.instanse
+    @Published var months: [Month] = []
+    @Published var currentDay: Day? = nil
     @Published var newAccentColor: Color = .accentColor
     private let key: String = "color"
     
     init() {
-        fetchMonths()
+        getMonts()
         getColor()
+    }
+    
+    func getMonts() {
+        Task {
+            if let moths = await dataManager.getMonths() {
+                await MainActor.run {
+                    self.months = moths
+                }
+            }
+        }
     }
     
     func getColor() {
@@ -33,8 +41,8 @@ class MonthsViewModel: ObservableObject {
         }
     }
     
-    func getCurrentDay(_ day: CalendarDates?, _ month: MonthEntity) {
-        guard let array = month.day?.allObjects as? [DayEntity] else { return }
+    func getCurrentDay(_ day: CalendarDates?, _ month: Month) {
+        let array = months.first(where: { $0.title == month.title })?.days
        
         let dateFormatter: DateFormatter = {
             let dateFormatter = DateFormatter()
@@ -44,12 +52,12 @@ class MonthsViewModel: ObservableObject {
       
         let dayDate = dateFormatter.string(from: day!.date)
         
-        guard let firsDay = array.firstIndex(where: { dateFormatter.string(from: $0.date!) == dayDate }) else { return }
-        self.currentDay = array[firsDay]
+        guard let firsDay = array?.firstIndex(where: { dateFormatter.string(from: $0.date ?? Date()) == dayDate }) else { return }
+        self.currentDay = array?[firsDay]
     }
     
-    func checkDays(_ day: CalendarDates?, _ month: MonthEntity) -> Bool {
-        guard let array = month.day?.allObjects as? [DayEntity] else { return false }
+    func checkDays(_ day: CalendarDates?, _ month: Month) -> Bool {
+        let array = months.first(where: { $0.title == month.title })?.days
         var tempBool: Bool = false
         let dateFormatter: DateFormatter = {
             let dateFormatter = DateFormatter()
@@ -59,16 +67,16 @@ class MonthsViewModel: ObservableObject {
       
         let dayDate = dateFormatter.string(from: day!.date)
         
-        guard let firsDay = array.firstIndex(where: { dateFormatter.string(from: $0.date!) == dayDate }) else { return false }
-        let element = array[firsDay]
-        let elementDate = dateFormatter.string(from: element.date!)
+        guard let firsDay = array?.firstIndex(where: { dateFormatter.string(from: $0.date ?? Date()) == dayDate }) else { return false }
+        let element = array?[firsDay]
+        let elementDate = dateFormatter.string(from: element?.date ?? Date())
         if dayDate == elementDate {
             tempBool = true
         }
         return tempBool
     }
     
-    func fetchDates(_ month: MonthEntity) -> [CalendarDates] {
+    func fetchDates(_ month: Month) -> [CalendarDates] {
         let current = Calendar.current
        
         let currentMonth = getCurrentMont(month)
@@ -91,7 +99,7 @@ class MonthsViewModel: ObservableObject {
         return monthDays
     }
     
-    func getCurrentMont(_ selectedMonth: MonthEntity) -> Date {
+    func getCurrentMont(_ selectedMonth: Month) -> Date {
         let calendar = Calendar.current
 
         let dateFormatter: DateFormatter = {
@@ -117,45 +125,23 @@ class MonthsViewModel: ObservableObject {
         return NSLocalizedString(String(clearTitle), comment: "") + String(yaer)
     }
     
-    func fetchMonths() {
-        let request = NSFetchRequest<MonthEntity>(entityName: coreData.monthsEntety)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \MonthEntity.date, ascending: false)]
-        do {
-            try months = coreData.context.fetch(request)
-        } catch let error {
-            print("Error of fetching months: \(error.localizedDescription)")
-        }
-    }
-    
-//    func fetchDays(from month: MonthEntity) -> [DayEntity] {
-//        let request = NSFetchRequest<DayEntity>(entityName: coreData.dayEntity)
-//        request.sortDescriptors = [NSSortDescriptor(keyPath: \DayEntity.date, ascending: false)]
-//        request.predicate = NSPredicate(format: "month == %@", month)
-//        do {
-//           return try coreData.context.fetch(request)
-//        } catch let error {
-//            print("Error of fetching days: \(error.localizedDescription)")
-//            return []
-//        }
-//    }
-    
-    func countHours(for month: MonthEntity) -> Double? {
-        guard let daysArray = month.day?.allObjects as? [DayEntity] else { return nil }
+    func countHours(for month: Month) -> Double? {
+        guard let daysArray = months.first(where: { $0.title == month.title })?.days else { return nil }
         var hoursArray: [Double] = []
         for day in daysArray {
-            let minutes = Double(day.hours * 60 ) + Double(day.minutes)
+            let minutes = Double((day.hours ?? 0) * 60 ) + Double(day.minutes ?? 0)
             hoursArray.append(minutes)
         }
         return hoursArray.reduce(0,+) / 60
     }
     
-    func countSalary(for month: MonthEntity) -> Double? {
+    func countSalary(for month: Month) -> Double? {
         guard let totalHours = countHours(for: month) else { return nil }
         return totalHours * UserDefaults.standard.double(forKey: "hourSalary")
     }
     
-    func progressBar(for month: MonthEntity, width: CGFloat) -> CGFloat {
-        let target = month.monthTarget
+    func progressBar(for month: Month, width: CGFloat) -> CGFloat {
+        let target = month.monthTarget ?? 0
         let curentHours = countHours(for: month) ?? 0
         let percent = curentHours / Double(target) * width
         if percent >= width {
@@ -167,11 +153,11 @@ class MonthsViewModel: ObservableObject {
         }
      }
     
-    func countHoursTitle(for month: MonthEntity) -> String? {
-        guard let daysArray = month.day?.allObjects as? [DayEntity] else { return nil }
+    func countHoursTitle(for month: Month) -> String? {
+        guard let daysArray = months.first(where: { $0.title == month.title })?.days else { return nil }
         var hoursArray: [Double] = []
         for day in daysArray {
-            let minutes = Double(day.hours * 60 ) + Double(day.minutes)
+            let minutes = Double((day.hours ?? 0) * 60 ) + Double(day.minutes ?? 0)
             hoursArray.append(minutes)
         }
         let totalHours = String(hoursArray.reduce(0, +) / 60)
@@ -187,7 +173,7 @@ class MonthsViewModel: ObservableObject {
         }
         return "\(hour):\(convertInToMonute)"
     }
-    
+  
     func addNewMonth(title: String, monthTarget: Int32) {
         let dateFormater: DateFormatter = {
             let dateFormater: DateFormatter = DateFormatter()
@@ -195,15 +181,20 @@ class MonthsViewModel: ObservableObject {
             dateFormater.dateFormat = " YYYY"
             return dateFormater
         }()
-        let newMonth = MonthEntity(context: coreData.context)
+       
+        var newMonth = Month()
         newMonth.title = title + dateFormater.string(for: Date())!
         newMonth.monthTarget = monthTarget
         newMonth.date = Date()
-        save()
+        self.months.append(newMonth)
+        dataManager.addToCoreDataMonth(month: newMonth)
+        getMonts()
     }
     
-    func addHours(month: MonthEntity, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
-        let newDay = DayEntity(context: coreData.context)
+    
+    func addHours(month: inout Month, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
+        var newDay = Day()
+        
         let convertToMinutes = ((Double(endHours) * 60 + Double(endMinutes)) - (Double(startHours) * 60 + Double(startMinutes)) - Double(pauseTime)) / 60
         let stringOfMinutes: String = String(convertToMinutes)
         let index = stringOfMinutes.firstIndex(of: ".") ?? stringOfMinutes.endIndex
@@ -217,6 +208,7 @@ class MonthsViewModel: ObservableObject {
         } else if minuteToString.count > 3 {
             newDay.minutes = Int32(convertInToMinutes / 100)
         }
+        
         newDay.month = month
         newDay.date = date
         newDay.hours = Int32(hour) ?? 0
@@ -225,28 +217,25 @@ class MonthsViewModel: ObservableObject {
         newDay.endHours = endHours
         newDay.endMinutes = endMinutes
         newDay.pauseTime = pauseTime
+        month.days?.append(newDay)
         month.totalHours = countHours(for: month) ?? 0
         month.totalSalary = countSalary(for: month) ?? 0
-        save()
+        dataManager.addHoursToCoreData(month: month, day: newDay, hour: String(hour), minutes: minuteToString, convertInToMinutes: convertInToMinutes)
+        getMonts()
     }
     
-    func deleteDay(month: MonthEntity, day: DayEntity) {
-        guard let daysArray = month.day?.allObjects as? [DayEntity] else { return }
-        guard let index = daysArray.firstIndex(of: day) else { return }
-        let item = daysArray[index] 
-        coreData.context.delete(item)
-        save()
+    func deleteDay(month: inout Month, day: Day) {
+        guard let index = month.days?.firstIndex(of: day) else { return }
+        dataManager.delete(day: day, month: month)
+        month.days?.remove(at: index)
+        getMonts()
     }
     
     func deleteMonth(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
-        let item = months[index]
-        coreData.context.delete(item)
-        save()
-    }
-    
-    func save() {
-        coreData.save()
-        fetchMonths()
+        let month = months[index]
+        months.remove(at: index)
+        dataManager.delete(month: month)
+        getMonts()
     }
 }

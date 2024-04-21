@@ -10,12 +10,19 @@ import UIKit
 
 struct Day: Identifiable {
     var id = UUID().uuidString
-    var date: Date
-    var endHours: Int32
-    var endMinutes: Int32
-    var hours: Int32
-    var minutes: Int32
-    var pauseTime: Int32
-    var startHours: Int32
-    var startMinutes: Int32
+    var month: Month?
+    var date: Date?
+    var endHours: Int32?
+    var endMinutes: Int32?
+    var hours: Int32?
+    var minutes: Int32?
+    var pauseTime: Int32?
+    var startHours: Int32?
+    var startMinutes: Int32?
+}
+
+extension Day: Equatable {
+    static func == (lhs: Day, rhs: Day) -> Bool {
+        return lhs.date == rhs.date
+    }
 }
