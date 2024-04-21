@@ -9,9 +9,11 @@ import Foundation
 import CoreData
 import Combine
 
+
 class StatisticViewModel: ObservableObject {
     
     let monthViewModel: MonthsViewModel = MonthsViewModel.instance
+    let dataManager: DataManager = DataManager.instanse
     @Published var months: [Month] = []
     @Published var currentMonth: Month? = nil
     @Published var selectedIndex: Int = 0
@@ -30,11 +32,13 @@ class StatisticViewModel: ObservableObject {
     }()
     
     func getMonths() {
-        monthViewModel.$months
-            .sink { [weak self] array in
-                self?.months = array
+        Task {
+            if let moths = await dataManager.getMonths() {
+                await MainActor.run {
+                    self.months = moths
+                }
             }
-            .store(in: &cancellable)
+        }
     }
     
     func localizedMonthTitle(title: String?) -> String {
