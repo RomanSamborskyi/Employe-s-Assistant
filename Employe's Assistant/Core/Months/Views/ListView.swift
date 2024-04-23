@@ -12,7 +12,7 @@ import WidgetKit
 struct ListView: View {
     
     @ObservedObject var vm: MonthsViewModel
-    @State var month: Month
+    let month: Month
     var dateFormater: DateFormatter = {
         let dateFormater = DateFormatter()
         dateFormater.dateStyle = .medium

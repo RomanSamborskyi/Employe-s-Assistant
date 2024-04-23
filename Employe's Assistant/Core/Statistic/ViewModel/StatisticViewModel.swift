@@ -25,11 +25,17 @@ class StatisticViewModel: ObservableObject {
     func getMonths() {
         monthViewModel.$months
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] array in
+            .tryMap { data -> [Month] in
+                data as [Month]
+            }
+            .sink { _ in
+               
+            } receiveValue: { [weak self] array in
                 self?.months = array
             }
             .store(in: &cancellable)
     }
+    
     
     var dateFormater: DateFormatter = {
         var dateFormater: DateFormatter = DateFormatter()

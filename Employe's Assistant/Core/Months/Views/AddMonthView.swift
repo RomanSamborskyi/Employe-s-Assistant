@@ -12,7 +12,7 @@ struct AddMonthView: View {
     @AppStorage("isDark") var isDark: Bool = false
     @State private var targetText: String = ""
     @State private var selectedMonth: Monthes = .empty
-    @StateObject var vm: MonthsViewModel
+    @ObservedObject var vm: MonthsViewModel
     @Binding var dissmiss: Bool
     
     var body: some View {

@@ -8,16 +8,11 @@
 import UIKit
 import SwiftUI
 
-
 class MonthsViewModel: ObservableObject {
     
     static let instance: MonthsViewModel = MonthsViewModel()
     let dataManager: DataManager = DataManager.instanse
-    @Published var months: [Month] = [] {
-        willSet {
-            print("edited")
-        }
-    }
+    @Published var months: [Month] = []
     @Published var currentDay: Day? = nil
     @Published var newAccentColor: Color = .accentColor
     private let key: String = "color"
