@@ -8,7 +8,6 @@
 import UIKit
 import SwiftUI
 
-
 class MonthsViewModel: ObservableObject {
     
     static let instance: MonthsViewModel = MonthsViewModel()
