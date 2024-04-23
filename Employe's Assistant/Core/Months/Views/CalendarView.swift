@@ -14,10 +14,9 @@ struct CalendarView: View {
     @State private var columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 7)
     @State private var sheetIsPresented: Bool = false
     @State private var showConfirmationDialog: Bool = false
-    @State private var calDays: [Day] = []
     @AppStorage("isDark") var isDark: Bool = false
     @ObservedObject var vm: MonthsViewModel
-    @State var month: Month
+    let month: Month
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -87,7 +86,7 @@ struct CalendarView: View {
         }
         .confirmationDialog("", isPresented: $showConfirmationDialog, actions: {
             Button(role: .destructive, action: { 
-                vm.deleteDay(month: &month, day: vm.currentDay!)
+                vm.deleteDay(month: month, day: vm.currentDay!)
                 WidgetCenter.shared.reloadAllTimelines()
             },label: {
                 HStack {

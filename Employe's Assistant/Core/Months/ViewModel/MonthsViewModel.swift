@@ -19,15 +19,15 @@ class MonthsViewModel: ObservableObject {
     private let key: String = "color"
     
     init() {
-        getMonts()
+        getMonths()
         getColor()
     }
     
-    func getMonts() {
+    func getMonths() {
         Task {
-            if let moths = await dataManager.getMonths() {
+            if let array = await dataManager.getMonths() {
                 await MainActor.run {
-                    self.months = moths
+                    self.months = array
                 }
             }
         }
@@ -174,6 +174,7 @@ class MonthsViewModel: ObservableObject {
         return "\(hour):\(convertInToMonute)"
     }
   
+    
     func addNewMonth(title: String, monthTarget: Int32) {
         let dateFormater: DateFormatter = {
             let dateFormater: DateFormatter = DateFormatter()
@@ -188,11 +189,13 @@ class MonthsViewModel: ObservableObject {
         newMonth.date = Date()
         self.months.append(newMonth)
         dataManager.addToCoreDataMonth(month: newMonth)
-        getMonts()
+        getMonths()
     }
     
     
-    func addHours(month: inout Month, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
+    func addHours(month: Month, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
+        
+        guard var currentMonth = months.first(where: { $0.title == month.title }) else { return }
         var newDay = Day()
         
         let convertToMinutes = ((Double(endHours) * 60 + Double(endMinutes)) - (Double(startHours) * 60 + Double(startMinutes)) - Double(pauseTime)) / 60
@@ -217,18 +220,20 @@ class MonthsViewModel: ObservableObject {
         newDay.endHours = endHours
         newDay.endMinutes = endMinutes
         newDay.pauseTime = pauseTime
-        month.days?.append(newDay)
-        month.totalHours = countHours(for: month) ?? 0
-        month.totalSalary = countSalary(for: month) ?? 0
-        dataManager.addHoursToCoreData(month: month, day: newDay, hour: String(hour), minutes: minuteToString, convertInToMinutes: convertInToMinutes)
-        getMonts()
+        currentMonth.days?.append(newDay)
+        currentMonth.totalHours = countHours(for: currentMonth) ?? 0
+        currentMonth.totalSalary = countSalary(for: currentMonth) ?? 0
+        dataManager.addHoursToCoreData(month: currentMonth, day: newDay, hour: String(hour), minutes: minuteToString, convertInToMinutes: convertInToMinutes)
+        getMonths()
     }
     
-    func deleteDay(month: inout Month, day: Day) {
-        guard let index = month.days?.firstIndex(of: day) else { return }
+    func deleteDay(month: Month, day: Day) {
+        guard let index = months.first(where: { $0.title == month.title })?.days?.firstIndex(of: day),
+              var  daysArray = months.first(where: { $0.title == month.title })?.days
+        else { return }
         dataManager.delete(day: day, month: month)
-        month.days?.remove(at: index)
-        getMonts()
+        daysArray.remove(at: index)
+        getMonths()
     }
     
     func deleteMonth(indexSet: IndexSet) {
@@ -236,6 +241,6 @@ class MonthsViewModel: ObservableObject {
         let month = months[index]
         months.remove(at: index)
         dataManager.delete(month: month)
-        getMonts()
+        getMonths()
     }
 }

@@ -40,5 +40,10 @@ struct ProgresBarView: View {
                 self.width = vm.progressBar(for: month, width: 180)
             }
         }
+        .onChange(of: vm.months.first(where: { $0.title == month.title })?.days!) { _ in
+            withAnimation(Animation.bouncy) {
+                self.width = vm.progressBar(for: month, width: 180)
+            }
+        }
     }
 }

@@ -8,13 +8,14 @@
 import Foundation
 import CoreData
 
+
 class DataManager {
     static let instanse: DataManager = DataManager()
     let coreData: CoreDataManager = CoreDataManager.instanse
     
     
-    
     func getMonths() async -> [Month]? {
+        
         var months: [Month] = []
         
         for month in fetchMonths() {
@@ -28,6 +29,7 @@ class DataManager {
             months.append(convertedMonth)
         }
         return months
+        
     }
     
     func fetchMonths() -> [MonthEntity] {

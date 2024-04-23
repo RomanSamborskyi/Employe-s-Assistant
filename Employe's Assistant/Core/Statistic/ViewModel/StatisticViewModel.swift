@@ -6,14 +6,12 @@
 //
 
 import Foundation
-import CoreData
 import Combine
 
 
 class StatisticViewModel: ObservableObject {
     
     let monthViewModel: MonthsViewModel = MonthsViewModel.instance
-    let dataManager: DataManager = DataManager.instanse
     @Published var months: [Month] = []
     @Published var currentMonth: Month? = nil
     @Published var selectedIndex: Int = 0
@@ -22,7 +20,18 @@ class StatisticViewModel: ObservableObject {
     init() {
         getMonths()
         getCurrentMonth()
-        trimCalculation()
+    }
+    deinit {
+        print("deinited")
+    }
+    
+    func getMonths() {
+        monthViewModel.$months
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] array in
+                self?.months = array
+            }
+            .store(in: &cancellable)
     }
     
     var dateFormater: DateFormatter = {
@@ -31,14 +40,14 @@ class StatisticViewModel: ObservableObject {
         return dateFormater
     }()
     
-    func getMonths() {
-        Task {
-            if let moths = await dataManager.getMonths() {
-                await MainActor.run {
-                    self.months = moths
-                }
-            }
+    func trimCalculation(for month: Month) -> CGFloat {
+        if let month = months.first(where: { $0.title == month.title }) {
+            let hours = month.totalHours ?? 0
+            let scorePercent = CGFloat(hours) / CGFloat(month.monthTarget ?? 0) * CGFloat(100)
+            let currentTrim: CGFloat = CGFloat(scorePercent) / CGFloat(1.0) / CGFloat(100)
+            return currentTrim
         }
+        return 0
     }
     
     func localizedMonthTitle(title: String?) -> String {
@@ -53,18 +62,8 @@ class StatisticViewModel: ObservableObject {
         guard let index = self.months.firstIndex(where: { self.localizedMonthTitle(title: $0.title) == self.dateFormater.string(from: Date()).capitalized }) else {
                 return
             }
-            let month = self.months[index]
-            self.selectedIndex = index
-            self.currentMonth = month
-    }
-    
-    func trimCalculation() {
-        if var month = currentMonth {
-            let hours = month.totalHours ?? 0
-            let scorePercent = CGFloat(hours) / CGFloat(month.monthTarget ?? 0) * CGFloat(100)
-            let currentTrim: CGFloat = CGFloat(scorePercent) / CGFloat(1.0) / CGFloat(100)
-            month.trim = currentTrim
-        }
+        self.currentMonth = self.months[index]
+        self.selectedIndex = index
     }
     
     func calculateSegmentHeight(day: Day) -> CGFloat? {

@@ -12,7 +12,7 @@ import SwiftUI
 struct MonthDetailView: View {
     
     @State private var count: Int = 0
-    @StateObject var vm: StatisticViewModel
+    @ObservedObject var vm: StatisticViewModel
     let month: Month
     
     var body: some View {
@@ -22,7 +22,7 @@ struct MonthDetailView: View {
                     .stroke(Color.gray.opacity(0.5),style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .frame(width: 95)
                 Circle()
-                    .trim(from: 0.0 , to: CGFloat(month.trim ?? 0))
+                    .trim(from: 0.0 , to: CGFloat(vm.trimCalculation(for: month)))
                     .stroke(Int32(month.totalHours ?? 0) >= month.monthTarget ?? 0 ? Color.green : Color.accentColor,style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .frame(width: 95)
                     .rotationEffect(Angle(degrees: 270.0))
@@ -62,7 +62,7 @@ struct MonthDetailView: View {
                         .foregroundColor(.gray)
                         .font(.caption)
                         Spacer(minLength: 35)
-                    Text(String(format: "%.2f", month.totalSalary ?? 0))
+                    Text(String(format: "%.2f", vm.monthViewModel.countSalary(for: month) ?? 0))
                         .foregroundStyle(Color.gray)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
