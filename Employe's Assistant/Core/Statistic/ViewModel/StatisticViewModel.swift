@@ -21,9 +21,6 @@ class StatisticViewModel: ObservableObject {
         getMonths()
         getCurrentMonth()
     }
-    deinit {
-        print("deinited")
-    }
     
     func getMonths() {
         monthViewModel.$months
