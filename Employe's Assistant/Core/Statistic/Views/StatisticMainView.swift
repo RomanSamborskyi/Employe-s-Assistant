@@ -9,8 +9,12 @@ import SwiftUI
 
 struct StatisticMainView: View {
     
-    @StateObject var vm: StatisticViewModel = StatisticViewModel()
+    @StateObject var vm: StatisticViewModel
     @AppStorage("savedType") var chartType: ChartType = .barMark
+    
+    init() {
+        _vm = StateObject(wrappedValue: StatisticViewModel(monthViewModel: MonthsViewModel()))
+    }
     
     var body: some View {
         NavigationView {
