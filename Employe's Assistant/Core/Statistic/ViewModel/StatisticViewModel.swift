@@ -7,35 +7,43 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 
 class StatisticViewModel: ObservableObject {
-    
-    let monthViewModel: MonthsViewModel = MonthsViewModel.instance
+
     @Published var months: [Month] = []
+    let monthViewModel: MonthsViewModel
     @Published var currentMonth: Month? = nil
     @Published var selectedIndex: Int = 0
+    @Published var newAccentColor: Color = .accentColor
     var cancellable = Set<AnyCancellable>()
+    private let key: String = "color"
+
  
-    init() {
+    init(monthViewModel: MonthsViewModel) {
+        self.monthViewModel = monthViewModel
         getMonths()
         getCurrentMonth()
+        getColor()
+       
+    }
+    
+    func getColor() {
+        guard let components = UserDefaults.standard.value(forKey: key) as? [CGFloat] else { return }
+        let color = Color(.sRGB, red: components[0], green: components[1], blue: components[2], opacity: components[3] )
+        DispatchQueue.main.async {
+            self.newAccentColor = color
+        }
     }
     
     func getMonths() {
         monthViewModel.$months
-            .receive(on: DispatchQueue.main)
-            .tryMap { data -> [Month] in
-                data as [Month]
+           .sink { [weak self] month in
+            self?.months = month
             }
-            .sink { _ in
-               
-            } receiveValue: { [weak self] array in
-                self?.months = array
-            }
-            .store(in: &cancellable)
+           .store(in: &cancellable)
     }
-    
     
     var dateFormater: DateFormatter = {
         var dateFormater: DateFormatter = DateFormatter()

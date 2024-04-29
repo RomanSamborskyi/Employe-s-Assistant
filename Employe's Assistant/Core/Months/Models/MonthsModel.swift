@@ -8,7 +8,7 @@
 import UIKit
 
 
-struct Month: Identifiable {
+struct Month: Identifiable, Sendable {
     
     var id = UUID().uuidString
     var date: Date?

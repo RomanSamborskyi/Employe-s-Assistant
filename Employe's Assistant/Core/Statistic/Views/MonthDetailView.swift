@@ -70,16 +70,17 @@ struct MonthDetailView: View {
                 HStack {
                     Text("Month target:")
                         .font(.caption)
-                        .foregroundColor(vm.monthViewModel.newAccentColor)
+                        .foregroundColor(vm.newAccentColor)
                     Spacer(minLength: 25)
                     Text("\(month.monthTarget ?? 0)")
-                        .foregroundStyle(vm.monthViewModel.newAccentColor)
+                        .foregroundStyle(vm.newAccentColor)
                 }
             }.onAppear {
                 withAnimation(Animation.spring) {
                     if let array = month.days {
                         self.count = array.count
                     }
+                    vm.monthViewModel.getMonths()
                 }
            }
             .onChange(of: vm.currentMonth, perform: { month in

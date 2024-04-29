@@ -11,7 +11,7 @@ import SwiftUI
 class MonthsViewModel: ObservableObject {
     
     static let instance: MonthsViewModel = MonthsViewModel()
-    let dataManager: DataManager = DataManager.instanse
+    let dataManager = DataManager.instanse
     @Published var months: [Month] = []
     @Published var currentDay: Day? = nil
     @Published var newAccentColor: Color = .accentColor
@@ -181,7 +181,7 @@ class MonthsViewModel: ObservableObject {
             dateFormater.dateFormat = " YYYY"
             return dateFormater
         }()
-       
+        
         var newMonth = Month()
         newMonth.title = title + dateFormater.string(for: Date())!
         newMonth.monthTarget = monthTarget
@@ -193,7 +193,6 @@ class MonthsViewModel: ObservableObject {
     
     
     func addHours(month: Month, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
-        
         guard var currentMonth = months.first(where: { $0.title == month.title }) else { return }
         var newDay = Day()
         
@@ -227,12 +226,12 @@ class MonthsViewModel: ObservableObject {
     }
     
     func deleteDay(month: Month, day: Day) {
-        guard let index = months.first(where: { $0.title == month.title })?.days?.firstIndex(of: day),
-              var  daysArray = months.first(where: { $0.title == month.title })?.days
-        else { return }
-        dataManager.delete(day: day, month: month)
-        daysArray.remove(at: index)
-        getMonths()
+            guard let index = months.first(where: { $0.title == month.title })?.days?.firstIndex(of: day),
+                  var  daysArray = months.first(where: { $0.title == month.title })?.days
+            else { return }
+            dataManager.delete(day: day, month: month)
+            daysArray.remove(at: index)
+            getMonths()
     }
     
     func deleteMonth(indexSet: IndexSet) {
