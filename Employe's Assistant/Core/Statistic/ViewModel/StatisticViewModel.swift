@@ -24,7 +24,6 @@ class StatisticViewModel: ObservableObject {
     init(monthViewModel: MonthsViewModel) {
         self.monthViewModel = monthViewModel
         getMonths()
-        getCurrentMonth()
         getColor()
        
     }

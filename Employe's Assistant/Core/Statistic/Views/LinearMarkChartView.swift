@@ -18,37 +18,32 @@ struct LinearMarkChartView: View {
         VStack {
             Text("\(month.title ?? "")")
                 .font(.system(size: 15, weight: .bold, design: .rounded))
-            ZStack {
-                Chart {
-                    ForEach(array, id: \.date) { hour in
-                        LineMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
-                                 y: .value("Hours", hour.hours ?? 0)
-                        ).foregroundStyle(Color.accentColor.gradient)
-                    }
+            
+            Chart {
+                ForEach(array, id: \.date) { hour in
+                    LineMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
+                             y: .value("Hours", hour.hours ?? 0)
+                    ).foregroundStyle(Color.accentColor.gradient)
                 }
-                Chart {
-                    ForEach(array, id: \.date) { hour in
-                        PointMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
-                                  y: .value("Hours", hour.hours ?? 0)
-                        ).foregroundStyle(Color.accentColor.gradient)
-                    }
+                ForEach(array, id: \.date) { hour in
+                    PointMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
+                              y: .value("Hours", hour.hours ?? 0)
+                    ).foregroundStyle(Color.accentColor.gradient)
                 }
-                Chart {
-                    ForEach(array, id: \.date) { hour in
-                        AreaMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
-                                 y: .value("Hours", hour.hours ?? 0)
-                        ).foregroundStyle(gradient)
-                    }
+                ForEach(array, id: \.date) { hour in
+                    AreaMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
+                             y: .value("Hours", hour.hours ?? 0)
+                    ).foregroundStyle(gradient)
                 }
             }
         }.onAppear {
-            withAnimation(Animation.bouncy) {
+            withAnimation(Animation.bouncy(duration: 0.5)) {
                 guard let array = month.days else { return }
                 self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
             }
         }
         .onChange(of: vm.selectedIndex) { newValue in
-            withAnimation(Animation.bouncy) {
+            withAnimation(Animation.bouncy(duration: 0.5)) {
                 vm.currentMonth = vm.months[newValue]
                 guard let array = vm.currentMonth?.days else { return }
                 self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })

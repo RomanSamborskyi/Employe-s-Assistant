@@ -27,13 +27,13 @@ struct ChartView: View {
                 }
             }
         }.onAppear {
-            withAnimation(Animation.bouncy) {
+            withAnimation(Animation.bouncy(duration: 0.5)) {
                 guard let array = month.days else { return }
                 self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
             }
         }
         .onChange(of: vm.selectedIndex) { newValue in
-            withAnimation(Animation.bouncy) {
+            withAnimation(Animation.bouncy(duration: 0.5)) {
                 vm.currentMonth = vm.months[newValue]
                 guard let array = vm.currentMonth?.days else { return }
                 self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })

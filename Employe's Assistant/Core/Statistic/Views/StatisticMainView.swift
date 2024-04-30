@@ -37,6 +37,7 @@ struct StatisticMainView: View {
                         StatisticByMonthsChartView(vm: vm, chartType: $chartType)
                     }
                 }
+                .onAppear { vm.getCurrentMonth() }
                 .navigationTitle("Statistic")
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {

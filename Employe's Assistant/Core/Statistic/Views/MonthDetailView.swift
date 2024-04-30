@@ -76,7 +76,7 @@ struct MonthDetailView: View {
                         .foregroundStyle(vm.newAccentColor)
                 }
             }.onAppear {
-                withAnimation(Animation.spring) {
+                withAnimation(Animation.bouncy(duration: 0.5)) {
                     if let array = month.days {
                         self.count = array.count
                     }
@@ -84,7 +84,7 @@ struct MonthDetailView: View {
                 }
            }
             .onChange(of: vm.currentMonth, perform: { month in
-                withAnimation(Animation.spring) {
+                withAnimation(Animation.bouncy(duration: 0.5)) {
                     if let array = month?.days {
                         self.count = array.count
                     }
