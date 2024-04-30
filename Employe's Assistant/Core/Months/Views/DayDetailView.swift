@@ -22,6 +22,8 @@ struct DayDetailView: View {
             case .calendar:
                 CalendarView(vm: vm, month: month)
             }
+        }.onAppear {
+            vm.dataManager.updateTotalSalaryAndHours(month: month, totalSalary: vm.countSalary(for: month) ?? 0, totalHours: vm.countHours(for: month) ?? 0)
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing, content: {

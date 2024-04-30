@@ -28,8 +28,10 @@ class MonthsViewModel: ObservableObject {
         Task {
             if let array = await dataManager.getMonths() {
                 await MainActor.run {
-                    self.months = array
-                    self.startFetchingData = false
+                    withAnimation(Animation.bouncy) {
+                        self.months = array
+                        self.startFetchingData = false
+                    }
                 }
             }
         }

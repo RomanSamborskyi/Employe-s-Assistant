@@ -25,7 +25,6 @@ public class MonthEntity: NSManagedObject, Codable {
         totalHours = try values.decode(Double.self, forKey: .totalHours)
         totalSalary = try values.decode(Double.self, forKey: .totalSalary)
         trim = try values.decode(Double.self, forKey: .trim)
-       
         if let dayArray = try? values.decode([DayEntity].self, forKey: .day) {
               // Convert the array to an NSSet
               let daySet = NSSet(array: dayArray)
@@ -41,7 +40,6 @@ public class MonthEntity: NSManagedObject, Codable {
         try values.encode(totalHours, forKey: .totalHours)
         try values.encode(totalSalary, forKey: .totalSalary)
         try values.encode(trim, forKey: .trim)
-       
         if let daySet = day as? Set<DayEntity> {
               let dayArray = Array(daySet)
               try values.encode(dayArray, forKey: .day)

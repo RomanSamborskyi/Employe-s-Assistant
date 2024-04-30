@@ -68,10 +68,15 @@ class DataManager {
         coreDataDay.endHours = day.endHours ?? 0
         coreDataDay.endMinutes = day.endMinutes ?? 0
         coreDataDay.pauseTime = day.pauseTime ?? 0
-        coreDataMonth.totalHours = month.totalHours ?? 0
-        coreDataMonth.totalSalary = month.totalSalary ?? 0
         var coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity]
         coreDataDaysarray?.append(coreDataDay)
+        save()
+    }
+    
+    func updateTotalSalaryAndHours(month: Month, totalSalary: Double, totalHours: Double) {
+        guard let coreDataMonth = fetchMonths().first(where: { $0.title == month.title }) else { return }
+        coreDataMonth.totalHours = totalHours
+        coreDataMonth.totalSalary = totalSalary
         save()
     }
     
