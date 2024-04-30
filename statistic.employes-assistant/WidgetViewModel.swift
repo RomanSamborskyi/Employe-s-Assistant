@@ -155,4 +155,11 @@ class WidgetViewModel: ObservableObject {
         guard let index = try? getMonts().firstIndex(where: { localizedMonthTitle(title: $0.title) == dateFormater.string(from: Date()).capitalized }) else { return nil }
         return try? getMonts()[index]
     }
+    
+    func trimCalculation(for month: MonthEntity) -> CGFloat {
+        let hours = month.totalHours
+        let scorePercent = CGFloat(hours) / CGFloat(month.monthTarget) * CGFloat(100)
+        let currentTrim: CGFloat = CGFloat(scorePercent) / CGFloat(1.0) / CGFloat(100)
+        return currentTrim
+    }
 }

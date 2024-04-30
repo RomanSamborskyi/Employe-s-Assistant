@@ -14,6 +14,7 @@ struct LinearMarkChartView: View {
     @State var array: [Day] = []
     let month: Month
     let gradient: LinearGradient = LinearGradient(colors: [Color.accentColor, Color.clear], startPoint: .top, endPoint: .bottom)
+    
     var body: some View {
         VStack {
             Text("\(month.title ?? "")")

@@ -15,6 +15,7 @@ class MonthsViewModel: ObservableObject {
     @Published var months: [Month] = []
     @Published var currentDay: Day? = nil
     @Published var newAccentColor: Color = .accentColor
+    @Published var startFetchingData: Bool = false
     private let key: String = "color"
     
     init() {
@@ -23,10 +24,12 @@ class MonthsViewModel: ObservableObject {
     }
     
     func getMonths() {
+        self.startFetchingData = true
         Task {
             if let array = await dataManager.getMonths() {
                 await MainActor.run {
                     self.months = array
+                    self.startFetchingData = false
                 }
             }
         }

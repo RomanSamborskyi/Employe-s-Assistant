@@ -37,27 +37,32 @@ struct StatisticMainView: View {
                         StatisticByMonthsChartView(vm: vm, chartType: $chartType)
                     }
                 }
-                .onAppear { vm.getCurrentMonth() }
+                .onAppear {
+                    vm.getCurrentMonth()
+                }
                 .navigationTitle("Statistic")
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Picker("Selected month", selection: $vm.selectedIndex) {
-                                ForEach(vm.months.indices, id: \.self) { index in
-                                    Text(vm.months[index].title ?? "")
-                                }
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Picker("Selected month", selection: $vm.selectedIndex) {
+                            ForEach(vm.months.indices, id: \.self) { index in
+                                Text(vm.months[index].title ?? "")
                             }
                         }
-                        if #available(iOS 16, *) {
-                            ToolbarItem(placement: .topBarLeading) {
-                                Picker("", selection: $chartType) {
-                                    ForEach(ChartType.allCases) { chart in
-                                        Text(chart.description)
-                                            .tag(chart)
-                                    }
+                    }
+                    if #available(iOS 16, *) {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Picker("", selection: $chartType) {
+                                ForEach(ChartType.allCases) { chart in
+                                    Text(chart.description)
+                                        .tag(chart)
                                 }
                             }
                         }
                     }
+                }
+            } else if vm.startFetchingData == true {
+                ProgressView()
+                    .scaleEffect(1.5)
             } else {
                 VStack {
                     Image(systemName: "chart.xyaxis.line")

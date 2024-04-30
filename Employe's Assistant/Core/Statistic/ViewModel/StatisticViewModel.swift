@@ -13,19 +13,28 @@ import SwiftUI
 class StatisticViewModel: ObservableObject {
 
     @Published var months: [Month] = []
-    let monthViewModel: MonthsViewModel
+    @Published var startFetchingData: Bool? = nil
     @Published var currentMonth: Month? = nil
     @Published var selectedIndex: Int = 0
     @Published var newAccentColor: Color = .accentColor
+    let monthViewModel: MonthsViewModel
     var cancellable = Set<AnyCancellable>()
     private let key: String = "color"
 
  
     init(monthViewModel: MonthsViewModel) {
         self.monthViewModel = monthViewModel
+        checkIfFetchingData()
         getMonths()
         getColor()
-       
+    }
+    
+    func checkIfFetchingData() {
+        monthViewModel.$startFetchingData
+            .sink { vale in
+                self.startFetchingData = vale
+            }
+            .store(in: &cancellable)
     }
     
     func getColor() {
