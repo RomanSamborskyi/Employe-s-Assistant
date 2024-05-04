@@ -14,15 +14,13 @@ class MonthsViewModel: ObservableObject {
     let dataManager: DataManager = DataManager.instanse
     @Published var months: [Month] = []
     @Published var currentDay: Day? = nil
-    @Published var newAccentColor: Color = .accentColor
     @Published var startFetchingData: Bool = false
     private let key: String = "color"
     
     init() {
         getMonths()
-        getColor()
     }
-    
+
     func getMonths() {
         self.startFetchingData = true
         Task {
@@ -34,14 +32,6 @@ class MonthsViewModel: ObservableObject {
                     }
                 }
             }
-        }
-    }
-    
-    func getColor() {
-        guard let components = UserDefaults.standard.value(forKey: key) as? [CGFloat] else { return }
-        let color = Color(.sRGB, red: components[0], green: components[1], blue: components[2], opacity: components[3] )
-        DispatchQueue.main.async {
-            self.newAccentColor = color
         }
     }
     

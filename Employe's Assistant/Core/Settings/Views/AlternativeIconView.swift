@@ -14,7 +14,7 @@ struct AlternativeIconView: View {
     private var checkmark: some View {
               Image(systemName: "checkmark.seal.fill")
                     .font(.title)
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(Color.newAccentColor)
                     .offset(x: -10, y: -10)
     }
     
@@ -23,11 +23,11 @@ struct AlternativeIconView: View {
             Image(systemName: "photo.on.rectangle.angled")
                 .padding()
                 .font(.system(size: 65, weight: .bold, design: .rounded))
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.newAccentColor)
             Text("Pick an icon")
                 .padding()
                 .font(.system(size: 45, weight: .bold, design: .rounded))
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.newAccentColor)
             LazyVGrid(columns: columns, spacing: 30) {
                 ForEach(vm.icons, id: \.self) { icon in
                     ZStack(alignment: .topLeading) {
@@ -35,7 +35,7 @@ struct AlternativeIconView: View {
                             .resizable()
                             .frame(width: 100, height: 100)
                             .clipShape(RoundedRectangle(cornerRadius: 25))
-                            .shadow(color: vm.newAccentColor ,radius: 5, x: 5, y: 5)
+                            .shadow(color: Color.newAccentColor ,radius: 5, x: 5, y: 5)
                             .onTapGesture {
                                 vm.currentIndex = vm.icons.firstIndex(of: icon) ?? 0
                                 HapticEngineManager.instance.hapticNotification(with: .success)

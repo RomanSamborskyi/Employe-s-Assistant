@@ -215,7 +215,7 @@ func mediumCalendarWidget(_ entry: Provider.Entry, days: [String], columns: [Gri
                     Text(LocalizedStringKey(day))
                         .padding(.horizontal,Locale.preferredLanguages.first! == "uk-UA" ? 2.65 : 0)
                         .font(.system(size: 10.5, weight: .bold, design: .rounded))
-                        .foregroundStyle(Color.red)
+                        .foregroundStyle(entry.color).contrast(1.5)
                 }
             }
             LazyVGrid(columns: columns, spacing: 8) {

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct CustomPopOver: View {
-    
-    @ObservedObject var vm: SettingsViewModel
+
     @AppStorage("isDark") var isDark: Bool = false
     @Binding var trigerPopOver: Bool
     let text: String
+    let extraText: String?
     let iconName: String
     
     var body: some View {
@@ -20,8 +20,15 @@ struct CustomPopOver: View {
             HStack {
                 Image(systemName: iconName)
                     .font(.title)
-                    .foregroundStyle(vm.newAccentColor)
-                Text(text)
+                    .foregroundStyle(Color.newAccentColor)
+                VStack(alignment: .leading) {
+                    Text(text)
+                    if extraText != nil {
+                        Text(extraText!)
+                            .font(.callout)
+                            .foregroundStyle(Color.gray)
+                    }
+                }
             }.padding()
                 .background(
                     ZStack {
@@ -30,7 +37,7 @@ struct CustomPopOver: View {
                             //.frame(width: 330, height: 75)
                         RoundedRectangle(cornerRadius: 15)
                             .stroke(lineWidth: 3)
-                            .foregroundStyle(vm.newAccentColor)
+                            .foregroundStyle(Color.newAccentColor)
                             //.frame(width: 330, height: 75)
                     }
                 )

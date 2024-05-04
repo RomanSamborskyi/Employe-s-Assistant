@@ -22,15 +22,15 @@ struct BartMarkChartView: View {
                 case .hours:
                     BarMark(x: .value("Months", month.title ?? ""),
                              y: .value("Hours", month.totalHours ?? 0)
-                    ).foregroundStyle(Color.accentColor.gradient)
+                    ).foregroundStyle(Color.newAccentColor.gradient)
                 case .workingDays:
                     BarMark(x: .value("Months", month.title ?? ""),
                              y: .value("Days", month.days?.count ?? 0)
-                    ).foregroundStyle(Color.accentColor.gradient)
+                    ).foregroundStyle(Color.newAccentColor.gradient)
                 case .salary:
                     BarMark(x: .value("Months", month.title ?? ""),
                              y: .value("Salary", month.totalSalary ?? 0)
-                    ).foregroundStyle(Color.accentColor.gradient)
+                    ).foregroundStyle(Color.newAccentColor.gradient)
                 }
             }
         }

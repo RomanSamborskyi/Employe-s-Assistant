@@ -20,7 +20,7 @@ struct MoreDetailsOfDayView: View {
         VStack {
             Image(systemName: "info.bubble.fill")
                 .font(.system(size: 55, weight: .bold, design: .rounded))
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.newAccentColor)
             Text("Detail of a day:")
                 .font(.system(size: 40, weight: .bold, design: .rounded))
             Text(dateFormater.string(from: day.date ?? Date()))

@@ -11,7 +11,6 @@ struct ContentView: View {
     
     @State private var selectedTab: Tabs = .months
     @AppStorage("showOnboarding") private var showOnboarding: Bool = true
-    @StateObject var svm: SettingsViewModel = SettingsViewModel()
     
     var body: some View {
         TabView {
@@ -25,15 +24,16 @@ struct ContentView: View {
                 .tabItem {
                     Label("Statistic", systemImage: "chart.xyaxis.line")
                 }
-            SettingsMainView(vm: svm)
+            SettingsMainView()
                 .tag(selectedTab == .settings)
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
-        }.accentColor(svm.newAccentColor)
-            .fullScreenCover(isPresented: $showOnboarding) {
+        }
+        .tint(Color.newAccentColor)
+        .fullScreenCover(isPresented: $showOnboarding) {
                 OnboardingMainView()
-            }
+        }
     }
 }
 

@@ -16,7 +16,6 @@ class StatisticViewModel: ObservableObject {
     @Published var startFetchingData: Bool? = nil
     @Published var currentMonth: Month? = nil
     @Published var selectedIndex: Int = 0
-    @Published var newAccentColor: Color = .accentColor
     let monthViewModel: MonthsViewModel
     let dataManager: DataManager = DataManager.instanse
     var cancellable = Set<AnyCancellable>()
@@ -27,7 +26,6 @@ class StatisticViewModel: ObservableObject {
         self.monthViewModel = monthViewModel
         checkIfFetchingData()
         getMonths()
-        getColor()
     }
     
     func checkIfFetchingData() {
@@ -36,14 +34,6 @@ class StatisticViewModel: ObservableObject {
                 self.startFetchingData = vale
             }
             .store(in: &cancellable)
-    }
-    
-    func getColor() {
-        guard let components = UserDefaults.standard.value(forKey: key) as? [CGFloat] else { return }
-        let color = Color(.sRGB, red: components[0], green: components[1], blue: components[2], opacity: components[3] )
-        DispatchQueue.main.async {
-            self.newAccentColor = color
-        }
     }
     
     func getMonths() {

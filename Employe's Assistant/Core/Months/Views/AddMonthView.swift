@@ -19,7 +19,7 @@ struct AddMonthView: View {
         VStack {
             Image(systemName: "calendar.badge.plus")
                 .font(.system(size: 65, weight: .bold, design: .rounded))
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.newAccentColor)
             Text("Add new month:")
                 .font(.system(size: 35, weight: .bold, design: .rounded))
             HStack {
@@ -54,10 +54,10 @@ struct AddMonthView: View {
                     .padding()
                     .foregroundStyle(Color.white)
                     .frame(maxWidth: .infinity)
-                    .background(Color.accentColor)
+                    .background(Color.newAccentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
-        }.accentColor(vm.newAccentColor)
+        }.accentColor(Color.newAccentColor)
             .preferredColorScheme(isDark ? .dark : .light)
     }
 }

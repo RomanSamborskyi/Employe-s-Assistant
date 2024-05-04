@@ -30,7 +30,7 @@ struct CalendarView: View {
                     Text(LocalizedStringKey(day))
                         .padding(Locale.preferredLanguages.first! == "uk-UA" ? 10 : 8)
                         .font(.system(size: 18, weight: .bold, design: .rounded))
-                        .foregroundStyle(Color.red)
+                        .foregroundStyle(Color.newAccentColor).contrast(1.5)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                 }
@@ -41,16 +41,16 @@ struct CalendarView: View {
                         Text("")
                     } else {
                         Text("\(day.day)")
-                            .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? Color.accentColor : Color.primary)
+                            .foregroundStyle(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? Color.newAccentColor : Color.primary)
                             .fontWeight(dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) ? .bold : nil)
                             .background(vm.checkDays(day, month) ? RoundedRectangle(cornerRadius: 10)
                                 .frame(width: 35,height: 35)
-                                .foregroundStyle(Color.accentColor.opacity(0.5)) : nil )
+                                .foregroundStyle(Color.newAccentColor.opacity(0.5)) : nil )
                             .overlay {
                                 if dateFormatter.string(from: day.date) == dateFormatter.string(from: Date()) {
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(lineWidth: 3)
-                                        .foregroundStyle(Color.accentColor)
+                                        .foregroundStyle(Color.newAccentColor)
                                         .frame(width: 35, height: 35)
                                 }
                             }
@@ -75,13 +75,13 @@ struct CalendarView: View {
                     .font(.system(size: 25, weight: .bold, design: .rounded))
                 Image(systemName: "figure.step.training")
                     .font(.system(size: 25, weight: .bold, design: .rounded))
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(Color.newAccentColor)
             } .padding()
             ProgresBarView(vm: vm, month: month)
             Spacer()
         }.sheet(isPresented: $sheetIsPresented) {
             MoreDetailsOfDayView(day: vm.currentDay!)
-                .accentColor(vm.newAccentColor)
+                .accentColor(Color.newAccentColor)
                 .preferredColorScheme(isDark ? .dark : .light)
         }
         .confirmationDialog("", isPresented: $showConfirmationDialog, actions: {

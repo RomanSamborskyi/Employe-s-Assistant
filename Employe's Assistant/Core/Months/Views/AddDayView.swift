@@ -37,7 +37,7 @@ struct AddDayView: View {
             Image(systemName: "box.truck.badge.clock")
                 .padding()
                 .font(.system(size: 55, weight: .bold, design: .rounded))
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.newAccentColor)
             Text("Set up working hours:")
                 .font(.system(size: 30, weight: .bold, design: .rounded))
             HStack {
@@ -114,14 +114,14 @@ struct AddDayView: View {
                     .padding()
                     .foregroundStyle(Color.white)
                     .frame(maxWidth: .infinity)
-                    .background(Color.accentColor)
+                    .background(Color.newAccentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
-        }.accentColor(vm.newAccentColor)
+        }.tint(Color.newAccentColor)
             .preferredColorScheme(isDark ? .dark : .light)
             .overlay {
                 if showPopOver {
-                    CustomPopOver(vm: SettingsViewModel(), trigerPopOver: $showPopOver, text: NSLocalizedString(popOverTitle, comment: ""), iconName: "exclamationmark.square.fill")
+                    CustomPopOver(trigerPopOver: $showPopOver, text: NSLocalizedString(popOverTitle, comment: ""), extraText: nil, iconName: "exclamationmark.square.fill")
                         .transition(.move(edge: .top))
                 }
             }

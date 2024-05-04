@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsMainView: View {
     
-    @ObservedObject var vm: SettingsViewModel
+    @StateObject var vm: SettingsViewModel = SettingsViewModel()
     @AppStorage("isDark") var isDark: Bool = false
     @State private var setHours: Bool = false
     @State private var hourSalary: Double = 0

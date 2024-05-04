@@ -21,7 +21,7 @@ struct ProgresBarView: View {
                     .foregroundStyle(Color.gray)
                 RoundedRectangle(cornerRadius: 25)
                     .frame(width: width, height: 20)
-                    .foregroundStyle(Int32(vm.countHours(for: month) ?? 0) >= month.monthTarget ?? 0 ? Color.green.gradient : Color.accentColor.gradient)
+                    .foregroundStyle(Int32(vm.countHours(for: month) ?? 0) >= month.monthTarget ?? 0 ? Color.green.gradient : Color.newAccentColor.gradient)
             }
             Text(vm.countHoursTitle(for: month) ?? "")
                 .foregroundStyle(Color.primary)

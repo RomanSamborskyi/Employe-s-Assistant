@@ -23,7 +23,7 @@ struct MonthDetailView: View {
                     .frame(width: 95)
                 Circle()
                     .trim(from: 0.0 , to: CGFloat(vm.trimCalculation(for: month)))
-                    .stroke(Int32(month.totalHours ?? 0) >= month.monthTarget ?? 0 ? Color.green : Color.accentColor,style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                    .stroke(Int32(month.totalHours ?? 0) >= month.monthTarget ?? 0 ? Color.green : Color.newAccentColor,style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .frame(width: 95)
                     .rotationEffect(Angle(degrees: 270.0))
                     .animation(.linear, value: 0.2)
@@ -46,7 +46,7 @@ struct MonthDetailView: View {
                         .fontWeight(.bold)
                     Image(systemName: "info.bubble.fill")
                         .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(Color.newAccentColor)
                         .font(.title2)
                 }
                 HStack {
@@ -70,10 +70,10 @@ struct MonthDetailView: View {
                 HStack {
                     Text("Month target:")
                         .font(.caption)
-                        .foregroundColor(vm.newAccentColor)
+                        .foregroundColor(Color.newAccentColor)
                     Spacer(minLength: 25)
                     Text("\(month.monthTarget ?? 0)")
-                        .foregroundStyle(vm.newAccentColor)
+                        .foregroundStyle(Color.newAccentColor)
                 }
             }.onAppear {
                 withAnimation(Animation.bouncy(duration: 0.5)) {

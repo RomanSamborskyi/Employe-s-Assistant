@@ -14,7 +14,7 @@ struct LinearMarkChartMontView: View {
     @ObservedObject var vm: StatisticViewModel
     @State private var array: [Month] = []
     @Binding var selectedTab: StatisticType
-    let gradient: LinearGradient = LinearGradient(colors: [Color.accentColor, Color.clear], startPoint: .top, endPoint: .bottom)
+    let gradient: LinearGradient = LinearGradient(colors: [Color.newAccentColor, Color.clear], startPoint: .top, endPoint: .bottom)
     
     var body: some View {
         ZStack {
@@ -24,15 +24,15 @@ struct LinearMarkChartMontView: View {
                     case .hours:
                         LineMark(x: .value("Months", month.title ?? ""),
                                  y: .value("Hours", month.totalHours ?? 0)
-                        ).foregroundStyle(Color.accentColor.gradient)
+                        ).foregroundStyle(Color.newAccentColor.gradient)
                     case .workingDays:
                         LineMark(x: .value("Months", month.title ?? ""),
                                  y: .value("Days", month.days?.count ?? 0)
-                        ).foregroundStyle(Color.accentColor.gradient)
+                        ).foregroundStyle(Color.newAccentColor.gradient)
                     case .salary:
                         LineMark(x: .value("Months", month.title ?? ""),
                                  y: .value("Salary", month.totalSalary ?? 0)
-                        ).foregroundStyle(Color.accentColor.gradient)
+                        ).foregroundStyle(Color.newAccentColor.gradient)
                     }
                 }
             }
@@ -42,15 +42,15 @@ struct LinearMarkChartMontView: View {
                     case .hours:
                         PointMark(x: .value("Months", month.title ?? ""),
                                  y: .value("Hours", month.totalHours ?? 0)
-                        ).foregroundStyle(Color.accentColor.gradient)
+                        ).foregroundStyle(Color.newAccentColor.gradient)
                     case .workingDays:
                         PointMark(x: .value("Months", month.title ?? ""),
                                  y: .value("Days", month.days?.count ?? 0)
-                        ).foregroundStyle(Color.accentColor.gradient)
+                        ).foregroundStyle(Color.newAccentColor.gradient)
                     case .salary:
                         PointMark(x: .value("Months", month.title ?? ""),
                                  y: .value("Salary", month.totalSalary ?? 0)
-                        ).foregroundStyle(Color.accentColor.gradient)
+                        ).foregroundStyle(Color.newAccentColor.gradient)
                     }
                 }
             }

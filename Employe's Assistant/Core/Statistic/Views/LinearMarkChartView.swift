@@ -13,7 +13,7 @@ struct LinearMarkChartView: View {
     @ObservedObject var vm: StatisticViewModel
     @State var array: [Day] = []
     let month: Month
-    let gradient: LinearGradient = LinearGradient(colors: [Color.accentColor, Color.clear], startPoint: .top, endPoint: .bottom)
+    let gradient: LinearGradient = LinearGradient(colors: [Color.newAccentColor, Color.clear], startPoint: .top, endPoint: .bottom)
     
     var body: some View {
         VStack {
@@ -24,12 +24,12 @@ struct LinearMarkChartView: View {
                 ForEach(array, id: \.date) { hour in
                     LineMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
                              y: .value("Hours", hour.hours ?? 0)
-                    ).foregroundStyle(Color.accentColor.gradient)
+                    ).foregroundStyle(Color.newAccentColor.gradient)
                 }
                 ForEach(array, id: \.date) { hour in
                     PointMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),
                               y: .value("Hours", hour.hours ?? 0)
-                    ).foregroundStyle(Color.accentColor.gradient)
+                    ).foregroundStyle(Color.newAccentColor.gradient)
                 }
                 ForEach(array, id: \.date) { hour in
                     AreaMark(x: .value("Days", hour.date ?? Date(), unit: .day, calendar: .current),

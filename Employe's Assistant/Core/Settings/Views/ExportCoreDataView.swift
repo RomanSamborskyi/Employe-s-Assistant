@@ -35,9 +35,9 @@ struct ExportCoreDataView: View {
                         icon: { Image(systemName: "arrow.up") }
                     ).foregroundStyle(Color.primary)
                 }).padding()
-                    .background( RoundedRectangle(cornerRadius: 15).foregroundStyle(Color.accentColor))
+                    .background( RoundedRectangle(cornerRadius: 15).foregroundStyle(Color.newAccentColor))
             }.padding()
-                .background(RoundedRectangle(cornerRadius: 25).foregroundStyle(Color.accentColor.opacity(0.3)))
+                .background(RoundedRectangle(cornerRadius: 25).foregroundStyle(Color.newAccentColor.opacity(0.3)))
             VStack {
                 Text("Import backup file")
                     .font(.system(size: 35, weight: .bold, design: .rounded))
@@ -52,9 +52,9 @@ struct ExportCoreDataView: View {
                         icon: { Image(systemName: "arrow.down") }
                     ).foregroundStyle(Color.primary)
                 }).padding()
-                    .background( RoundedRectangle(cornerRadius: 15).foregroundStyle(Color.accentColor))
+                    .background( RoundedRectangle(cornerRadius: 15).foregroundStyle(Color.newAccentColor))
             }.padding()
-                .background(RoundedRectangle(cornerRadius: 25).foregroundStyle(Color.accentColor.opacity(0.3)))
+                .background(RoundedRectangle(cornerRadius: 25).foregroundStyle(Color.newAccentColor.opacity(0.3)))
             Spacer()
                 .frame(height: 130)
         }.onAppear {
@@ -79,7 +79,7 @@ struct ExportCoreDataView: View {
         }
         .overlay(content: {
             if showPopOver {
-                CustomPopOver(vm: vm, trigerPopOver: $showPopOver, text: popoverText, iconName: "checkmark.square.fill")
+                CustomPopOver(trigerPopOver: $showPopOver, text: popoverText, extraText: nil, iconName: "checkmark.square.fill")
             }
         })
     }

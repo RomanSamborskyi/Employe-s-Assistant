@@ -18,7 +18,7 @@ struct SetHourSalaryView: View {
         VStack {
             Image(systemName: "dollarsign")
                 .font(.system(size: 65, weight: .bold, design: .rounded))
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.newAccentColor)
             Text("Set your hour salary:")
                 .font(.system(size: 35, weight: .bold, design: .rounded))
                 .multilineTextAlignment(.center)
@@ -39,12 +39,12 @@ struct SetHourSalaryView: View {
                     .padding()
                     .foregroundStyle(Color.white)
                     .frame(maxWidth: .infinity)
-                    .background(Color.accentColor)
+                    .background(Color.newAccentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
                     .padding()
                     
             })
-        }.accentColor(vm.newAccentColor)
+        }.accentColor(Color.newAccentColor)
             .preferredColorScheme(isDark ? .dark : .light)
         .onAppear {
             self.text = String(vm.returnHourSalary())

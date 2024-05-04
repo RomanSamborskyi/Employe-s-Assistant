@@ -64,13 +64,13 @@ struct SegmentView: View {
                     .animation(.bouncy, value: showHours)
                     .background(
                      RoundedRectangle(cornerRadius: 10)
-                        .foregroundStyle(Color.accentColor.opacity(0.4))
+                        .foregroundStyle(Color.newAccentColor.opacity(0.4))
                     )
             }
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: 25)
                 .frame(height: height)
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.newAccentColor)
             Text(dateFormater.string(from: day.date ?? Date()))
                 .font(.system(size: 7))
                 .frame(width: 25)

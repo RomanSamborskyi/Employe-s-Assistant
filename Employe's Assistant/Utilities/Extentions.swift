@@ -5,7 +5,7 @@
 //  Created by Roman Samborskyi on 03.02.2024.
 //
 
-import UIKit
+import SwiftUI
 
 extension Date {
     func datesOfMonth() -> [Date] {
@@ -32,4 +32,10 @@ extension Date {
     }
 }
 
+extension Color {
+    static var newAccentColor: Color {
+        guard let components = UserDefaults.standard.value(forKey: "color") as? [CGFloat] else { return Color.accentColor }
+        return Color(.sRGB, red: components[0], green: components[1], blue: components[2], opacity: components[3] )
+    }
+}
 
