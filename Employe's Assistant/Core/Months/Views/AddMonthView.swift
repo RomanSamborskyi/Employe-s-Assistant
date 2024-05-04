@@ -61,7 +61,3 @@ struct AddMonthView: View {
             .preferredColorScheme(isDark ? .dark : .light)
     }
 }
-
-#Preview {
-    AddMonthView(vm: MonthsViewModel(), dissmiss: .constant(false))
-}

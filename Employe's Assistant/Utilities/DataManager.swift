@@ -13,6 +13,7 @@ actor DataManager {
     static let instanse: DataManager = DataManager()
     let coreData: CoreDataManager = CoreDataManager.instanse
     
+    private init() {  }
     
     func getMonths() async -> [Month]? {
         

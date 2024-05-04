@@ -18,7 +18,7 @@ class StatisticViewModel: ObservableObject {
     @Published var selectedIndex: Int = 0
     @Published var newAccentColor: Color = .accentColor
     let monthViewModel: MonthsViewModel
-    let dataManager = DataManager.instanse
+    let dataManager: DataManager = DataManager.instanse
     var cancellable = Set<AnyCancellable>()
     private let key: String = "color"
 

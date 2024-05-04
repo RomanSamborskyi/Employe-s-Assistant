@@ -9,13 +9,18 @@ import SwiftUI
 
 struct MonthsMainView: View {
     
-    @StateObject private var viewModel: MonthsViewModel = MonthsViewModel()
+    @StateObject private var viewModel: MonthsViewModel
     @State private var addNewMonth: Bool = false
     var dateFormater: DateFormatter = {
         var dateFormater: DateFormatter = DateFormatter()
         dateFormater.dateStyle = .medium
         return dateFormater
     }()
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: MonthsViewModel())
+    }
+    
     var body: some View {
         NavigationStack {
             List {

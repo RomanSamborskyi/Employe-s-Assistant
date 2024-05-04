@@ -11,7 +11,7 @@ import SwiftUI
 class MonthsViewModel: ObservableObject {
     
   
-    let dataManager = DataManager.instanse
+    let dataManager: DataManager = DataManager.instanse
     @Published var months: [Month] = []
     @Published var currentDay: Day? = nil
     @Published var newAccentColor: Color = .accentColor
