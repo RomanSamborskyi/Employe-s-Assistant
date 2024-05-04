@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
- 
+    
     @State private var selectedTab: Tabs = .months
     @AppStorage("showOnboarding") private var showOnboarding: Bool = true
     @StateObject var svm: SettingsViewModel = SettingsViewModel()

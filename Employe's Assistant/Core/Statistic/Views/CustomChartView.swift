@@ -26,10 +26,10 @@ struct CustomChartView: View {
                 }.frame(height: 130)
         }
         .onAppear {
-            if let array = month.days {
-                withAnimation(Animation.bouncy) {
-                    self.array = array.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
-                }
+            withAnimation(Animation.bouncy(duration: 0.5)) {
+                guard let month = vm.months.first(where: { $0.title == month.title }),
+                      let days = month.days else { return }
+                self.array = days.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
             }
         }
         .onChange(of: vm.selectedIndex) { index in

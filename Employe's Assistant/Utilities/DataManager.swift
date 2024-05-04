@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 
-class DataManager {
+actor DataManager {
     static let instanse: DataManager = DataManager()
     let coreData: CoreDataManager = CoreDataManager.instanse
     
@@ -32,7 +32,7 @@ class DataManager {
         
     }
     
-    func fetchMonths() -> [MonthEntity] {
+   nonisolated func fetchMonths() -> [MonthEntity] {
         let request = NSFetchRequest<MonthEntity>(entityName: coreData.monthsEntety)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \MonthEntity.date, ascending: false)]
         do {
@@ -43,7 +43,7 @@ class DataManager {
         }
     }
     
-    func addToCoreDataMonth(month: Month) {
+    nonisolated func addToCoreDataMonth(month: Month) {
         let coreDataMonth = MonthEntity(context: coreData.context)
         coreDataMonth.title = month.title ?? ""
         coreDataMonth.monthTarget = month.monthTarget ?? 0
@@ -51,7 +51,7 @@ class DataManager {
         save()
     }
     
-    func addHoursToCoreData(month: Month, day: Day, hour: String, minutes: String, convertInToMinutes: Int) {
+    nonisolated func addHoursToCoreData(month: Month, day: Day, hour: String, minutes: String, convertInToMinutes: Int) {
         let coreDataDay = DayEntity(context: coreData.context)
         guard let coreDataMonth = fetchMonths().first(where: { $0.title ?? "" == month.title}) else { return }
         
@@ -73,14 +73,14 @@ class DataManager {
         save()
     }
     
-    func updateTotalSalaryAndHours(month: Month, totalSalary: Double, totalHours: Double) {
+   nonisolated func updateTotalSalaryAndHours(month: Month, totalSalary: Double, totalHours: Double) {
         guard let coreDataMonth = fetchMonths().first(where: { $0.title == month.title }) else { return }
         coreDataMonth.totalHours = totalHours
         coreDataMonth.totalSalary = totalSalary
         save()
     }
     
-    func delete(day: Day, month: Month) {
+    nonisolated func delete(day: Day, month: Month) {
         guard let coreDataMonth = fetchMonths().first(where: { $0.title ?? "" == month.title}),
               let coreDataDaysarray = coreDataMonth.day?.allObjects as? [DayEntity],
               let coreDataItem = coreDataDaysarray.first(where: { $0.date == day.date })
@@ -89,13 +89,13 @@ class DataManager {
         save()
     }
     
-    func delete(month: Month) {
+    nonisolated  func delete(month: Month) {
         guard let month = fetchMonths().first(where: { $0.title ?? "" == month.title}) else { return }
         coreData.context.delete(month)
         save()
     }
     
-    func save() {
+    nonisolated func save() {
         coreData.save()
     }
 }
