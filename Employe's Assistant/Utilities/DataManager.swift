@@ -32,7 +32,7 @@ actor DataManager {
         
     }
     
-   nonisolated  func fetchMonths() -> [MonthEntity] {
+   nonisolated func fetchMonths() -> [MonthEntity] {
         let request = NSFetchRequest<MonthEntity>(entityName: coreData.monthsEntety)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \MonthEntity.date, ascending: false)]
         do {
@@ -73,7 +73,7 @@ actor DataManager {
         save()
     }
     
-    nonisolated func updateTotalSalaryAndHours(month: Month, totalSalary: Double, totalHours: Double) {
+   nonisolated func updateTotalSalaryAndHours(month: Month, totalSalary: Double, totalHours: Double) {
         guard let coreDataMonth = fetchMonths().first(where: { $0.title == month.title }) else { return }
         coreDataMonth.totalHours = totalHours
         coreDataMonth.totalSalary = totalSalary
@@ -89,7 +89,7 @@ actor DataManager {
         save()
     }
     
-    nonisolated func delete(month: Month) {
+    nonisolated  func delete(month: Month) {
         guard let month = fetchMonths().first(where: { $0.title ?? "" == month.title}) else { return }
         coreData.context.delete(month)
         save()
