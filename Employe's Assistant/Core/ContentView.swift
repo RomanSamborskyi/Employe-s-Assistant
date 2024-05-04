@@ -32,7 +32,7 @@ struct ContentView: View {
                 }
         }.accentColor(svm.newAccentColor)
             .fullScreenCover(isPresented: $showOnboarding) {
-                OnboardingMainView(hideOnboarding: $showOnboarding)
+                OnboardingMainView()
             }
     }
 }

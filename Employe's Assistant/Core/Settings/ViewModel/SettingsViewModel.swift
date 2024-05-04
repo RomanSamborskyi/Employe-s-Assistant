@@ -12,7 +12,6 @@ import CoreData
 
 class SettingsViewModel: ObservableObject {
     
-    static let instance: SettingsViewModel = SettingsViewModel()
     let coreData: CoreDataManager = CoreDataManager.instanse
     
     @Published var currentIndex: Int = 0

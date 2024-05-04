@@ -13,12 +13,15 @@ struct OnboardingMainView: View {
     
     @State var viewNumber: OnboardingPages = .first
     @State private var selectedMonth: Monthes = .empty
-    @StateObject private var vm: OnboardingViewModel = OnboardingViewModel()
-    
+    @StateObject private var vm: OnboardingViewModel
     @State private var targetText: String = ""
     @State private var hourSalary: String = ""
-    @Binding var hideOnboarding: Bool
-   
+    
+    @Environment(\.dismiss) var dissmiss
+    init() {
+        _vm = StateObject(wrappedValue: OnboardingViewModel(monthsViewModel: MonthsViewModel(), settingsViewModel: SettingsViewModel()))
+    }
+    
     var body: some View {
         VStack {
             switch viewNumber {
@@ -40,22 +43,22 @@ struct OnboardingMainView: View {
                     switch viewNumber {
                     case .first:
                         withAnimation(Animation.bouncy) {
-                            self.hideOnboarding = false
+                            dissmiss.callAsFunction()
                             HapticEngineManager.instance.makeFeadback(with: .rigid)
                         }
                     case .second:
                         withAnimation(Animation.bouncy) {
-                            self.hideOnboarding = false
+                            dissmiss.callAsFunction()
                             HapticEngineManager.instance.makeFeadback(with: .rigid)
                         }
                     case .thread:
                         withAnimation(Animation.bouncy) {
-                            self.hideOnboarding = false
+                            dissmiss.callAsFunction()
                             HapticEngineManager.instance.makeFeadback(with: .rigid)
                         }
                     case .fourth:
                         withAnimation(Animation.bouncy) {
-                            self.hideOnboarding = false
+                            dissmiss.callAsFunction()
                             HapticEngineManager.instance.makeFeadback(with: .rigid)
                         }
                     }
@@ -103,7 +106,7 @@ struct OnboardingMainView: View {
                             vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
                             vm.setHourSalary(salary: Double(hourSalary) ?? 0)
                             HapticEngineManager.instance.hapticNotification(with: .success)
-                            self.hideOnboarding = false
+                            dissmiss.callAsFunction()
                         }
                     }
                 }, label: {

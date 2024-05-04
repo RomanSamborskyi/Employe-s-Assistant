@@ -10,8 +10,14 @@ import Foundation
 
 class OnboardingViewModel: ObservableObject {
     
-    private let monthsViewModel: MonthsViewModel = MonthsViewModel.instance
-    private let settingsViewModel: SettingsViewModel = SettingsViewModel.instance
+    
+    let monthsViewModel: MonthsViewModel
+    let settingsViewModel: SettingsViewModel
+    
+    init(monthsViewModel: MonthsViewModel, settingsViewModel: SettingsViewModel) {
+        self.monthsViewModel = monthsViewModel
+        self.settingsViewModel = settingsViewModel
+    }
     
     
     func addNewMonth(title: String, monthTarget: Int32) {

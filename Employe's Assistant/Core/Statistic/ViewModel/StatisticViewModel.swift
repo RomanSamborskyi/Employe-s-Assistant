@@ -18,6 +18,7 @@ class StatisticViewModel: ObservableObject {
     @Published var selectedIndex: Int = 0
     @Published var newAccentColor: Color = .accentColor
     let monthViewModel: MonthsViewModel
+    let dataManager = DataManager.instanse
     var cancellable = Set<AnyCancellable>()
     private let key: String = "color"
 
@@ -46,11 +47,15 @@ class StatisticViewModel: ObservableObject {
     }
     
     func getMonths() {
-        monthViewModel.$months
-           .sink { [weak self] month in
-            self?.months = month
+        Task {
+            if let array = await dataManager.getMonths() {
+                await MainActor.run {
+                    withAnimation(Animation.bouncy) {
+                        self.months = array
+                    }
+                }
             }
-           .store(in: &cancellable)
+        }
     }
     
     var dateFormater: DateFormatter = {

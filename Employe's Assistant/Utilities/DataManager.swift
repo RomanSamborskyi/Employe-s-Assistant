@@ -32,7 +32,7 @@ actor DataManager {
         
     }
     
-   nonisolated func fetchMonths() -> [MonthEntity] {
+    nonisolated func fetchMonths() -> [MonthEntity] {
         let request = NSFetchRequest<MonthEntity>(entityName: coreData.monthsEntety)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \MonthEntity.date, ascending: false)]
         do {

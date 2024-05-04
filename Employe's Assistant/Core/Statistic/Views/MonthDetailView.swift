@@ -81,6 +81,7 @@ struct MonthDetailView: View {
                         self.count = array.count
                     }
                     vm.monthViewModel.getMonths()
+                    vm.getMonths()
               }
            }
             .onChange(of: vm.currentMonth, perform: { month in
