@@ -24,6 +24,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Statistic", systemImage: "chart.xyaxis.line")
                 }
+                
             SettingsMainView()
                 .tag(selectedTab == .settings)
                 .tabItem {
