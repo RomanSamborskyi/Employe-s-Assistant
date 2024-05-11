@@ -16,8 +16,8 @@ struct CustomPopOver: View {
     let iconName: String
     
     var body: some View {
-        VStack(alignment: .center) {
-            HStack {
+        VStack {
+            HStack(alignment: .top, spacing: 25) {
                 Image(systemName: iconName)
                     .font(.title)
                     .foregroundStyle(Color.newAccentColor)
@@ -29,20 +29,26 @@ struct CustomPopOver: View {
                             .foregroundStyle(Color.gray)
                     }
                 }
-            }.padding()
-                .background(
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .foregroundStyle(isDark ? .black : .white)
-                            //.frame(width: 330, height: 75)
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(lineWidth: 3)
-                            .foregroundStyle(Color.newAccentColor)
-                            //.frame(width: 330, height: 75)
-                    }
-                )
+                Spacer()
+            }
+            .padding()
+            .background(
+                ZStack {
+                    RoundedRectangle(cornerRadius: 15)
+                        .foregroundStyle(isDark ? .black : .white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 80)
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(lineWidth: 3)
+                        .foregroundStyle(Color.newAccentColor)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 80)
+                }
+            )
+            .padding()
             Spacer()
-        }.onAppear {
+        }
+        .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 withAnimation(Animation.bouncy) {
                     self.trigerPopOver = false

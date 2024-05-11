@@ -11,6 +11,7 @@ struct AddMonthView: View {
     
     @AppStorage("isDark") var isDark: Bool = false
     @State private var targetText: String = ""
+    @State private var showPopOver: Bool = false
     @State private var selectedMonth: Monthes = .empty
     @ObservedObject var vm: MonthsViewModel
     @Binding var dissmiss: Bool
@@ -46,9 +47,18 @@ struct AddMonthView: View {
             }.padding()
             
             Button(action: {
-                vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
-                HapticEngineManager.instance.hapticNotification(with: .success)
-                self.dissmiss = false
+                switch selectedMonth {
+                case .empty:
+                    withAnimation(Animation.bouncy) {
+                        self.showPopOver.toggle()
+                    }
+                default:
+                    withAnimation(Animation.bouncy) {
+                        vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
+                        HapticEngineManager.instance.hapticNotification(with: .success)
+                        self.dissmiss = false
+                    }
+                }
             }, label: {
                 Text("SAVE")
                     .padding()
@@ -57,7 +67,13 @@ struct AddMonthView: View {
                     .background(Color.newAccentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
-        }.accentColor(Color.newAccentColor)
-            .preferredColorScheme(isDark ? .dark : .light)
+        }
+        .accentColor(Color.newAccentColor)
+        .preferredColorScheme(isDark ? .dark : .light)
+        .overlay {
+            if showPopOver {
+               CustomPopOver(trigerPopOver: $showPopOver, text: NSLocalizedString("Please, select a month", comment: ""), extraText: "", iconName: "exclamationmark.square")
+            }
+        }
     }
 }

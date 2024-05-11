@@ -6,6 +6,7 @@
 "SAVE" = "ЗБЕРЕГТИ";
 "Months" = "Місяці";
 "There are no months added" = "Немає доданих місяців";
+"Please, select a month" = "Будь ласка, виберіть місяць";
 //Day detail view
 "Delete" = "Видадити";
 "The list is empty" = "Список порожній";
