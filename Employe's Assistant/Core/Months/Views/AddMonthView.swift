@@ -15,7 +15,14 @@ struct AddMonthView: View {
     @State private var selectedMonth: Monthes = .empty
     @ObservedObject var vm: MonthsViewModel
     @Binding var dissmiss: Bool
-    
+    var popOverTitle: String {
+        if selectedMonth == .empty {
+            return NSLocalizedString("Please, select a month", comment: "")
+        } else if vm.ifContain(month: selectedMonth.description) {
+           return NSLocalizedString("The month is already exist", comment: "")
+        }
+        return "Empty popOver"
+    }
     var body: some View {
         VStack {
             Image(systemName: "calendar.badge.plus")
@@ -51,12 +58,18 @@ struct AddMonthView: View {
                 case .empty:
                     withAnimation(Animation.bouncy) {
                         self.showPopOver.toggle()
+                        HapticEngineManager.instance.hapticNotification(with: .error)
                     }
                 default:
                     withAnimation(Animation.bouncy) {
-                        vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
-                        HapticEngineManager.instance.hapticNotification(with: .success)
-                        self.dissmiss = false
+                        if vm.ifContain(month: selectedMonth.description) {
+                            self.showPopOver.toggle()
+                            HapticEngineManager.instance.hapticNotification(with: .error)
+                        } else {
+                            vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
+                            HapticEngineManager.instance.hapticNotification(with: .success)
+                            self.dissmiss = false
+                        }
                     }
                 }
             }, label: {
@@ -72,7 +85,7 @@ struct AddMonthView: View {
         .preferredColorScheme(isDark ? .dark : .light)
         .overlay {
             if showPopOver {
-               CustomPopOver(trigerPopOver: $showPopOver, text: NSLocalizedString("Please, select a month", comment: ""), extraText: "", iconName: "exclamationmark.square")
+               CustomPopOver(trigerPopOver: $showPopOver, text: popOverTitle, extraText: "", iconName: "exclamationmark.square")
             }
         }
     }

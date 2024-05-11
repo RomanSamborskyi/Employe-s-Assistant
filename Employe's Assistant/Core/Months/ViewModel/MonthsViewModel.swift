@@ -35,6 +35,30 @@ class MonthsViewModel: ObservableObject {
         }
     }
     
+    func ifContainDay(in month: Month, date: Date) -> Bool {
+        guard let monthArray = months.first(where: { $0.title == month.title }),
+              let days = monthArray.days else { return false }
+        
+        let dateFormatter: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            return dateFormatter
+        }()
+        
+        return days.contains(where: { dateFormatter.string(from: $0.date ?? Date()) == dateFormatter.string(from: date) })
+    }
+    
+    func ifContain(month: String) -> Bool {
+        let dateFormater: DateFormatter = {
+            let dateFormater: DateFormatter = DateFormatter()
+            dateFormater.dateStyle = .full
+            dateFormater.dateFormat = " YYYY"
+            return dateFormater
+        }()
+        let comparableMonth = month + dateFormater.string(from: Date())
+        return months.contains(where: { localizedMonthTitle(title: $0.title) == comparableMonth })
+    }
+    
     func getCurrentDay(_ day: CalendarDates?, _ month: Month) {
         let array = months.first(where: { $0.title == month.title })?.days
        
