@@ -6,6 +6,8 @@
 "SAVE" = "ЗБЕРЕГТИ";
 "Months" = "Місяці";
 "There are no months added" = "Немає доданих місяців";
+"Please, select a month" = "Будь ласка, виберіть місяць";
+"The month is already exist" = "Місяць вже існує";
 //Day detail view
 "Delete" = "Видадити";
 "The list is empty" = "Список порожній";
@@ -27,6 +29,7 @@
 "Pause time:" = "Час на обід:";
 "Date: " = "Дата:";
 "SAVE" = "ЗБЕРЕГТИ";
+"You already added this day" = "Ви вже додали цей день";
 
 //Month detail view
 "Month details" = "Деталі місяця";

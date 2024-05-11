@@ -11,10 +11,18 @@ struct AddMonthView: View {
     
     @AppStorage("isDark") var isDark: Bool = false
     @State private var targetText: String = ""
+    @State private var showPopOver: Bool = false
     @State private var selectedMonth: Monthes = .empty
     @ObservedObject var vm: MonthsViewModel
     @Binding var dissmiss: Bool
-    
+    var popOverTitle: String {
+        if selectedMonth == .empty {
+            return NSLocalizedString("Please, select a month", comment: "")
+        } else if vm.ifContain(month: selectedMonth.description) {
+           return NSLocalizedString("The month is already exist", comment: "")
+        }
+        return "Empty popOver"
+    }
     var body: some View {
         VStack {
             Image(systemName: "calendar.badge.plus")
@@ -46,9 +54,24 @@ struct AddMonthView: View {
             }.padding()
             
             Button(action: {
-                vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
-                HapticEngineManager.instance.hapticNotification(with: .success)
-                self.dissmiss = false
+                switch selectedMonth {
+                case .empty:
+                    withAnimation(Animation.bouncy) {
+                        self.showPopOver.toggle()
+                        HapticEngineManager.instance.hapticNotification(with: .error)
+                    }
+                default:
+                    withAnimation(Animation.bouncy) {
+                        if vm.ifContain(month: selectedMonth.description) {
+                            self.showPopOver.toggle()
+                            HapticEngineManager.instance.hapticNotification(with: .error)
+                        } else {
+                            vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
+                            HapticEngineManager.instance.hapticNotification(with: .success)
+                            self.dissmiss = false
+                        }
+                    }
+                }
             }, label: {
                 Text("SAVE")
                     .padding()
@@ -57,7 +80,13 @@ struct AddMonthView: View {
                     .background(Color.newAccentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
-        }.accentColor(Color.newAccentColor)
-            .preferredColorScheme(isDark ? .dark : .light)
+        }
+        .accentColor(Color.newAccentColor)
+        .preferredColorScheme(isDark ? .dark : .light)
+        .overlay {
+            if showPopOver {
+               CustomPopOver(trigerPopOver: $showPopOver, text: popOverTitle, extraText: "", iconName: "exclamationmark.square")
+            }
+        }
     }
 }

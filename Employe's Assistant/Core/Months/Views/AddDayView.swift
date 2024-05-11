@@ -27,6 +27,8 @@ struct AddDayView: View {
             title = "Set all required fields"
         } else if startHours == .zero || endHours == .zero {
             title = "Set up start and end hours"
+        } else if vm.ifContainDay(in: month, date: date) {
+            title = "You already added this day"
         } else if date > Date() {
             title = "This day is in the future"
         }
@@ -96,13 +98,13 @@ struct AddDayView: View {
                 DatePickerVIew(date: $date)
             }
             Button(action: {
-                if startHours == .zero || endHours == .zero || date > Date() {
+                if startHours == .zero || endHours == .zero || date > Date() || vm.ifContainDay(in: month, date: date) {
                     withAnimation(Animation.bouncy) {
                         self.showPopOver.toggle()
                         HapticEngineManager.instance.hapticNotification(with: .error)
                     }
                 } else {
-                    withAnimation(Animation.spring) {
+                    withAnimation(Animation.bouncy) {
                         self.dissmiss = false
                     }
                     vm.addHours(month: month, startHours: Int32(startHours.description) ?? 0, startMinutes: Int32(startMinutes.description) ?? 0, endHours: Int32(endHours.description) ?? 0, endMinutes: Int32(endMinutes.description) ?? 0, pauseTime: Int32(pauseTime.description) ?? 0, date: date)
