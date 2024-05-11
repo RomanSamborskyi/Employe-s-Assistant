@@ -7,7 +7,9 @@
 
 import SwiftUI
 
+
 extension Date {
+    ///Create an array of date from current month
     func datesOfMonth() -> [Date] {
         let calendar = Calendar.current
         let currentMonth = calendar.component(.month, from: self)
@@ -33,6 +35,7 @@ extension Date {
 }
 
 extension Color {
+    ///Setting new accent color to use across the app
     static var newAccentColor: Color {
         guard let components = UserDefaults.standard.value(forKey: "color") as? [CGFloat] else { return Color.accentColor }
         return Color(.sRGB, red: components[0], green: components[1], blue: components[2], opacity: components[3] )

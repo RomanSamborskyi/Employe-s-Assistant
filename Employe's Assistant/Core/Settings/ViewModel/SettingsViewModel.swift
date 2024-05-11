@@ -27,7 +27,7 @@ class SettingsViewModel: ObservableObject {
             self.currentIndex = icons.firstIndex(of: currentIcon) ?? 0
         }
     }
-    
+   ///Function to restore a data from hardcored json file, need becouse sendbox doesnt work on real device
 //    func forseRestore() {
 //        let file = "jsonFileExp"
 //        
@@ -46,7 +46,7 @@ class SettingsViewModel: ObservableObject {
 //            print("error of restoring: \(error.localizedDescription)")
 //        }
 //    }
-    
+    ///Import backup json file from device to app, decoded it and save to core data
     func importJSONFile(_ url: URL) {
         do {
             print(url)
@@ -60,7 +60,7 @@ class SettingsViewModel: ObservableObject {
             print("Error of importing json: \(error.localizedDescription)")
         }
     }
-    
+    ///Delete temporary file after saving json file
     func delteTempFile(_ url: URL) {
         do {
             try FileManager.default.removeItem(at: url)
@@ -68,7 +68,7 @@ class SettingsViewModel: ObservableObject {
             print(error.localizedDescription)
         }
     }
-    
+    ///Export backup json file to "Files" app on device
     func exportCoreData() -> URL {
         
         var url: URL = URL(string: "google.com")!
@@ -93,7 +93,7 @@ class SettingsViewModel: ObservableObject {
         }
         return url
     }
-    
+    ///Check what icon currently setted
     func checkIcon(icon: String?) -> Bool  {
         var boolValue: Bool = false
         if UIApplication.shared.alternateIconName == nil && currentIndex == icons.firstIndex(of: icon) || icon == UIApplication.shared.alternateIconName {
@@ -101,7 +101,7 @@ class SettingsViewModel: ObservableObject {
         }
         return boolValue
     }
-    
+    ///Get list of alternative icons names
     func getAlternativeAppIcon() {
         if let icons = Bundle.main.object(forInfoDictionaryKey: "CFBundleIcons") as? [String: Any], let alternativeIcons = icons["CFBundleAlternateIcons"] as? [String: Any] {
             for (_,value) in alternativeIcons {
@@ -112,7 +112,7 @@ class SettingsViewModel: ObservableObject {
             }
         }
     }
-    
+    ///Get collor from USerDefaults and set it in to local publisher
     func getColor() {
         guard let components = UserDefaults.standard.value(forKey: key) as? [CGFloat] else { return }
         let color = Color(.sRGB, red: components[0], green: components[1], blue: components[2], opacity: components[3] )
@@ -120,15 +120,15 @@ class SettingsViewModel: ObservableObject {
             self.newAccentColor = color
         }
     }
-    
+    ///Save hour salary in to UserDefaults
     func saveHourSalary(_ newValue: Double) {
         UserDefaults.standard.setValue(newValue, forKey: "hourSalary")
     }
-    
+    ///Function return hour salary from UserDefaults
     func returnHourSalary() -> Double {
         return UserDefaults.standard.double(forKey: "hourSalary")
     }
-    
+    ///Add new accent color to UserDefaults and Core data
     func addToUserDefaults() {
         let savedColor = UIColor(newAccentColor).cgColor
         if let component = savedColor.components {
@@ -141,7 +141,7 @@ class SettingsViewModel: ObservableObject {
             coreData.save()
         }
     }
-    
+    ///Function to reset accent color in to default value(Color.accentColor)
     func resetAccenrColor() {
         let color = UIColor(Color.accentColor).cgColor
         

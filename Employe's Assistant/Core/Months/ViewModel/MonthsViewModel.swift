@@ -21,6 +21,8 @@ class MonthsViewModel: ObservableObject {
         getMonths()
     }
 
+    
+    ///Fetching moths form database in to local publisher
     func getMonths() {
         self.startFetchingData = true
         Task {
@@ -34,7 +36,7 @@ class MonthsViewModel: ObservableObject {
             }
         }
     }
-    
+    ///Check if specific month contain a specific day
     func ifContainDay(in month: Month, date: Date) -> Bool {
         guard let monthArray = months.first(where: { $0.title == month.title }),
               let days = monthArray.days else { return false }
@@ -47,7 +49,7 @@ class MonthsViewModel: ObservableObject {
         
         return days.contains(where: { dateFormatter.string(from: $0.date ?? Date()) == dateFormatter.string(from: date) })
     }
-    
+    ///Check if database containe specific month
     func ifContain(month: String) -> Bool {
         let dateFormater: DateFormatter = {
             let dateFormater: DateFormatter = DateFormatter()
@@ -58,7 +60,7 @@ class MonthsViewModel: ObservableObject {
         let comparableMonth = month + dateFormater.string(from: Date())
         return months.contains(where: { localizedMonthTitle(title: $0.title) == comparableMonth })
     }
-    
+    ///Get current day for tap gestrue in Calendar view, for display details or delete selected day
     func getCurrentDay(_ day: CalendarDates?, _ month: Month) {
         let array = months.first(where: { $0.title == month.title })?.days
        
@@ -73,7 +75,7 @@ class MonthsViewModel: ObservableObject {
         guard let firsDay = array?.firstIndex(where: { dateFormatter.string(from: $0.date ?? Date()) == dayDate }) else { return }
         self.currentDay = array?[firsDay]
     }
-    
+    ///Check if database contain day from calendar
     func checkDays(_ day: CalendarDates?, _ month: Month) -> Bool {
         let array = months.first(where: { $0.title == month.title })?.days
         var tempBool: Bool = false
@@ -93,7 +95,7 @@ class MonthsViewModel: ObservableObject {
         }
         return tempBool
     }
-    
+    ///Fetch dates from calendar to custom type CalendarDates
     func fetchDates(_ month: Month) -> [CalendarDates] {
         let current = Calendar.current
        
@@ -116,7 +118,7 @@ class MonthsViewModel: ObservableObject {
         
         return monthDays
     }
-    
+    ///Get cuurent month from months in database whch match to current calendar month
     func getCurrentMont(_ selectedMonth: Month) -> Date {
         let calendar = Calendar.current
 
@@ -134,7 +136,7 @@ class MonthsViewModel: ObservableObject {
         
         return Date()
     }
-    
+    ///Function which return localizable title of a month from database
     func localizedMonthTitle(title: String?) -> String {
         guard let title = title else { return "no title" }
         let indexOfSpace = title.firstIndex(of: " ") ?? title.endIndex
@@ -142,7 +144,7 @@ class MonthsViewModel: ObservableObject {
         let yaer = title[indexOfSpace...]
         return NSLocalizedString(String(clearTitle), comment: "") + String(yaer)
     }
-    
+    ///Count of ohirs for specific month
     func countHours(for month: Month) -> Double? {
         guard let daysArray = months.first(where: { $0.title == month.title })?.days else { return nil }
         var hoursArray: [Double] = []
@@ -152,12 +154,12 @@ class MonthsViewModel: ObservableObject {
         }
         return hoursArray.reduce(0,+) / 60
     }
-    
+    ///Count a salary for specific month
     func countSalary(for month: Month) -> Double? {
         guard let totalHours = countHours(for: month) else { return nil }
         return totalHours * UserDefaults.standard.double(forKey: "hourSalary")
     }
-    
+    ///Calculation of prgress bar length
     func progressBar(for month: Month, width: CGFloat) -> CGFloat {
         let target = month.monthTarget ?? 0
         let curentHours = countHours(for: month) ?? 0
@@ -170,7 +172,7 @@ class MonthsViewModel: ObservableObject {
             return CGFloat(percent)
         }
      }
-    
+    ///Counting a hours for specific month.Function return a string value of total hours in hour format
     func countHoursTitle(for month: Month) -> String? {
         guard let daysArray = months.first(where: { $0.title == month.title })?.days else { return nil }
         var hoursArray: [Double] = []
@@ -191,8 +193,7 @@ class MonthsViewModel: ObservableObject {
         }
         return "\(hour):\(convertInToMonute)"
     }
-  
-    
+    ///Add a new month.Function also contain method to add a new month to database
     func addNewMonth(title: String, monthTarget: Int32) {
         let dateFormater: DateFormatter = {
             let dateFormater: DateFormatter = DateFormatter()
@@ -209,8 +210,7 @@ class MonthsViewModel: ObservableObject {
         dataManager.addToCoreDataMonth(month: newMonth)
         getMonths()
     }
-    
-    
+    ///Add a new day.Function also contain method to add a new day to database
     func addHours(month: Month, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
         guard var currentMonth = months.first(where: { $0.title == month.title }) else { return }
         var newDay = Day()
@@ -243,7 +243,7 @@ class MonthsViewModel: ObservableObject {
         dataManager.addHoursToCoreData(month: currentMonth, day: newDay, hour: String(hour), minutes: minuteToString, convertInToMinutes: convertInToMinutes)
         getMonths()
     }
-    
+    ///Deleting a day from database,
     func deleteDay(month: Month, day: Day) {
             guard let index = months.first(where: { $0.title == month.title })?.days?.firstIndex(of: day),
                   var  daysArray = months.first(where: { $0.title == month.title })?.days
@@ -252,7 +252,7 @@ class MonthsViewModel: ObservableObject {
             daysArray.remove(at: index)
             getMonths()
     }
-    
+    ///Deleting a month from database
     func deleteMonth(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
         let month = months[index]

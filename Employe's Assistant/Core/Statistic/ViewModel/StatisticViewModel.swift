@@ -27,7 +27,7 @@ class StatisticViewModel: ObservableObject {
         checkIfFetchingData()
         getMonths()
     }
-    
+    ///Listening to publisher in MonthViewModel, which represent a state when starting fetching data from database
     func checkIfFetchingData() {
         monthViewModel.$startFetchingData
             .sink { vale in
@@ -35,7 +35,7 @@ class StatisticViewModel: ObservableObject {
             }
             .store(in: &cancellable)
     }
-    
+    ///Fetch months from database to local publisher
     func getMonths() {
         Task {
             if let array = await dataManager.getMonths() {
@@ -47,13 +47,13 @@ class StatisticViewModel: ObservableObject {
             }
         }
     }
-    
+    ///Date formater which represent date if format: MMMM yyyy
     var dateFormater: DateFormatter = {
         var dateFormater: DateFormatter = DateFormatter()
         dateFormater.dateFormat = "LLLL yyyy"
         return dateFormater
     }()
-    
+    ///Calculation of trim on MonthDetailView circle progress bar
     func trimCalculation(for month: Month) -> CGFloat {
         if let month = months.first(where: { $0.title == month.title }) {
             let hours = month.totalHours ?? 0
@@ -63,7 +63,7 @@ class StatisticViewModel: ObservableObject {
         }
         return 0
     }
-    
+    ///Function which return localizable title of a month from database
     func localizedMonthTitle(title: String?) -> String {
         guard let title = title else { return "" }
         let indexOfSpace = title.firstIndex(of: " ") ?? title.endIndex
@@ -71,7 +71,7 @@ class StatisticViewModel: ObservableObject {
         let yaer = title[indexOfSpace...]
         return NSLocalizedString(String(clearTitle), comment: "") + String(yaer)
     }
-    
+    ///Get cuurent month from database which match to current calendar month and set it in to localc publisher
     func getCurrentMonth() {
         guard let index = self.months.firstIndex(where: { self.localizedMonthTitle(title: $0.title) == self.dateFormater.string(from: Date()).capitalized }) else {
                 return
@@ -79,7 +79,7 @@ class StatisticViewModel: ObservableObject {
         self.currentMonth = self.months[index]
         self.selectedIndex = index
     }
-    
+    ///Calculation height for custom chart
     func calculateSegmentHeight(day: Day) -> CGFloat? {
         guard let array = currentMonth?.days else { return nil }
         guard let max = array.max(by: { $0.hours ?? 0 < $1.hours ?? 0 }) else { return 0 }
@@ -87,7 +87,7 @@ class StatisticViewModel: ObservableObject {
         let maxHeight: CGFloat = CGFloat((max.hours ?? 0) + 3)
         return CGFloat(dayHours) / maxHeight * 100
     }
-    
+    ///Calculation height for custom chart which depend of type of specific tab 
     func calculateHeight(_ month: Month, selectedTab: StatisticType) -> CGFloat? {
         switch selectedTab {
         case .hours:

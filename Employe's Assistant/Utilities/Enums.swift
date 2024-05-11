@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+//List of view in month detail view
 enum SelectView: String, Identifiable, CaseIterable {
     var id: Self { self }
     case list, calendar
@@ -21,7 +21,7 @@ enum SelectView: String, Identifiable, CaseIterable {
         }
     }
 }
-
+//Type of statistic in statistic view
 enum StatisticType: String, Identifiable, CaseIterable {
     var id: Self { self }
     case hours, workingDays, salary
@@ -37,11 +37,11 @@ enum StatisticType: String, Identifiable, CaseIterable {
         }
     }
 }
-
+//Main tabs
 enum Tabs {
-    case months, statistic, profile, settings
+    case months, statistic, settings
 }
-
+//String representation of hours which used in addNewDay view
 enum Hours: String, CaseIterable, Identifiable {
     
     var id: Self { self }
@@ -102,7 +102,7 @@ enum Hours: String, CaseIterable, Identifiable {
         }
     }
 }
-
+//String representation of minutes which used in addNewDay view
 enum Minutes: String, CaseIterable, Identifiable {
     
     var id: Self { self }
@@ -121,7 +121,7 @@ enum Minutes: String, CaseIterable, Identifiable {
         }
     }
 }
-
+//String representation of minutes which used in addNewDay view
 enum Pause: String, CaseIterable, Identifiable {
     
     var id: Self { self }
@@ -158,7 +158,7 @@ enum Pause: String, CaseIterable, Identifiable {
         }
     }
 }
-
+//List of months which used for adding the new month
 enum Monthes: String, CaseIterable, Identifiable {
     
     var id: Self { self }
@@ -196,11 +196,11 @@ enum Monthes: String, CaseIterable, Identifiable {
         }
     }
 }
-
+//List of onboarding pages
 enum OnboardingPages: CaseIterable {
     case first, second, thread, fourth
 }
-
+//Type of chart
 enum ChartType: String, Identifiable, CaseIterable {
     var id: Self { self }
     case barMark, lineMark, custom
