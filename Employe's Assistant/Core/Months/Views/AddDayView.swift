@@ -34,6 +34,7 @@ struct AddDayView: View {
         }
         return title
     }
+    
     var body: some View {
         VStack {
             Image(systemName: "box.truck.badge.clock")
@@ -119,13 +120,9 @@ struct AddDayView: View {
                     .background(Color.newAccentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }).padding()
-        }.tint(Color.newAccentColor)
-            .preferredColorScheme(isDark ? .dark : .light)
-            .overlay {
-                if showPopOver {
-                    CustomPopOver(trigerPopOver: $showPopOver, text: NSLocalizedString(popOverTitle, comment: ""), extraText: nil, iconName: "exclamationmark.square.fill")
-                        .transition(.move(edge: .top))
-                }
-            }
+        }
+        .tint(Color.newAccentColor)
+        .preferredColorScheme(isDark ? .dark : .light)
+        .alert(popOverTitle, isPresented: $showPopOver) { }
     }
 }

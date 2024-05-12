@@ -77,11 +77,7 @@ struct ExportCoreDataView: View {
                 HapticEngineManager.instance.hapticNotification(with: .error)
             }
         }
-        .overlay(content: {
-            if showPopOver {
-                CustomPopOver(trigerPopOver: $showPopOver, text: popoverText, extraText: nil, iconName: "checkmark.square.fill")
-            }
-        })
+        .alert(popoverText, isPresented: $showPopOver) { }
     }
 }
 

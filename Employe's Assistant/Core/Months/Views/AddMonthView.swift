@@ -23,6 +23,7 @@ struct AddMonthView: View {
         }
         return "Empty popOver"
     }
+    
     var body: some View {
         VStack {
             Image(systemName: "calendar.badge.plus")
@@ -83,10 +84,6 @@ struct AddMonthView: View {
         }
         .accentColor(Color.newAccentColor)
         .preferredColorScheme(isDark ? .dark : .light)
-        .overlay {
-            if showPopOver {
-               CustomPopOver(trigerPopOver: $showPopOver, text: popOverTitle, extraText: "", iconName: "exclamationmark.square")
-            }
-        }
+        .alert(popOverTitle, isPresented: $showPopOver) { }
     }
 }

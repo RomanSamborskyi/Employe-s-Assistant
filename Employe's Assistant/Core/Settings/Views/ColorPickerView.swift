@@ -61,21 +61,13 @@ struct ColorPickerView: View {
             }).padding()
             Spacer()
         }
-        .overlay {
-            if showAlert {
-                CustomPopOver(trigerPopOver: $showAlert, text: NSLocalizedString("Color was successfully changed", comment: ""), extraText: "Restart app to aply changes", iconName: "checkmark.square.fill")
-                    .transition(.move(edge: .top))
-                    .onDisappear {
-                        disMiss.callAsFunction()
-                    }
-            }
+        .alert("Color was successfully changed", isPresented: $showAlert) { } message: {
+            Text("Restart app to aply changes")
         }
+
     }
 }
 
 #Preview {
     ColorPickerView(vm: SettingsViewModel())
 }
-
-
-
