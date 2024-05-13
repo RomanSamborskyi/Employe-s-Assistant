@@ -18,22 +18,9 @@ struct AddDayView: View {
     @State private var endMinutes: Minutes = .zero
     @State private var pauseTime: Pause = .zero
     @State private var date: Date = Date()
-    @State private var showPopOver: Bool = false
+    @State private var error: AppError? = nil
     @Binding var dissmiss: Bool
     let month: Month
-    var popOverTitle: String {
-        var title: String = ""
-        if startHours == .zero && endHours == .zero && date > Date() {
-            title = "Set all required fields"
-        } else if startHours == .zero || endHours == .zero {
-            title = "Set up start and end hours"
-        } else if vm.ifContainDay(in: month, date: date) {
-            title = "You already added this day"
-        } else if date > Date() {
-            title = "This day is in the future"
-        }
-        return title
-    }
     
     var body: some View {
         VStack {
@@ -99,9 +86,19 @@ struct AddDayView: View {
                 DatePickerVIew(date: $date)
             }
             Button(action: {
-                if startHours == .zero || endHours == .zero || date > Date() || vm.ifContainDay(in: month, date: date) {
+                if startHours == .zero || endHours == .zero {
                     withAnimation(Animation.bouncy) {
-                        self.showPopOver.toggle()
+                        self.error = AppError.setAllDayFields
+                        HapticEngineManager.instance.hapticNotification(with: .error)
+                    }
+                } else if date > Date() {
+                    withAnimation(Animation.bouncy) {
+                        self.error = AppError.dayIsInTheFeature
+                        HapticEngineManager.instance.hapticNotification(with: .error)
+                    }
+                } else if vm.ifContainDay(in: month, date: date) {
+                    withAnimation(Animation.bouncy) {
+                        self.error = AppError.existingDay
                         HapticEngineManager.instance.hapticNotification(with: .error)
                     }
                 } else {
@@ -123,6 +120,6 @@ struct AddDayView: View {
         }
         .tint(Color.newAccentColor)
         .preferredColorScheme(isDark ? .dark : .light)
-        .alert(popOverTitle, isPresented: $showPopOver) { }
+        .alert(error?.localizedDescription ?? "", isPresented: Binding(value: $error)) { }
     }
 }

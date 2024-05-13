@@ -10,10 +10,9 @@ import WidgetKit
 
 
 struct ColorPickerView: View {
-    
+    @State private var error: AppError? = nil
     @ObservedObject var vm: SettingsViewModel
     @Environment(\.dismiss) var disMiss
-    @State private var showAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -33,7 +32,7 @@ struct ColorPickerView: View {
                 vm.addToUserDefaults()
                 WidgetCenter.shared.reloadAllTimelines()
                 withAnimation(Animation.bouncy) {
-                    self.showAlert.toggle()
+                    self.error = AppError.colorChanged
                     HapticEngineManager.instance.hapticNotification(with: .success)
                 }
             }, label: {
@@ -49,7 +48,7 @@ struct ColorPickerView: View {
                 vm.resetAccenrColor()
                 WidgetCenter.shared.reloadAllTimelines()
                 withAnimation(Animation.bouncy) {
-                    self.showAlert.toggle()
+                    self.error = AppError.colorChanged
                     HapticEngineManager.instance.hapticNotification(with: .warning)
                 }
             }, label: {
@@ -61,10 +60,9 @@ struct ColorPickerView: View {
             }).padding()
             Spacer()
         }
-        .alert("Color was successfully changed", isPresented: $showAlert) { } message: {
-            Text("Restart app to aply changes")
+        .alert(error?.localizedDescription ?? "", isPresented: Binding(value: $error)){ } message: {
+            Text(error?.message ?? "")
         }
-
     }
 }
 

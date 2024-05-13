@@ -11,18 +11,10 @@ struct AddMonthView: View {
     
     @AppStorage("isDark") var isDark: Bool = false
     @State private var targetText: String = ""
-    @State private var showPopOver: Bool = false
     @State private var selectedMonth: Monthes = .empty
+    @State private var error: AppError? = nil
     @ObservedObject var vm: MonthsViewModel
     @Binding var dissmiss: Bool
-    var popOverTitle: String {
-        if selectedMonth == .empty {
-            return NSLocalizedString("Please, select a month", comment: "")
-        } else if vm.ifContain(month: selectedMonth.description) {
-           return NSLocalizedString("The month is already exist", comment: "")
-        }
-        return "Empty popOver"
-    }
     
     var body: some View {
         VStack {
@@ -58,13 +50,13 @@ struct AddMonthView: View {
                 switch selectedMonth {
                 case .empty:
                     withAnimation(Animation.bouncy) {
-                        self.showPopOver.toggle()
+                        self.error = AppError.emptyMonth
                         HapticEngineManager.instance.hapticNotification(with: .error)
                     }
                 default:
                     withAnimation(Animation.bouncy) {
                         if vm.ifContain(month: selectedMonth.description) {
-                            self.showPopOver.toggle()
+                            self.error = AppError.monthAlreadyExist
                             HapticEngineManager.instance.hapticNotification(with: .error)
                         } else {
                             vm.addNewMonth(title: selectedMonth.description, monthTarget: Int32(targetText) ?? 0)
@@ -84,6 +76,6 @@ struct AddMonthView: View {
         }
         .accentColor(Color.newAccentColor)
         .preferredColorScheme(isDark ? .dark : .light)
-        .alert(popOverTitle, isPresented: $showPopOver) { }
+        .alert(error?.localizedDescription ?? "", isPresented: Binding(value: $error)) { }
     }
 }

@@ -34,8 +34,9 @@ struct MonthsMainView: View {
                 }.onDelete(perform: { indexSet in
                     viewModel.deleteMonth(indexSet: indexSet)
                 })
-            }.navigationTitle(dateFormater.string(from: Date()))
-                .toolbar {
+            }
+            .navigationTitle(dateFormater.string(from: Date()))
+            .toolbar {
                     ToolbarItem(placement: .topBarTrailing, content: {
                         Button(action: {
                             withAnimation(Animation.spring) {
@@ -47,7 +48,7 @@ struct MonthsMainView: View {
                         })
                     })
                 }
-                .sheet(isPresented: $addNewMonth) {
+            .sheet(isPresented: $addNewMonth) {
                     AddMonthView(vm: viewModel, dissmiss: $addNewMonth)
             }
             .overlay {
@@ -63,12 +64,13 @@ struct MonthsMainView: View {
                         }
                     }
                 }
-                .refreshable {
+            .refreshable {
                     viewModel.getMonths()
                 }
-                .onAppear {
+            .onAppear {
                     viewModel.getMonths()
                 }
+            .alert(viewModel.error?.localizedDescription ?? "", isPresented: Binding(value: $viewModel.error)) { }
         }
     }
 }

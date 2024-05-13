@@ -216,3 +216,44 @@ enum ChartType: String, Identifiable, CaseIterable {
         }
     }
 }
+//App posible errors
+enum AppError: Error, LocalizedError {
+    case noDataFetched, errorOfExportBackup, errorSavingToCoreData, noDataFromCoreData, errorOfImportBackup, emptyMonth, monthAlreadyExist, setAllDayFields, existingDay, dayIsInTheFeature, dataImported, colorChanged
+    
+    var errorDescription: String? {
+        switch self {
+        case .noDataFetched:
+            return NSLocalizedString("Error of fetching data", comment: "")
+        case .errorOfExportBackup:
+            return NSLocalizedString("Error of export backup file", comment: "")
+        case .errorSavingToCoreData:
+            return NSLocalizedString("Error of saving data", comment: "")
+        case .noDataFromCoreData:
+            return NSLocalizedString("Error of fetching data", comment: "")
+        case .errorOfImportBackup:
+            return NSLocalizedString("Error of importing data", comment: "")
+        case .emptyMonth:
+            return NSLocalizedString("Please, select a month", comment: "")
+        case .monthAlreadyExist:
+            return NSLocalizedString("The month is already exist", comment: "")
+        case .setAllDayFields:
+            return NSLocalizedString("Set all required fields", comment: "")
+        case .existingDay:
+            return NSLocalizedString("You already added this day", comment: "")
+        case .dayIsInTheFeature:
+            return NSLocalizedString("This day is in the future", comment: "")
+        case .dataImported:
+            return NSLocalizedString("Data impoted succesfully", comment: "")
+        case .colorChanged:
+            return NSLocalizedString("Color was successfully changed", comment: "")
+        }
+    }
+    var message: String? {
+        switch self {
+        case .colorChanged:
+            return NSLocalizedString("Restart app to aply changes", comment: "")
+        default:
+            return nil
+        }
+    }
+}

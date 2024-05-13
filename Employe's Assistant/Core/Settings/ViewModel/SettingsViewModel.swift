@@ -16,6 +16,7 @@ class SettingsViewModel: ObservableObject {
     
     @Published var currentIndex: Int = 0
     @Published var newAccentColor: Color = .accentColor
+    @Published var error: AppError? = nil
     var icons: [String?] = [nil]
     private let key: String = "color"
     
@@ -57,7 +58,7 @@ class SettingsViewModel: ObservableObject {
             
             try coreData.context.save()
         } catch {
-            print("Error of importing json: \(error.localizedDescription)")
+            self.error = AppError.errorOfImportBackup
         }
     }
     ///Delete temporary file after saving json file
@@ -89,7 +90,7 @@ class SettingsViewModel: ObservableObject {
                 }
             }
         } catch {
-            print(error.localizedDescription)
+            self.error = AppError.errorOfExportBackup
         }
         return url
     }

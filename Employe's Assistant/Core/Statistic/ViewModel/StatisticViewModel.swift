@@ -27,6 +27,8 @@ class StatisticViewModel: ObservableObject {
         checkIfFetchingData()
         getMonths()
     }
+    
+    
     ///Listening to publisher in MonthViewModel, which represent a state when starting fetching data from database
     func checkIfFetchingData() {
         monthViewModel.$startFetchingData
@@ -38,7 +40,7 @@ class StatisticViewModel: ObservableObject {
     ///Fetch months from database to local publisher
     func getMonths() {
         Task {
-            if let array = await dataManager.getMonths() {
+            if let array = try await dataManager.getMonths() {
                 await MainActor.run {
                     withAnimation(Animation.bouncy) {
                         self.months = array

@@ -14,6 +14,7 @@ class MonthsViewModel: ObservableObject {
     let dataManager: DataManager = DataManager.instanse
     @Published var months: [Month] = []
     @Published var currentDay: Day? = nil
+    @Published var error: AppError? = nil
     @Published var startFetchingData: Bool = false
     private let key: String = "color"
     
@@ -25,14 +26,19 @@ class MonthsViewModel: ObservableObject {
     ///Fetching moths form database in to local publisher
     func getMonths() {
         self.startFetchingData = true
+        
         Task {
-            if let array = await dataManager.getMonths() {
-                await MainActor.run {
-                    withAnimation(Animation.bouncy) {
-                        self.months = array
-                        self.startFetchingData = false
+            do {
+                if let array = try await dataManager.getMonths() {
+                    await MainActor.run {
+                        withAnimation(Animation.bouncy) {
+                            self.months = array
+                            self.startFetchingData = false
+                        }
                     }
                 }
+            } catch {
+                self.error = AppError.noDataFetched
             }
         }
     }

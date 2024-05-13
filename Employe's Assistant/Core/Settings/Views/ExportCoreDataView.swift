@@ -13,8 +13,8 @@ struct ExportCoreDataView: View {
     @State private var sheetIsPresented: Bool = false
     @State private var sharedURL: URL = URL(string: "google.com")!
     @State private var presentingImportSheet: Bool = false
-    @State private var showPopOver: Bool = false
-    @State private var popoverText: String = ""
+    @State private var error: AppError? = nil
+    
     var body: some View {
         VStack {
             Text("Backup data localy on your device")
@@ -67,17 +67,15 @@ struct ExportCoreDataView: View {
             switch result {
             case .success(let url):
                 vm.importJSONFile(url)
-                self.showPopOver.toggle()
-                self.popoverText = "Data impoted succesfully"
+                self.error = AppError.dataImported
                 HapticEngineManager.instance.hapticNotification(with: .success)
             case .failure(let error):
                 print(error.localizedDescription)
-                self.showPopOver.toggle()
-                self.popoverText = "Error of importing data"
+                self.error = AppError.errorOfImportBackup
                 HapticEngineManager.instance.hapticNotification(with: .error)
             }
         }
-        .alert(popoverText, isPresented: $showPopOver) { }
+        .alert(error?.localizedDescription ?? "", isPresented: Binding(value: $error)) { }
     }
 }
 
