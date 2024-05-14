@@ -248,6 +248,7 @@ enum AppError: Error, LocalizedError {
             return NSLocalizedString("Color was successfully changed", comment: "")
         }
     }
+    
     var message: String? {
         switch self {
         case .colorChanged:

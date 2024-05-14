@@ -10,7 +10,6 @@ import SwiftUI
 
 class MonthsViewModel: ObservableObject {
     
-  
     let dataManager: DataManager = DataManager.instanse
     @Published var months: [Month] = []
     @Published var currentDay: Day? = nil
