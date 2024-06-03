@@ -17,7 +17,7 @@ struct StatisticMainView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             if !vm.months.isEmpty {
                 List {
                     Section {

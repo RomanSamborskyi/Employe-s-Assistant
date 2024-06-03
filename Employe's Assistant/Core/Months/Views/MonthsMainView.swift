@@ -25,7 +25,9 @@ struct MonthsMainView: View {
         NavigationStack {
             List {
                 ForEach(viewModel.months) { month in
-                    NavigationLink(destination: { DayDetailView(vm: viewModel, month: month) }, label: {
+                    NavigationLink(destination: {
+                        DayDetailView(vm: viewModel, month: month)
+                    }, label: {
                         HStack {
                             Text(month.title ?? "no title")
                             Spacer()

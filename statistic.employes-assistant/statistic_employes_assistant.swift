@@ -66,7 +66,7 @@ struct statistic_employes_assistantEntryView: View {
     var body: some View {
         switch family {
         case .systemSmall:
-          smallWidget(entry)
+            smallWidget(entry)
         case .systemMedium:
             if entry.configuration.type == .progressBar {
                mediumProgressBarWidget(entry, count: count)

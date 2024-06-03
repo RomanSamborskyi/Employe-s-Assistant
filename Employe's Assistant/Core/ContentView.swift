@@ -13,27 +13,43 @@ struct ContentView: View {
     @AppStorage("showOnboarding") private var showOnboarding: Bool = true
     
     var body: some View {
-        TabView {
-            MonthsMainView()
-                .tag(selectedTab == .months)
-                .tabItem {
-                    Label("Months", systemImage: "calendar.badge.clock.rtl")
+        if #available(iOS 17.0, *) {
+            ZStack {
+                switch selectedTab {
+                case .months:
+                    MonthsMainView()
+                case .statistic:
+                    StatisticMainView()
+                case .settings:
+                    SettingsMainView()
                 }
-            StatisticMainView()
-                .tag(selectedTab == .statistic)
-                .tabItem {
-                    Label("Statistic", systemImage: "chart.xyaxis.line")
-                }
-                
-            SettingsMainView()
-                .tag(selectedTab == .settings)
-                .tabItem {
-                    Label("Settings", systemImage: "gear")
-                }
-        }
-        .tint(Color.newAccentColor)
-        .fullScreenCover(isPresented: $showOnboarding) {
-                OnboardingMainView()
+            
+                CustomTabBar(currentTab: $selectedTab)
+            }
+            .tint(Color.newAccentColor)
+        } else {
+            TabView {
+                MonthsMainView()
+                    .tag(selectedTab == .months)
+                    .tabItem {
+                        Label("Months", systemImage: "calendar.badge.clock.rtl")
+                    }
+                StatisticMainView()
+                    .tag(selectedTab == .statistic)
+                    .tabItem {
+                        Label("Statistic", systemImage: "chart.xyaxis.line")
+                    }
+                    
+                SettingsMainView()
+                    .tag(selectedTab == .settings)
+                    .tabItem {
+                        Label("Settings", systemImage: "gear")
+                    }
+            }
+            .tint(Color.newAccentColor)
+            .fullScreenCover(isPresented: $showOnboarding) {
+                    OnboardingMainView()
+            }
         }
     }
 }

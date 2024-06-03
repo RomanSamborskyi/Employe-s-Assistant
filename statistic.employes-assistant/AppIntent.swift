@@ -17,12 +17,13 @@ struct ConfigurationAppIntent: WidgetConfigurationIntent {
 }
 
 enum WidgetType: String, AppEnum {
-    case progressBar, calendar
+    case progressBar, calendar, clock
     
     static var typeDisplayRepresentation: TypeDisplayRepresentation = "Widget type"
     
     static var caseDisplayRepresentations: [WidgetType : DisplayRepresentation] = [
         .calendar : "Calendar",
-        .progressBar : "Progress Bar"
+        .progressBar : "Progress Bar",
+        .clock : "Clock"
     ]
 }

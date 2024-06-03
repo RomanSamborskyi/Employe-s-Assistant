@@ -38,8 +38,30 @@ enum StatisticType: String, Identifiable, CaseIterable {
     }
 }
 //Main tabs
-enum Tabs {
+enum Tabs: String, CaseIterable {
     case months, statistic, settings
+    
+    var description: String {
+        switch self {
+        case .months:
+            "Months"
+        case .statistic:
+            "Statistic"
+        case .settings:
+            "Settings"
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .months:
+            "calendar.badge.clock.rtl"
+        case .statistic:
+            "chart.xyaxis.line"
+        case .settings:
+            "gear.circle"
+        }
+    }
 }
 //String representation of hours which used in addNewDay view
 enum Hours: String, CaseIterable, Identifiable {
@@ -257,3 +279,4 @@ enum AppError: Error, LocalizedError {
         }
     }
 }
+
