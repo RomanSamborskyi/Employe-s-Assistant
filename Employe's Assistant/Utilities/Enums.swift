@@ -218,7 +218,7 @@ enum ChartType: String, Identifiable, CaseIterable {
 }
 //App posible errors
 enum AppError: Error, LocalizedError {
-    case noDataFetched, errorOfExportBackup, errorSavingToCoreData, noDataFromCoreData, errorOfImportBackup, emptyMonth, monthAlreadyExist, setAllDayFields, existingDay, dayIsInTheFeature, dataImported, colorChanged
+    case noDataFetched, errorOfExportBackup, errorSavingToCoreData, noDataFromCoreData, errorOfImportBackup, emptyMonth, monthAlreadyExist, setAllDayFields, existingDay, dayIsInTheFeature, dataImported,dataExportedSuccessfully, colorChanged
     
     var errorDescription: String? {
         switch self {
@@ -246,6 +246,8 @@ enum AppError: Error, LocalizedError {
             return NSLocalizedString("Data impoted succesfully", comment: "")
         case .colorChanged:
             return NSLocalizedString("Color was successfully changed", comment: "")
+        case .dataExportedSuccessfully:
+            return NSLocalizedString("Backup file saved successfully", comment: "")
         }
     }
     
