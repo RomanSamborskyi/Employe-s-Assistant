@@ -50,7 +50,6 @@ class SettingsViewModel: ObservableObject {
     ///Import backup json file from device to app, decoded it and save to core data
     func importJSONFile(_ url: URL) {
         do {
-            print(url)
            let jsonData = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             decoder.userInfo[.context] = coreData.context
@@ -86,6 +85,7 @@ class SettingsViewModel: ObservableObject {
                         let pathURL = tempURL.appending(component: "Exposrt \(Date().formatted(date: .complete, time: .omitted)).json")
                         try jsonString.write(to: pathURL, atomically: true, encoding: .utf8)
                         url = pathURL
+                        self.error = AppError.dataExportedSuccessfully
                     }
                 }
             }
@@ -93,6 +93,11 @@ class SettingsViewModel: ObservableObject {
             self.error = AppError.errorOfExportBackup
         }
         return url
+    }
+    ///Check if directory contain saved file
+    func checkIfSavedSuccessfully(_ url: URL) -> Bool {
+        guard FileManager.default.fileExists(atPath: url.path) else { return false }
+        return true
     }
     ///Check what icon currently setted
     func checkIcon(icon: String?) -> Bool  {
