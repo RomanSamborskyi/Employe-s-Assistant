@@ -36,8 +36,9 @@ struct ExportCoreDataView: View {
                     ).foregroundStyle(Color.primary)
                 }).padding()
                     .background( RoundedRectangle(cornerRadius: 15).foregroundStyle(Color.newAccentColor))
-            }.padding()
-                .background(RoundedRectangle(cornerRadius: 25).foregroundStyle(Color.newAccentColor.opacity(0.3)))
+            }
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 25).foregroundStyle(Color.newAccentColor.opacity(0.3)))
             VStack {
                 Text("Import backup file")
                     .font(.system(size: 35, weight: .bold, design: .rounded))
@@ -57,10 +58,18 @@ struct ExportCoreDataView: View {
                 .background(RoundedRectangle(cornerRadius: 25).foregroundStyle(Color.newAccentColor.opacity(0.3)))
             Spacer()
                 .frame(height: 130)
-        }.onAppear {
+        }
+        .onAppear {
             self.sharedURL = vm.exportCoreData()
         }
-        .sheet(isPresented: $sheetIsPresented, onDismiss: { vm.delteTempFile(sharedURL) }, content: {
+        .sheet(isPresented: $sheetIsPresented, onDismiss: {
+            if vm.checkIfSavedSuccessfully(sharedURL) {
+                self.error = AppError.dataExportedSuccessfully
+            } else {
+                self.error = AppError.errorOfExportBackup
+            }
+            vm.delteTempFile(sharedURL)
+        }, content: {
             CustomShareSheetView(url: $sharedURL)
         })
         .fileImporter(isPresented: $presentingImportSheet, allowedContentTypes: [.json]) { result in

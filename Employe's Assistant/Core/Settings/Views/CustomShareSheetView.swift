@@ -17,7 +17,6 @@ struct CustomShareSheetView: UIViewControllerRepresentable {
         return UIActivityViewController(activityItems: [url], applicationActivities: nil)
 
     }
-
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
         // You can add additional update logic here if needed
     }
