@@ -283,3 +283,28 @@ enum AppError: Error, LocalizedError {
     }
 }
 
+enum Selector: String, CaseIterable {
+    case user, guest
+    
+    var description: String {
+        switch self {
+        case .user:
+            "User"
+        case .guest:
+            "Vendor"
+        }
+    }
+}
+
+enum BackUpMethod: String {
+    case local, cloud
+    
+    var description: String {
+        switch self {
+        case .local:
+            "Local"
+        case .cloud:
+            "Cloud"
+        }
+    }
+}

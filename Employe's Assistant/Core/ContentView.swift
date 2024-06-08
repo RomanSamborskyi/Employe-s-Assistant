@@ -27,6 +27,9 @@ struct ContentView: View {
                 CustomTabBar(currentTab: $selectedTab)
             }
             .tint(Color.newAccentColor)
+            .fullScreenCover(isPresented: $showOnboarding) {
+                    OnboardingMainView()
+            }
         } else {
             TabView {
                 MonthsMainView()

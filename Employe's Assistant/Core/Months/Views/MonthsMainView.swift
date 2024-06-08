@@ -77,6 +77,8 @@ struct MonthsMainView: View {
     }
 }
 
-#Preview {
-    MonthsMainView()
+struct MonthsMainViewPreview: PreviewProvider {
+    static var previews: some View {
+        MonthsMainView()
+    }
 }
