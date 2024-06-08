@@ -7,6 +7,42 @@
 
 import SwiftUI
 
+
+
+struct SignInView: View {
+    
+    @AppStorage("isDark") var isDark: Bool = false
+    @State private var login: String = ""
+    @State private var password: String = ""
+    
+    var body: some View {
+        GeometryReader { proxy in
+            ScrollView {
+                ZStack {
+                    isDark ? Color.newAccentColor.darker(per: 20) : Color.white
+                    BackgroundImage(isDark: $isDark)
+                        .offset(y: -proxy.size.height * 0.34)
+                    VStack {
+                        
+                        TextFiledsSection(isDark: $isDark, login: $login, password: $password)
+                        
+                        ButtonsSection(isDark: $isDark)
+                        
+                    }
+                    .padding(.top, proxy.size.height / 7.6)
+                }
+                .ignoresSafeArea()
+            }
+            .background(LinearGradient(colors: [isDark ? Color.black : Color.white, isDark ? Color.newAccentColor.darker(per: 20) : Color.white, isDark ? Color.newAccentColor.darker(per: 20) : Color.white, isDark ? Color.newAccentColor.darker(per: 20) : Color.white], startPoint: .top, endPoint: .bottom))
+            .scrollIndicators(ScrollIndicatorVisibility.hidden)
+        }
+    }
+}
+
+#Preview {
+    SignInView()
+}
+
 struct BackgroundShape: Shape {
     func path(in rect: CGRect) -> Path {
         Path { path in
@@ -38,58 +74,27 @@ struct BackgroundShapeStroke: Shape {
 }
 
 struct BackgroundImage: View {
+    
+    @Binding var isDark: Bool
+    
     var body: some View {
         ZStack {
-            Image("party")
-                .resizable()
+            RoundedRectangle(cornerRadius: 5)
+                .foregroundStyle(isDark ? Color.black : Color.newAccentColor.opacity(0.5))
             BackgroundShapeStroke()
                 .stroke(style: StrokeStyle(lineWidth: 7, lineCap: .round, lineJoin: .round, miterLimit: 3, dash: [1], dashPhase: 0))
-                .foregroundStyle(Color.purpleStroke)
+                .foregroundStyle(Color.newAccentColor)
             BackgroundShape()
-                .fill(Color.backgroundPurple)
+                .fill(isDark ? Color.newAccentColor.darker(per: 20) : Color.white)
         }
         .frame(maxWidth: .infinity)
         .frame(maxHeight: .infinity)
     }
 }
 
-struct CustomPicker: View {
-    
-    @Binding var tab: Selector
-    
-    var body: some View {
-        HStack {
-            ForEach(Selector.allCases, id: \.self) { tab in
-                Text(tab.description)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 40)
-                    .foregroundStyle(self.tab == tab ? Color.white : Color.primary)
-                    .background(self.tab == tab ? Color.loginButton : nil)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .onTapGesture {
-                        withAnimation(Animation.bouncy) {
-                            self.tab = tab
-                        }
-                    }
-            }
-        }
-        .padding(4)
-        .background(
-            ZStack {
-                RoundedRectangle(cornerRadius: 15)
-                    .stroke(lineWidth: 2)
-                    .foregroundStyle(Color.picker)
-                RoundedRectangle(cornerRadius: 15)
-                    .foregroundStyle(Color.textFieldPurple)
-            }
-        )
-        .padding(.horizontal, 10)
-    }
-}
-
 struct TextFiledsSection: View {
     
+    @Binding var isDark: Bool
     @Binding var login: String
     @Binding var password: String
     @State private var showPassword: Bool = false
@@ -102,7 +107,7 @@ struct TextFiledsSection: View {
             TextField("Enter your email", text: $login)
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 15)
-                    .foregroundStyle(Color.textFieldPurple)
+                    .foregroundStyle(isDark ? Color.newAccentColor.darker(per: 35) : Color.gray.opacity(0.2))
                 )
             Text("Password")
                 .font(.callout)
@@ -113,20 +118,20 @@ struct TextFiledsSection: View {
                     TextField("Enter your password", text: $password)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 15)
-                            .foregroundStyle(Color.textFieldPurple)
+                            .foregroundStyle(isDark ? Color.newAccentColor.darker(per: 35) : Color.gray.opacity(0.2))
                         )
                 } else {
                     SecureField("Enter your password", text: $password)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 15)
-                            .foregroundStyle(Color.textFieldPurple)
+                            .foregroundStyle(isDark ? Color.newAccentColor.darker(per: 35) : Color.gray.opacity(0.2))
                         )
                 }
                 Button(action: {
                     self.showPassword.toggle()
                 }, label: {
                     Image(systemName: showPassword ? "eye.fill" : "eye.slash.fill")
-                        .foregroundStyle(Color.showPassword)
+                        .foregroundStyle(isDark ? Color.newAccentColor.darker(per: 60) : Color.gray.opacity(0.7))
                 })
                 .padding()
             }
@@ -145,6 +150,8 @@ struct TextFiledsSection: View {
 }
 
 struct ButtonsSection: View {
+    
+    @Binding var isDark: Bool
     
     @ViewBuilder
     func makeButton(label: String, image: Image?, color: Color, fontColor: Color) -> some View {
@@ -174,7 +181,7 @@ struct ButtonsSection: View {
     
     var body: some View {
         VStack {
-            makeButton(label: "Login", image: nil, color: Color.loginButton, fontColor: Color.white)
+            makeButton(label: "Login", image: nil, color: isDark ? Color.newAccentColor.opacity(0.7) : Color.gray.opacity(0.2), fontColor: Color.white)
             HStack {
                 RoundedRectangle(cornerRadius: 10)
                     .padding()
@@ -190,8 +197,8 @@ struct ButtonsSection: View {
             }
             .padding(.horizontal, 10)
         }
-        makeButton(label: "Continue with Apple", image: Image(systemName: "apple.logo"), color: Color.textFieldPurple, fontColor: Color.primary)
-        makeButton(label: "Continue with Google", image: Image("google"), color: Color.textFieldPurple, fontColor: Color.primary)
+        makeButton(label: "Continue with Apple", image: Image(systemName: "apple.logo"), color: isDark ? Color.newAccentColor.darker(per: 35) : Color.gray.opacity(0.2), fontColor: Color.primary)
+        makeButton(label: "Continue with Google", image: Image("google"), color: isDark ? Color.newAccentColor.darker(per: 35) : Color.gray.opacity(0.2), fontColor: Color.primary)
         Text("Don't have an account?")
             .padding(.top, 20)
         
@@ -202,44 +209,8 @@ struct ButtonsSection: View {
                 .padding(.bottom, 25)
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundStyle(Color.signUp)
+                .foregroundStyle(isDark ? Color.yellow.opacity(0.7) : Color.newAccentColor.darker(per: 35))
         }
 
     }
-}
-
-struct UIPractice: View {
-    
-    @State private var selector: Selector = .user
-    @State private var login: String = ""
-    @State private var password: String = ""
-    
-    var body: some View {
-        GeometryReader { proxy in
-            ScrollView {
-                ZStack {
-                    Color.backgroundPurple
-                    BackgroundImage()
-                        .offset(y: -proxy.size.height * 0.27)
-                    VStack {
-                        
-                        CustomPicker(tab: $selector)
-                        
-                        TextFiledsSection(login: $login, password: $password)
-                        
-                        ButtonsSection()
-                        
-                    }
-                    .padding(.top, proxy.size.height / 3.9)
-                }
-                .ignoresSafeArea()
-            }
-            .background(Color.backgroundPurple)
-            .scrollIndicators(ScrollIndicatorVisibility.hidden)
-        }
-    }
-}
-
-#Preview {
-    UIPractice()
 }
