@@ -37,7 +37,7 @@ struct SettingsMainView: View {
                 }
                 Section("General") {
                     HStack {
-                        NavigationLink(destination: { ExportCoreDataView(vm: vm) }) {
+                        NavigationLink(destination: { BackUpMainView(vm: vm) }) {
                             Image(systemName: "icloud.fill")
                             Text("BackUp")
                         }

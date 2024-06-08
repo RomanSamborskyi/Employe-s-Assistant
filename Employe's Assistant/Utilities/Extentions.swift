@@ -53,3 +53,37 @@ extension Binding where Value == Bool{
         }
     }
 }
+
+extension UIColor {
+    var rgb: (red: CGFloat, green: CGFloat, blue: CGFloat)? {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        
+        guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
+            return nil
+        }
+        
+        return (red, green, blue)
+    }
+}
+
+extension Color {
+    var uiColor: UIColor {
+        let component = UIColor(self).cgColor.components!
+        
+        return UIColor(red: component[0], green: component[1], blue: component[2], alpha: component[3])
+    }
+}
+
+extension Color {
+    func darker(per percentage: Double) -> Color {
+        guard let rgb = self.uiColor.rgb else { return self }
+        
+        return Color(
+            red: max(rgb.red - percentage / 100, 0),
+            green: max(rgb.green - percentage / 100, 0),
+            blue: max(rgb.blue - percentage / 100, 0))
+    }
+}
