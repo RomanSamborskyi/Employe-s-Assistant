@@ -22,7 +22,7 @@ struct BackUpMainView: View {
             }
         }
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem {
                 Picker("", selection: $backUp) {
                     ForEach(BackUpMethod.allCases, id: \.self) { tab in
                         Text(tab.description)

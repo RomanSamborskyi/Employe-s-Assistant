@@ -33,7 +33,7 @@ struct SignInView: View {
                 }
                 .ignoresSafeArea()
             }
-            .background(isDark ? Color.newAccentColor.darker(per: 20) : Color.white)
+            .background(LinearGradient(colors: [isDark ? Color.black : Color.white, isDark ? Color.newAccentColor.darker(per: 20) : Color.white, isDark ? Color.newAccentColor.darker(per: 20) : Color.white, isDark ? Color.newAccentColor.darker(per: 20) : Color.white], startPoint: .top, endPoint: .bottom))
             .scrollIndicators(ScrollIndicatorVisibility.hidden)
         }
     }
@@ -107,7 +107,7 @@ struct TextFiledsSection: View {
             TextField("Enter your email", text: $login)
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 15)
-                    .foregroundStyle(isDark ? Color.newAccentColor.darker(per: 50) : Color.gray.opacity(0.2))
+                    .foregroundStyle(isDark ? Color.newAccentColor.darker(per: 35) : Color.gray.opacity(0.2))
                 )
             Text("Password")
                 .font(.callout)
@@ -118,13 +118,13 @@ struct TextFiledsSection: View {
                     TextField("Enter your password", text: $password)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 15)
-                            .foregroundStyle(isDark ? Color.newAccentColor.darker(per: 50) : Color.gray.opacity(0.2))
+                            .foregroundStyle(isDark ? Color.newAccentColor.darker(per: 35) : Color.gray.opacity(0.2))
                         )
                 } else {
                     SecureField("Enter your password", text: $password)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 15)
-                            .foregroundStyle(isDark ? Color.newAccentColor.darker(per: 50) : Color.gray.opacity(0.2))
+                            .foregroundStyle(isDark ? Color.newAccentColor.darker(per: 35) : Color.gray.opacity(0.2))
                         )
                 }
                 Button(action: {
@@ -197,8 +197,8 @@ struct ButtonsSection: View {
             }
             .padding(.horizontal, 10)
         }
-        makeButton(label: "Continue with Apple", image: Image(systemName: "apple.logo"), color: isDark ? Color.newAccentColor.darker(per: 50) : Color.gray.opacity(0.2), fontColor: Color.primary)
-        makeButton(label: "Continue with Google", image: Image("google"), color: isDark ? Color.newAccentColor.darker(per: 50) : Color.gray.opacity(0.2), fontColor: Color.primary)
+        makeButton(label: "Continue with Apple", image: Image(systemName: "apple.logo"), color: isDark ? Color.newAccentColor.darker(per: 35) : Color.gray.opacity(0.2), fontColor: Color.primary)
+        makeButton(label: "Continue with Google", image: Image("google"), color: isDark ? Color.newAccentColor.darker(per: 35) : Color.gray.opacity(0.2), fontColor: Color.primary)
         Text("Don't have an account?")
             .padding(.top, 20)
         
@@ -209,7 +209,7 @@ struct ButtonsSection: View {
                 .padding(.bottom, 25)
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundStyle(isDark ? Color.yellow.opacity(0.7) : Color.newAccentColor.darker(per: 50))
+                .foregroundStyle(isDark ? Color.yellow.opacity(0.7) : Color.newAccentColor.darker(per: 35))
         }
 
     }
