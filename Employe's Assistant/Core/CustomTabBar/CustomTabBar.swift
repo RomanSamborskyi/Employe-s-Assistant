@@ -39,8 +39,8 @@ struct CustomTabBar: View {
                                 }
                                 .foregroundStyle(self.currentTab == currentTab ? Color.newAccentColor : Color.gray)
                                 .onTapGesture {
+                                    self.currentTab = currentTab
                                     withAnimation(.bouncy, completionCriteria: .logicallyComplete, {
-                                        self.currentTab = currentTab
                                         tab.isAnimating = true
                                     }, completion: {
                                         var transaction = Transaction()
