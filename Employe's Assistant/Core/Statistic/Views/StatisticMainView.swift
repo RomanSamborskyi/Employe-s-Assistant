@@ -12,8 +12,8 @@ struct StatisticMainView: View {
     @StateObject var vm: StatisticViewModel
     @AppStorage("savedType") var chartType: ChartType = .barMark
     
-    init() {
-        _vm = StateObject(wrappedValue: StatisticViewModel(monthViewModel: MonthsViewModel()))
+    init(dataManager: DataManager) {
+        _vm = StateObject(wrappedValue: StatisticViewModel(monthViewModel: MonthsViewModel(dataManager: dataManager), dataManager: dataManager))
     }
     
     var body: some View {
@@ -76,8 +76,4 @@ struct StatisticMainView: View {
             }
         }
     }
-}
-
-#Preview {
-    StatisticMainView()
 }

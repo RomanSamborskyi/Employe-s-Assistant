@@ -10,14 +10,15 @@ import SwiftUI
 
 class MonthsViewModel: ObservableObject {
     
-    let dataManager: DataManager = DataManager.instanse
+    let dataManager: DataManager
     @Published var months: [Month] = []
     @Published var currentDay: Day? = nil
     @Published var error: AppError? = nil
     @Published var startFetchingData: Bool = false
     private let key: String = "color"
     
-    init() {
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
         getMonths()
     }
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MonthsMainView: View {
     
+    @Binding var hideTabBar: Bool
     @StateObject private var viewModel: MonthsViewModel
     @State private var addNewMonth: Bool = false
     var dateFormater: DateFormatter = {
@@ -17,8 +18,9 @@ struct MonthsMainView: View {
         return dateFormater
     }()
     
-    init() {
-        _viewModel = StateObject(wrappedValue: MonthsViewModel())
+    init(hideTabBar: Binding<Bool>, dataManager: DataManager) {
+        _viewModel = StateObject(wrappedValue: MonthsViewModel(dataManager: dataManager))
+        _hideTabBar = hideTabBar
     }
     
     var body: some View {
@@ -27,6 +29,16 @@ struct MonthsMainView: View {
                 ForEach(viewModel.months) { month in
                     NavigationLink(destination: {
                         DayDetailView(vm: viewModel, month: month)
+                            .onAppear {
+                                withAnimation(Animation.smooth) {
+                                    self.hideTabBar = true
+                                }
+                            }
+                            .onDisappear {
+                                withAnimation(Animation.smooth) {
+                                    self.hideTabBar = false
+                                }
+                            }
                     }, label: {
                         HStack {
                             Text(month.title ?? "no title")
@@ -77,8 +89,3 @@ struct MonthsMainView: View {
     }
 }
 
-struct MonthsMainViewPreview: PreviewProvider {
-    static var previews: some View {
-        MonthsMainView()
-    }
-}

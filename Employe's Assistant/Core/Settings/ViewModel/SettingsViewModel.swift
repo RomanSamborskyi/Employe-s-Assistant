@@ -18,9 +18,11 @@ class SettingsViewModel: ObservableObject {
     @Published var newAccentColor: Color = .accentColor
     @Published var error: AppError? = nil
     var icons: [String?] = [nil]
+    let dataManager: DataManager
     private let key: String = "color"
     
-    init() {
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
         getColor()
         getAlternativeAppIcon()
         

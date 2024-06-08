@@ -87,7 +87,3 @@ struct ExportCoreDataView: View {
         .alert(error?.localizedDescription ?? "", isPresented: Binding(value: $error)) { }
     }
 }
-
-#Preview {
-    ExportCoreDataView(vm: SettingsViewModel())
-}

@@ -65,6 +65,3 @@ struct AlternativeIconView: View {
     }
 }
 
-#Preview {
-    AlternativeIconView(vm: SettingsViewModel())
-}

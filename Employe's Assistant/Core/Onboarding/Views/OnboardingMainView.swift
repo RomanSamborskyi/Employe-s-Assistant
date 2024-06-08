@@ -18,8 +18,8 @@ struct OnboardingMainView: View {
     @State private var hourSalary: String = ""
     
     @Environment(\.dismiss) var dissmiss
-    init() {
-        _vm = StateObject(wrappedValue: OnboardingViewModel(monthsViewModel: MonthsViewModel(), settingsViewModel: SettingsViewModel()))
+    init(dataManager: DataManager) {
+        _vm = StateObject(wrappedValue: OnboardingViewModel(monthsViewModel: MonthsViewModel(dataManager: dataManager), settingsViewModel: SettingsViewModel(dataManager: dataManager)))
     }
     
     var body: some View {

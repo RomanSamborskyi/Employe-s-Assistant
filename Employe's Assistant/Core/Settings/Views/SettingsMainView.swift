@@ -9,10 +9,16 @@ import SwiftUI
 
 struct SettingsMainView: View {
     
-    @StateObject var vm: SettingsViewModel = SettingsViewModel()
+    @StateObject var vm: SettingsViewModel
+    @Binding var hideTabBar: Bool
     @AppStorage("isDark") var isDark: Bool = false
     @State private var setHours: Bool = false
     @State private var hourSalary: Double = 0
+    
+    init(dataManager: DataManager, hideTabBar: Binding<Bool>) {
+        _vm = StateObject(wrappedValue: SettingsViewModel(dataManager: dataManager))
+        _hideTabBar = hideTabBar
+    }
     
     var body: some View {
         NavigationView {
@@ -37,19 +43,55 @@ struct SettingsMainView: View {
                 }
                 Section("General") {
                     HStack {
-                        NavigationLink(destination: { BackUpMainView(vm: vm) }) {
+                        NavigationLink(destination: {
+                            BackUpMainView(vm: vm)
+                                .onAppear {
+                                    withAnimation(Animation.smooth) {
+                                        self.hideTabBar = true
+                                    }
+                                }
+                                .onDisappear {
+                                    withAnimation(Animation.smooth) {
+                                        self.hideTabBar = false
+                                    }
+                                }
+                        }) {
                             Image(systemName: "icloud.fill")
                             Text("BackUp")
                         }
                     }
                     HStack {
-                        NavigationLink(destination: { AlternativeIconView(vm: vm) }) {
+                        NavigationLink(destination: {
+                            AlternativeIconView(vm: vm)
+                                .onAppear {
+                                    withAnimation(Animation.smooth) {
+                                        self.hideTabBar = true
+                                    }
+                                }
+                                .onDisappear {
+                                    withAnimation(Animation.smooth) {
+                                        self.hideTabBar = false
+                                    }
+                                }
+                        }) {
                             Image(systemName: "photo.on.rectangle.angled")
                             Text("App icon")
                         }
                     }
                     HStack {
-                        NavigationLink(destination: { ColorPickerView(vm: vm) }, label: {
+                        NavigationLink(destination: {
+                            ColorPickerView(vm: vm)
+                                .onAppear {
+                                    withAnimation(Animation.smooth) {
+                                        self.hideTabBar = true
+                                    }
+                                }
+                                .onDisappear {
+                                    withAnimation(Animation.smooth) {
+                                        self.hideTabBar = false
+                                    }
+                                }
+                        }, label: {
                             Image(systemName: "paintpalette.fill")
                             Text("Accent color")
                         })
@@ -65,9 +107,4 @@ struct SettingsMainView: View {
         }
     }
 }
-
-#Preview {
-    SettingsMainView(vm: SettingsViewModel())
-}
-
 

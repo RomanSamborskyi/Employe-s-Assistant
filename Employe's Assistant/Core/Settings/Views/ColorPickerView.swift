@@ -65,7 +65,3 @@ struct ColorPickerView: View {
         }
     }
 }
-
-#Preview {
-    ColorPickerView(vm: SettingsViewModel())
-}

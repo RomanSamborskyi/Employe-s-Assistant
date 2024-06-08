@@ -22,12 +22,10 @@ struct BackUpMainView: View {
             }
         }
         .toolbar {
-            ToolbarItem {
+            ToolbarItem(placement: .principal) {
                 Picker("", selection: $backUp) {
                     ForEach(BackUpMethod.allCases, id: \.self) { tab in
                         Text(tab.description)
-                            .padding()
-                            .padding(.horizontal, 20)
                     }
                 }
                 .pickerStyle(.segmented)

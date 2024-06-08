@@ -10,10 +10,10 @@ import CoreData
 
 
 actor DataManager {
-    static let instanse: DataManager = DataManager()
+    
     let coreData: CoreDataManager = CoreDataManager.instanse
     
-    private init() {  }
+    init() {  }
     
     ///Get months from core data and converting them in to type Month
     func getMonths() async throws -> [Month]? {

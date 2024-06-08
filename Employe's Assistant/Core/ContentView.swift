@@ -10,40 +10,43 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var selectedTab: Tabs = .months
+    @State var hideTabBar: Bool = false
     @AppStorage("showOnboarding") private var showOnboarding: Bool = true
+    @State var dataManager: DataManager = DataManager()
     
     var body: some View {
         if #available(iOS 17.0, *) {
             ZStack {
                 switch selectedTab {
                 case .months:
-                    MonthsMainView()
+                    MonthsMainView(hideTabBar: $hideTabBar, dataManager: dataManager)
                 case .statistic:
-                    StatisticMainView()
+                    StatisticMainView(dataManager: dataManager)
                 case .settings:
-                    SettingsMainView()
+                    SettingsMainView(dataManager: dataManager, hideTabBar: $hideTabBar)
                 }
-            
+                if !hideTabBar {
                 CustomTabBar(currentTab: $selectedTab)
+                        .transition(.move(edge: .bottom))
+                }
             }
             .tint(Color.newAccentColor)
             .fullScreenCover(isPresented: $showOnboarding) {
-                    OnboardingMainView()
+                OnboardingMainView(dataManager: dataManager)
             }
         } else {
             TabView {
-                MonthsMainView()
-                    .tag(selectedTab == .months)
+                MonthsMainView(hideTabBar: $hideTabBar, dataManager: dataManager)
                     .tabItem {
                         Label("Months", systemImage: "calendar.badge.clock.rtl")
                     }
-                StatisticMainView()
+                StatisticMainView(dataManager: dataManager)
                     .tag(selectedTab == .statistic)
                     .tabItem {
                         Label("Statistic", systemImage: "chart.xyaxis.line")
                     }
                     
-                SettingsMainView()
+                SettingsMainView(dataManager: dataManager, hideTabBar: $hideTabBar)
                     .tag(selectedTab == .settings)
                     .tabItem {
                         Label("Settings", systemImage: "gear")
@@ -51,7 +54,7 @@ struct ContentView: View {
             }
             .tint(Color.newAccentColor)
             .fullScreenCover(isPresented: $showOnboarding) {
-                    OnboardingMainView()
+                OnboardingMainView(dataManager: dataManager)
             }
         }
     }

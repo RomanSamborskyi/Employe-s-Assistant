@@ -17,12 +17,13 @@ class StatisticViewModel: ObservableObject {
     @Published var currentMonth: Month? = nil
     @Published var selectedIndex: Int = 0
     let monthViewModel: MonthsViewModel
-    let dataManager: DataManager = DataManager.instanse
+    let dataManager: DataManager
     var cancellable = Set<AnyCancellable>()
     private let key: String = "color"
 
  
-    init(monthViewModel: MonthsViewModel) {
+    init(monthViewModel: MonthsViewModel, dataManager: DataManager) {
+        self.dataManager = dataManager
         self.monthViewModel = monthViewModel
         checkIfFetchingData()
         getMonths()
