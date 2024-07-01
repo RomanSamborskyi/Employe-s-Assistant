@@ -60,8 +60,6 @@ struct ColorPickerView: View {
             }).padding()
             Spacer()
         }
-        .alert(error?.localizedDescription ?? "", isPresented: Binding(value: $error)){ } message: {
-            Text(error?.message ?? "")
-        }
+        .alert(error?.localizedDescription ?? "", isPresented: Binding(value: $error)) { }
     }
 }

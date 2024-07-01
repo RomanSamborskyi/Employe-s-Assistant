@@ -12,7 +12,7 @@ import CoreData
 
 class SettingsViewModel: ObservableObject {
     
-    let coreData: CoreDataManager = CoreDataManager.instanse
+    //let coreData: CoreDataManager = CoreDataManager.instanse
     
     @Published var currentIndex: Int = 0
     @Published var newAccentColor: Color = .accentColor
@@ -54,10 +54,10 @@ class SettingsViewModel: ObservableObject {
         do {
            let jsonData = try Data(contentsOf: url)
             let decoder = JSONDecoder()
-            decoder.userInfo[.context] = coreData.context
+            decoder.userInfo[.context] = dataManager.coreData.context
             _ = try decoder.decode([MonthEntity].self, from: jsonData)
             
-            try coreData.context.save()
+            try dataManager.coreData.context.save()
         } catch {
             self.error = AppError.errorOfImportBackup
         }
@@ -79,7 +79,7 @@ class SettingsViewModel: ObservableObject {
             if let entity = MonthEntity.entity().name {
                 let request = NSFetchRequest<MonthEntity>(entityName: entity)
                 request.relationshipKeyPathsForPrefetching = ["day"]
-                let results = try coreData.context.fetch(request)
+                let results = try dataManager.coreData.context.fetch(request)
                
                 let jasonFile = try JSONEncoder().encode(results)
                 if let jsonString = String(data: jasonFile, encoding: .utf8) {
@@ -141,12 +141,12 @@ class SettingsViewModel: ObservableObject {
         let savedColor = UIColor(newAccentColor).cgColor
         if let component = savedColor.components {
             UserDefaults.standard.set(component, forKey: key)
-            let color = NewColorEntity(context: coreData.context)
+            let color = NewColorEntity(context: dataManager.coreData.context)
             color.red = Float(component[0])
             color.green = Float(component[1])
             color.blue = Float(component[2])
             color.opacity = Float(component[3])
-            coreData.save()
+            dataManager.coreData.save()
         }
     }
     ///Function to reset accent color in to default value(Color.accentColor)
@@ -155,12 +155,12 @@ class SettingsViewModel: ObservableObject {
         
         if let component = color.components {
             UserDefaults.standard.set(component, forKey: key)
-            let color = NewColorEntity(context: coreData.context)
+            let color = NewColorEntity(context: dataManager.coreData.context)
             color.red = Float(component[0])
             color.green = Float(component[1])
             color.blue = Float(component[2])
             color.opacity = Float(component[3])
-            coreData.save()
+            dataManager.coreData.save()
         }
     }
 }

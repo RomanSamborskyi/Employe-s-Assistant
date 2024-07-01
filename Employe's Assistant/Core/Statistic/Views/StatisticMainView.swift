@@ -33,6 +33,18 @@ struct StatisticMainView: View {
                             CustomChartView(vm: vm, month: vm.currentMonth ?? vm.months.first!)
                         }
                     }
+                    .overlay {
+                        if vm.currentMonth?.totalHours == 0 {
+                            VStack(spacing: 15) {
+                                Image(systemName: "chart.xyaxis.line")
+                                    .font(.largeTitle)
+                                Text("No data to display")
+                                    .font(.title2)
+                            }
+                            .padding(10)
+                            .fontWeight(.bold)
+                        }
+                    }
                     Section {
                         StatisticByMonthsChartView(vm: vm, chartType: $chartType)
                     }

@@ -272,15 +272,6 @@ enum AppError: Error, LocalizedError {
             return NSLocalizedString("Backup file saved successfully", comment: "")
         }
     }
-    
-    var message: String? {
-        switch self {
-        case .colorChanged:
-            return NSLocalizedString("Restart app to aply changes", comment: "")
-        default:
-            return nil
-        }
-    }
 }
 
 enum BackUpMethod: String, CaseIterable {
