@@ -80,8 +80,6 @@ struct MonthDetailView: View {
                     if let array = month.days {
                         self.count = array.count
                     }
-                    vm.monthViewModel.getMonths()
-                    vm.getMonths()
               }
            }
             .onChange(of: vm.currentMonth, perform: { month in

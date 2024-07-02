@@ -36,6 +36,7 @@ struct ListView: View {
                         }).contextMenu {
                             Button(role: .destructive, action: {
                                 vm.deleteDay(month: month, day: day)
+                                vm.dataManager.updateTotalSalaryAndHours(month: month, totalSalary: vm.countSalary(for: month) ?? 0, totalHours: vm.countHours(for: month) ?? 0)
                                 WidgetCenter.shared.reloadAllTimelines()
                             },label: {
                                 HStack {

@@ -27,6 +27,7 @@ class StatisticViewModel: ObservableObject {
         self.monthViewModel = monthViewModel
         checkIfFetchingData()
         getMonths()
+        getCurrentMonth()
     }
     
     

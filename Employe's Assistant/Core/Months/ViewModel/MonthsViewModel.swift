@@ -11,7 +11,7 @@ import SwiftUI
 class MonthsViewModel: ObservableObject {
     
     let dataManager: DataManager
-    @Published var months: [Month] = []
+    @Published var months: [Month] = [] 
     @Published var currentDay: Day? = nil
     @Published var error: AppError? = nil
     @Published var startFetchingData: Bool = false
@@ -217,8 +217,7 @@ class MonthsViewModel: ObservableObject {
         getMonths()
     }
     ///Add a new day.Function also contain method to add a new day to database
-    func addHours(month: Month, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
-        guard var currentMonth = months.first(where: { $0.title == month.title }) else { return }
+    func addHours(month: inout Month, startHours: Int32, startMinutes: Int32, endHours: Int32, endMinutes: Int32, pauseTime: Int32, date: Date) {
         var newDay = Day()
         
         let convertToMinutes = ((Double(endHours) * 60 + Double(endMinutes)) - (Double(startHours) * 60 + Double(startMinutes)) - Double(pauseTime)) / 60
@@ -243,10 +242,8 @@ class MonthsViewModel: ObservableObject {
         newDay.endHours = endHours
         newDay.endMinutes = endMinutes
         newDay.pauseTime = pauseTime
-        currentMonth.days?.append(newDay)
-        currentMonth.totalHours = countHours(for: currentMonth) ?? 0
-        currentMonth.totalSalary = countSalary(for: currentMonth) ?? 0
-        dataManager.addHoursToCoreData(month: currentMonth, day: newDay, hour: String(hour), minutes: minuteToString, convertInToMinutes: convertInToMinutes)
+        month.days?.append(newDay)
+        dataManager.addHoursToCoreData(month: month, day: newDay, hour: String(hour), minutes: minuteToString, convertInToMinutes: convertInToMinutes)
         getMonths()
     }
     ///Deleting a day from database,

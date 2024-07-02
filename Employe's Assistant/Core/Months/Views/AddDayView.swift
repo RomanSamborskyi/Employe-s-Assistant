@@ -20,7 +20,7 @@ struct AddDayView: View {
     @State private var date: Date = Date()
     @State private var error: AppError? = nil
     @Binding var dissmiss: Bool
-    let month: Month
+    @State var month: Month
     
     var body: some View {
         VStack {
@@ -105,7 +105,7 @@ struct AddDayView: View {
                     withAnimation(Animation.bouncy) {
                         self.dissmiss = false
                     }
-                    vm.addHours(month: month, startHours: Int32(startHours.description) ?? 0, startMinutes: Int32(startMinutes.description) ?? 0, endHours: Int32(endHours.description) ?? 0, endMinutes: Int32(endMinutes.description) ?? 0, pauseTime: Int32(pauseTime.description) ?? 0, date: date)
+                    vm.addHours(month: &month, startHours: Int32(startHours.description) ?? 0, startMinutes: Int32(startMinutes.description) ?? 0, endHours: Int32(endHours.description) ?? 0, endMinutes: Int32(endMinutes.description) ?? 0, pauseTime: Int32(pauseTime.description) ?? 0, date: date)
                     HapticEngineManager.instance.hapticNotification(with: .success)
                     WidgetCenter.shared.reloadAllTimelines()
                 }
@@ -121,5 +121,8 @@ struct AddDayView: View {
         .tint(Color.newAccentColor)
         .preferredColorScheme(isDark ? .dark : .light)
         .alert(error?.localizedDescription ?? "", isPresented: Binding(value: $error)) { }
+        .onDisappear {
+            vm.dataManager.updateTotalSalaryAndHours(month: month, totalSalary: vm.countSalary(for: month) ?? 0, totalHours: vm.countHours(for: month) ?? 0)
+        }
     }
 }
