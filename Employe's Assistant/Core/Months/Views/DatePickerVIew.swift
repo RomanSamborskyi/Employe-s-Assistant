@@ -14,6 +14,7 @@ struct DatePickerVIew: View {
     var body: some View {
         VStack {
             DatePicker("", selection: $date.animation(), displayedComponents: .date)
-        }.padding(5)
+        }
+        .padding(5)
     }
 }

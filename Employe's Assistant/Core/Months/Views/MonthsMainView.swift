@@ -45,7 +45,8 @@ struct MonthsMainView: View {
                             Spacer()
                         }
                     })
-                }.onDelete(perform: { indexSet in
+                }
+                .onDelete(perform: { indexSet in
                     viewModel.deleteMonth(indexSet: indexSet)
                 })
             }

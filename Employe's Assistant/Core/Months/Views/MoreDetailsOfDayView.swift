@@ -34,7 +34,9 @@ struct MoreDetailsOfDayView: View {
                 Text("minute")
                     .font(.caption2)
                     .frame(width: 40)
-            }.padding(10)
+            }
+            .padding(10)
+            
             HStack {
                 Text("Start work at:")
                 Spacer()
@@ -66,6 +68,7 @@ struct MoreDetailsOfDayView: View {
                     .frame(width: 40)
             }
             Spacer()
-        }.padding()
+        }
+        .padding()
     }
 }

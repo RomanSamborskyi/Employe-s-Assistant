@@ -116,13 +116,11 @@ struct AddDayView: View {
                     .frame(maxWidth: .infinity)
                     .background(Color.newAccentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
-            }).padding()
+            })
+            .padding()
         }
         .tint(Color.newAccentColor)
         .preferredColorScheme(isDark ? .dark : .light)
         .alert(error?.localizedDescription ?? "", isPresented: Binding(value: $error)) { }
-        .onDisappear {
-            vm.dataManager.updateTotalSalaryAndHours(month: month, totalSalary: vm.countSalary(for: month) ?? 0, totalHours: vm.countHours(for: month) ?? 0)
-        }
     }
 }

@@ -33,10 +33,10 @@ struct ListView: View {
                                 Spacer()
                                 Text("\(day.hours ?? 0):\(day.minutes ?? 0)")
                             }
-                        }).contextMenu {
+                        })
+                        .contextMenu {
                             Button(role: .destructive, action: {
                                 vm.deleteDay(month: month, day: day)
-                                vm.dataManager.updateTotalSalaryAndHours(month: month, totalSalary: vm.countSalary(for: month) ?? 0, totalHours: vm.countHours(for: month) ?? 0)
                                 WidgetCenter.shared.reloadAllTimelines()
                             },label: {
                                 HStack {

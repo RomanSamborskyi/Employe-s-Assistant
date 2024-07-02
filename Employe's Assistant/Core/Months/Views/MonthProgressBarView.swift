@@ -20,9 +20,10 @@ struct MonthProgressBarView: View {
                 .foregroundStyle(Color.gray.opacity(0.5))
             RoundedRectangle(cornerRadius: 25)
                 .frame(width: width, height: 15)
-                .foregroundStyle(Int32(vm.countHours(for: month) ?? 0) >= month.monthTarget ?? 0 ? Color.green.gradient : Color.newAccentColor.gradient)
+                .foregroundStyle(Int32(month.totalHours ?? 0) >= month.monthTarget ?? 0 ? Color.green.gradient : Color.newAccentColor.gradient)
                 
-        }.onAppear {
+        }
+        .onAppear {
             withAnimation(Animation.bouncy) {
                 width = vm.progressBar(for: month, width: 100)
             }

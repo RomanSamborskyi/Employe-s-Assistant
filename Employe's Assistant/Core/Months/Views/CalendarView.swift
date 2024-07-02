@@ -69,7 +69,8 @@ struct CalendarView: View {
                             }
                     }
                 }
-            }.padding()
+            }
+            .padding()
             
             HStack {
                 Text("Monthly progress")
@@ -77,10 +78,15 @@ struct CalendarView: View {
                 Image(systemName: "figure.step.training")
                     .font(.system(size: 25, weight: .bold, design: .rounded))
                     .foregroundStyle(Color.newAccentColor)
-            } .padding()
+            } 
+            .padding()
+            
             ProgresBarView(vm: vm, month: month)
+            
             Spacer()
-        }.sheet(isPresented: $sheetIsPresented) {
+            
+        }
+        .sheet(isPresented: $sheetIsPresented) {
             MoreDetailsOfDayView(day: vm.currentDay!)
                 .accentColor(Color.newAccentColor)
                 .preferredColorScheme(isDark ? .dark : .light)

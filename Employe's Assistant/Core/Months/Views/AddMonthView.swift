@@ -23,6 +23,7 @@ struct AddMonthView: View {
                 .foregroundStyle(Color.newAccentColor)
             Text("Add new month:")
                 .font(.system(size: 35, weight: .bold, design: .rounded))
+            
             HStack {
                 Text("Select a month:")
                     .padding(10)
@@ -33,7 +34,9 @@ struct AddMonthView: View {
                         Text(month.description)
                     }
                 }).pickerStyle(.automatic)
-            }.padding()
+            }
+            .padding()
+            
             HStack {
                 Text("Set a hours target fo the month: ")
                     .padding(10)
@@ -44,7 +47,8 @@ struct AddMonthView: View {
                     .frame(width: 100)
                     .background(Color.gray.opacity(0.3))
                     .clipShape(RoundedRectangle(cornerRadius: 15))
-            }.padding()
+            }
+            .padding()
             
             Button(action: {
                 switch selectedMonth {
@@ -72,7 +76,8 @@ struct AddMonthView: View {
                     .frame(maxWidth: .infinity)
                     .background(Color.newAccentColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
-            }).padding()
+            })
+            .padding()
         }
         .accentColor(Color.newAccentColor)
         .preferredColorScheme(isDark ? .dark : .light)
