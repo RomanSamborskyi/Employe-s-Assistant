@@ -81,7 +81,8 @@ struct StatisticMainView: View {
                     Text("There is no any statistic")
                         .padding()
                         .font(.system(size: 25, weight: .bold, design: .rounded))
-                }.navigationTitle("Statistic")
+                }
+                .navigationTitle("Statistic")
             }
         }
     }

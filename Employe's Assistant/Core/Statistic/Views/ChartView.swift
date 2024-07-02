@@ -26,10 +26,10 @@ struct ChartView: View {
                     ).foregroundStyle(Color.newAccentColor.gradient)
                 }
             }
-        }.onAppear {
+        }
+        .onAppear {
             withAnimation(Animation.bouncy(duration: 0.5)) {
-                guard let month = vm.months.first(where: { $0.title == month.title }),
-                      let days = month.days else { return }
+                guard let days = month.days else { return }
                 self.array = days.sorted(by: { $0.date ?? Date() < $1.date ?? Date() })
             }
         }

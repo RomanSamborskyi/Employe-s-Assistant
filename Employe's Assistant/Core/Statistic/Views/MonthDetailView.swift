@@ -38,7 +38,8 @@ struct MonthDetailView: View {
                     .frame(width: 80)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
-            }.frame(width: 110, height: 110)
+            }
+            .frame(width: 110, height: 110)
             VStack(alignment: .leading) {
                 HStack {
                     Text("Month details")
@@ -75,7 +76,8 @@ struct MonthDetailView: View {
                     Text("\(month.monthTarget ?? 0)")
                         .foregroundStyle(Color.newAccentColor)
                 }
-            }.onAppear {
+            }
+            .onAppear {
                 withAnimation(Animation.bouncy(duration: 0.5)) {
                     if let array = month.days {
                         self.count = array.count

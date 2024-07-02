@@ -23,7 +23,8 @@ struct StatisticByMonthsChartView: View {
                 ForEach(StatisticType.allCases, id: \.self) { tab in
                     Text(tab.description)
                 }
-            }.pickerStyle(.segmented)
+            }
+            .pickerStyle(.segmented)
                 .padding(5)
             switch selectedTab {
             case .hours:

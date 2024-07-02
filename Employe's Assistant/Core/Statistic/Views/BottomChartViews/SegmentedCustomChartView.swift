@@ -20,8 +20,9 @@ struct SegmentedCustomChart: View {
                     SegmentUniversalView(vm: vm, selectedTab: $selectedTab, month: month)
                 }
             }
-        }.frame(height: 130)
-            .onAppear {
+        }
+        .frame(height: 130)
+        .onAppear {
                 withAnimation(Animation.bouncy) {
                     self.array = vm.months
                 }

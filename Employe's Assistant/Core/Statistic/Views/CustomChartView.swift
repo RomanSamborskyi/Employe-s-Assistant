@@ -23,7 +23,8 @@ struct CustomChartView: View {
                             SegmentView(vm: vm, day: day)
                         }
                     }
-                }.frame(height: 130)
+                }
+                .frame(height: 130)
         }
         .onAppear {
             withAnimation(Animation.bouncy(duration: 0.5)) {
