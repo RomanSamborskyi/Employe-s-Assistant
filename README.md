@@ -27,13 +27,14 @@ The app will meet you with onboarding screens, where you can read some short ins
 
 ![Simulator Screenshot - iPhone 15 Pro - 2024-08-07 at 09 24 06 Medium](https://github.com/user-attachments/assets/2db72f23-68f8-4dbb-9522-e9ed6e52e4dc)
 
-Here you can create a new month and set a hour target for this month
-
-![Simulator Screenshot - iPhone 15 Pro - 2024-08-07 at 09 26 20 Medium](https://github.com/user-attachments/assets/00f8f28f-dd4e-43a8-a356-2fa5c075aa6a)
 
 A list of existing months with small progress bar for each of them
 
 ![Simulator Screenshot - iPhone 15 Pro - 2024-08-07 at 09 32 21 Medium](https://github.com/user-attachments/assets/d6163bfc-71ce-45b1-8f1b-ab07a23a18c6)
+
+Here you can create a new month and set a hour target for this month
+
+![Simulator Screenshot - iPhone 15 Pro - 2024-08-07 at 09 26 20 Medium](https://github.com/user-attachments/assets/00f8f28f-dd4e-43a8-a356-2fa5c075aa6a)
 
 A list of working days in one of the months, you can choose between list view and calendar view to display your working days
 
